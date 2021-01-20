@@ -25,6 +25,7 @@ npm run build
 ## 项目结构
 项目结构及其作用如下所示，因为是 Vue CLI 生成的，遵循了 [Vuex 官方的项目结构示例](https://vuex.vuejs.org/zh/guide/structure.html)，因此较为规范：
 
+```
 ├── node_modules/        # npm 包及其依赖
 │   └── ... 
 ├── public/              # 打包时会把该文件夹下的资源原封不动地复制到 dist 文件夹下
@@ -46,3 +47,4 @@ npm run build
 │   ├── App.vue          # Vue 根组件
 │   └── main.js          # 源码入口 
 └── ...                  # 根目录下其他的文件暂时不需要关心
+```
