@@ -27,6 +27,7 @@ export default {
             typeContent: [],
             typeIndex: -1,
             showChoicesView: false,
+            endMessage: 'NORMAL', // 'NORMAL' or 'REPEAT'
         }
     },
 
@@ -59,10 +60,10 @@ export default {
                         this.showChoice()
                     } else {
                         // 如果没有 responses 环节， 则结束这个段落的对话
-                        this.hide('FINISH_PARAGRAPH')
+                        this.hide(this.endMessage)
                     }
                 } else {
-                    this.hide('FINISH_PARAGRAPH')
+                    this.hide(this.endMessage)
                 }
             }
 
@@ -91,6 +92,9 @@ export default {
             this.typeTargetName = 'FEEDBACKS'
             this.typeContent = choice.feedbacks
             this.typeIndex = -1
+            if (choice.repeat) {
+                this.endMessage = 'REPEAT'
+            }
             this.talk()
         },
     },
