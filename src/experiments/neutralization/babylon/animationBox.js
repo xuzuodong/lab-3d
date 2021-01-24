@@ -159,16 +159,114 @@ hideFrames.push({
 })
 hideButton.setKeys(hideFrames)
 
+// 通过改变相机位置来移动相机的函数，接受两个参数（需要移动的相机，移动到的目标位置, 结束帧）
+function moveCameraByPosition(camera, targetPosition, endFrame) {
+  const moveCameraByPosition = new BABYLON.Animation(
+    'moveCameraByPosition',
+    'position',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const moveCameraByPositionFrames = []
+  moveCameraByPositionFrames.push({
+    frame: 0,
+    value: camera.position
+  })
+  moveCameraByPositionFrames.push({
+    frame: endFrame,
+    value: targetPosition
+  })
+  moveCameraByPosition.setKeys(moveCameraByPositionFrames)
+
+  return moveCameraByPosition
+}
+
+function showMesh(endFrame) {
+  const showMesh = new BABYLON.Animation(
+    'showMesh',
+    'visibility',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const showMeshFrames = []
+  showMeshFrames.push({
+    frame: 0,
+    value: 0
+  })
+  showMeshFrames.push({
+    frame: endFrame,
+    value: 1
+  })
+  showMesh.setKeys(showMeshFrames)
+
+  return showMesh
+}
+
+// 定义试管中溶液增减动画的函数
+BABYLON.Mesh.prototype.scaleyFromPivot = function(pivotPoint, t) {
+  let _sy = (this.scaling.y + t / 10) / this.scaling.y
+
+  const blscaleY = new BABYLON.Animation(
+    'blscaleY',
+    'scaling.y',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const blscaleYFrames = []
+  blscaleYFrames.push({
+    frame: 0,
+    value: this.scaling.y
+  })
+  blscaleYFrames.push({
+    frame: 1.8 * frameRate,
+    value: this.scaling.y
+  })
+  blscaleYFrames.push({
+    frame: 2.2 * frameRate,
+    value: this.scaling.y + t / 10
+  })
+  blscaleY.setKeys(blscaleYFrames)
+
+  const blpositionY = new BABYLON.Animation(
+    'blpositionY',
+    'position.y',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const blpositionYFrames = []
+  blpositionYFrames.push({
+    frame: 0,
+    value: this.position.y
+  })
+  blpositionYFrames.push({
+    frame: 1.8 * frameRate,
+    value: this.position.y
+  })
+  blpositionYFrames.push({
+    frame: 2.2 * frameRate,
+    value: pivotPoint.y + _sy * (this.position.y - pivotPoint.y)
+  })
+  blpositionY.setKeys(blpositionYFrames)
+
+  return [blscaleY, blpositionY]
+}
+
 const animationBox = new Object({
-  outDropper: outDropper,
-  outFrames: outFrames,
-  backDropper: backDropper,
-  backFrames: backFrames,
-  dropLiquid: dropLiquid,
-  liquidScale: liquidScale,
-  liquidSphereVisible: liquidSphereVisible,
-  showButton: showButton,
-  hideButton: hideButton
+  outDropper,
+  outFrames,
+  backDropper,
+  backFrames,
+  dropLiquid,
+  liquidScale,
+  liquidSphereVisible,
+  showButton,
+  hideButton,
+  moveCameraByPosition,
+  showMesh
 })
 
 export default animationBox
