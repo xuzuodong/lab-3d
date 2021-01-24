@@ -10,7 +10,7 @@ import { operations } from './operation'
 export default function(canvas, engine) {
   // 整个场景动画的帧率，这个参数要与animationBox中的数值保持一致，本项目帧率保持12不变
   const frameRate = 12
-  
+
   // 创建一个场景scene
   const scene = new BABYLON.Scene(engine)
   scene.clearColor = new BABYLON.Color3(240 / 255, 240 / 255, 240 / 255)
@@ -69,9 +69,21 @@ export default function(canvas, engine) {
     // 添加一组灯光到场景
     settingLight()
     function settingLight() {
-      const light1 = new BABYLON.HemisphericLight('HemisphericLight', new BABYLON.Vector3(150, -500, 0), scene)
-      const light2 = new BABYLON.HemisphericLight('HemisphericLight2', new BABYLON.Vector3(100, 500, 0), scene)
-      const shadowLight = new BABYLON.DirectionalLight('shadowControlLight', new BABYLON.Vector3(100, -100, 0), scene)
+      const light1 = new BABYLON.HemisphericLight(
+        'HemisphericLight',
+        new BABYLON.Vector3(150, -500, 0),
+        scene
+      )
+      const light2 = new BABYLON.HemisphericLight(
+        'HemisphericLight2',
+        new BABYLON.Vector3(100, 500, 0),
+        scene
+      )
+      const shadowLight = new BABYLON.DirectionalLight(
+        'shadowControlLight',
+        new BABYLON.Vector3(100, -100, 0),
+        scene
+      )
       shadowLight.position = new BABYLON.Vector3(-80, 80, 0)
       light1.intensity = 0.6
       light2.intensity = 0.6
@@ -173,14 +185,17 @@ export default function(canvas, engine) {
     let dropliquid = dropperMesh[1]
     modifyDropperMeshes()
     function modifyDropperMeshes() {
-      dropper.getChildMeshes()[0].material = matGlass
-    
-      dropper.position.y = 50
-      dropliquid.position.y = 50
-    
+      dropper.parent = null
+      dropliquid.parent = null
+
+      dropper.position = new BABYLON.Vector3(0, 50, 0)
+      dropliquid.position = new BABYLON.Vector3(0, 50, 0)
+
       dropliquid.visibility = 0
       dropper.getChildMeshes()[0].visibility = 0
       dropper.getChildMeshes()[1].visibility = 0
+
+      dropper.getChildMeshes()[0].material = matGlass
     }
 
     // 添加阴影
@@ -223,9 +238,13 @@ export default function(canvas, engine) {
     pheText.alpha = 0
 
     // 模拟液滴
-    const liquidSphere = BABYLON.MeshBuilder.CreateSphere('liquidSphere', { diameter: 0.4, segments: 32 }, scene)
+    const liquidSphere = BABYLON.MeshBuilder.CreateSphere(
+      'liquidSphere',
+      { diameter: 0.4, segments: 32 },
+      scene
+    )
     const matLiquidSphere = new BABYLON.StandardMaterial('matLiquidSphere', scene)
-    matLiquidSphere.diffuseColor = new BABYLON.Color3(160 / 255, 32 / 255, 240 / 255)
+    matLiquidSphere.diffuseColor = new BABYLON.Color3(1, 1, 1)
     liquidSphere.visibility = 0
     liquidSphere.material = matLiquidSphere
     liquidSphere.position.y = 53
@@ -233,7 +252,16 @@ export default function(canvas, engine) {
     // 定义试管中的液体缩放基准点
     let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
 
-    operations(scene, { purBottle, purDropper, purLiquid, pheBottle, pheDropper, pheLiquid, purText, pheText })
+    operations(scene, {
+      purBottle,
+      purDropper,
+      purLiquid,
+      pheBottle,
+      pheDropper,
+      pheLiquid,
+      purText,
+      pheText
+    })
   })
 
   return scene

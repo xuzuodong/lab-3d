@@ -2,6 +2,10 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 
 const frameRate = 12
 
+// 通用动画缓动函数，ease-in，形如二次函数，嫌慢后快
+const generalEasingFunction = new BABYLON.QuadraticEase()
+generalEasingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN)
+
 // 拿出试剂瓶上的滴灌
 const outDropper = new BABYLON.Animation(
   'outDropper',
@@ -48,32 +52,33 @@ backFrames.push({
 })
 backDropper.setKeys(backFrames)
 
-// 滴管中滴出溶液的过程
-const dropLiquid = new BABYLON.Animation(
-  'dropLiquid',
-  'position.y',
-  frameRate,
-  BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-  BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
-)
-const dropFrames = []
-dropFrames.push({
-  frame: 0,
-  value: 53
-})
-dropFrames.push({
-  frame: 2 * frameRate,
-  value: 5
-})
-dropFrames.push({
-  frame: 2.2 * frameRate,
-  value: 53
-})
-dropLiquid.setKeys(dropFrames)
+// 滴管中滴出溶液的过程(由于必定向下低落，故直接取名xx_y)
+const dropLiquid_y = (beginPosition_y, endPosition_y, endFrame) => {
+  const dropLiquid_y = new BABYLON.Animation(
+    'dropLiquid_y',
+    'position.y',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const dropFrames = []
+  dropFrames.push({
+    frame: 0,
+    value: beginPosition_y
+  })
+  dropFrames.push({
+    frame: endFrame,
+    value: endPosition_y
+  })
+  dropFrames.push({
+    frame: 2.2 * frameRate,
+    value: beginPosition_y
+  })
+  dropLiquid_y.setKeys(dropFrames)
+  dropLiquid_y.setEasingFunction(generalEasingFunction)
 
-const easingFunction = new BABYLON.QuadraticEase()
-easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN)
-dropLiquid.setEasingFunction(easingFunction)
+  return dropLiquid_y
+}
 
 // 液滴变大的过程
 const liquidScale = new BABYLON.Animation(
@@ -160,7 +165,7 @@ hideFrames.push({
 hideButton.setKeys(hideFrames)
 
 // 通过改变相机位置来移动相机的函数，接受两个参数（需要移动的相机，移动到的目标位置, 结束帧）
-function moveCameraByPosition(camera, targetPosition, endFrame) {
+const moveCameraByPosition = (camera, targetPosition, endFrame) => {
   const moveCameraByPosition = new BABYLON.Animation(
     'moveCameraByPosition',
     'position',
@@ -182,7 +187,8 @@ function moveCameraByPosition(camera, targetPosition, endFrame) {
   return moveCameraByPosition
 }
 
-function showMesh(endFrame) {
+// 显示物体的动画（从不可见到可见），接收一个参数（结束帧）
+const showMesh = endFrame => {
   const showMesh = new BABYLON.Animation(
     'showMesh',
     'visibility',
@@ -200,8 +206,58 @@ function showMesh(endFrame) {
     value: 1
   })
   showMesh.setKeys(showMeshFrames)
+  showMesh.setEasingFunction(generalEasingFunction)
 
   return showMesh
+}
+
+// 隐藏物体的动画（从可见到不可见），接收一个参数（结束帧）
+const hideMesh = endFrame => {
+  const hideMesh = new BABYLON.Animation(
+    'hideMesh',
+    'visibility',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const hideMeshFrames = []
+  hideMeshFrames.push({
+    frame:0,
+    value:1
+  })
+  hideMeshFrames.push({
+    frame: endFrame,
+    value:0
+  })
+  hideMesh.setKeys(hideMeshFrames)
+  hideMesh.setEasingFunction(generalEasingFunction)
+
+  return hideMesh
+}
+
+// 物体位置变换动画（position相关）
+const moveMesh = (beginPosition, endPosition, endFrame) => {
+  const moveMesh = new BABYLON.Animation(
+    'moveMesh',
+    'position',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+
+  const moveMeshFrames = []
+  moveMeshFrames.push({
+    frame: 0,
+    value: beginPosition
+  })
+  moveMeshFrames.push({
+    frame: endFrame,
+    value: endPosition
+  })
+  moveMesh.setKeys(moveMeshFrames)
+
+  moveMesh.setEasingFunction(generalEasingFunction)
+  return moveMesh
 }
 
 // 定义试管中溶液增减动画的函数
@@ -260,13 +316,15 @@ const animationBox = new Object({
   outFrames,
   backDropper,
   backFrames,
-  dropLiquid,
+  dropLiquid_y,
   liquidScale,
   liquidSphereVisible,
   showButton,
   hideButton,
   moveCameraByPosition,
-  showMesh
+  showMesh,
+  hideMesh,
+  moveMesh
 })
 
 export default animationBox
