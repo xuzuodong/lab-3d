@@ -10,7 +10,6 @@ import { materials } from './materials'
 export default function(canvas, engine) {
   // 整个场景动画的帧率，这个参数要与animationBox中的数值保持一致，本项目帧率保持12不变
   const frameRate = 12
-
   // 创建一个场景scene
   const scene = new BABYLON.Scene(engine)
   scene.clearColor = new BABYLON.Color3(240 / 255, 240 / 255, 240 / 255)

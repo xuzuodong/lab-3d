@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import script from './script'
-import operation from './babylon/operation'
+import script from "./script";
+import operation from "./babylon/operation";
 
 export default {
   props: {
