@@ -1,10 +1,26 @@
 <template>
     <div id="app">
-        <div id="nav" v-show="showNav">
-            <router-link to="/">首页</router-link> |
-            <router-link to="/about">关于我们</router-link>
-        </div>
-        <router-view />
+        <q-layout view="hhh lpR fff">
+            <q-header v-if="showNav" class="bg-primary text-white">
+                <q-toolbar class="bg-black text-white">
+                    <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" />
+                    <q-tabs shrink>
+                        <q-route-tab label="首页" to="/" exact />
+                        <q-route-tab label="关于我们" to="/about" exact />
+                    </q-tabs>
+                    <q-space />
+                    <q-btn flat label="注册/登录" />
+                </q-toolbar>
+            </q-header>
+
+            <q-page-container>
+                <router-view />
+            </q-page-container>
+
+            <q-footer v-if="showNav" class="bg-white text-dark text-center">
+                <div class="q-py-sm">© 杭州师范大学 版权所有</div>
+            </q-footer>
+        </q-layout>
     </div>
 </template>
 
