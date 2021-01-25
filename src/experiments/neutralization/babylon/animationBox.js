@@ -222,12 +222,12 @@ const hideMesh = endFrame => {
   )
   const hideMeshFrames = []
   hideMeshFrames.push({
-    frame:0,
-    value:1
+    frame: 0,
+    value: 1
   })
   hideMeshFrames.push({
     frame: endFrame,
-    value:0
+    value: 0
   })
   hideMesh.setKeys(hideMeshFrames)
   hideMesh.setEasingFunction(generalEasingFunction)

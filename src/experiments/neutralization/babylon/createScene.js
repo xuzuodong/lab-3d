@@ -4,8 +4,8 @@ import tube from './meshes/tube.glb'
 import purbottle from './meshes/purbottle.glb'
 import phebottle from './meshes/phebottle.glb'
 import dropper from './meshes/dropper.glb'
-import animationBox from './animationBox'
 import { operations } from './operation'
+import { materials } from './materials'
 
 export default function(canvas, engine) {
   // 整个场景动画的帧率，这个参数要与animationBox中的数值保持一致，本项目帧率保持12不变
@@ -94,17 +94,9 @@ export default function(canvas, engine) {
     settingGround()
     function settingGround() {
       const ground = BABYLON.MeshBuilder.CreateGround('myGround', { width: 500, height: 500 }, scene)
-      const matGround = new BABYLON.StandardMaterial('matGround', scene)
-      matGround.diffuseColor = new BABYLON.Color3(218 / 255, 218 / 255, 218 / 255)
-      matGround.opacityFresnel = true
-      ground.material = matGround
+      ground.material = materials(scene).matGround
       ground.receiveShadows = true
     }
-
-    // 定义试剂瓶、试管所需材质
-    const matGlass = new BABYLON.StandardMaterial('matGlass', scene)
-    matGlass.diffuseColor = new BABYLON.Color3(1, 1, 1)
-    matGlass.alpha = 0.3
 
     // 设置试管参数
     let tube = tubeMesh[0]
@@ -116,15 +108,9 @@ export default function(canvas, engine) {
       bottom_liquid.parent = null
       main_liquid.parent = null
 
-      const matTube = new BABYLON.StandardMaterial('matTube', scene)
-      matTube.diffuseColor = new BABYLON.Color3(1, 1, 1)
-      matTube.alpha = 0.7
-      tube.material = matTube
-
-      const matLiquid = new BABYLON.StandardMaterial('matLiquid', scene)
-      matLiquid.diffuseColor = new BABYLON.Color3(0, 0, 1)
-      bottom_liquid.material = matLiquid
-      main_liquid.material = matLiquid
+      tube.material = materials(scene).matTube
+      bottom_liquid.material = materials(scene).matTubeLiquid
+      main_liquid.material = materials(scene).matTubeLiquid
     }
 
     // 设置紫色石蕊试剂参数
@@ -144,14 +130,10 @@ export default function(canvas, engine) {
       purBottle.position = new BABYLON.Vector3(80, 0, 80)
       purSolution.position = new BABYLON.Vector3(80, 0, 80)
 
-      const matPursolution = new BABYLON.StandardMaterial('matPursolution', scene)
-      matPursolution.diffuseColor = new BABYLON.Color3(160 / 255, 32 / 255, 240 / 255)
-      matPursolution.alpha = 0.9
-      purSolution.material = matPursolution
-      purLiquid.material = matPursolution
-
-      purBottle.material = matGlass
-      purDropper.getChildMeshes()[0].material = matGlass
+      purSolution.material = materials(scene).matPursolution
+      purLiquid.material = materials(scene).matPursolution
+      purBottle.material = materials(scene).matGlass
+      purDropper.getChildMeshes()[0].material = materials(scene).matGlass
     }
 
     // 设置无色酚酞试剂参数
@@ -171,13 +153,9 @@ export default function(canvas, engine) {
       pheBottle.position = new BABYLON.Vector3(110, 0, 80)
       pheSolution.position = new BABYLON.Vector3(110, 0, 80)
 
-      const matPhesolution = new BABYLON.StandardMaterial('matPhesolution', scene)
-      matPhesolution.diffuseColor = new BABYLON.Color3(1, 1, 1)
-      matPhesolution.alpha = 0.9
-      pheSolution.material = matPhesolution
-
-      pheBottle.material = matGlass
-      pheDropper.getChildMeshes()[0].material = matGlass
+      pheSolution.material = materials(scene).matPhesolution
+      pheBottle.material = materials(scene).matGlass
+      pheDropper.getChildMeshes()[0].material = materials(scene).matGlass
     }
 
     // 设置添加溶液的滴管参数
@@ -195,7 +173,7 @@ export default function(canvas, engine) {
       dropper.getChildMeshes()[0].visibility = 0
       dropper.getChildMeshes()[1].visibility = 0
 
-      dropper.getChildMeshes()[0].material = matGlass
+      dropper.getChildMeshes()[0].material = materials(scene).matGlass
     }
 
     // 添加阴影
@@ -243,10 +221,8 @@ export default function(canvas, engine) {
       { diameter: 0.4, segments: 32 },
       scene
     )
-    const matLiquidSphere = new BABYLON.StandardMaterial('matLiquidSphere', scene)
-    matLiquidSphere.diffuseColor = new BABYLON.Color3(1, 1, 1)
     liquidSphere.visibility = 0
-    liquidSphere.material = matLiquidSphere
+    liquidSphere.material = materials(scene).matDropperLiquid
     liquidSphere.position.y = 53
 
     // 定义试管中的液体缩放基准点

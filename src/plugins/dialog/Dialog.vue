@@ -4,7 +4,7 @@
             <p class="text" v-html="typed"></p>
         </dialog-bubble-vue>
         <div class="choices" v-if="showChoicesView">
-            <div v-for="choice in paragraph.responses" :key="choice.name" @click="feedback(choice)" class="choice">
+            <div v-for="(choice, index) in paragraph.responses" :key="choice.name" @click="feedback(choice, index)" class="choice">
                 {{ choice.name }}
             </div>
         </div>
@@ -28,6 +28,7 @@ export default {
             typeIndex: -1,
             showChoicesView: false,
             endMessage: 'NORMAL', // 'NORMAL' or 'REPEAT'
+            chosenIndex: 0
         }
     },
 
@@ -60,10 +61,12 @@ export default {
                         this.showChoice()
                     } else {
                         // 如果没有 responses 环节， 则结束这个段落的对话
-                        this.hide(this.endMessage)
+                        // this.hide(this.endMessage)
+                        this.hide(this.chosenIndex)
                     }
                 } else {
-                    this.hide(this.endMessage)
+                    // this.hide(this.endMessage)
+                    this.hide(this.chosenIndex)
                 }
             }
 
@@ -87,11 +90,12 @@ export default {
             this.showChoicesView = false
         },
 
-        feedback(choice) {
+        feedback(choice, index) {
             this.hideChoice()
             this.typeTargetName = 'FEEDBACKS'
             this.typeContent = choice.feedbacks
             this.typeIndex = -1
+            this.chosenIndex = index
             if (choice.repeat) {
                 this.endMessage = 'REPEAT'
             }

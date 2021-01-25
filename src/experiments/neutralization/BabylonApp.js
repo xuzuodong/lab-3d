@@ -18,6 +18,40 @@ export default class BabylonApp {
     })
   }
 
+  showDropper() {
+    return new Promise((resolve, reject) => {
+      const frameRate = 12
+      const showDropper = animationBox.showMesh(frameRate)
+
+      const showDropperGroup = new BABYLON.AnimationGroup('showDropper')
+      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive0'))
+      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive1'))
+      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropliquid'))
+      showDropperGroup.normalize(0, frameRate)
+      showDropperGroup.play()
+      showDropperGroup.onAnimationEndObservable.add(() => {
+        resolve()
+      })
+    })
+  }
+
+  hideDropper() {
+    return new Promise((resolve, reject) => {
+      const frameRate = 12
+      const hideDropper = animationBox.hideMesh(frameRate)
+
+      const hideDropperGroup = new BABYLON.AnimationGroup('hideDropper')
+      hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive0'))
+      hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive1'))
+      hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropliquid'))
+      hideDropperGroup.normalize(0, frameRate)
+      hideDropperGroup.play()
+      hideDropperGroup.onAnimationEndObservable.add(() => {
+        resolve()
+      })
+    })
+  }
+
   pullInCamera() {
     return new Promise((resolve, reject) => {
       const frameRate = 12
@@ -26,17 +60,11 @@ export default class BabylonApp {
         new BABYLON.Vector3(0, 50, -80),
         2 * frameRate
       )
-      const showDropper = animationBox.showMesh(2 * frameRate)
+
       this.scene.activeCamera.setTarget(new BABYLON.Vector3(0, 50, 0))
       this.scene.beginDirectAnimation(this.scene.activeCamera, [pullInCamera], 0, 2 * frameRate, false, 1)
 
-      const showDropperGroup = new BABYLON.AnimationGroup('showDropper')
-      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive0'))
-      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive1'))
-      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropliquid'))
-      showDropperGroup.normalize(0, 2 * frameRate)
-      showDropperGroup.play()
-      showDropperGroup.onAnimationEndObservable.add(() => {
+      this.showDropper().then(() => {
         resolve()
       })
     })
@@ -64,17 +92,13 @@ export default class BabylonApp {
         new BABYLON.Vector3(0, 50, 0),
         frameRate
       )
-      const hideDropper = animationBox.hideMesh(frameRate)
-      const resetDropperGroup = new BABYLON.AnimationGroup('resetDropperGroup')
-      resetDropperGroup.addTargetedAnimation(
+      const resetPositionGroup = new BABYLON.AnimationGroup('resetDropperGroup')
+      resetPositionGroup.addTargetedAnimation(
         resetDropperPosition,
         this.scene.getTransformNodeByName('dropper')
       )
-      resetDropperGroup.addTargetedAnimation(resetDropperPosition, this.scene.getMeshByName('dropliquid'))
-      resetDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive0'))
-      resetDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive1'))
-      resetDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropliquid'))
-      resetDropperGroup.normalize(0, frameRate)
+      resetPositionGroup.addTargetedAnimation(resetDropperPosition, this.scene.getMeshByName('dropliquid'))
+      resetPositionGroup.normalize(0, frameRate)
 
       moveDropperDownGroup.onAnimationEndObservable.add(() => {
         this.scene.beginDirectAnimation(
@@ -89,13 +113,12 @@ export default class BabylonApp {
           false,
           1,
           () => {
-            resetDropperGroup.play()
+            resetPositionGroup.play()
+            this.hideDropper().then(() => {
+              resolve()
+            })
           }
         )
-      })
-
-      resetDropperGroup.onAnimationEndObservable.add(() => {
-        resolve()
       })
     })
   }
