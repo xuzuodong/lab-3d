@@ -53,7 +53,7 @@ backFrames.push({
 backDropper.setKeys(backFrames)
 
 // 滴管中滴出溶液的过程(由于必定向下低落，故直接取名xx_y)
-const dropLiquid_y = (beginPosition_y, endPosition_y, endFrame) => {
+const dropLiquid_y = (beginPosition_y, endPosition_y) => {
   const dropLiquid_y = new BABYLON.Animation(
     'dropLiquid_y',
     'position.y',
@@ -67,12 +67,8 @@ const dropLiquid_y = (beginPosition_y, endPosition_y, endFrame) => {
     value: beginPosition_y
   })
   dropFrames.push({
-    frame: endFrame,
+    frame: 2 * frameRate,
     value: endPosition_y
-  })
-  dropFrames.push({
-    frame: 2.2 * frameRate,
-    value: beginPosition_y
   })
   dropLiquid_y.setKeys(dropFrames)
   dropLiquid_y.setEasingFunction(generalEasingFunction)
@@ -118,7 +114,7 @@ visibileFrames.push({
 })
 visibileFrames.push({
   frame: 2 * frameRate,
-  value: 0
+  value: 1
 })
 liquidSphereVisible.setKeys(visibileFrames)
 

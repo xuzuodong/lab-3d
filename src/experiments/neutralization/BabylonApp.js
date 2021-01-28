@@ -22,7 +22,6 @@ export default class BabylonApp {
     return new Promise((resolve, reject) => {
       const frameRate = 12
       const showDropper = animationBox.showMesh(frameRate)
-
       const showDropperGroup = new BABYLON.AnimationGroup('showDropper')
       showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive0'))
       showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive1'))
@@ -39,7 +38,6 @@ export default class BabylonApp {
     return new Promise((resolve, reject) => {
       const frameRate = 12
       const hideDropper = animationBox.hideMesh(frameRate)
-
       const hideDropperGroup = new BABYLON.AnimationGroup('hideDropper')
       hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive0'))
       hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive1'))
@@ -49,6 +47,40 @@ export default class BabylonApp {
       hideDropperGroup.onAnimationEndObservable.add(() => {
         resolve()
       })
+    })
+  }
+
+  dropLiqiud(liquidColor, beginPosition_y, endPosition_y) {
+    return new Promise((resolve, reject) => {
+      const frameRate = 12
+      const liquidSphere = this.scene.getMeshByName('liquidSphere')
+      const dropperLiquid = this.scene.getMeshByName('dropliquid')
+      const main_liquid = this.scene.getMeshByName('main_liquid')
+      liquidSphere.material.diffuseColor = liquidColor
+      dropperLiquid.material.diffuseColor = liquidColor
+      let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
+      this.scene.beginDirectAnimation(
+        liquidSphere,
+        [
+          animationBox.dropLiquid_y(beginPosition_y, endPosition_y),
+          animationBox.liquidSphereVisible,
+          animationBox.liquidScale
+        ],
+        0,
+        2 * frameRate,
+        false
+      )
+      this.scene.beginDirectAnimation(
+        main_liquid,
+        main_liquid.scaleyFromPivot(pivotAt, 0.2),
+        0,
+        2.2 * frameRate,
+        false,
+        1,
+        () => {
+          resolve()
+        }
+      )
     })
   }
 
@@ -73,8 +105,6 @@ export default class BabylonApp {
   firstDropLiqiud() {
     return new Promise((resolve, reject) => {
       const frameRate = 12
-      const liquidSphere = this.scene.getMeshByName('liquidSphere')
-      liquidSphere.position.y = 41
 
       const moveDropperDown = animationBox.moveMesh(
         new BABYLON.Vector3(0, 50, 0),
@@ -101,24 +131,12 @@ export default class BabylonApp {
       resetPositionGroup.normalize(0, frameRate)
 
       moveDropperDownGroup.onAnimationEndObservable.add(() => {
-        this.scene.beginDirectAnimation(
-          liquidSphere,
-          [
-            animationBox.dropLiquid_y(41, 5, 2 * frameRate),
-            animationBox.liquidSphereVisible,
-            animationBox.liquidScale
-          ],
-          0,
-          2 * frameRate,
-          false,
-          1,
-          () => {
-            resetPositionGroup.play()
-            this.hideDropper().then(() => {
-              resolve()
-            })
-          }
-        )
+        this.dropLiqiud(new BABYLON.Color3(1, 1, 1), 41, 5).then(() => {
+          resetPositionGroup.play()
+          this.hideDropper().then(() => {
+            resolve()
+          })
+        })
       })
     })
   }

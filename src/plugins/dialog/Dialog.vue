@@ -27,8 +27,7 @@ export default {
             typeContent: [],
             typeIndex: -1,
             showChoicesView: false,
-            endMessage: 'NORMAL', // 'NORMAL' or 'REPEAT'
-            chosenIndex: 0
+            chosenIndex: 0 // 返回用户所选选项的序号，从0开始
         }
     },
 
@@ -61,11 +60,9 @@ export default {
                         this.showChoice()
                     } else {
                         // 如果没有 responses 环节， 则结束这个段落的对话
-                        // this.hide(this.endMessage)
                         this.hide(this.chosenIndex)
                     }
                 } else {
-                    // this.hide(this.endMessage)
                     this.hide(this.chosenIndex)
                 }
             }
@@ -96,9 +93,6 @@ export default {
             this.typeContent = choice.feedbacks
             this.typeIndex = -1
             this.chosenIndex = index
-            if (choice.repeat) {
-                this.endMessage = 'REPEAT'
-            }
             this.talk()
         },
     },

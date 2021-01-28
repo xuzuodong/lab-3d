@@ -54,7 +54,7 @@ export const operations = (
 
   purBottle.actionManager.registerAction(
     new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function() {
-      if (scene.animatables.length == 0) {
+      if (scene.animatables.length == 0) {     
         changeDropper()
         whichLiquid = 'pur'
         animationBox.outFrames[0].value = new BABYLON.Vector3(80, 0, 80)

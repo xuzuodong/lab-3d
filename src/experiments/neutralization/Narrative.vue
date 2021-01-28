@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import script from "./script";
-import operation from "./babylon/operation";
+import script from './script'
+import operation from './babylon/operation'
 
 export default {
   props: {
@@ -40,6 +40,8 @@ export default {
     const p6 = script.paragraphs.find(p => p.id == '滴管滴加解释')
     await this.$dialog({ paragraph: p6 })
 
+    // 弹出选择框-预留位置
+
     const p7 = script.paragraphs.find(p => p.id == '选择碱溶液1')
     const liquidType = await this.$dialog({ paragraph: p7 })
     await this.babylon.showDropper()
@@ -53,7 +55,18 @@ export default {
     }
 
     const p8 = script.paragraphs.find(p => p.id == '滴加碱溶液')
-    await this.$dialog({ paragraph : p8 })
+    await this.$dialog({ paragraph: p8 })
+
+    // 滴加完成后，弹出文本输入的结论框-预留位置
+
+    const p9 = script.paragraphs.find(p => p.id == '承上启下部分')
+    await this.$dialog({ paragraph: p9 })
+
+    const p10 = script.paragraphs.find(p => p.id == '阶段二开场')
+    await this.$dialog({ paragraph: p10 })
+
+    const p11 = script.paragraphs.find(p => p.id == '选择酸碱指示剂')
+    await this.$dialog({ paragraph: p11 })
   }
 }
 </script>
