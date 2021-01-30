@@ -109,10 +109,6 @@ visibileFrames.push({
   value: 1
 })
 visibileFrames.push({
-  frame: 1.9 * frameRate,
-  value: 1
-})
-visibileFrames.push({
   frame: 2 * frameRate,
   value: 1
 })
@@ -257,7 +253,12 @@ const moveMesh = (beginPosition, endPosition, endFrame) => {
 }
 
 // 定义试管中溶液增减动画的函数
-BABYLON.Mesh.prototype.scaleyFromPivot = function(pivotPoint, t) {
+BABYLON.Mesh.prototype.scaleyFromPivot = function(
+  pivotPoint,
+  t,
+  midFrame = 1.8 * frameRate,
+  endFrame = 2 * frameRate
+) {
   let _sy = (this.scaling.y + t / 10) / this.scaling.y
 
   const blscaleY = new BABYLON.Animation(
@@ -273,11 +274,11 @@ BABYLON.Mesh.prototype.scaleyFromPivot = function(pivotPoint, t) {
     value: this.scaling.y
   })
   blscaleYFrames.push({
-    frame: 1.8 * frameRate,
+    frame: midFrame,
     value: this.scaling.y
   })
   blscaleYFrames.push({
-    frame: 2.2 * frameRate,
+    frame: endFrame,
     value: this.scaling.y + t / 10
   })
   blscaleY.setKeys(blscaleYFrames)
@@ -295,11 +296,11 @@ BABYLON.Mesh.prototype.scaleyFromPivot = function(pivotPoint, t) {
     value: this.position.y
   })
   blpositionYFrames.push({
-    frame: 1.8 * frameRate,
+    frame: midFrame,
     value: this.position.y
   })
   blpositionYFrames.push({
-    frame: 2.2 * frameRate,
+    frame: endFrame,
     value: pivotPoint.y + _sy * (this.position.y - pivotPoint.y)
   })
   blpositionY.setKeys(blpositionYFrames)

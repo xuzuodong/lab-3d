@@ -1,17 +1,46 @@
 <template>
-  <div></div>
+  <div>
+    <ControlPanel :babylon="babylon" :controlFlag="controlFlag" @infoDeliver="infoDeliver" />
+  </div>
 </template>
 
 <script>
 import script from './script'
 import operation from './babylon/operation'
+import ControlPanel from './ControlPanel'
 
 export default {
   props: {
     babylon: Object
   },
   data() {
-    return {}
+    return {
+      controlFlag: {
+        showButton: false,
+        showRadio: false,
+        showConPanel: false
+      }
+    }
+  },
+  components: { ControlPanel },
+  methods: {
+    // 子组件向父组件传值
+    infoDeliver(name, value) {
+      this.controlFlag[name] = value
+      // this.controlFlag.showButton = value
+    },
+    proceed([obj, name, value]) {
+      // 等待用户点击各种在ControlPanel中的停止、确定、提交等按钮，再resoleve，弹出后续剧情对话框
+      this.$set(obj, name, value)
+      return new Promise((resolve, reject) => {
+        let timer = setInterval(() => {
+          if (!obj[name]) {
+            resolve()
+            clearInterval(timer)
+          }
+        }, 1000)
+      })
+    }
   },
   async mounted() {
     const p1 = script.paragraphs.find(p => p.id == '初始画面')
@@ -41,6 +70,7 @@ export default {
     await this.$dialog({ paragraph: p6 })
 
     // 弹出选择框-预留位置
+    await this.proceed([this.controlFlag, 'showRadio', true])
 
     const p7 = script.paragraphs.find(p => p.id == '选择碱溶液1')
     const liquidType = await this.$dialog({ paragraph: p7 })
@@ -57,16 +87,24 @@ export default {
     const p8 = script.paragraphs.find(p => p.id == '滴加碱溶液')
     await this.$dialog({ paragraph: p8 })
 
+    await this.proceed([this.controlFlag, 'showButton', true])
+    await this.proceed([this.controlFlag, 'showConPanel', true])
+
     // 滴加完成后，弹出文本输入的结论框-预留位置
 
     const p9 = script.paragraphs.find(p => p.id == '承上启下部分')
     await this.$dialog({ paragraph: p9 })
 
-    const p10 = script.paragraphs.find(p => p.id == '阶段二开场')
+    const p10 = script.paragraphs.find(p => p.id == '阶段二开场1')
     await this.$dialog({ paragraph: p10 })
 
-    const p11 = script.paragraphs.find(p => p.id == '选择酸碱指示剂')
+    await this.babylon.resetTube()
+
+    const p11 = script.paragraphs.find(p => p.id == '阶段二开场2')
     await this.$dialog({ paragraph: p11 })
+
+    const p12 = script.paragraphs.find(p => p.id == '选择酸碱指示剂')
+    await this.$dialog({ paragraph: p12 })
   }
 }
 </script>
