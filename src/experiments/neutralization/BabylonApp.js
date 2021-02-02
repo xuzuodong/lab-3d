@@ -2,6 +2,7 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import '@babylonjs/loaders/glTF'
 import createScene from './babylon/createScene'
 import animationBox from './babylon/animationBox'
+import generalOperations from './babylon/generalOperation'
 
 export default class BabylonApp {
   constructor(domId) {
@@ -18,108 +19,17 @@ export default class BabylonApp {
     })
   }
 
-  showDropper() {
-    return new Promise((resolve, reject) => {
-      const frameRate = 12
-      const showDropper = animationBox.showMesh(frameRate)
-      const showDropperGroup = new BABYLON.AnimationGroup('showDropper')
-      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive0'))
-      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropper_primitive1'))
-      showDropperGroup.addTargetedAnimation(showDropper, this.scene.getMeshByName('dropliquid'))
-      showDropperGroup.normalize(0, frameRate)
-      showDropperGroup.play()
-      showDropperGroup.onAnimationEndObservable.add(() => {
-        resolve()
-      })
-    })
-  }
-
-  hideDropper() {
-    return new Promise((resolve, reject) => {
-      const frameRate = 12
-      const hideDropper = animationBox.hideMesh(frameRate)
-      const hideDropperGroup = new BABYLON.AnimationGroup('hideDropper')
-      hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive0'))
-      hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropper_primitive1'))
-      hideDropperGroup.addTargetedAnimation(hideDropper, this.scene.getMeshByName('dropliquid'))
-      hideDropperGroup.normalize(0, frameRate)
-      hideDropperGroup.play()
-      hideDropperGroup.onAnimationEndObservable.add(() => {
-        resolve()
-      })
-    })
-  }
-
-  dropLiqiud(beginPosition_y, endPosition_y, liquidColor = new BABYLON.Color3(1, 1, 1)) {
-    return new Promise((resolve, reject) => {
-      const frameRate = 12
-      const liquidSphere = this.scene.getMeshByName('liquidSphere')
-      const dropperLiquid = this.scene.getMeshByName('dropliquid')
-      const main_liquid = this.scene.getMeshByName('main_liquid')
-      liquidSphere.material.diffuseColor = liquidColor
-      dropperLiquid.material.diffuseColor = liquidColor
-      let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
-      this.scene.beginDirectAnimation(
-        liquidSphere,
-        [
-          animationBox.dropLiquid_y(beginPosition_y, endPosition_y),
-          animationBox.liquidSphereVisible,
-          animationBox.liquidScale
-        ],
-        0,
-        2 * frameRate,
-        false
-      )
-      this.scene.beginDirectAnimation(
-        main_liquid,
-        main_liquid.scaleyFromPivot(pivotAt, 0.2),
-        0,
-        2.2 * frameRate,
-        false,
-        1,
-        () => {
-          resolve()
-        }
-      )
-    })
-  }
-
-  resetTube() {
-    return new Promise((resolve, reject) => {
-      const frameRate = 12
-      const main_liquid = this.scene.getMeshByName('main_liquid')
-      const initialScaleY = main_liquid.scaling._x.toFixed(2)
-      const currentScaleY = main_liquid.scaling._y.toFixed(2)
-      const deltaY = initialScaleY - currentScaleY
-      let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
-      this.scene.beginDirectAnimation(
-        main_liquid,
-        main_liquid.scaleyFromPivot(pivotAt, 10 * deltaY, 0, frameRate),
-        0,
-        2.2 * frameRate,
-        false,
-        1,
-        () => {
-          main_liquid.material.diffuseColor = new BABYLON.Color3(1, 0, 1)
-          resolve()
-        }
-      )
-    })
-  }
-
   pullInCamera() {
     return new Promise((resolve, reject) => {
       const frameRate = 12
-      const pullInCamera = animationBox.moveCameraByPosition(
+      const pullInCamera = animationBox.moveCamera(
         this.scene.activeCamera,
-        new BABYLON.Vector3(0, 50, -80),
-        2 * frameRate
+        new BABYLON.Vector3(0, 47, 0),
+        70,
+        frameRate
       )
-
-      this.scene.activeCamera.setTarget(new BABYLON.Vector3(0, 50, 0))
-      this.scene.beginDirectAnimation(this.scene.activeCamera, [pullInCamera], 0, 2 * frameRate, false, 1)
-
-      this.showDropper().then(() => {
+      this.scene.beginDirectAnimation(this.scene.activeCamera, pullInCamera, 0, frameRate, false)
+      generalOperations.showDropper(this.scene).then(() => {
         resolve()
       })
     })
@@ -154,12 +64,78 @@ export default class BabylonApp {
       resetPositionGroup.normalize(0, frameRate)
 
       moveDropperDownGroup.onAnimationEndObservable.add(() => {
-        this.dropLiqiud(41, 5).then(() => {
+        generalOperations.dropLiqiud(this.scene, 41, 5).then(() => {
           resetPositionGroup.play()
-          this.hideDropper().then(() => {
+          generalOperations.hideDropper(this.scene).then(() => {
             resolve()
           })
         })
+      })
+    })
+  }
+
+  restCamera() {
+    return new Promise((resolve, reject) => {
+      const frameRate = 12
+      const pullInCamera = animationBox.moveCamera(
+        this.scene.activeCamera,
+        new BABYLON.Vector3(0, 10, 0),
+        150,
+        frameRate
+      )
+      this.scene.beginDirectAnimation(this.scene.activeCamera, pullInCamera, 0, frameRate, false, 1, () => {
+        resolve()
+      })
+    })
+  }
+
+  tubeCloseUp() {
+    return new Promise((resolve, reject) => {
+      const frameRate = 12
+      const pullInCamera = animationBox.moveCamera(
+        this.scene.activeCamera,
+        new BABYLON.Vector3(0, 20, 0),
+        60,
+        frameRate
+      )
+      this.scene.beginDirectAnimation(this.scene.activeCamera, pullInCamera, 0, frameRate, false, 1, () => {
+        resolve()
+      })
+    })
+  }
+
+  resetTube() {
+    return new Promise((resolve, reject) => {
+      const frameRate = 12
+      const main_liquid = this.scene.getMeshByName('main_liquid')
+      const initialScaleY = main_liquid.scaling._x.toFixed(2)
+      const currentScaleY = main_liquid.scaling._y.toFixed(2)
+      const deltaY = initialScaleY - currentScaleY
+      let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
+      this.scene.beginDirectAnimation(
+        main_liquid,
+        main_liquid.scaleyFromPivot(pivotAt, 10 * deltaY, 0, frameRate),
+        0,
+        2.2 * frameRate,
+        false,
+        1,
+        () => {
+          main_liquid.material.diffuseColor = new BABYLON.Color3(1, 0, 1)
+          resolve()
+        }
+      )
+    })
+  }
+
+  selectIndicator() {
+    return new Promise((resolve, reject) => {
+      const purBottle = this.scene.getMeshByName('purbottle')
+      const pheBottle = this.scene.getMeshByName('phebottle')
+      generalOperations.registClickActionOnBottle(this.scene).then(val => {
+        resolve(val)
+        // 移除酸碱指示剂的点击事件，即一旦选择完成则无法重选
+        purBottle.actionManager.unregisterAction(purBottle.actionManager.actions[2])
+        pheBottle.actionManager.unregisterAction(pheBottle.actionManager.actions[2])
       })
     })
   }

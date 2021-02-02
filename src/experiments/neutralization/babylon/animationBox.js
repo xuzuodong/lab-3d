@@ -2,9 +2,12 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 
 const frameRate = 12
 
-// 通用动画缓动函数，ease-in，形如二次函数，嫌慢后快
-const generalEasingFunction = new BABYLON.QuadraticEase()
-generalEasingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN)
+// 通用动画缓动函数，ease-in，形如二次函数，先慢后快
+const easeInFunction = new BABYLON.QuadraticEase()
+easeInFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN)
+
+const easeInOutFunction = new BABYLON.CubicEase();
+easeInOutFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
 
 // 拿出试剂瓶上的滴灌
 const outDropper = new BABYLON.Animation(
@@ -71,7 +74,7 @@ const dropLiquid_y = (beginPosition_y, endPosition_y) => {
     value: endPosition_y
   })
   dropLiquid_y.setKeys(dropFrames)
-  dropLiquid_y.setEasingFunction(generalEasingFunction)
+  dropLiquid_y.setEasingFunction(easeInFunction)
 
   return dropLiquid_y
 }
@@ -114,69 +117,66 @@ visibileFrames.push({
 })
 liquidSphereVisible.setKeys(visibileFrames)
 
-// 滴管拿出来时，响应的控制按钮出现动画
-const showButton = new BABYLON.Animation(
-  'showButton',
-  'alpha',
-  frameRate,
-  BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-  BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
-)
-const showFrames = []
-showFrames.push({
-  frame: 0,
-  value: 0
-})
-showFrames.push({
-  frame: 2 * frameRate,
-  value: 0
-})
-showFrames.push({
-  frame: 3 * frameRate,
-  value: 1
-})
-showButton.setKeys(showFrames)
-
-// 滴管放回去时，响应的控制按钮消失动画
-const hideButton = new BABYLON.Animation(
-  'hideButton',
-  'alpha',
-  frameRate,
-  BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-  BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
-)
-const hideFrames = []
-hideFrames.push({
-  frame: 0,
-  value: 1
-})
-hideFrames.push({
-  frame: 1 * frameRate,
-  value: 0
-})
-hideButton.setKeys(hideFrames)
-
-// 通过改变相机位置来移动相机的函数，接受两个参数（需要移动的相机，移动到的目标位置, 结束帧）
-const moveCameraByPosition = (camera, targetPosition, endFrame) => {
-  const moveCameraByPosition = new BABYLON.Animation(
-    'moveCameraByPosition',
-    'position',
+// 通过改变相机的target合radius来移动相机的函数，接受四个参数（需要移动的相机，相机指向的目标点，最终距离目标的半径, 结束帧）
+const moveCamera = (camera, endTarget, endRadius, endFrame) => {
+  const changeTarget = new BABYLON.Animation(
+    'changeTarget',
+    'target',
     frameRate,
     BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
     BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
   )
-  const moveCameraByPositionFrames = []
-  moveCameraByPositionFrames.push({
+  const changeTargetFrames = []
+  changeTargetFrames.push({
     frame: 0,
-    value: camera.position
+    value: camera.target
   })
-  moveCameraByPositionFrames.push({
+  changeTargetFrames.push({
     frame: endFrame,
-    value: targetPosition
+    value: endTarget
   })
-  moveCameraByPosition.setKeys(moveCameraByPositionFrames)
+  changeTarget.setKeys(changeTargetFrames)
+  changeTarget.setEasingFunction(easeInOutFunction)
 
-  return moveCameraByPosition
+  const changeRadius = new BABYLON.Animation(
+    'changeRadius',
+    'radius',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const changeRadiusFrames = []
+  changeRadiusFrames.push({
+    frame: 0,
+    value: camera.radius
+  })
+  changeRadiusFrames.push({
+    frame: endFrame,
+    value: endRadius
+  })
+  changeRadius.setKeys(changeRadiusFrames)
+  changeRadius.setEasingFunction(easeInOutFunction)
+
+  const changeBeta = new BABYLON.Animation(
+    'changeBeta',
+    'beta',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const changeBetaFrames = []
+  changeBetaFrames.push({
+    frame: 0,
+    value: camera.beta
+  })
+  changeBetaFrames.push({
+    frame: endFrame,
+    value: camera.upperBetaLimit
+  })
+  changeBeta.setKeys(changeBetaFrames)
+  changeBeta.setEasingFunction(easeInOutFunction)
+
+  return [changeTarget, changeRadius, changeBeta]
 }
 
 // 显示物体的动画（从不可见到可见），接收一个参数（结束帧）
@@ -198,7 +198,7 @@ const showMesh = endFrame => {
     value: 1
   })
   showMesh.setKeys(showMeshFrames)
-  showMesh.setEasingFunction(generalEasingFunction)
+  showMesh.setEasingFunction(easeInFunction)
 
   return showMesh
 }
@@ -222,7 +222,7 @@ const hideMesh = endFrame => {
     value: 0
   })
   hideMesh.setKeys(hideMeshFrames)
-  hideMesh.setEasingFunction(generalEasingFunction)
+  hideMesh.setEasingFunction(easeInFunction)
 
   return hideMesh
 }
@@ -248,7 +248,7 @@ const moveMesh = (beginPosition, endPosition, endFrame) => {
   })
   moveMesh.setKeys(moveMeshFrames)
 
-  moveMesh.setEasingFunction(generalEasingFunction)
+  moveMesh.setEasingFunction(easeInFunction)
   return moveMesh
 }
 
@@ -316,9 +316,7 @@ const animationBox = new Object({
   dropLiquid_y,
   liquidScale,
   liquidSphereVisible,
-  showButton,
-  hideButton,
-  moveCameraByPosition,
+  moveCamera,
   showMesh,
   hideMesh,
   moveMesh

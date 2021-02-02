@@ -4,7 +4,7 @@ import tube from './meshes/tube.glb'
 import purbottle from './meshes/purbottle.glb'
 import phebottle from './meshes/phebottle.glb'
 import dropper from './meshes/dropper.glb'
-import { operations } from './operation'
+import { defaultOperations } from './defaultOperation'
 import { materials } from './materials'
 
 export default function(canvas, engine) {
@@ -48,19 +48,20 @@ export default function(canvas, engine) {
     const camera = scene.activeCamera
     settingCamera()
     function settingCamera() {
-      camera.beta = Math.PI / 1.8
+      camera.beta = Math.PI / 3
       camera.alpha = -Math.PI / 2
       camera.setTarget(new BABYLON.Vector3(0, 10, 0))
+      camera.radius = 150
       camera.lowerBetaLimit = (Math.PI / 2) * 0.02
-      camera.upperBetaLimit = (Math.PI / 2) * 0.9
+      camera.upperBetaLimit = (Math.PI / 2) * 0.85
       camera.lowerRadiusLimit = 20
       camera.upperRadiusLimit = 250
-      camera.attachControl(canvas, true)
       camera.panningSensibility = 1
       camera.wheelPrecision = 3
       camera.useBouncingBehavior = true
       camera.useFramingBehavior = true
-      camera.position = new BABYLON.Vector3(0, 50, -150)
+
+      console.log(camera);
     }
 
     // 添加一组灯光到场景
@@ -213,6 +214,9 @@ export default function(canvas, engine) {
     pheText.linkOffsetY = 50
     pheText.alpha = 0
 
+    // const plane = BABYLON.MeshBuilder.CreateGround('myGround', { width: 100, height: 100 }, scene)
+    // plane.position.y = 47
+
     // 模拟液滴
     const liquidSphere = BABYLON.MeshBuilder.CreateSphere(
       'liquidSphere',
@@ -222,13 +226,11 @@ export default function(canvas, engine) {
     liquidSphere.visibility = 0
     liquidSphere.material = materials(scene).matDropperLiquid
 
-    operations(scene, {
+    defaultOperations(scene, {
       purBottle,
       purDropper,
-      purLiquid,
       pheBottle,
       pheDropper,
-      pheLiquid,
       purText,
       pheText
     })

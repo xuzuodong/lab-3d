@@ -24,6 +24,7 @@
 
 <script>
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
+import generalOperations from './babylon/generalOperation'
 export default {
   name: 'controlPanel',
   props: { babylon: Object, controlFlag: Object },
@@ -34,15 +35,33 @@ export default {
     async drop() {
       if (!this.isDropping) {
         this.isDropping = true
-        await this.babylon.dropLiqiud(51, 5).then(() => {
-          this.isDropping = false
-        })
+        if (this.liquidType === 'acid' || this.liquidType === 'alkali') {
+          await generalOperations.dropLiqiud(this.babylon.scene, 51, 5).then(() => {
+            this.isDropping = false
+          })
+        }
+        if (this.liquidType === 'phe') {
+          await generalOperations.dropLiqiud(this.babylon.scene, 53, 5).then(() => {
+            this.isDropping = false
+          })
+        }
+        if (this.liquidType === 'pur') {
+          await generalOperations
+            .dropLiqiud(this.babylon.scene, 53, 5, new BABYLON.Color3(160 / 255, 32 / 255, 240 / 255))
+            .then(() => {
+              this.isDropping = false
+            })
+        }
       }
     },
     stop() {
       if (!this.isDropping) {
         this.$emit('infoDeliver', 'showButton', false)
-        this.babylon.hideDropper()
+        if (this.liquidType === 'acid' || this.liquidType === 'alkali') {
+          generalOperations.hideDropper(this.babylon.scene)
+        } else {
+          generalOperations.putBackDropper(this.babylon.scene, this.liquidType)
+        }
       }
     },
     radio_submit() {
@@ -54,6 +73,11 @@ export default {
       if (this.conclusion_step1 != '') {
         this.$emit('infoDeliver', 'showConPanel', false)
       }
+    }
+  },
+  computed: {
+    liquidType: function() {
+      return this.$store.state.liquidType
     }
   }
 }
