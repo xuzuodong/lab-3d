@@ -23,6 +23,7 @@
     "@vue/cli-plugin-router": "^4.5.10",
     "@vue/cli-plugin-vuex": "^4.5.10",
     "@vue/cli-service": "~4.5.0",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "dom-typer": "0.0.4",
     "eslint": "^6.7.2",
@@ -31,6 +32,8 @@
     "sass": "^1.32.4",
     "sass-loader": "^10.1.1",
     "vue-cli-plugin-quasar": "~3.0.1",
+    "vue-cookies": "^1.7.4",
+    "vue-snip": "^1.1.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

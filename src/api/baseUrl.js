@@ -1,0 +1,1 @@
+export default 'http://47.98.192.17:3000/api/'

@@ -27,7 +27,7 @@ let caller = options => {
 }
 
 export default {
-  install(vue) {
-    vue.prototype.$dialog = caller
+  install(Vue) {
+    Vue.prototype.$dialog = caller
   }
 }
