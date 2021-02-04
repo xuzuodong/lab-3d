@@ -5,7 +5,7 @@ import purbottle from './meshes/purbottle.glb'
 import phebottle from './meshes/phebottle.glb'
 import dropper from './meshes/dropper.glb'
 import { defaultOperations } from './defaultOperation'
-import { materials } from './materials'
+import { createMaterials } from './materials'
 
 export default function(canvas, engine) {
   // 创建一个场景scene
@@ -44,6 +44,17 @@ export default function(canvas, engine) {
     const myan = scene.animationGroups.find(a => a.name === 'All Animations')
     myan.stop()
 
+    createMaterials(scene)
+    const materials = {
+      matGround: scene.getMaterialByName('matGround'),
+      matTube: scene.getMaterialByName('matTube'),
+      matTubeLiquid: scene.getMaterialByName('matTubeLiquid'),
+      matGlass: scene.getMaterialByName('matGlass'),
+      matDropperLiquid: scene.getMaterialByName('matDropperLiquid'),
+      matPursolution: scene.getMaterialByName('matPursolution'),
+      matPhesolution: scene.getMaterialByName('matPhesolution')
+    }
+
     // 添加一个相机，并绑定鼠标事件
     const camera = scene.activeCamera
     settingCamera()
@@ -60,8 +71,6 @@ export default function(canvas, engine) {
       camera.wheelPrecision = 3
       camera.useBouncingBehavior = true
       camera.useFramingBehavior = true
-
-      console.log(camera);
     }
 
     // 添加一组灯光到场景
@@ -92,8 +101,15 @@ export default function(canvas, engine) {
     settingGround()
     function settingGround() {
       const ground = BABYLON.MeshBuilder.CreateGround('myGround', { width: 500, height: 500 }, scene)
-      ground.material = materials(scene).matGround
+      ground.material = materials.matGround
       ground.receiveShadows = true
+    }
+
+    // 定义试管中溶液增减动画的函数
+    BABYLON.Mesh.prototype.originalScale = function(pivotPoint, t) {
+      let _sy = (this.scaling.y + t / 10) / this.scaling.y
+      this.scaling.y = this.scaling.y + t / 10
+      this.position.y = pivotPoint.y + _sy * (this.position.y - pivotPoint.y)
     }
 
     // 设置试管参数
@@ -106,9 +122,14 @@ export default function(canvas, engine) {
       bottom_liquid.parent = null
       main_liquid.parent = null
 
-      tube.material = materials(scene).matTube
-      bottom_liquid.material = materials(scene).matTubeLiquid
-      main_liquid.material = materials(scene).matTubeLiquid
+      let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
+      main_liquid.originalScale(pivotAt, -2.7)
+      main_liquid.visibility = 0
+      bottom_liquid.visibility = 0
+
+      tube.material = materials.matTube
+      bottom_liquid.material = materials.matTubeLiquid
+      main_liquid.material = materials.matTubeLiquid
     }
 
     // 设置紫色石蕊试剂参数
@@ -128,10 +149,10 @@ export default function(canvas, engine) {
       purBottle.position = new BABYLON.Vector3(80, 0, 80)
       purSolution.position = new BABYLON.Vector3(80, 0, 80)
 
-      purSolution.material = materials(scene).matPursolution
-      purLiquid.material = materials(scene).matPursolution
-      purBottle.material = materials(scene).matGlass
-      purDropper.getChildMeshes()[0].material = materials(scene).matGlass
+      purSolution.material = materials.matPursolution
+      purLiquid.material = materials.matPursolution
+      purBottle.material = materials.matGlass
+      purDropper.getChildMeshes()[0].material = materials.matGlass
     }
 
     // 设置无色酚酞试剂参数
@@ -151,9 +172,9 @@ export default function(canvas, engine) {
       pheBottle.position = new BABYLON.Vector3(110, 0, 80)
       pheSolution.position = new BABYLON.Vector3(110, 0, 80)
 
-      pheSolution.material = materials(scene).matPhesolution
-      pheBottle.material = materials(scene).matGlass
-      pheDropper.getChildMeshes()[0].material = materials(scene).matGlass
+      pheSolution.material = materials.matPhesolution
+      pheBottle.material = materials.matGlass
+      pheDropper.getChildMeshes()[0].material = materials.matGlass
     }
 
     // 设置添加溶液的滴管参数
@@ -171,8 +192,8 @@ export default function(canvas, engine) {
       dropper.getChildMeshes()[0].visibility = 0
       dropper.getChildMeshes()[1].visibility = 0
 
-      dropper.getChildMeshes()[0].material = materials(scene).matGlass
-      dropliquid.material = materials(scene).matDropperLiquid
+      dropper.getChildMeshes()[0].material = materials.matGlass
+      dropliquid.material = materials.matDropperLiquid
     }
 
     // 添加阴影
@@ -214,9 +235,6 @@ export default function(canvas, engine) {
     pheText.linkOffsetY = 50
     pheText.alpha = 0
 
-    // const plane = BABYLON.MeshBuilder.CreateGround('myGround', { width: 100, height: 100 }, scene)
-    // plane.position.y = 47
-
     // 模拟液滴
     const liquidSphere = BABYLON.MeshBuilder.CreateSphere(
       'liquidSphere',
@@ -224,7 +242,7 @@ export default function(canvas, engine) {
       scene
     )
     liquidSphere.visibility = 0
-    liquidSphere.material = materials(scene).matDropperLiquid
+    liquidSphere.material = materials.matDropperLiquid
 
     defaultOperations(scene, {
       purBottle,

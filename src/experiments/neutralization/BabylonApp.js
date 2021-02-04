@@ -64,7 +64,7 @@ export default class BabylonApp {
       resetPositionGroup.normalize(0, frameRate)
 
       moveDropperDownGroup.onAnimationEndObservable.add(() => {
-        generalOperations.dropLiqiud(this.scene, 41, 5).then(() => {
+        generalOperations.dropLiqiud(this.scene, 41, 3).then(() => {
           resetPositionGroup.play()
           generalOperations.hideDropper(this.scene).then(() => {
             resolve()
@@ -108,7 +108,7 @@ export default class BabylonApp {
     return new Promise((resolve, reject) => {
       const frameRate = 12
       const main_liquid = this.scene.getMeshByName('main_liquid')
-      const initialScaleY = main_liquid.scaling._x.toFixed(2)
+      const initialScaleY = main_liquid.scaling._x.toFixed(2) - 0.22
       const currentScaleY = main_liquid.scaling._y.toFixed(2)
       const deltaY = initialScaleY - currentScaleY
       let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
@@ -120,7 +120,7 @@ export default class BabylonApp {
         false,
         1,
         () => {
-          main_liquid.material.diffuseColor = new BABYLON.Color3(1, 0, 1)
+          main_liquid.material.diffuseColor = new BABYLON.Color3(1, 1, 1)
           resolve()
         }
       )

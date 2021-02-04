@@ -1,6 +1,12 @@
 <template>
   <div>
-    <ControlPanel :babylon="babylon" :controlFlag="controlFlag" @infoDeliver="infoDeliver" />
+    <ControlPanel
+      :babylon="babylon"
+      :controlFlag="controlFlag"
+      :acidType="acidType"
+      :dropType="dropType"
+      @infoDeliver="infoDeliver"
+    />
   </div>
 </template>
 
@@ -19,7 +25,10 @@ export default {
         showButton: false,
         showRadio: false,
         showConPanel: false
-      }
+      },
+      dropType: '',
+      acidType: '',
+      alkaliType: ''
     }
   },
   components: { ControlPanel },
@@ -28,10 +37,10 @@ export default {
     infoDeliver(name, value) {
       this.controlFlag[name] = value
     },
-    proceed([obj, name, value, liquidType = '']) {
+    proceed([obj, name, value, dropType = '']) {
       // 等待用户点击各种在ControlPanel中的停止、确定、提交等按钮，再resoleve，弹出后续剧情对话框
       this.$set(obj, name, value)
-      this.$store.commit('changeLiquid', liquidType)
+      this.dropType = dropType
       return new Promise((resolve, reject) => {
         let timer = setInterval(() => {
           if (!obj[name]) {
@@ -47,15 +56,17 @@ export default {
     await this.$dialog({ paragraph: p1 })
 
     const p2 = script.paragraphs.find(p => p.id == '选择酸溶液')
-    const acidType = await this.$dialog({ paragraph: p2 })
+    const dropAcidType = await this.$dialog({ paragraph: p2 })
     await this.babylon.pullInCamera()
-    if (acidType == 0) {
+    if (dropAcidType == 0) {
       const p2_0 = script.paragraphs.find(p => p.id == '酸溶液-盐酸')
       await this.$dialog({ paragraph: p2_0 })
+      this.acidType = 'acid_hcl'
     }
-    if (acidType == 1) {
+    if (dropAcidType == 1) {
       const p2_1 = script.paragraphs.find(p => p.id == '酸溶液-醋酸')
       await this.$dialog({ paragraph: p2_1 })
+      this.acidType = 'acid_ch3cooh'
     }
 
     const p3 = script.paragraphs.find(p => p.id == '夸奖')
@@ -85,15 +96,17 @@ export default {
     await this.babylon.restCamera()
 
     const p7 = script.paragraphs.find(p => p.id == '选择碱溶液')
-    const alkaliType = await this.$dialog({ paragraph: p7 })
+    const p7_alkaliType = await this.$dialog({ paragraph: p7 })
     await this.babylon.pullInCamera()
-    if (alkaliType == 0) {
+    if (p7_alkaliType == 0) {
       const p7_0 = script.paragraphs.find(p => p.id == '碱溶液-氢氧化钠')
       await this.$dialog({ paragraph: p7_0 })
+      this.alkaliType = 'alkali_naoh'
     }
-    if (alkaliType == 1) {
+    if (p7_alkaliType == 1) {
       const p7_1 = script.paragraphs.find(p => p.id == '碱溶液-小苏打')
       await this.$dialog({ paragraph: p7_1 })
+      this.alkaliType = 'alkali_nahco3'
     }
 
     await this.babylon.tubeCloseUp()
@@ -101,8 +114,8 @@ export default {
     const p8 = script.paragraphs.find(p => p.id == '滴加碱溶液')
     await this.$dialog({ paragraph: p8 })
 
-    await this.proceed([this.controlFlag, 'showButton', true, 'alkali'])
-    
+    await this.proceed([this.controlFlag, 'showButton', true, this.alkaliType])
+
     await this.proceed([this.controlFlag, 'showConPanel', true])
 
     await this.babylon.restCamera()
@@ -123,11 +136,30 @@ export default {
     const p12 = script.paragraphs.find(p => p.id == '选择酸碱指示剂')
     await this.$dialog({ paragraph: p12 })
 
-    const indicatorType =  await this.babylon.selectIndicator()
+    const indicatorType = await this.babylon.selectIndicator()
 
     const p13 = script.paragraphs.find(p => p.id == '滴入酸碱指示剂')
     await this.$dialog({ paragraph: p13 })
     await this.proceed([this.controlFlag, 'showButton', true, indicatorType])
+
+    const p14 = script.paragraphs.find(p => p.id == '阶段二-选择碱溶液')
+    const p14_alkaliType = await this.$dialog({ paragraph: p14 })
+    await this.babylon.pullInCamera()
+    if (p14_alkaliType == 0) {
+      const p14_0 = script.paragraphs.find(p => p.id == '阶段二-碱溶液-氢氧化钠')
+      await this.$dialog({ paragraph: p14_0 })
+      this.alkaliType = 'alkali_naoh'
+    }
+    if (p14_alkaliType == 1) {
+      const p14_1 = script.paragraphs.find(p => p.id == '阶段二-碱溶液-小苏打')
+      await this.$dialog({ paragraph: p14_1 })
+      this.alkaliType = 'alkali_nahco3'
+    }
+
+    const p15 = script.paragraphs.find(p => p.id == '阶段二-滴加碱溶液')
+    await this.$dialog({ paragraph: p15 })
+
+    await this.proceed([this.controlFlag, 'showButton', true, this.alkaliType])
   }
 }
 </script>
