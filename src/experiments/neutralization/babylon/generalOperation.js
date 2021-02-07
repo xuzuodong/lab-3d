@@ -2,6 +2,21 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import animationBox from './animationBox'
 
 const frameRate = 12
+let indicaterUsed = ''
+
+const resetCamera = scene => {
+  return new Promise((resolve, reject) => {
+    const cameraAn = animationBox.moveCamera(
+      scene.activeCamera,
+      new BABYLON.Vector3(0, 10, 0),
+      150,
+      frameRate
+    )
+    scene.beginDirectAnimation(scene.activeCamera, cameraAn, 0, frameRate, false, 1, () => {
+      resolve()
+    })
+  })
+}
 
 // 通用滴加酸碱溶液的试管，因为加的酸碱溶液都是无色，所以出现时统一设置颜色，避免之前操作的影响
 const showDropper = scene => {
@@ -84,31 +99,57 @@ const registClickActionOnBottle = scene => {
   const pheLiquid = scene.getMeshByName('pheliquid')
 
   return new Promise((resolve, reject) => {
-    purBottle.actionManager.registerAction(
-      new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
-        if (scene.animatables.length === 0) {
-          animationBox.outFrames[0].value = new BABYLON.Vector3(80, 0, 80)
-          animationBox.outFrames[1].value = new BABYLON.Vector3(80, 20, 80)
-          scene.beginDirectAnimation(purDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
-          scene.beginDirectAnimation(purLiquid, [animationBox.outDropper], 0, 3 * frameRate, false, 1, () => {
-            resolve('pur')
-          })
-        }
-      })
-    )
+    if (indicaterUsed != 'pur') {
+      purBottle.actionManager.registerAction(
+        new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+          if (scene.animatables.length === 0) {
+            animationBox.outFrames[0].value = new BABYLON.Vector3(80, 0, 80)
+            animationBox.outFrames[1].value = new BABYLON.Vector3(80, 20, 80)
+            resetCamera(scene).then(() => {
+              scene.beginDirectAnimation(purDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
+              scene.beginDirectAnimation(
+                purLiquid,
+                [animationBox.outDropper],
+                0,
+                3 * frameRate,
+                false,
+                1,
+                () => {
+                  resolve('pur')
+                  indicaterUsed = 'pur'
+                }
+              )
+            })
+          }
+        })
+      )
+    }
 
-    pheBottle.actionManager.registerAction(
-      new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
-        if (scene.animatables.length === 0) {
-          animationBox.outFrames[0].value = new BABYLON.Vector3(110, 0, 80)
-          animationBox.outFrames[1].value = new BABYLON.Vector3(110, 20, 80)
-          scene.beginDirectAnimation(pheDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
-          scene.beginDirectAnimation(pheLiquid, [animationBox.outDropper], 0, 3 * frameRate, false, 1, () => {
-            resolve('phe')
-          })
-        }
-      })
-    )
+    if (indicaterUsed != 'phe') {
+      pheBottle.actionManager.registerAction(
+        new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+          if (scene.animatables.length === 0) {
+            animationBox.outFrames[0].value = new BABYLON.Vector3(110, 0, 80)
+            animationBox.outFrames[1].value = new BABYLON.Vector3(110, 20, 80)
+            resetCamera(scene).then(() => {
+              scene.beginDirectAnimation(pheDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
+              scene.beginDirectAnimation(
+                pheLiquid,
+                [animationBox.outDropper],
+                0,
+                3 * frameRate,
+                false,
+                1,
+                () => {
+                  resolve('phe')
+                  indicaterUsed = 'phe'
+                }
+              )
+            })
+          }
+        })
+      )
+    }
   })
 }
 

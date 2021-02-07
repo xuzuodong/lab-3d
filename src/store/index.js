@@ -1,4 +1,3 @@
-import { FlyCameraKeyboardInput } from '@babylonjs/core'
 import Vue from 'vue'
 import Vuex from 'vuex'
 

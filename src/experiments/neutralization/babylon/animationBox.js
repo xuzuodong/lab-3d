@@ -6,8 +6,8 @@ const frameRate = 12
 const easeInFunction = new BABYLON.QuadraticEase()
 easeInFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN)
 
-const easeInOutFunction = new BABYLON.CubicEase();
-easeInOutFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT);
+const easeInOutFunction = new BABYLON.CubicEase()
+easeInOutFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT)
 
 // 拿出试剂瓶上的滴灌
 const outDropper = new BABYLON.Animation(
@@ -118,7 +118,7 @@ visibileFrames.push({
 liquidSphereVisible.setKeys(visibileFrames)
 
 // 通过改变相机的target合radius来移动相机的函数，接受四个参数（需要移动的相机，相机指向的目标点，最终距离目标的半径, 结束帧）
-const moveCamera = (camera, endTarget, endRadius, endFrame) => {
+const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2, beta = Math.PI / 3) => {
   const changeTarget = new BABYLON.Animation(
     'changeTarget',
     'target',
@@ -157,6 +157,25 @@ const moveCamera = (camera, endTarget, endRadius, endFrame) => {
   changeRadius.setKeys(changeRadiusFrames)
   changeRadius.setEasingFunction(easeInOutFunction)
 
+  const changeAlpha = new BABYLON.Animation(
+    'changeAlpha',
+    'alpha',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const changeAlphaFrames = []
+  changeAlphaFrames.push({
+    frame: 0,
+    value: camera.alpha
+  })
+  changeAlphaFrames.push({
+    frame: endFrame,
+    value: alpha
+  })
+  changeAlpha.setKeys(changeAlphaFrames)
+  changeAlpha.setEasingFunction(easeInOutFunction)
+
   const changeBeta = new BABYLON.Animation(
     'changeBeta',
     'beta',
@@ -176,7 +195,7 @@ const moveCamera = (camera, endTarget, endRadius, endFrame) => {
   changeBeta.setKeys(changeBetaFrames)
   changeBeta.setEasingFunction(easeInOutFunction)
 
-  return [changeTarget, changeRadius, changeBeta]
+  return [changeTarget, changeRadius, changeAlpha, changeBeta]
 }
 
 // 显示物体的动画（从不可见到可见），接收一个参数（结束帧）
