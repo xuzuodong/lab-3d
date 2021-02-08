@@ -1,6 +1,6 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 
-export const materials = scene => {
+export const createMaterials = scene => {
   // 定义地面材质
   const matGround = new BABYLON.StandardMaterial('matGround', scene)
   matGround.diffuseColor = new BABYLON.Color3(218 / 255, 218 / 255, 218 / 255)
@@ -9,11 +9,12 @@ export const materials = scene => {
   // 定义场景中间实验试管的材质
   const matTube = new BABYLON.StandardMaterial('matTube', scene)
   matTube.diffuseColor = new BABYLON.Color3(1, 1, 1)
-  matTube.alpha = 0.7
+  matTube.alpha = 0.5
 
   // 定义场景中间实验试管内溶液的材质
   const matTubeLiquid = new BABYLON.StandardMaterial('matTubeLiquid', scene)
-  matTubeLiquid.diffuseColor = new BABYLON.Color3(0, 0, 1)
+  matTubeLiquid.diffuseColor = new BABYLON.Color3(1, 1, 1)
+  matTubeLiquid.alpha = 0.95
 
   // 定义通用试剂瓶、滴管的玻璃材质
   const matGlass = new BABYLON.StandardMaterial('matGlass', scene)
@@ -34,6 +35,4 @@ export const materials = scene => {
   const matPhesolution = new BABYLON.StandardMaterial('matPhesolution', scene)
   matPhesolution.diffuseColor = new BABYLON.Color3(1, 1, 1)
   matPhesolution.alpha = 0.9
-
-  return { matGround, matTube, matTubeLiquid, matGlass, matDropperLiquid, matPursolution, matPhesolution }
 }
