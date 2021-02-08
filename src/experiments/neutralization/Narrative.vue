@@ -5,6 +5,7 @@
       :controlFlag="controlFlag"
       :acidType="acidType"
       :dropType="dropType"
+      :clearIndicater = "clearIndicater"
       @infoDeliver="infoDeliver"
     />
   </div>
@@ -28,7 +29,8 @@ export default {
       },
       dropType: '',
       acidType: '',
-      alkaliType: ''
+      alkaliType: '',
+      clearIndicater: false
     }
   },
   components: { ControlPanel },
@@ -172,7 +174,7 @@ export default {
     
     //全部重置
     this.dropType = this.acidType = this.alkaliType = ''
-    this.$store.commit('addSwitch', false)
+    this.clearIndicater = true
     await this.babylon.resetAll()
 
     const p18 = script.paragraphs.find(p => p.id == '阶段三-选择酸溶液')
