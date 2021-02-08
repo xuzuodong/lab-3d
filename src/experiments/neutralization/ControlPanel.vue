@@ -28,9 +28,22 @@ import generalOperations from './babylon/generalOperation'
 import { reactions } from './babylon/reaction'
 export default {
   name: 'controlPanel',
-  props: { babylon: Object, controlFlag: Object, acidType: String, dropType: String },
+  props: {
+    babylon: Object,
+    controlFlag: Object,
+    acidType: String,
+    dropType: String,
+    clearIndicater: Boolean
+  },
   data() {
-    return { isDropping: false, radio_step1: '', conclusion_step1: '', indicaterType: '', clickCount: 0 }
+    return {
+      isDropping: false,
+      radio_step1: '',
+      conclusion_step1: '',
+      indicaterType: '',
+      isAddIndicater: false,
+      clickCount: 0
+    }
   },
   methods: {
     async drop() {
@@ -54,7 +67,7 @@ export default {
           await generalOperations.dropLiqiud(this.babylon.scene, 53, 3).then(() => {
             this.isDropping = false
             this.indicaterType = 'phe'
-            this.$store.commit('addSwitch', true)
+            this.isAddIndicater = true
             reactions(this.babylon.scene, this.acidType, this.dropType, this.indicaterType, this.clickCount)
           })
         }
@@ -64,7 +77,7 @@ export default {
             .then(() => {
               this.isDropping = false
               this.indicaterType = 'pur'
-              this.$store.commit('addSwitch', true)
+              this.isAddIndicater = true
               reactions(this.babylon.scene, this.acidType, this.dropType, this.indicaterType, this.clickCount)
             })
         }
@@ -96,15 +109,15 @@ export default {
       }
     }
   },
-  computed: {
-    isAddIndicater: function() {
-      return this.$store.state.isAddIndicater
-    }
-  },
   watch: {
     dropType: function(newVal, oldVal) {
       if (newVal != oldVal) {
         this.clickCount = 0
+      }
+    },
+    clearIndicater: function(newVal, oldVal) {
+      if (newVal) {
+        this.isAddIndicater = false
       }
     }
   }
