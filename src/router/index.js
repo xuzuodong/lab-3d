@@ -1,16 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import experimentsRoutes from './experiments'
 
 Vue.use(VueRouter)
-
-// 虚拟实验内部的路由在这里依次注册
-const experimentsRoutes = [
-  {
-    path: '/scene/neutralization',
-    component: () => import('../experiments/neutralization/Experiment.vue')
-  }
-]
 
 // 非虚拟实验内部的路由在这里注册
 const routes = [

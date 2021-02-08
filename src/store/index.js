@@ -8,9 +8,13 @@ import experiment from './modules/experiment'
 
 export default new Vuex.Store({
   state: {
-    isAddIndicater: false
+    isAddIndicater: false,
+    liquidType: 'acid'
   },
   mutations: {
+    changeLiquid(state, type) {
+      state.liquidType = type
+    },
     addSwitch(state, flag) {
       state.isAddIndicater = flag
     }

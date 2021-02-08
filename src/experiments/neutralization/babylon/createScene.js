@@ -235,6 +235,9 @@ export default function(canvas, engine) {
     pheText.linkOffsetY = 50
     pheText.alpha = 0
 
+    // const plane = BABYLON.MeshBuilder.CreateGround('myGround', { width: 100, height: 100 }, scene)
+    // plane.position.y = 47
+
     // 模拟液滴
     const liquidSphere = BABYLON.MeshBuilder.CreateSphere(
       'liquidSphere',
