@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="canvasContainer">
     <canvas id="renderCanvas"></canvas>
     <div id="gui">
       <Narrative :babylon="babylon" />
@@ -12,7 +12,6 @@ import BabylonApp from './BabylonApp'
 import Narrative from './Narrative.vue'
 
 export default {
-  name: 'App',
   components: { Narrative },
   data() {
     return {
