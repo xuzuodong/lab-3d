@@ -8,7 +8,7 @@ module.exports = {
       .loader('url-loader')
       .options({
         limit: 0,
-        outputPath: 'assets/',
+        outputPath: 'assets/'
       })
       .end()
     config.plugin('html').tap((args) => {
@@ -24,7 +24,5 @@ module.exports = {
     }
   },
 
-  transpileDependencies: [
-    'quasar'
-  ]
+  transpileDependencies: ['quasar'],
 }
