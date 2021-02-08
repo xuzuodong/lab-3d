@@ -10,6 +10,11 @@ const getters = {}
 const mutations = {
   updateUserInfo(state, userInfo) {
     state.userInfo = userInfo
+  },
+
+  logout(state) {
+    state.userInfo = null
+    Vue.$cookies.remove('userInfo')
   }
 }
 
@@ -19,9 +24,10 @@ const actions = {
       username,
       password,
       success(res) {
-        if (res.status == 200) {
-          commit('updateUserInfo', res.data)
-          success(res.data)
+        if (res.status == 200 && res.data.code == 200) {
+          commit('updateUserInfo', res.data.body)
+          Vue.$cookies.set('userInfo', res.data.body)
+          success(res.data.body)
         } else failure(res)
       },
       failure(res) {
@@ -31,14 +37,13 @@ const actions = {
   },
 
   register({ commit }, { username, password, userType, success, failure }) {
-    userApi.login({
+    userApi.register({
       username,
       password,
       userType,
       success(res) {
-        if (res.status == 200) {
-          commit('updateUserInfo', res.data)
-          success(res.data)
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
         } else failure(res)
       },
       failure(res) {

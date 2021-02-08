@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 // 虚拟实验内部的路由在这里依次注册
 const experimentsRoutes = [
   {
-    path: '/stage/neutralization',
+    path: '/scene/neutralization',
     component: () => import('../experiments/neutralization/Experiment.vue')
   }
 ]

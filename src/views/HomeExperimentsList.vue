@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h4 v-if="!experiments">加载中...</h4>
+    <h5 v-if="!experiments && !failure" class="text-center text-grey">加载中...</h5>
+    <h5 v-if="!experiments && failure" class="text-center text-grey">
+      加载失败，
+      <a @click="selectAllExperiments" class="cursor-pointer">点击重试</a>
+    </h5>
     <div v-else class="container row justify-center q-py-lg">
       <HomeExperimentsListItemVue
         v-for="experiment in experiments"
@@ -23,6 +27,7 @@ export default {
   data() {
     return {
       experiments: null,
+      failure: false,
     }
   },
 
@@ -32,8 +37,14 @@ export default {
 
   created() {
     this.selectAllExperiments({
-      success: (experiments) => (this.experiments = experiments),
-      failure: (res) => console.log(res),
+      success: (experiments) => {
+        this.experiments = experiments.reverse()
+        this.failure = false
+      },
+      failure: (res) => {
+        this.failure = true
+        console.log(res)
+      },
     })
   },
 }

@@ -1,23 +1,30 @@
 import experimentApi from '../../api/experiment'
 
-const state = () => ({
-  experiments: null
-})
+const state = () => ({})
 
 const getters = {}
 
-const mutations = {
-  setExperiments(state, experiments) {
-    state.experiments = experiments
-  }
-}
+const mutations = {}
 
 const actions = {
-  selectAllExperiments({ commit }, { success, failure }) {
+  selectAllExperiments(context, { success, failure }) {
     experimentApi.selectAllExperiments({
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
-          commit('setExperiments', res.data.body)
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
+
+  selectExperimentByAlias(context, { alias, success, failure }) {
+    experimentApi.selectExperimentByAlias({
+      alias,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
           success(res.data.body)
         } else failure(res)
       },
