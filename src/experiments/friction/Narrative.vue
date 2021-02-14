@@ -16,9 +16,14 @@ export default {
     return {}
   },
   async mounted() {
-    const p1 = script.paragraphs.find((p) => p.id == '初始画面')
-    await this.$talker({ paragraph: p1 })
+    const p0 = script.paragraphs.find((p) => p.id == '不远处似乎传来了什么动静')
 
+    await this.$talker({ paragraph: p0 })
+    await this.babylon.runStart()
+    const p1 = script.paragraphs.find((p) => p.id == '初始画面')
+
+    await this.$talker({ paragraph: p1 })
+    await this.babylon.runStop()
     const p2 = script.paragraphs.find((p) => p.id == '路过的工程师')
     await this.$talker({ paragraph: p2 })
 
@@ -38,9 +43,10 @@ export default {
             await this.babylon.changeGround(grasspng)
             const p5 = script.paragraphs.find((p) => p.id == '草地')
             await this.$talker({ paragraph: p5 })
-            await this.babylon.grassRun(8000)
+            await this.babylon.runStart()
             const p5_1 = script.paragraphs.find((p) => p.id == '草地后')
             await this.$talker({ paragraph: p5_1 })
+            await this.babylon.runStop()
             console.log(changeGround)
           }
           if (p4_0.choices[changeGround].name == '**较为光滑**的木地板') {
@@ -85,29 +91,33 @@ export default {
           await this.babylon.smallArea()
           const p8 = script.paragraphs.find((p) => p.id == '减小接触面积')
           await this.$talker({ paragraph: p8 })
-          await this.babylon.grassRun(5000)
+          await this.babylon.runStart()
           const p10 = script.paragraphs.find((p) => p.id == '减小接触面积后1')
           await this.$talker({ paragraph: p10 })
+          await this.babylon.runStop()
           await this.babylon.largeArea()
           const p9 = script.paragraphs.find((p) => p.id == '增大接触面积')
           await this.$talker({ paragraph: p9 })
-          await this.babylon.grassRun(5000)
+          await this.babylon.runStart()
           const p11 = script.paragraphs.find((p) => p.id == '增大接触面积后2')
           await this.$talker({ paragraph: p11 })
+          await this.babylon.runStop()
         }
         if (changeArea == 1) {
           await this.babylon.largeArea()
           const p9 = script.paragraphs.find((p) => p.id == '增大接触面积')
           await this.$talker({ paragraph: p9 })
-          await this.babylon.grassRun(5000)
+          await this.babylon.runStart()
           const p12 = script.paragraphs.find((p) => p.id == '增大接触面积后1')
           await this.$talker({ paragraph: p12 })
+          await this.babylon.runStop()
           await this.babylon.changeArea()
           const p8 = script.paragraphs.find((p) => p.id == '减小接触面积')
           await this.$talker({ paragraph: p8 })
-          await this.babylon.grassRun(5000)
+          await this.babylon.runStart()
           const p13 = script.paragraphs.find((p) => p.id == '减小接触面积后2')
           await this.$talker({ paragraph: p13 })
+          await this.babylon.runStop()
         }
         const p14 = script.paragraphs.find((p) => p.id == '接触面积总结')
         await this.$talker({ paragraph: p14 })
@@ -130,6 +140,16 @@ export default {
     }
     const p20 = script.paragraphs.find((p) => p.id == '机器人的吐槽')
     await this.$talker({ paragraph: p20 })
+    const p21 = script.paragraphs.find((p) => p.id == '大总结')
+    await this.$talker({ paragraph: p21 })
+    const p22 = script.paragraphs.find((p) => p.id == '总结任务1')
+    await this.$talker({ paragraph: p22 })
+    const p23 = script.paragraphs.find((p) => p.id == '总结任务2')
+    await this.$talker({ paragraph: p23 })
+    const p24 = script.paragraphs.find((p) => p.id == '总结任务3')
+    await this.$talker({ paragraph: p24 })
+    const p25 = script.paragraphs.find((p) => p.id == '结局')
+    await this.$talker({ paragraph: p25 })
   },
 }
 </script>
