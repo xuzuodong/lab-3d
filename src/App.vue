@@ -35,14 +35,14 @@ export default {
     /**
      * 每次路由跳转执行检查，
      * 如果是进入实验内部，则隐藏导航栏；
-     * 如果从实验内部出来，则确保 dialog 组件关闭；
+     * 如果从实验内部出来，则确保 talker 组件关闭；
      * 进入实验内部时（通过输入 url 进入），如果没有登录，则回到首页
      */
     $route() {
       const insideExperiment = this.$route.matched.some((r) => r.path.match('/scene/'))
       this.showNav = !insideExperiment
-      let dialogNode = document.getElementById('dialog')
-      if (dialogNode && !insideExperiment) document.body.removeChild(dialogNode)
+      let talkerNode = document.getElementById('talker')
+      if (talkerNode && !insideExperiment) document.body.removeChild(talkerNode)
       if (insideExperiment && !this.userInfo) this.$router.replace({ path: '/', query: { join: 'login' } })
     },
   },

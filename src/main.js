@@ -1,5 +1,5 @@
 import './plugins/vue-cookies'
-import './plugins/dialog'
+import './plugins/talker'
 import './plugins/quasar'
 import './plugins/vue-snip'
 

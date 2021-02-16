@@ -20,6 +20,10 @@ export default {
   },
   mounted() {
     this.babylon = new BabylonApp('renderCanvas')
+  }, 
+  
+  beforeDestroy() {
+    this.babylon.engine.dispose()
   }
 }
 </script>

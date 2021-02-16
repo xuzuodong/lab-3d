@@ -1,1 +1,1 @@
-export default 'http://47.98.192.17:3000/api/'
+export default 'http://api.lab3d.site:3001/api/'

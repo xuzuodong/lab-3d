@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -31,11 +33,13 @@
     "node-sass": "^4.13.0",
     "sass": "^1.32.4",
     "sass-loader": "^10.1.1",
+    "type-check": "^0.4.0",
     "vue-cli-plugin-quasar": "~3.0.1",
     "vue-cookies": "^1.7.4",
     "vue-smooth-height": "^1.6.4",
     "vue-snip": "^1.1.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.8.1"
   },
   "eslintConfig": {
     "root": true,
