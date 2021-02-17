@@ -27,12 +27,12 @@ export const outputHookFinder = (paragraph, pointer) => {
 
     let matchedIndex
     // talk
-    if (h.talk >= 0 || h.talk === 'last') {
+    if (h.talk >= 0 || h.talk === 'last' && pointer.talk != null) {
       if (h.talk === 'last') h.talk = paragraph.talks.length - 1
       matchedIndex = h.talk == pointer.talk
     }
     // reply
-    else if (h.reply) {
+    else if (h.reply && pointer.reply != null) {
       // 不指定选项
       if (h.reply.choice === 'any') {
         if (h.reply.index === 'last') {
@@ -47,7 +47,7 @@ export const outputHookFinder = (paragraph, pointer) => {
           choice = paragraph.choices.length - 1
         }
         if (h.reply.index === 'last') {
-          h.reply.index = paragraph.choices[choice].replies.length - 1
+          h.reply.index = paragraph.choices[choice].replies?.length - 1
         }
         matchedIndex = h.reply.index == pointer.reply && choice == pointer.choice
       }
