@@ -21,11 +21,17 @@
           <p>{{ experiment.description }}</p>
           <div class="row q-mt-md items-end">
             <div
+              @click="toggleLike"
               v-ripple:red
               class="row items-center cursor-pointer relative-position q-pa-sm"
               style="border-radius: 20px"
             >
-              <q-icon class="q-mr-xs" name="favorite_border" size="sm" color="red" />
+              <q-icon
+                class="q-mr-xs"
+                :name="experiment.experimentLikec ? 'favorite' : 'favorite_border'"
+                size="sm"
+                color="red"
+              />
               {{ experiment.likec }}
             </div>
             <q-space />
@@ -154,20 +160,54 @@ export default {
   },
 
   methods: {
-    ...mapActions('experiment', ['selectExperimentByAlias']),
+    ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment']),
+
+    toggleLike() {
+      if (this.userInfo) {
+        this.likeExperiment({
+          id: this.experiment.id,
+          like: !this.experiment.experimentLikec,
+          success: (res) => {
+            if (this.experiment.experimentLikec) {
+              this.experiment.likec--
+              this.experiment.experimentLikec = false
+            } else {
+              this.experiment.likec++
+              this.experiment.experimentLikec = true
+            }
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
+      } else {
+        this.$q
+          .dialog({
+            component: DialogJoinVue,
+            parent: this,
+          })
+          .onOk(() => {
+            this.loadExperimentDetails()
+          })
+      }
+    },
+
+    loadExperimentDetails() {
+      this.selectExperimentByAlias({
+        alias: this.$route.params.alias,
+        success: (experiment) => {
+          this.experiment = experiment
+          document.title = experiment.name + ' | Lab 3D'
+        },
+        failure: (error) => {
+          console.log(error)
+        },
+      })
+    },
   },
 
   created() {
-    this.selectExperimentByAlias({
-      alias: this.$route.params.alias,
-      success: (experiment) => {
-        this.experiment = experiment
-        document.title = experiment.name + ' | Lab 3D'
-      },
-      failure: (error) => {
-        console.log(error)
-      },
-    })
+    this.loadExperimentDetails()
   },
 
   beforeRouteLeave(to, from, next) {

@@ -15,6 +15,7 @@ const mutations = {
   logout(state) {
     state.userInfo = null
     Vue.$cookies.remove('userInfo')
+    window.location.reload()
   }
 }
 
