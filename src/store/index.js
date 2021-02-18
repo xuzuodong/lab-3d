@@ -7,10 +7,5 @@ import user from './modules/user'
 import experiment from './modules/experiment'
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {},
   modules: { user, experiment }
 })

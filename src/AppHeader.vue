@@ -1,5 +1,5 @@
 <template>
-  <q-header class="bg-black text-white">
+  <q-header v-if="!insideExperiment" class="bg-black text-white">
     <q-toolbar class="container toolbar text-white q-mx-auto">
       <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" />
       <q-tabs shrink content-class="tabs">
@@ -34,12 +34,25 @@
       </div>
     </q-toolbar>
   </q-header>
+
+  <div v-else>
+    <q-page-sticky position="top-left" :offset="[18, 18]">
+      <q-btn fab-mini icon="arrow_back" color="white" text-color="dark" @click="leaveConfirm" />
+    </q-page-sticky>
+  </div>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex'
 import DialogJoinVue from './components/DialogJoin.vue'
+
 export default {
+  props: {
+    insideExperiment: {
+      type: Boolean,
+    },
+  },
+
   computed: {
     ...mapState('user', ['userInfo']),
   },
@@ -52,11 +65,22 @@ export default {
         .dialog({
           component: DialogJoinVue,
           parent: this,
-          text: 'something',
         })
         .onOk(() => {})
         .onCancel(() => {})
         .onDismiss(() => {})
+    },
+
+    leaveConfirm() {
+      this.$q
+        .dialog({
+          title: '离开实验',
+          message: '实验进度将不会保存，确认离开吗？',
+          cancel: true,
+        })
+        .onOk(() => {
+          this.$router.go(-1)
+        })
     },
   },
 }

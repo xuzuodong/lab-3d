@@ -12,7 +12,7 @@ module.exports = {
       })
       .end()
     config.plugin('html').tap((args) => {
-      args[0].title = 'Lab 3D'
+      args[0].title = 'Lab 3D - 体验炫酷的科学实验！'
       return args
     })
   },
