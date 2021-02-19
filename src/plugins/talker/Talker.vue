@@ -75,12 +75,7 @@ export default {
         this.typer.targetString = this.paragraph.talks[this.pointer.talk]
       } else {
         // 指针内 choice 非 null, 则说明当前进行 reply 环节
-        if (this.pointer.reply == null) {
-          this.pointer.talk = null
-          this.pointer.reply = 0
-        } else {
-          this.pointer.reply++
-        }
+        this.pointer.reply++
         this.typer.targetString = this.paragraph.choices[this.pointer.choice].replies[this.pointer.reply]
       }
 
@@ -169,6 +164,7 @@ export default {
 
     reply(choice, index) {
       this.hideChoices()
+      this.pointer.talk = null
       this.pointer.choice = index
       this.pointer.reply = -1
       const inputHook =
