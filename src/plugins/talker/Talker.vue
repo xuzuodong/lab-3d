@@ -8,6 +8,7 @@
         <div
           v-for="(choice, index) in paragraph.choices"
           :key="choice.name"
+          v-show="!choice.hidden"
           @click="reply(choice, index)"
           class="choice"
         >
@@ -110,7 +111,7 @@ export default {
           // talk 环节
           // 判断有没有后续的玩家选择环节（choices），如果有则弹出选择 UI
           if (this.paragraph.choices && this.paragraph.choices.length > 0) {
-            this.showChoice()
+            this.showChoices()
           } else {
             // 如果没有 choices 环节，则结束这个段落的对话
             this.closeParagraph()
@@ -149,11 +150,12 @@ export default {
       this.$destroy()
     },
 
-    showChoice() {
+    // 打开 / 关闭 选择面板
+    showChoices() {
       this.showChoicesView = true
     },
 
-    hideChoice() {
+    hideChoices() {
       this.showChoicesView = false
     },
 
@@ -166,7 +168,7 @@ export default {
     },
 
     reply(choice, index) {
-      this.hideChoice()
+      this.hideChoices()
       this.pointer.choice = index
       this.pointer.reply = -1
       const inputHook =
@@ -180,6 +182,7 @@ export default {
           paragraph: this.paragraph,
           goto: this.goto,
           restart: this.restart,
+          hideChoice: this.hideChoice,
         })
       } else {
         if (choice.replies && choice.replies.length > 0) {
@@ -208,7 +211,9 @@ export default {
       } else if (talk === 'last') {
         Object.assign(this.pointer, { talk: this.paragraph.talks.length - 2, choice: null, reply: null })
       } else if (reply) {
-        const { choice, index } = reply
+        let { choice, index } = reply
+        if (choice === 'last') choice = this.paragraph.choices.length - 1
+        if (index === 'last') index = this.paragraph.choices[choice].replies.length - 1
         Object.assign(this.pointer, { talk: null, choice, reply: index - 1 })
       } else {
         Object.assign(this.pointer, { talk: null, choice: null, reply: null })
@@ -216,6 +221,11 @@ export default {
       this.hooks && this.hooks.forEach((h) => delete h.resolved)
       this.show()
       this.talk()
+    },
+
+    // 外部调用，隐藏当前选项
+    hideChoice() {
+      this.$set(this.paragraph.choices[this.pointer.choice], 'hidden', true)
     },
   },
 

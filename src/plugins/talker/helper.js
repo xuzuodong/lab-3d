@@ -27,7 +27,7 @@ export const outputHookFinder = (paragraph, pointer) => {
 
     let matchedIndex
     // talk
-    if (h.talk >= 0 || h.talk === 'last' && pointer.talk != null) {
+    if (h.talk >= 0 || (h.talk === 'last' && pointer.talk != null)) {
       if (h.talk === 'last') h.talk = paragraph.talks.length - 1
       matchedIndex = h.talk == pointer.talk
     }
@@ -62,8 +62,12 @@ export const inputHookFinder = (paragraph, pointer) => {
     if (h.paragraph != paragraph.id) return false
 
     let matchedChoiceIndex
-    if (h.choice === 'last') h.choice = paragraph.choices.length - 1
-    matchedChoiceIndex = h.choice == pointer.choice
+    if (h.choice === 'any') {
+      matchedChoiceIndex = true
+    } else {
+      if (h.choice === 'last') h.choice = paragraph.choices.length - 1
+      matchedChoiceIndex = h.choice == pointer.choice
+    }
     return matchedChoiceIndex
   }
 }

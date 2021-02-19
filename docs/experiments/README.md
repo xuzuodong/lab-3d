@@ -482,7 +482,22 @@ goto 可以前往任一段落的任一句 `talk` 或 `reply`。
   method: (tools) => {
     const paragraph = tools.paragraph
     console.log(paragraph.name) // 输出 '某个段落'
-    next()
+    tools.next()
+  },
+},
+```
+
+#### hideChoice
+
+作用：监听到玩家选了某个选项后，使该选项不再可选。
+
+```js
+{
+  paragraph: '某个段落',
+  choice: 'any',
+  method: (tools) => {
+    tools.hideChoice() 
+    tools.restart() // 重新开始本段落后，刚刚用户选的选项不会再出现
   },
 },
 ```
@@ -511,7 +526,7 @@ hooks 钩子数组，钩子用来指定监听哪个段落的哪个环节并编�
 
 - 类型：`number|string`
 
-指定监听用户选了哪个 choice，值值从 0 开始计，可以为 'last' 来监听最后一个选项。
+指定监听用户选了哪个 choice，值值从 0 开始计，可以为 'last' 来监听最后一个选项，可以为 'any' 来监听任意选项。
 
 **注意，一个** `hooks[]` **中，**要么使用** `choice`，要么使用** `talk`，**要么使用** `reply`，**不能一个以上同时存在，也不能没有**。
 
