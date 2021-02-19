@@ -18,11 +18,11 @@ import icejpg from '../../assets/ice.jpg'
 export default {
   //   components: { Narrative },
 
-  data() {
-    return {
-      babylon: {},
-    }
-  },
+  // data() {
+  //   return {
+  //     babylon: {},
+  //   }
+  // },
 
   mounted() {
     this.babylon = new BabylonApp('renderCanvas')
@@ -30,25 +30,61 @@ export default {
       script: script,
       hooks: [
         {
-          paragraph: '摩擦力是什么',
-          reply: { choice: '0', index: 'last' },
+          paragraph: '初始画面',
+          talk: 0,
           method: (tools) => {
-            // const p4_0 = script.paragraphs.find((p) => p.id == '改变接触面粗糙程度')
-            // const changeGround = this.$talker({ paragraph: p4_0 })
-            // p4_0.choices.splice(changeGround, 1)
-            tools.goto({ paragraph: '改变接触面粗糙程度' })
+            this.howToDecrease = 0
+            tools.next()
           },
         },
         {
           paragraph: '摩擦力是什么',
-          reply: { choice: '1', index: 'last' },
+          choice: 0,
+          method: (tools) => {
+            this.howToDecrease++
+            this.roughCount = 0
+            tools.hideChoice()
+            tools.next()
+          },
+        },
+        {
+          paragraph: '摩擦力是什么',
+          reply: { choice: 0, index: 'last' },
+          method: (tools) => {
+            tools.goto({ paragraph: '改变接触面粗糙程度' })
+          },
+        },
+
+        {
+          paragraph: '摩擦力是什么',
+          choice: 1,
+          method: (tools) => {
+            this.howToDecrease++
+            this.areaCount = 0
+            tools.hideChoice()
+            tools.next()
+          },
+        },
+        {
+          paragraph: '摩擦力是什么',
+          reply: { choice: 1, index: 'last' },
           method: (tools) => {
             tools.goto({ paragraph: '改变与接触面的面积' })
           },
         },
+
         {
           paragraph: '摩擦力是什么',
-          reply: { choice: '2', index: 'last' },
+          choice: 2,
+          method: (tools) => {
+            this.howToDecrease++
+            tools.hideChoice()
+            tools.next()
+          },
+        },
+        {
+          paragraph: '摩擦力是什么',
+          reply: { choice: 2, index: 'last' },
           method: (tools) => {
             tools.goto({ paragraph: '改变物体的质量' })
           },
@@ -56,13 +92,12 @@ export default {
         //接触面选项
         {
           paragraph: '改变接触面粗糙程度',
-          reply: { choice: 0, index: 'last' },
+          choice: 0,
           method: (tools) => {
-            const paragraph = tools.paragraph
-            console.log(paragraph)
-            paragraph.choices.splice(paragraph.choices.some(r=>r.name == '**很粗糙**的草地'), 1)
-            tools.goto({ paragraph: '草地' })
+            this.roughCount++
             this.babylon.changeGround(grasspng)
+            tools.hideChoice()
+            tools.goto({ paragraph: '草地' })
           },
         },
         {
@@ -85,18 +120,18 @@ export default {
           paragraph: '草地后',
           talk: 'last',
           method: (tools) => {
-            tools.goto({ paragraph: '改变接触面粗糙程度' })
+            if (this.roughCount == 3) tools.goto({ paragraph: '接触面总结' })
+            else tools.goto({ paragraph: '改变接触面粗糙程度' })
           },
         },
         {
           paragraph: '改变接触面粗糙程度',
-          reply: { choice: '1', index: 'last' },
+          choice: 1,
           method: (tools) => {
-            const paragraph = tools.paragraph
-            console.log(paragraph)
-            paragraph.choices.splice(paragraph.choices.some(r=>r.name == '**较为光滑**的木地板'), 1)
-            tools.goto({ paragraph: '木板' })
+            this.roughCount++
             this.babylon.changeGround(woodjpg)
+            tools.hideChoice()
+            tools.goto({ paragraph: '木板' })
           },
         },
         {
@@ -107,30 +142,22 @@ export default {
             tools.goto({ paragraph: '木板后' })
           },
         },
-        // {
-        //   paragraph: '木板后',
-        //   talk: 1,
-        //   method: (tools) => {
-        //     this.babylon.runStop()
-        //     tools.next()
-        //   },
-        // },
         {
           paragraph: '木板后',
           talk: 'last',
           method: (tools) => {
-            tools.goto({ paragraph: '改变接触面粗糙程度' })
+            if (this.roughCount == 3) tools.goto({ paragraph: '接触面总结' })
+            else tools.goto({ paragraph: '改变接触面粗糙程度' })
           },
         },
         {
           paragraph: '改变接触面粗糙程度',
-          reply: { choice: '2', index: 'last' },
+          choice: 2,
           method: (tools) => {
-            const paragraph = tools.paragraph
-            console.log(paragraph)
-            paragraph.choices.splice(paragraph.choices.some(r=>r.name == '**非常光滑**的冰面'), 1)
-            tools.goto({ paragraph: '冰面' })
+            this.roughCount++
             this.babylon.changeGround(icejpg)
+            tools.hideChoice()
+            tools.goto({ paragraph: '冰面' })
           },
         },
         {
@@ -141,21 +168,164 @@ export default {
             tools.goto({ paragraph: '冰面后' })
           },
         },
-        // {
-        //   paragraph: '冰面后',
-        //   talk: 3,
-        //   method: (tools) => {
-        //     this.babylon.runStop()
-        //     tools.next()
-        //   },
-        // },
         {
           paragraph: '冰面后',
           talk: 'last',
           method: (tools) => {
-            tools.goto({ paragraph: '改变接触面粗糙程度' })
+            if (this.roughCount == 3) tools.goto({ paragraph: '接触面总结' })
+            else tools.goto({ paragraph: '改变接触面粗糙程度' })
           },
         },
+        {
+          paragraph: '接触面总结',
+          reply: { choice: 0, index: 'last' },
+          method: (tools) => {
+            tools.goto({ paragraph: '接触面正确结束' })
+          },
+        },
+        {
+          paragraph: '接触面总结',
+          reply: { choice: 1, index: 'last' },
+          method: (tools) => {
+            tools.goto({ paragraph: '接触面回答错误' })
+          },
+        },
+        {
+          paragraph: '接触面回答错误',
+          reply: { choice: 0, index: 'last' },
+          method: (tools) => {
+            tools.goto({ paragraph: '接触面正确结束' })
+          },
+        },
+        {
+          paragraph: '接触面正确结束',
+          talk: 'last',
+          method: (tools) => {
+            if (this.howToDecrease == 3) tools.goto({ paragraph: '机器人的吐槽' })
+            else tools.goto({ paragraph: '摩擦力是什么' })
+          },
+        },
+        //接触面积
+        {
+          paragraph: '改变与接触面的面积',
+          reply: { choice: 0, index: 'last' },
+          method: (tools) => {
+            this.babylon.smallArea()
+            tools.goto({ paragraph: '减小接触面积' })
+          },
+        },
+        {
+          paragraph: '减小接触面积',
+          talk: 1,
+          method: (tools) => {
+            this.babylon.runStart()
+            setTimeout(() => {
+              tools.next()
+            }, 3000)
+          },
+        },
+        {
+          paragraph: '减小接触面积',
+          talk: 'last',
+          method: (tools) => {
+            this.babylon.runStop()
+            tools.next()
+          },
+        },
+        {
+          paragraph: '减小接触面积',
+          reply: { choice: 0, index: 0 },
+          method: (tools) => {
+            this.babylon.largeArea()
+            tools.goto({ paragraph: '增大接触面积1' })
+          },
+        },
+        {
+          paragraph: '增大接触面积1',
+          talk: 1,
+          method: (tools) => {
+            this.babylon.runStart()
+            setTimeout(() => {
+              tools.next()
+            }, 3000)
+          },
+        },
+        {
+          paragraph: '增大接触面积1',
+          talk: 'last',
+          method: (tools) => {
+            this.babylon.runStop()
+            tools.next()
+          },
+        },
+        {
+          paragraph: '增大接触面积1',
+          reply: { choice: 0, index: 'last' },
+          method: (tools) => {
+            tools.goto({ paragraph: '接触面积总结' })
+          },
+        },
+
+        {
+          paragraph: '改变与接触面的面积',
+          reply: { choice: 1, index: 'last' },
+          method: (tools) => {
+            this.babylon.largeArea()
+            tools.goto({ paragraph: '增大接触面积' })
+          },
+        },
+        {
+          paragraph: '增大接触面积',
+          talk: 1,
+          method: (tools) => {
+            this.babylon.runStart()
+            setTimeout(() => {
+              tools.next()
+            }, 3000)
+          },
+        },
+        {
+          paragraph: '增大接触面积',
+          talk: 'last',
+          method: (tools) => {
+            this.babylon.runStop()
+            tools.next()
+          },
+        },
+        {
+          paragraph: '增大接触面积',
+          reply: { choice: 0, index: 'last' },
+          method: (tools) => {
+            this.babylon.changeArea()
+            tools.goto({ paragraph: '减小接触面积1' })
+          },
+        },
+        {
+          paragraph: '减小接触面积1',
+          talk: 1,
+          method: (tools) => {
+            this.babylon.runStart()
+            setTimeout(() => {
+              tools.next()
+            }, 3000)
+          },
+        },
+        {
+          paragraph: '减小接触面积1',
+          talk: 'last',
+          method: (tools) => {
+            this.babylon.runStop()
+            tools.next()
+          },
+        },
+        {
+          paragraph: '减小接触面积1',
+          reply: { choice: 0, index: 'last' },
+          method: (tools) => {
+            tools.goto({ paragraph: '接触面积总结' })
+          },
+        },
+
         {
           paragraph: '总结任务1',
           talk: 0,
