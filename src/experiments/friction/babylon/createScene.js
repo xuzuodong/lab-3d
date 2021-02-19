@@ -1,9 +1,6 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
-import * as GUI from '@babylonjs/gui'
+// import * as GUI from '@babylonjs/gui'
 import xbot from './meshes/Xbot.glb'
-import woodjpg from '../../../assets/wood.jpg'
-import grasspng from '../../../assets/grass.png'
-import icejpg from '../../../assets/ice.jpg'
 
 export default function(canvas, engine) {
     // 创建一个场景scene
@@ -14,32 +11,18 @@ export default function(canvas, engine) {
     Promise.all([
         BABYLON.SceneLoader.ImportMeshAsync('', xbot, '', scene, undefined, '.glb')
     ]).then(function(newMeshes) {
-        const xbot = [];
-        xbot.push(scene.getMeshByID('__root__'));
 
-        function boxdata(dep, hei, wid) {
-            return { depth: dep, height: hei, width: wid }
-        }
-
-        const role = BABYLON.MeshBuilder.CreateBox("box",
-            boxdata(10, 0.01, 0.01),
-            scene);
+        const role = BABYLON.MeshBuilder.CreateBox("box", { depth: 10, height: 0.01, width: 0.01 }, scene);
         role.position = new BABYLON.Vector3(0, 1.15, -5.0);
-        // { depth: 4.5, height: 2, width: 1.2 }
         const box = BABYLON.MeshBuilder.CreateBox("boxx", { depth: 1.2, height: 2, width: 4.5 }, scene);
-        // box.scaling = new BABYLON.Vector3(4.5, 2, 1.2)
         box.position = new BABYLON.Vector3(0, 1, -10);
-
-        const fakebox = BABYLON.MeshBuilder.CreateBox("box",
-            boxdata(0.001, 0.001, 0.001),
-            scene);
+        const fakebox = BABYLON.MeshBuilder.CreateBox("box", { depth: 0.001, height: 0.001, width: 0.001 }, scene);
         fakebox.position = new BABYLON.Vector3(0, 1, 0);
 
         // 添加一个相机，并绑定鼠标事件
         const alpha = Math.PI / 4;
         const beta = Math.PI / 3;
         const distance = 13;
-
         const mainCamera = new BABYLON.ArcRotateCamera("mainCamera", alpha, beta, distance, new BABYLON.Vector3(0, 10, 0), scene);
         mainCamera.attachControl(canvas, true);
         mainCamera.lowerRadiusLimit = 2;

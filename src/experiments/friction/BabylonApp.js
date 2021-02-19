@@ -150,7 +150,7 @@ export default class BabylonApp {
         const role = this.scene.meshes[3]
         const box = this.scene.meshes[4]
         const fakebox = this.scene.meshes[5]
-        const xbot = this.scene.meshes[0]
+        const xbot = [this.scene.getMeshByID('__root__')];
         const animation1 = new BABYLON.Animation("tutoAnimation",
             "position.z",
             60,
@@ -217,7 +217,7 @@ export default class BabylonApp {
         animationGroup1.addTargetedAnimation(animation1, fakebox);
         animationGroup1.addTargetedAnimation(animation2, role);
         animationGroup1.addTargetedAnimation(animation3, box);
-        this.grassRun(6500);
+        this.grassRun(6000);
         animationGroup1.play(true);
     }
 

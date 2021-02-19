@@ -16,14 +16,16 @@ export default {
     return {}
   },
   async mounted() {
+    setTimeout(() => {
+      this.babylon.runStart()
+    }, 500)
     const p0 = script.paragraphs.find((p) => p.id == '不远处似乎传来了什么动静')
-
     await this.$talker({ paragraph: p0 })
-    await this.babylon.runStart()
-    const p1 = script.paragraphs.find((p) => p.id == '初始画面')
 
-    await this.$talker({ paragraph: p1 })
+    const p1 = script.paragraphs.find((p) => p.id == '初始画面')
     await this.babylon.runStop()
+    await this.$talker({ paragraph: p1 })
+
     const p2 = script.paragraphs.find((p) => p.id == '路过的工程师')
     await this.$talker({ paragraph: p2 })
 
