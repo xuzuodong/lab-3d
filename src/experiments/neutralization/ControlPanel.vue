@@ -1,15 +1,8 @@
 <template>
   <div id="controlPanel">
-    <div v-if="controlFlag.showButton">
+    <div v-if="showButton">
       <q-btn color="black" label="滴加" @click="drop" />
       <q-btn color="black" label="结束" @click="stop" />
-    </div>
-    <div v-if="controlFlag.showConPanel">
-      <p>在刚刚“酸溶液”和“碱溶液”的反应中，你有观察到它们之间发生了什么明显的变化吗？</p>
-      <div class="q-pa-md" style="max-width: 300px">
-        <q-input v-model="conclusion_step1" filled autogrow />
-      </div>
-      <q-btn color="black" label="提交" @click="text_submit" />
     </div>
   </div>
 </template>
@@ -22,7 +15,7 @@ export default {
   name: 'controlPanel',
   props: {
     babylon: Object,
-    controlFlag: Object,
+    showButton: Boolean,
     acidType: String,
     dropType: String,
     clearIndicater: Boolean
@@ -30,8 +23,6 @@ export default {
   data() {
     return {
       isDropping: false,
-      radio_step1: '',
-      conclusion_step1: '',
       indicaterType: '',
       isAddIndicater: false,
       clickCount: 0
@@ -77,7 +68,7 @@ export default {
     },
     stop() {
       if (!this.isDropping) {
-        this.$emit('infoDeliver', 'showButton', false)
+        this.$emit('infoDeliver', false)
         if (
           this.dropType === 'acid_hcl' ||
           this.dropType === 'acid_ch3cooh' ||
@@ -88,11 +79,6 @@ export default {
         } else {
           generalOperations.putBackDropper(this.babylon.scene, this.dropType)
         }
-      }
-    },
-    text_submit() {
-      if (this.conclusion_step1 != '') {
-        this.$emit('infoDeliver', 'showConPanel', false)
       }
     }
   },
@@ -106,7 +92,7 @@ export default {
       if (newVal) {
         this.isAddIndicater = false
       }
-    },
+    }
   }
 }
 </script>
