@@ -1,5 +1,4 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
-import { PositionGizmo } from '@babylonjs/core/Legacy/legacy'
 import '@babylonjs/loaders/glTF'
 import createScene from './babylon/createScene'
 
@@ -19,9 +18,9 @@ export default class BabylonApp {
     }
     changeGround(ground) {
         let mat = new BABYLON.StandardMaterial("", this.scene)
-            // if (ground == "") {
-            //     mat.diffuseColor = new BABYLON.Color3(100 / 255, 100 / 255, 100 / 255)
-            // }
+        // if (ground == "") {
+        //     mat.diffuseColor = new BABYLON.Color3(100 / 255, 100 / 255, 100 / 255)
+        // }
         mat.diffuseTexture = new BABYLON.Texture(ground, this.scene)
         let road = this.scene.getMeshByName('road')
         road.material = mat
@@ -103,7 +102,7 @@ export default class BabylonApp {
         runAnim.play(true);
         runAnim.setWeightForAllAnimatables(0);
         let currentParam = runParam
-            //0.01是动画变速的速率，0.05就会很快了已经。
+        //0.01是动画变速的速率，0.05就会很快了已经。
         function onBeforeAnimation() {
             // Increment the weight of the current override animation
             if (currentParam) {
