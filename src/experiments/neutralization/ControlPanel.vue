@@ -1,8 +1,8 @@
 <template>
   <div id="controlPanel">
     <div v-if="showButton">
-      <q-btn color="black" label="滴加" @click="drop" />
-      <q-btn color="black" label="结束" @click="stop" />
+      <q-btn color="primary" label="滴加" @click="drop" class="q-ma-md" />
+      <q-btn color="primary" label="结束" @click="stop" class="q-ma-md" />
     </div>
   </div>
 </template>
@@ -100,7 +100,9 @@ export default {
 <style scoped>
 #controlPanel {
   position: absolute;
-  top: 20px;
+  top: 80px;
   z-index: 5;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

@@ -61,6 +61,12 @@ export default {
             acid_alkali: acid_alkali
           })
           .onOk((data) => {
+            /*resolve得到的data是一个对象，根据当前要传给后端哪个数据就传哪个，
+             * 内涵总共三个key，具体查看DialogQuestion.vue中的data的conclusion对象
+             * useDropper是试管使用方法的选择题
+             * textConclusion是填写实验现象的主观文本题
+             * radioConclusion是酸碱指示剂颜色变化的选择题
+             */
             resolve(data)
           })
       })
@@ -70,14 +76,6 @@ export default {
     this.$talker({
       script: script,
       hooks: [
-        // {
-        //   paragraph: '初始画面',
-        //   talk: 1,
-        //   method: async (tools) => {
-        //     await this.conclusionSubmit('radioConclusion')
-        //     await tools.next()
-        //   }
-        // },
         {
           paragraph: '选择酸溶液',
           reply: { choice: 'any', index: 1 },
@@ -125,6 +123,7 @@ export default {
           method: async (tools) => {
             await this.conclusionSubmit('useDropperRadio')
             // 后面then发数据请求，或用变量去接用户选择的答案
+            // 下遇到conclusionSubmit就是传数据位置
             await this.babylon.restCamera()
             await tools.next()
           }
