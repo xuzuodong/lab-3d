@@ -10,7 +10,7 @@
           :key="choice.name"
           v-show="!choice.hidden"
           @click="reply(choice, index)"
-          class="choice"
+          class="choice text-dark"
         >
           {{ choice.name }}
         </div>
@@ -259,7 +259,7 @@ export default {
   display: flex;
   flex-direction: column-reverse;
   padding: 20px;
-  
+
   .bubble-text {
     flex-grow: 1;
     margin: 16px;
