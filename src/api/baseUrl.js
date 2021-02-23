@@ -1,0 +1,1 @@
+export default 'http://api.lab3d.site:3001/api/'
