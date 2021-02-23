@@ -26,10 +26,8 @@ body {
   @media screen and (max-width: $breakpoint-sm-max) {
     width: 90%;
   }
-  @media screen and (max-width: $breakpoint-xs-max) {
-    width: 97%;
-  }
   width: 1300px;
+  min-width: 600px;
 }
 
 .absolute-spinner {

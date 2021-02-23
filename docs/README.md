@@ -1,6 +1,8 @@
 # 介绍
 
-欢迎来到 Lab 3D 开发文档！
+欢迎来到 Lab 3D 前端开发文档！
+
+本项目基于 Vue 2.x 框架实现，所有虚拟实验基于 Babylon.js 实现。
 
 ## 项目启动
 
@@ -16,28 +18,39 @@ npm install
 npm run serve
 ```
 
-通过以下命令构建可部署于生产环境的代码：
+## 项目部署
+
+项目目前采用手动部署，需将打包好的文件手动放置到服务器的对应目录。后续某个版本开始，将使用 Github Actions 实现自动化部署。
+
+通过以下命令构建用于部署的代码，构建完成后的文件存放在 `/dist` 下：
 
 ```
 npm run build
 ```
 
-## 项目部署
+### 生产环境部署
 
-将 `/dist` 中的文件存放至服务器 `/var/www/html` 目录
+将 `/dist` 中的文件存放至服务器 `/home/html` 目录，然后通过 [lab3d.site](http://www.lab3d.site) 访问。
 
+### 测试环境部署
 
-## Lab 3D 项目简介
+将 `/dist` 中的文件存放至服务器 `/home/beta` 目录，然后通过 [beta.lab3d.site](http://beta.lab3d.site) 访问。
+
+## 重要依赖
 
 ### 框架
 
-项目使用了 [Vue 2.x](https://cn.vuejs.org/v2/guide/) 作为框架，并使用 Vue CLI 提供标准化目录结构。
+项目使用了 [Vue 2.x](https://cn.vuejs.org/v2/guide/) 作为框架，基于 [Vue CLI](https://cli.vuejs.org/zh/) 提供的标准化目录结构开发。
+
+### UI
+
+使用了 [Quasar](https://quasar.dev/) 作为 UI 框架。可以参看第三方维护的[中文文档](http://quasarchs.com/)，但版本略为落后。
 
 ### 路由
 
 使用了 [Vue Router](https://router.vuejs.org/zh/) 来控制路由。
 
-### 网络请求 API
+### 网络请求与全局状态管理
 
 Lab 3D 包含于后端的数据交换，使用了 [Axios](http://www.axios-js.com/zh-cn/docs/) 来处理网络请求，并使用 [Vuex](https://vuex.vuejs.org/zh/) 作为数据交换中间层。
 

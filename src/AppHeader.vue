@@ -1,5 +1,5 @@
 <template>
-  <q-header class="bg-black text-white">
+  <q-header v-if="!insideExperiment" class="bg-navBar">
     <q-toolbar class="container toolbar text-white q-mx-auto">
       <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" />
       <q-tabs shrink content-class="tabs">
@@ -9,19 +9,31 @@
       <q-space />
       <q-btn v-if="!userInfo" flat label="注册/登录" @click="openLoginDialog" />
       <div v-else>
-        <q-btn rounded dense class="q-mr-xs" no-caps padding="6px 15px">
+        <q-btn dense unelevated class="q-mr-xs" no-caps padding="6px 15px">
           <q-avatar size="sm" :icon="userInfo.avatar ? null : 'person'">
             <q-img v-if="userInfo.avatar" :src="userInfo.avatar" :ratio="1" />
           </q-avatar>
           <span>{{ userInfo.name }}</span>
           <q-menu
-            dark
             anchor="bottom middle"
             self="top middle"
             transition-show="jump-down"
             transition-hide="jump-up"
           >
-            <q-list style="min-width: 150px">
+            <q-list style="min-width: 150px" :class="{ 'bg-grey-9': $q.dark.isActive }">
+              <q-item
+                v-if="userInfo.type == '学生'"
+                clickable
+                v-close-popup
+                :to="'/classrooms-list'"
+                :active-class="$q.dark.isActive ? 'text-white' : 'text-dark'"
+              >
+                <q-item-section side>
+                  <q-icon name="group" size="sm" />
+                </q-item-section>
+                <q-item-section>班级</q-item-section>
+              </q-item>
+
               <q-item clickable v-close-popup @click="logout">
                 <q-item-section side>
                   <q-icon name="logout" size="sm" />
@@ -34,12 +46,31 @@
       </div>
     </q-toolbar>
   </q-header>
+
+  <div v-else>
+    <q-page-sticky position="top-left" :offset="[18, 18]">
+      <q-btn
+        fab-mini
+        icon="arrow_back"
+        :color="$q.dark.isActive ? 'dark' : 'white'"
+        :text-color="$q.dark.isActive ? 'white' : 'dark'"
+        @click="leaveConfirm"
+      />
+    </q-page-sticky>
+  </div>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex'
 import DialogJoinVue from './components/DialogJoin.vue'
+
 export default {
+  props: {
+    insideExperiment: {
+      type: Boolean,
+    },
+  },
+
   computed: {
     ...mapState('user', ['userInfo']),
   },
@@ -52,11 +83,22 @@ export default {
         .dialog({
           component: DialogJoinVue,
           parent: this,
-          text: 'something',
         })
         .onOk(() => {})
         .onCancel(() => {})
         .onDismiss(() => {})
+    },
+
+    leaveConfirm() {
+      this.$q
+        .dialog({
+          title: '离开实验',
+          message: '实验进度将不会保存，确认离开吗？',
+          cancel: true,
+        })
+        .onOk(() => {
+          this.$router.go(-1)
+        })
     },
   },
 }

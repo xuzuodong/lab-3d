@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="$q.dark.isActive ? 'bg-darkSurface' : 'bg-light'">
     <h5 v-if="!experiments && !failure" class="text-center text-grey">加载中...</h5>
     <h5 v-if="!experiments && failure" class="text-center text-grey">
       加载失败，

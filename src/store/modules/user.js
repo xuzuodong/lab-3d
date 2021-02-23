@@ -2,7 +2,8 @@ import Vue from 'vue'
 import userApi from '../../api/user'
 
 const state = () => ({
-  userInfo: Vue.$cookies.get('userInfo')
+  userInfo: Vue.$cookies.get('userInfo'),
+  classrooms: null
 })
 
 const getters = {}
@@ -15,6 +16,11 @@ const mutations = {
   logout(state) {
     state.userInfo = null
     Vue.$cookies.remove('userInfo')
+    window.location.reload()
+  },
+
+  updateClassrooms(state, classrooms) {
+    state.classrooms = classrooms
   }
 }
 
@@ -44,6 +50,50 @@ const actions = {
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
           success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
+
+  selectMyClasses({ commit }, { success, failure }) {
+    userApi.selectMyClasses({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          commit('updateClassrooms', res.data.body)
+          success()
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
+
+  joinClass({ commit }, { classCode, success, failure }) {
+    userApi.joinClass({
+      classCode,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          commit('updateClassrooms', res.data.body)
+          success()
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
+
+  quitClass({ commit }, { classId, success, failure }) {
+    userApi.quitClass({
+      classId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          commit('updateClassrooms', res.data.body)
+          success()
         } else failure(res)
       },
       failure(res) {
