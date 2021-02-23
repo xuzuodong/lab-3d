@@ -21,15 +21,37 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
-  }, 
+  },
 
   selectMyClasses({ success, failure }) {
     axios({
       method: 'get',
       url: baseUrl + 'user/selectMyClasses',
-      headers: { Authorization: store.state.user.userInfo.token },
+      headers: { Authorization: store.state.user.userInfo.token }
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
-  }, 
+  },
+
+  joinClass({ classCode, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'user/joinClass',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { classCode }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  quitClass({ classId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'user/quitClass',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { classId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  }
 }

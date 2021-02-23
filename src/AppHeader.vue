@@ -26,7 +26,7 @@
                 clickable
                 v-close-popup
                 :to="'/classrooms-list'"
-                :active-class="$q.dark.active ? 'text-white' : 'text-dark'"
+                :active-class="$q.dark.isActive ? 'text-white' : 'text-dark'"
               >
                 <q-item-section side>
                   <q-icon name="group" size="sm" />
