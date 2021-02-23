@@ -1,23 +1,8 @@
 <template>
   <div id="controlPanel">
-    <div v-if="controlFlag.showButton">
-      <q-btn color="black" label="滴加" @click="drop" />
-      <q-btn color="black" label="结束" @click="stop" />
-    </div>
-    <div class="q-gutter-sm" v-if="controlFlag.showRadio">
-      <p>以下哪一种才是使用胶头滴管的正确方式？</p>
-      <q-radio v-model="radio_step1" val="A、1" label="A、1" />
-      <q-radio v-model="radio_step1" val="B、2" label="B、2" />
-      <q-radio v-model="radio_step1" val="C、3" label="C、3" />
-      <q-radio v-model="radio_step1" val="D、4" label="D、4" />
-      <q-btn color="black" label="提交" @click="radio_submit" />
-    </div>
-    <div v-if="controlFlag.showConPanel">
-      <p>在刚刚“酸溶液”和“碱溶液”的反应中，你有观察到它们之间发生了什么明显的变化吗？</p>
-      <div class="q-pa-md" style="max-width: 300px">
-        <q-input v-model="conclusion_step1" filled autogrow />
-      </div>
-      <q-btn color="black" label="提交" @click="text_submit" />
+    <div v-if="showButton">
+      <q-btn color="primary" label="滴加" @click="drop" class="q-ma-md" />
+      <q-btn color="primary" label="结束" @click="stop" class="q-ma-md" />
     </div>
   </div>
 </template>
@@ -30,7 +15,7 @@ export default {
   name: 'controlPanel',
   props: {
     babylon: Object,
-    controlFlag: Object,
+    showButton: Boolean,
     acidType: String,
     dropType: String,
     clearIndicater: Boolean
@@ -38,8 +23,6 @@ export default {
   data() {
     return {
       isDropping: false,
-      radio_step1: '',
-      conclusion_step1: '',
       indicaterType: '',
       isAddIndicater: false,
       clickCount: 0
@@ -85,7 +68,7 @@ export default {
     },
     stop() {
       if (!this.isDropping) {
-        this.$emit('infoDeliver', 'showButton', false)
+        this.$emit('infoDeliver', false)
         if (
           this.dropType === 'acid_hcl' ||
           this.dropType === 'acid_ch3cooh' ||
@@ -96,16 +79,6 @@ export default {
         } else {
           generalOperations.putBackDropper(this.babylon.scene, this.dropType)
         }
-      }
-    },
-    radio_submit() {
-      if (this.radio_step1 != '') {
-        this.$emit('infoDeliver', 'showRadio', false)
-      }
-    },
-    text_submit() {
-      if (this.conclusion_step1 != '') {
-        this.$emit('infoDeliver', 'showConPanel', false)
       }
     }
   },
@@ -127,7 +100,9 @@ export default {
 <style scoped>
 #controlPanel {
   position: absolute;
-  top: 20px;
+  top: 80px;
   z-index: 5;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
