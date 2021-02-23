@@ -1,9 +1,10 @@
 module.exports = {
-  title: 'Lab 3D 开发文档',
+  title: 'Lab 3D 前端开发文档',
   themeConfig: {
     nav: [
-      { text: '文档', link: '/' },
-      { text: '后端接口', link: 'http://api.lab3d.site:3001/swagger' },
+      { text: '前端开发文档', link: '/' },
+      { text: 'Github', link: 'https://github.com/xuzuodong/lab-3d' },
+      { text: '后端接口文档', link: 'http://api.lab3d.site:3001/swagger' },
     ],
     sidebar: [
       {

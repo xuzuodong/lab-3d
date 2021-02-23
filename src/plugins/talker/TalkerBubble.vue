@@ -1,13 +1,13 @@
 <template>
-  <div
+  <q-card
     @click="handleClick"
     @mousedown="mousedown = true"
     @mouseup="mousedown = false"
-    class="bubble bg-white rounded-borders shadow-transition"
-    :class="mousedown ? 'shadow-5' : 'shadow-1'"
+    class="bubble rounded-borders shadow-transition"
+    :class="[mousedown ? 'shadow-5' : 'shadow-1', $q.dark.isActive ? 'bg-dark' : 'bg-white']"
   >
     <slot></slot>
-  </div>
+  </q-card>
 </template>
 
 <script>

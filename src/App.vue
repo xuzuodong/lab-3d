@@ -7,7 +7,7 @@
         <router-view />
       </q-page-container>
 
-      <q-footer v-if="!insideExperiment" class="container bg-white text-dark text-center">
+      <q-footer v-if="!insideExperiment" class="text-center bg-navBar">
         <q-separator />
         <div class="q-py-md">© Lab 3D 版权所有</div>
       </q-footer>
@@ -47,6 +47,10 @@ export default {
       if (insideExperiment && !this.userInfo) this.$router.replace({ path: '/' })
     },
   },
+
+  created() {
+    this.$q.dark.set('auto')
+  }
 }
 </script>
 

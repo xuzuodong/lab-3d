@@ -12,8 +12,6 @@ import './styles/general.scss'
 
 Vue.config.productionTip = false
 
-// 全局对话框组件
-
 new Vue({
   store,
   router,

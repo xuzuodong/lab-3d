@@ -58,7 +58,9 @@
         </h5>
 
         <div class="text-subtitle1 text-weight-regular q-mt-lg q-mb-sm">- 背景故事 -</div>
-        <p class="text-grey-8">{{ experiment.introduction.background || '暂无背景故事' }}</p>
+        <p :class="$q.dark.isActive ? 'text-grey-5' : 'text-grey-8'">
+          {{ experiment.introduction.background || '暂无背景故事' }}
+        </p>
         <div class="text-subtitle1 text-weight-regular q-mt-lg q-mb-sm">- 实验任务要求 -</div>
         <li
           v-for="(requirement, index) in experiment.introduction.taskRequirements"
@@ -79,43 +81,45 @@
           知识链接
         </h5>
 
-        <q-tabs v-model="knowledgePointTab" class="bg-grey-2 text-primary" align="left">
-          <q-tab
-            v-for="(knowledgePoint, index) in experiment.knowledgePoints"
-            :key="knowledgePoint.name"
-            :name="index"
-            :label="knowledgePoint.name"
-          />
-        </q-tabs>
+        <q-card>
+          <q-tabs v-model="knowledgePointTab" align="left">
+            <q-tab
+              v-for="(knowledgePoint, index) in experiment.knowledgePoints"
+              :key="knowledgePoint.name"
+              :name="index"
+              :label="knowledgePoint.name"
+            />
+          </q-tabs>
 
-        <q-separator />
+          <q-separator />
 
-        <q-tab-panels v-model="knowledgePointTab" animated>
-          <q-tab-panel
-            v-for="(knowledgePoint, index) in experiment.knowledgePoints"
-            :key="knowledgePoint.name"
-            :name="index"
-            class="q-px-none row no-wrap"
-          >
-            <q-carousel animated v-model="knowledgeImageSlide" class="carousel" arrows>
-              <q-carousel-slide
-                v-for="(image, imageIndex) in knowledgePoint.images"
-                :key="image.caption"
-                :name="imageIndex"
-                :img-src="image.url"
-              >
-                <div class="absolute-bottom knowledge-point-image-caption">
-                  <div class="text-subtitle2">{{ image.caption }}</div>
-                </div>
-              </q-carousel-slide>
-            </q-carousel>
+          <q-tab-panels v-model="knowledgePointTab" class="q-px-md" animated>
+            <q-tab-panel
+              v-for="(knowledgePoint, index) in experiment.knowledgePoints"
+              :key="knowledgePoint.name"
+              :name="index"
+              class="q-px-none row no-wrap"
+            >
+              <q-carousel v-model="knowledgeImageSlides[index]" class="carousel" animated arrows>
+                <q-carousel-slide
+                  v-for="(image, imageIndex) in knowledgePoint.images"
+                  :key="image.caption"
+                  :name="imageIndex"
+                  :img-src="image.url"
+                >
+                  <div class="absolute-bottom knowledge-point-image-caption">
+                    <div class="text-subtitle2">{{ image.caption }}</div>
+                  </div>
+                </q-carousel-slide>
+              </q-carousel>
 
-            <div class="col q-ml-md">
-              <h6 class="q-mt-none q-mb-md">{{ knowledgePoint.name }}</h6>
-              <p class="knowledgePoint-desc">{{ knowledgePoint.description }}</p>
-            </div>
-          </q-tab-panel>
-        </q-tab-panels>
+              <div class="col q-ml-md">
+                <h6 class="q-mt-none q-mb-md">{{ knowledgePoint.name }}</h6>
+                <p class="knowledgePoint-desc">{{ knowledgePoint.description }}</p>
+              </div>
+            </q-tab-panel>
+          </q-tab-panels>
+        </q-card>
 
         <h5>
           <q-icon name="smart_display" class="q-mr-xs" />
@@ -151,7 +155,7 @@ export default {
     return {
       experiment: null,
       knowledgePointTab: 0,
-      knowledgeImageSlide: 0,
+      knowledgeImageSlides: null,
     }
   },
 
@@ -198,6 +202,7 @@ export default {
         success: (experiment) => {
           this.experiment = experiment
           document.title = experiment.name + ' | Lab 3D'
+          this.knowledgeImageSlides = this.experiment.knowledgePoints.map(() => 0)
         },
         failure: (error) => {
           console.log(error)

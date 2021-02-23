@@ -10,6 +10,7 @@ const routes = [
   { path: '/', name: 'Home', component: Home },
   { path: '/about', name: 'About', component: () => import('../views/About.vue') },
   { path: '/experiment/:alias', component: () => import('../views/ExperimentDetails.vue') },
+  { path: '/classrooms-list', component: () => import('../views/ClassroomsList.vue') },
 
   // 虚拟实验例子，在地址栏输入该路由来查看（确保先登录，不然会被重定向回首页）å
   { path: '/scene/example-basic', component: () => import('../experiments/example-basic/Entry.vue') },
