@@ -1,7 +1,7 @@
 <template>
   <div class="talker" v-show="showBubble">
-    <talker-bubble-vue class="bubble" @click="shouldGoNext" :clickable="!this.typer.typing">
-      <p class="text" v-html="typed"></p>
+    <talker-bubble-vue @click="shouldGoNext" :clickable="!this.typer.typing">
+      <p class="bubble-text" v-html="typed"></p>
     </talker-bubble-vue>
     <transition name="slide">
       <div class="choices" v-if="showChoicesView">
@@ -259,28 +259,15 @@ export default {
   display: flex;
   flex-direction: column-reverse;
   padding: 20px;
-  .bubble {
-    display: flex;
-    flex-direction: column;
-    background: rgb(238, 234, 234);
-    min-height: 150px;
-    cursor: pointer;
-    .text {
-      flex-grow: 1;
-      margin: 16px;
-    }
-    .button {
-      align-self: flex-end;
-      background: darkblue;
-      color: white;
-      padding: 5px 20px;
-      border-radius: 5px;
-      margin: 15px;
-      cursor: pointer;
-    }
+  
+  .bubble-text {
+    flex-grow: 1;
+    margin: 16px;
   }
+
   .choices {
     align-self: flex-end;
+    font-size: 2.2vmin;
     margin: 5px 0;
     .choice {
       background: rgb(247, 218, 166);

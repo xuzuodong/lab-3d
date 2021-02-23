@@ -13,7 +13,7 @@
       </q-card-section>
 
       <q-card-section class="q-pt-none" v-snip:js="4">
-        {{ experiment.introduction }}
+        {{ experiment.description }}
       </q-card-section>
     </q-card>
   </router-link>

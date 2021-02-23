@@ -24,14 +24,23 @@ npm run build
 
 ## 项目部署
 
-将 `/dist` 中的文件存放至服务器 `/var/www/html` 目录
+### 生产环境
 
+将 `/dist` 中的文件存放至服务器 `/home/html` 目录，然后通过 [www.lab3d.site](http://www.lab3d.site) 访问。
 
-## Lab 3D 项目简介
+### 测试环境
+
+将 `/dist` 中的文件存放至服务器 `/home/beta` 目录，然后通过 [beta.lab3d.site](http://beta.lab3d.site) 访问。
+
+## 重要依赖
 
 ### 框架
 
 项目使用了 [Vue 2.x](https://cn.vuejs.org/v2/guide/) 作为框架，并使用 Vue CLI 提供标准化目录结构。
+
+### UI
+
+使用了 [Quasar](https://quasar.dev/) 作为 UI 框架。可以参看第三方维护的[中文文档](http://quasarchs.com/)，但版本略为落后。
 
 ### 路由
 

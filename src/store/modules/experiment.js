@@ -32,6 +32,21 @@ const actions = {
         failure(res)
       }
     })
+  },
+
+  likeExperiment(context, { id, like, success, failure }) {
+    experimentApi.likeExperiment({
+      id,
+      like,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success()
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
   }
 }
 

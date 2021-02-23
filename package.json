@@ -36,6 +36,7 @@
     "type-check": "^0.4.0",
     "vue-cli-plugin-quasar": "~3.0.1",
     "vue-cookies": "^1.7.4",
+    "vue-plyr": "^7.0.0",
     "vue-smooth-height": "^1.6.4",
     "vue-snip": "^1.1.0",
     "vue-template-compiler": "^2.6.11",
