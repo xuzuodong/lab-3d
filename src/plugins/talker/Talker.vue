@@ -36,6 +36,8 @@ export default {
     script: Object,
     hooks: Array,
     end: Function,
+    scene: Object,
+    debug: String,
   },
 
   data() {
@@ -52,6 +54,16 @@ export default {
         choice: null,
         reply: null,
       },
+      slot: new Proxy(
+        {},
+        {
+          set: (obj, prop, val) => {
+            obj[prop] = val
+            this.typer.slot = obj
+            return true
+          },
+        }
+      ),
     }
   },
 
@@ -95,6 +107,7 @@ export default {
           paragraph: this.paragraph,
           goto: this.goto,
           restart: this.restart,
+          scene: this.scene,
         })
       } else this.next()
     },
@@ -179,6 +192,9 @@ export default {
           goto: this.goto,
           restart: this.restart,
           hideChoice: this.hideChoice,
+          scene: this.scene,
+          chosen: index,
+          setSlot: this.setSlot,
         })
       } else {
         if (choice.replies && choice.replies.length > 0) {
@@ -223,6 +239,11 @@ export default {
     hideChoice() {
       this.$set(this.paragraph.choices[this.pointer.choice], 'hidden', true)
     },
+
+    // 外部调用，为打字机插槽加入指定的内容
+    setSlot(obj) {
+      Object.assign(this.slot, obj)
+    },
   },
 
   beforeMount() {
@@ -242,6 +263,36 @@ export default {
       this.script.paragraphs.forEach((p, index) => (p.index = index))
       this.pointer.paragraph = 0
       this.paragraph = this.script.paragraphs[0]
+
+      if (process.env.NODE_ENV == 'development' && this.debug) {
+        const paragraphIndex = this.script.paragraphs.findIndex((p) => p.id == this.debug)
+        if (paragraphIndex !== -1) {
+          this.pointer.paragraph = paragraphIndex
+          this.paragraph = this.script.paragraphs[paragraphIndex]
+        }
+      }
+
+      // scene.state.foo -> scene.foo
+      this.scene = new Proxy(this.scene, {
+        get(obj, prop) {
+          if (prop in obj?.state) {
+            return obj.state[prop]
+          } else if (prop in obj?.actions) {
+            return obj.actions[prop]
+          }
+          return obj[prop]
+        },
+      })
+
+      this.scene.mutate = (newObj) => {
+        for (let prop in newObj) {
+          if (!(prop in this.scene.state)) {
+            throw `未在 state 中定义的字段: "${prop}" , 想要使用 scene.mutate 更改字段值，必须先在 state 中声明它。`
+          }
+        }
+        Object.assign(this.scene.state, newObj)
+      }
+
       this.talk()
     }
   },

@@ -37,10 +37,24 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.slide-enter-active, .slide-leave-active {
-  transition: all .3s ease-in-out;
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-in-out;
 }
-.slide-enter, .slide-leave-to {
+.slide-enter,
+.slide-leave-to {
   transform: translateX(30px);
   opacity: 0;
 }
+
+.top-right-dialog {
+  .q-dialog__inner {
+    bottom: auto;
+    left: auto;
+  }
+
+  .q-dialog__backdrop {
+    display: none;
+  }
+}
+

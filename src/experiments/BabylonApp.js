@@ -5,6 +5,7 @@
 
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import '@babylonjs/loaders/glTF'
+import actions from './neutralization/3d/actions'
 
 export default class BabylonApp {
   constructor() {
@@ -21,8 +22,11 @@ export default class BabylonApp {
     })
   }
 
-  createScene() {
+  createScene(options) {
     this.scene = new BABYLON.Scene(this.engine)
+
+    this.scene.state = options?.state
+    this.scene.actions = options?.actions
 
     this.engine.runRenderLoop(() => {
       this.scene.render()

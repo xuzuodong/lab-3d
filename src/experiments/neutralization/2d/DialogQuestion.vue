@@ -67,10 +67,10 @@
 </template>
 
 <script>
-import radioA from '../../assets/neutralization/a.png'
-import radioB from '../../assets/neutralization/b.png'
-import radioC from '../../assets/neutralization/c.png'
-import radioD from '../../assets/neutralization/d.png'
+import radioA from './assets/a.png'
+import radioB from './assets/b.png'
+import radioC from './assets/c.png'
+import radioD from './assets/d.png'
 export default {
   props: {
     dialogType: String,
