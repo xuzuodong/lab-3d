@@ -5,8 +5,6 @@ export const defaultOperations = (
   scene,
   { purBottle, purDropper, pheBottle, pheDropper, purText, pheText }
 ) => {
-  const frameRate = 12
-
   //高光
   const highLight = new BABYLON.HighlightLayer('hl1', scene)
 

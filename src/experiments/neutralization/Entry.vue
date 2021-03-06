@@ -18,15 +18,16 @@ export default {
     babylonApp = new BabylonApp()
     const scene = babylonApp.createScene({
       state: {
-        acidType: '', // 选择的酸溶液 'acid_hcl' or 'acid_ch3cooh'
-        alkaliType: '', // 选择的碱溶液 'alkali_naoh' or 'alkali_nahco3'
+        acidType: ['', false], // 选择的酸溶液 'acid_hcl' or 'acid_ch3cooh', 数组第二项表示现在是否已经加入
+        alkaliType: ['', false], // 选择的碱溶液 'alkali_naoh' or 'alkali_nahco3'，数组第二项表示现在是否已经加入
+        indicatorType: ['', false], // 选择的酸碱指示剂 'pur' or 'phe'，数组第二项表示现在是否已经加入
       },
       actions,
     })
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene })
+      this.$talker({ script, hooks, scene, debug: '选择碱溶液' })
     })
   },
 

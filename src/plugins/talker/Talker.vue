@@ -108,6 +108,7 @@ export default {
           goto: this.goto,
           restart: this.restart,
           scene: this.scene,
+          setSlot: this.setSlot,
         })
       } else this.next()
     },

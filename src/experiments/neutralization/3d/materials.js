@@ -24,6 +24,7 @@ export const createMaterials = (scene) => {
   // 定义通用滴管内溶液的材质，即液滴的材质
   const matDropperLiquid = new BABYLON.StandardMaterial('matDropperLiquid', scene)
   matDropperLiquid.diffuseColor = new BABYLON.Color3(1, 1, 1)
+  matDropperLiquid.alpha = 0.9
 
   // 定义紫色石蕊试剂的材质
   const matPursolution = new BABYLON.StandardMaterial('matPursolution', scene)

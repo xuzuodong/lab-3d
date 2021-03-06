@@ -7,11 +7,20 @@
     transition-hide="slide-right"
   >
     <q-card class="control-panel q-dialog-plugin" flat>
-      <q-card-section>
+      <q-card-section v-if="dropType != 'pur' && dropType != 'phe'">
         <div class="text-h6">滴加试剂</div>
         <div class="text-subtitle2">
           向试管中滴加
-          <strong>{{ dropTypeDisplayName }}</strong>
+          <strong>{{ changeLiquidName(dropType) }}</strong>
+          吧！
+        </div>
+      </q-card-section>
+
+      <q-card-section v-if="dropType == 'pur' || dropType == 'phe'">
+        <div class="text-h6">添加酸碱指示剂</div>
+        <div class="text-subtitle2">
+          向试管中滴加
+          <strong>{{ changeLiquidName(dropType) }}</strong>
           吧！
         </div>
       </q-card-section>
@@ -20,7 +29,9 @@
 
       <q-card-section>
         <div class="text-body1">已加入的溶液</div>
-        <li>稀盐酸 1 ml</li>
+        <li v-for="item in existLiquid" :key="item">
+          {{ changeLiquidName(item) }}
+        </li>
       </q-card-section>
 
       <q-card-actions align="center">
@@ -47,26 +58,15 @@ import { reactions } from '../3d/reaction'
 export default {
   name: 'controlPanel',
   props: {
-    babylon: Object,
-    acidType: String,
-    dropType: String,
-    clearIndicater: Boolean,
     scene: Object,
+    dropType: String,
   },
 
   data() {
     return {
       isDropping: false,
-      indicaterType: '',
-      isAddIndicater: false,
       clickCount: 0,
     }
-  },
-
-  computed: {
-    dropTypeDisplayName() {
-      return this.dropType == 'alkali_nahco3' ? '小苏打' : '氢氧化钠'
-    },
   },
 
   methods: {
@@ -82,6 +82,25 @@ export default {
       this.$emit('hide')
     },
 
+    changeLiquidName(temp) {
+      switch (temp) {
+        case 'acid_hcl':
+          return '稀盐酸'
+        case 'acid_ch3cooh':
+          return '醋酸溶液'
+        case 'alkali_naoh':
+          return '氢氧化钠溶液'
+        case 'alkali_nahco3':
+          return '小苏打溶液'
+        case 'pur':
+          return '紫色石蕊试剂'
+        case 'phe':
+          return '酚酞试剂'
+        default:
+          return ''
+      }
+    },
+
     async drop() {
       if (!this.isDropping) {
         this.clickCount++
@@ -89,25 +108,38 @@ export default {
 
         if (this.dropType === 'acid_hcl' || this.dropType === 'acid_ch3cooh') {
           await generalOperations.dropLiqiud(this.scene, 51, 3).then(() => {
+            this.scene.mutate({ acidType: [this.dropType, true] })
             this.isDropping = false
           })
         }
 
         if (this.dropType === 'alkali_naoh' || this.dropType === 'alkali_nahco3') {
           await generalOperations.dropLiqiud(this.scene, 51, 3).then(() => {
+            this.scene.mutate({ alkaliType: [this.dropType, true] })
             this.isDropping = false
             if (this.isAddIndicater) {
-              reactions(this.scene, this.acidType, this.dropType, this.indicaterType, this.clickCount)
+              reactions(
+                this.scene,
+                this.scene.acidType[0],
+                this.dropType,
+                this.scene.indicatorType[0],
+                this.clickCount
+              )
             }
           })
         }
 
         if (this.dropType === 'phe') {
           await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
+            this.scene.mutate({ indicatorType: [this.dropType, true] })
             this.isDropping = false
-            this.indicaterType = 'phe'
-            this.isAddIndicater = true
-            reactions(this.scene, this.acidType, this.dropType, this.indicaterType, this.clickCount)
+            reactions(
+              this.scene,
+              this.scene.acidType[0],
+              this.dropType,
+              this.scene.indicatorType[0],
+              this.clickCount
+            )
           })
         }
 
@@ -115,10 +147,15 @@ export default {
           await generalOperations
             .dropLiqiud(this.scene, 53, 3, new BABYLON.Color3(160 / 255, 32 / 255, 240 / 255))
             .then(() => {
+              this.scene.mutate({ indicatorType: [this.dropType, true] })
               this.isDropping = false
-              this.indicaterType = 'pur'
-              this.isAddIndicater = true
-              reactions(this.scene, this.acidType, this.dropType, this.indicaterType, this.clickCount)
+              reactions(
+                this.scene,
+                this.scene.acidType[0],
+                this.dropType,
+                this.scene.indicatorType[0],
+                this.clickCount
+              )
             })
         }
       }
@@ -143,17 +180,22 @@ export default {
     },
   },
 
-  watch: {
-    dropType: function (newVal, oldVal) {
-      if (newVal != oldVal) {
-        this.clickCount = 0
-      }
+  computed: {
+    isAddIndicater: function () {
+      return this.scene.indicatorType[1]
     },
-
-    clearIndicater: function (newVal, oldVal) {
-      if (newVal) {
-        this.isAddIndicater = false
+    existLiquid: function () {
+      let liquidList = []
+      if (this.scene.acidType[1]) {
+        liquidList.push(this.scene.acidType[0])
       }
+      if (this.scene.alkaliType[1]) {
+        liquidList.push(this.scene.alkaliType[0])
+      }
+      if (this.scene.indicatorType[1]) {
+        liquidList.push(this.scene.indicatorType[0])
+      }
+      return liquidList
     },
   },
 }
