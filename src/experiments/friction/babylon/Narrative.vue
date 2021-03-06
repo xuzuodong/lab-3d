@@ -1,18 +1,18 @@
 <template>
   <div id="gui">
-    <QSlider :showSlider="showSlider" @father="getGravity"></QSlider>
+    <gravitySlider :showSlider="showSlider" @father="getGravity"></gravitySlider>
   </div>
 </template>
 
 <script>
-import script from './script'
-import woodjpg from '../../assets/wood.jpg'
-import grasspng from '../../assets/grass.png'
-import icejpg from '../../assets/ice.jpg'
-import QSlider from './QSlider'
+import script from '../2d/script'
+import woodjpg from '../2d/assets/wood.jpg'
+import grasspng from '../2d/assets/grass.png'
+import icejpg from '../2d/assets/ice.jpg'
+import gravitySlider from '../2d/gravitySlider'
 
 export default {
-  components: { QSlider },
+  components: { gravitySlider },
   props: {
     babylon: Object,
   },

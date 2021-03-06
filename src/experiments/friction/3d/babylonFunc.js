@@ -1,8 +1,9 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import '@babylonjs/loaders/glTF'
-import createScene from './babylon/createScene'
+import createScene from './initScene'
+import BabylonApp from '../../BabylonApp'
 
-export default class BabylonApp {
+export default class babylonFunc {
     constructor(domId) {
         this.canvas = document.getElementById(domId) // 得到canvas对象的引用
         this.engine = new BABYLON.Engine(this.canvas, true) // 初始化 BABYLON 3D engine
