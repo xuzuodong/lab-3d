@@ -57,7 +57,7 @@ export default (scene) => {
                 }
             }
 
-            let mat = new BABYLON.StandardMaterial("", scene);
+            let mat = new BABYLON.StandardMaterial("mat", scene);
             // mat.diffuseTexture = new BABYLON.Texture(woodjpg, scene);
             mat.diffuseColor = new BABYLON.Color3(100 / 255, 100 / 255, 100 / 255)
 
@@ -72,53 +72,7 @@ export default (scene) => {
             road.material = mat;
             road.receiveShadows = true;
 
-            let idleAnim = scene.animationGroups.find(a => a.name === 'idle');
-            let idleParam = { name: "Idle", anim: idleAnim, weight: 1 };
-            let currentParam
-            idleAnim.play(true);
-            idleAnim.setWeightForAllAnimatables(1);
-
-            let walkAnim = scene.animationGroups.find(a => a.name === 'walk');
-            let walkParam = { name: "Walk", anim: walkAnim, weight: 0 };
-            walkAnim.play(true);
-            walkAnim.setWeightForAllAnimatables(0);
-
-            let runAnim = scene.animationGroups.find(a => a.name === 'run');
-            let runParam = { name: "Run", anim: runAnim, weight: 0 };
-            runAnim.play(true);
-            runAnim.setWeightForAllAnimatables(0);
-
-            //0.01是动画变速的速率，0.05就会很快了已经。
-            function onBeforeAnimation() {
-                // Increment the weight of the current override animation
-                if (currentParam) {
-                    currentParam.weight = BABYLON.Scalar.Clamp(currentParam.weight + 0.01, 0, 1);
-                    currentParam.anim.setWeightForAllAnimatables(currentParam.weight);
-                }
-
-                // Decrement the weight of all override animations that aren't current
-                if (currentParam !== idleParam) {
-                    idleParam.weight = BABYLON.Scalar.Clamp(idleParam.weight - 0.01, 0, 1);
-                    idleParam.anim.setWeightForAllAnimatables(idleParam.weight);
-                }
-
-                if (currentParam !== walkParam) {
-                    walkParam.weight = BABYLON.Scalar.Clamp(walkParam.weight - 0.01, 0, 1);
-                    walkParam.anim.setWeightForAllAnimatables(walkParam.weight);
-                }
-
-                if (currentParam !== runParam) {
-                    runParam.weight = BABYLON.Scalar.Clamp(runParam.weight - 0.01, 0, 1);
-                    runParam.anim.setWeightForAllAnimatables(runParam.weight);
-                }
-                // Remove the callback the current animation weight reaches 1 or
-                // when all override animations reach 0 when current is undefined
-                if ((currentParam && currentParam.weight === 1) ||
-                    (idleParam.weight === 0 && walkParam.weight === 0 && runParam.weight === 0)) {
-                    scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
-                }
-            }
+            resolve()
         })
-        resolve()
     })
 }

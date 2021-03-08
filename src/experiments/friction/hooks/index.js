@@ -1,8 +1,9 @@
+import { Dialog } from 'quasar'
 import woodjpg from '../2d/assets/wood.jpg'
 import grasspng from '../2d/assets/grass.png'
 import icejpg from '../2d/assets/ice.jpg'
 import actions from '../3d/actions'
-// import gravitySlider from '../2d/gravitySlider'
+import gravitySlider from '../2d/gravitySlider'
 
 let howToDecrease = 0
 let roughCount = 0
@@ -12,364 +13,416 @@ export default [
   {
     paragraph: '初始画面',
     talk: 0,
-    method: (next, scene) => {
-      // actions.runStart().then(() => next())
-      // scene.runStart()
-      console.log(next)
-      next.next()
+    method: ({ next, scene }) => {
+      scene.runStart().then(() => next())
     },
   },
 
+  //结束跑步
   {
     paragraph: '初始画面',
     choice: 'any',
-    method: (tools) => {
-      this.babylon.runStop()
-      tools.next()
+    method: ({ next, scene }) => {
+      scene.runStop().then(() => next())
     },
   },
+
+  //隐藏选择的选项，并跳转到对应的地方
+
+  // {
+  //   paragraph: '摩擦力是什么',
+  //   reply: { choice: 'any', index: 'last' },
+  //   method: ({ hideChoice, goto, chosen }) => {
+  //     howToDecrease++
+  //     hideChoice()
+  //     if (chosen == 0)
+  //       goto({ paragraph: '改变接触面粗糙程度' })
+  //     else if (chosen == 1)
+  //       goto({ paragraph: '改变与接触面的面积' })
+  //     else if (chosen == 2)
+  //       goto({ paragraph: '改变物体的质量' })
+  //   },
+  // },
+
   {
     paragraph: '摩擦力是什么',
     choice: 0,
-    method: (tools) => {
+    method: ({ next, hideChoice }) => {
       howToDecrease++
-      // this.roughCount = 0
-      tools.hideChoice()
-      tools.next()
+      hideChoice()
+      next()
     },
   },
   {
     paragraph: '摩擦力是什么',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '改变接触面粗糙程度' })
+    method: ({ goto }) => {
+      goto({ paragraph: '改变接触面粗糙程度' })
     },
   },
   {
     paragraph: '摩擦力是什么',
     choice: 1,
-    method: (tools) => {
+    method: ({ next, hideChoice }) => {
       howToDecrease++
-      tools.hideChoice()
-      tools.next()
+      hideChoice()
+      next()
     },
   },
   {
     paragraph: '摩擦力是什么',
     reply: { choice: 1, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '改变与接触面的面积' })
+    method: ({ goto }) => {
+      goto({ paragraph: '改变与接触面的面积' })
     },
   },
   {
     paragraph: '摩擦力是什么',
     choice: 2,
-    method: (tools) => {
+    method: ({ next, hideChoice }) => {
       howToDecrease++
-      tools.hideChoice()
-      tools.next()
+      hideChoice()
+      next()
     },
   },
   {
     paragraph: '摩擦力是什么',
     reply: { choice: 2, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '改变物体的质量' })
+    method: ({ goto }) => {
+      goto({ paragraph: '改变物体的质量' })
     },
   },
+
   //接触面选项
+
+  // {
+  //   paragraph: '改变接触面粗糙程度',
+  //   choice: 'any',
+  //   method: ({ next, chosen, scene }) => {
+  //     roughCount++
+  //     next.hideChoice()
+  //     if (chosen == 0) {
+  //       scene.changeGround(grasspng)
+  //       next.goto({ paragraph: '草地' })
+  //     }
+  //     else if (chosen == 1) {
+  //       scene.changeGround(woodjpg)
+  //       next.goto({ paragraph: '木板' })
+  //     }
+  //     else if (chosen == 2) {
+  //       scene.changeGround(icejpg)
+  //       next.goto({ paragraph: '冰面' })
+  //     }
+  //   },
+  // },
+
   {
     paragraph: '改变接触面粗糙程度',
     choice: 0,
-    method: (tools) => {
+    method: ({ goto, scene, hideChoice }) => {
       roughCount++
-      this.babylon.changeGround(grasspng)
-      tools.hideChoice()
-      tools.goto({ paragraph: '草地' })
+      scene.changeGround(grasspng)
+      hideChoice()
+      goto({ paragraph: '草地' })
     },
   },
   {
     paragraph: '草地',
     talk: 'last',
-    method: (tools) => {
-      this.babylon.runStart()
-      tools.goto({ paragraph: '草地后' })
+    method: ({ goto, scene }) => {
+      scene.runStart()
+      goto({ paragraph: '草地后' })
     },
   },
   {
     paragraph: '草地后',
     talk: 2,
-    method: (tools) => {
-      this.babylon.runStop()
-      tools.next()
+    method: ({ next, scene }) => {
+      scene.runStop()
+      next()
     },
   },
   {
     paragraph: '草地后',
     talk: 'last',
-    method: (tools) => {
-      if (roughCount == 3) tools.goto({ paragraph: '接触面总结' })
-      else tools.goto({ paragraph: '改变接触面粗糙程度' })
+    method: ({ goto }) => {
+      if (roughCount == 3) goto({ paragraph: '接触面总结' })
+      else goto({ paragraph: '改变接触面粗糙程度' })
     },
   },
   {
     paragraph: '改变接触面粗糙程度',
     choice: 1,
-    method: (tools) => {
+    method: ({ scene, hideChoice, goto }) => {
       roughCount++
-      this.babylon.changeGround(woodjpg)
-      tools.hideChoice()
-      tools.goto({ paragraph: '木板' })
+      scene.changeGround(woodjpg)
+      hideChoice()
+      goto({ paragraph: '木板' })
     },
   },
   {
     paragraph: '木板',
     talk: 'last',
-    method: (tools) => {
-      this.babylon.woodRun(0.02)
+    method: ({ goto, scene }) => {
+      scene.woodRun(0.02)
       setTimeout(() => {
-        tools.goto({ paragraph: '木板后' })
+        goto({ paragraph: '木板后' })
       }, 6000)
     },
   },
   {
     paragraph: '木板后',
     talk: 'last',
-    method: (tools) => {
-      if (roughCount == 3) tools.goto({ paragraph: '接触面总结' })
-      else tools.goto({ paragraph: '改变接触面粗糙程度' })
+    method: ({ goto }) => {
+      if (roughCount == 3) goto({ paragraph: '接触面总结' })
+      else goto({ paragraph: '改变接触面粗糙程度' })
     },
   },
   {
     paragraph: '改变接触面粗糙程度',
     choice: 2,
-    method: (tools) => {
+    method: ({ scene, goto, hideChoice }) => {
       roughCount++
-      this.babylon.changeGround(icejpg)
-      tools.hideChoice()
-      tools.goto({ paragraph: '冰面' })
+      scene.changeGround(icejpg)
+      hideChoice()
+      goto({ paragraph: '冰面' })
     },
   },
   {
     paragraph: '冰面',
     talk: 'last',
-    method: (tools) => {
-      this.babylon.iceRun(0.08)
+    method: ({ goto, scene }) => {
+      scene.iceRun(0.08)
       setTimeout(() => {
-        tools.goto({ paragraph: '冰面后' })
+        goto({ paragraph: '冰面后' })
       }, 6000)
     },
   },
   {
     paragraph: '冰面后',
     talk: 'last',
-    method: (tools) => {
-      if (roughCount == 3) tools.goto({ paragraph: '接触面总结' })
-      else tools.goto({ paragraph: '改变接触面粗糙程度' })
+    method: ({ goto }) => {
+      if (roughCount == 3) goto({ paragraph: '接触面总结' })
+      else goto({ paragraph: '改变接触面粗糙程度' })
     },
   },
   {
     paragraph: '接触面总结',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '接触面正确结束' })
+    method: ({ goto }) => {
+      goto({ paragraph: '接触面正确结束' })
     },
   },
   {
     paragraph: '接触面总结',
     reply: { choice: 1, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '接触面回答错误' })
+    method: ({ goto }) => {
+      goto({ paragraph: '接触面回答错误' })
     },
   },
   {
     paragraph: '接触面回答错误',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '接触面正确结束' })
+    method: ({ goto }) => {
+      goto({ paragraph: '接触面正确结束' })
     },
   },
   {
     paragraph: '接触面正确结束',
     talk: 'last',
-    method: (tools) => {
-      if (howToDecrease == 3) tools.goto({ paragraph: '机器人的吐槽' })
-      else tools.goto({ paragraph: '摩擦力是什么' })
+    method: ({ goto }) => {
+      if (howToDecrease == 3) goto({ paragraph: '机器人的吐槽' })
+      else goto({ paragraph: '摩擦力是什么' })
     },
   },
   //接触面积
   {
     paragraph: '改变与接触面的面积',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      this.babylon.smallArea()
-      tools.goto({ paragraph: '减小接触面积' })
+    method: ({ goto, scene }) => {
+      scene.smallArea()
+      goto({ paragraph: '减小接触面积' })
     },
   },
   {
     paragraph: '减小接触面积',
     talk: 1,
-    method: (tools) => {
-      this.babylon.runStart()
+    method: ({ next, scene }) => {
+      scene.runStart()
       setTimeout(() => {
-        tools.next()
+        next()
       }, 3000)
     },
   },
   {
     paragraph: '减小接触面积',
     talk: 'last',
-    method: (tools) => {
-      this.babylon.runStop()
-      tools.next()
+    method: ({ next, scene }) => {
+      scene.runStop()
+      next()
     },
   },
   {
     paragraph: '减小接触面积',
     reply: { choice: 0, index: 0 },
-    method: (tools) => {
-      this.babylon.largeArea()
-      tools.goto({ paragraph: '增大接触面积1' })
+    method: ({ goto, scene }) => {
+      scene.largeArea()
+      goto({ paragraph: '增大接触面积1' })
     },
   },
   {
     paragraph: '增大接触面积1',
     talk: 1,
-    method: (tools) => {
-      this.babylon.runStart()
+    method: ({ next, scene }) => {
+      scene.runStart()
       setTimeout(() => {
-        tools.next()
+        next()
       }, 3000)
     },
   },
   {
     paragraph: '增大接触面积1',
     talk: 'last',
-    method: (tools) => {
-      this.babylon.runStop()
-      tools.next()
+    method: ({ next, scene }) => {
+      scene.runStop()
+      next()
     },
   },
   {
     paragraph: '增大接触面积1',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '接触面积总结' })
+    method: ({ goto }) => {
+      goto({ paragraph: '接触面积总结' })
     },
   },
 
   {
     paragraph: '改变与接触面的面积',
     reply: { choice: 1, index: 'last' },
-    method: (tools) => {
-      this.babylon.largeArea()
-      tools.goto({ paragraph: '增大接触面积' })
+    method: ({ goto, scene }) => {
+      scene.largeArea()
+      goto({ paragraph: '增大接触面积' })
     },
   },
   {
     paragraph: '增大接触面积',
     talk: 1,
-    method: (tools) => {
-      this.babylon.runStart()
+    method: ({ next, scene }) => {
+      scene.runStart()
       setTimeout(() => {
-        tools.next()
+        next()
       }, 3000)
     },
   },
   {
     paragraph: '增大接触面积',
     talk: 'last',
-    method: (tools) => {
-      this.babylon.runStop()
-      tools.next()
+    method: ({ next, scene }) => {
+      scene.runStop()
+      next()
     },
   },
   {
     paragraph: '增大接触面积',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      this.babylon.changeArea()
-      tools.goto({ paragraph: '减小接触面积1' })
+    method: ({ goto, scene }) => {
+      scene.changeArea()
+      goto({ paragraph: '减小接触面积1' })
     },
   },
   {
     paragraph: '减小接触面积1',
     talk: 1,
-    method: (tools) => {
-      this.babylon.runStart()
+    method: ({ next, scene }) => {
+      scene.runStart()
       setTimeout(() => {
-        tools.next()
+        next()
       }, 3000)
     },
   },
   {
     paragraph: '减小接触面积1',
     talk: 'last',
-    method: (tools) => {
-      this.babylon.runStop()
-      tools.next()
+    method: ({ next, scene }) => {
+      scene.runStop()
+      next()
     },
   },
   {
     paragraph: '减小接触面积1',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '接触面积总结' })
+    method: ({ goto }) => {
+      goto({ paragraph: '接触面积总结' })
     },
   },
   {
     paragraph: '接触面积总结',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      if (howToDecrease == 3) tools.goto({ paragraph: '机器人的吐槽' })
-      else tools.goto({ paragraph: '摩擦力是什么' })
+    method: ({ goto }) => {
+      if (howToDecrease == 3) goto({ paragraph: '机器人的吐槽' })
+      else goto({ paragraph: '摩擦力是什么' })
     },
   },
   {
     paragraph: '重量调节器',
     talk: 'last',
-    method: actions.massChange(),
+    method: ({ goto, scene }) => {
+      Dialog.create({
+        component: gravitySlider,
+        scene,
+        showSlider: true,
+      }).onOk(async () => {
+        await goto({ paragraph: '轻松拉货' })
+      })
+      // this['this.tools'] = tools
+      // this.showSlider = true
+      // if (this.confirm == true) {
+      //   tools.goto({ paragraph: '轻松拉货' })
+      //   this.showSlider = false
+      //   this.confirm = false
+      // }
+    }
   },
   {
     paragraph: '轻松拉货',
     talk: 2,
-    method: (tools) => {
+    method: ({ next, scene }) => {
       console.log(this.gravity)
-      if (this.gravity == 1) this.babylon.iceRun(0.08)
-      else if (this.gravity == 2) this.babylon.iceRun(0.06)
-      else if (this.gravity == 3) this.babylon.iceRun(0.04)
+      if (this.gravity == 1) scene.iceRun(0.08)
+      else if (this.gravity == 2) scene.iceRun(0.06)
+      else if (this.gravity == 3) scene.iceRun(0.04)
       setTimeout(() => {
-        tools.next()
+        next()
       }, 6500)
     },
   },
   {
     paragraph: '轻松拉货',
     reply: { choice: 0, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '重量调节器' })
+    method: ({ goto }) => {
+      goto({ paragraph: '重量调节器' })
     },
   },
   {
     paragraph: '轻松拉货',
     reply: { choice: 1, index: 'last' },
-    method: (tools) => {
-      tools.goto({ paragraph: '质量总结' })
+    method: ({ goto }) => {
+      goto({ paragraph: '质量总结' })
     },
   },
   {
     paragraph: '质量结束',
     talk: 'last',
-    method: (tools) => {
-      if (howToDecrease == 3) tools.goto({ paragraph: '机器人的吐槽' })
-      else tools.goto({ paragraph: '摩擦力是什么' })
+    method: ({ goto }) => {
+      if (howToDecrease == 3) goto({ paragraph: '机器人的吐槽' })
+      else goto({ paragraph: '摩擦力是什么' })
     },
   },
 
   {
     paragraph: '总结任务1',
     talk: 0,
-    method: (tools) => {
+    method: ({ next }) => {
       // 使用 Quasar dialog 插件来弹出对话框
       this.$q
         .dialog({
@@ -386,14 +439,14 @@ export default [
           persistent: true,
         })
         .onOk(() => {
-          tools.next()
+          next()
         })
     },
   },
   {
     paragraph: '总结任务2',
     talk: 0,
-    method: (tools) => {
+    method: ({ next }) => {
       // 使用 Quasar dialog 插件来弹出对话框
       this.$q
         .dialog({
@@ -410,14 +463,14 @@ export default [
           persistent: true,
         })
         .onOk(() => {
-          tools.next()
+          next()
         })
     },
   },
   {
     paragraph: '总结任务3',
     talk: 0,
-    method: (tools) => {
+    method: ({ goto }) => {
       // 使用 Quasar dialog 插件来弹出对话框
       this.$q
         .dialog({
@@ -434,9 +487,8 @@ export default [
           persistent: true,
         })
         .onOk(() => {
-          tools.goto({ paragraph: '结局' })
+          goto({ paragraph: '结局' })
         })
     },
   },
-
 ]

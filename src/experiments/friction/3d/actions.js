@@ -1,28 +1,62 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import scene from './initScene'
 
-let idleParam = scene.idleParam
-let idleAnim = scene.idleAnim
-let walkParam = scene.walkParam
-let walkAnim = scene.walkAnim
-let runParam = scene.runParam
-let runAnim = scene.runAnim
-let currentParam = idleParam
-let onBeforeAnimation = scene.onBeforeAnimation
-
 export default {
   changeGround(ground) {
+    let mat = this.getMaterialByName('mat')
+    let road = this.getMeshByName('road')
     return new Promise((resolve) => {
-      // if (ground == "") {
-      //     mat.diffuseColor = new BABYLON.Color3(100 / 255, 100 / 255, 100 / 255)
-      // }
-      scene.mat.diffuseTexture = new BABYLON.Texture(ground, scene)
-      scene.road.material = scene.mat
+      mat.diffuseTexture = new BABYLON.Texture(ground, this)
+      mat.diffuseColor = new BABYLON.Color3(1, 1, 1)
+      road.material = mat
       resolve()
     })
   },
   runStart() {
-    // return new Promise((resolve) => {
+    let idleAnim = this.getAnimationGroupByName('idle')
+    let idleParam = { name: "Idle", anim: idleAnim, weight: 1 };
+    idleAnim.play(true);
+    idleAnim.setWeightForAllAnimatables(1);
+    let walkAnim = this.getAnimationGroupByName('walk')
+    let walkParam = { name: "Walk", anim: walkAnim, weight: 0 };
+    walkAnim.play(true);
+    walkAnim.setWeightForAllAnimatables(0);
+    let runAnim = this.getAnimationGroupByName('run')
+    let runParam = { name: "Run", anim: runAnim, weight: 0 };
+    runAnim.play(true);
+    runAnim.setWeightForAllAnimatables(0);
+    let currentParam = idleParam
+    //0.01是动画变速的速率，0.05就会很快了已经。
+    function onBeforeAnimation() {
+      // Increment the weight of the current override animation
+      if (currentParam) {
+        currentParam.weight = BABYLON.Scalar.Clamp(currentParam.weight + 0.01, 0, 1);
+        currentParam.anim.setWeightForAllAnimatables(currentParam.weight);
+      }
+
+      // Decrement the weight of all override animations that aren't current
+      if (currentParam !== idleParam) {
+        idleParam.weight = BABYLON.Scalar.Clamp(idleParam.weight - 0.01, 0, 1);
+        idleParam.anim.setWeightForAllAnimatables(idleParam.weight);
+      }
+
+      if (currentParam !== walkParam) {
+        walkParam.weight = BABYLON.Scalar.Clamp(walkParam.weight - 0.01, 0, 1);
+        walkParam.anim.setWeightForAllAnimatables(walkParam.weight);
+      }
+
+      if (currentParam !== runParam) {
+        runParam.weight = BABYLON.Scalar.Clamp(runParam.weight - 0.01, 0, 1);
+        runParam.anim.setWeightForAllAnimatables(runParam.weight);
+      }
+      // Remove the callback the current animation weight reaches 1 or
+      // when all override animations reach 0 when current is undefined
+      // if ((currentParam && currentParam.weight === 1) ||
+      //   (idleParam.weight === 0 && walkParam.weight === 0 && runParam.weight === 0)) {
+      //   scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
+      // }
+    }
+    return new Promise((resolve) => {
       if (currentParam === runParam) {
         return;
       }
@@ -30,19 +64,65 @@ export default {
         runParam.anim.syncAllAnimationsWith(null);
         currentParam.anim.syncAllAnimationsWith(runParam.anim.animatables[0]);
       }
-      scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
+      this.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
       currentParam = runParam;
-      scene.onBeforeAnimationsObservable.add(onBeforeAnimation);
-    //   resolve()
-    // })
+      this.onBeforeAnimationsObservable.add(onBeforeAnimation);
+      resolve()
+    })
   },
   runStop() {
-    if (currentParam === idleParam) {
-      return;
+    let idleAnim = this.getAnimationGroupByName('idle')
+    let idleParam = { name: "Idle", anim: idleAnim, weight: 0 };
+    idleAnim.play(true);
+    idleAnim.setWeightForAllAnimatables(1);
+    let walkAnim = this.getAnimationGroupByName('walk')
+    let walkParam = { name: "Walk", anim: walkAnim, weight: 0 };
+    walkAnim.play(true);
+    walkAnim.setWeightForAllAnimatables(0);
+    let runAnim = this.getAnimationGroupByName('run')
+    let runParam = { name: "Run", anim: runAnim, weight: 1 };
+    runAnim.play(true);
+    runAnim.setWeightForAllAnimatables(0);
+    let currentParam = runParam
+    //0.01是动画变速的速率，0.05就会很快了已经。
+    function onBeforeAnimation() {
+      // Increment the weight of the current override animation
+      if (currentParam) {
+        currentParam.weight = BABYLON.Scalar.Clamp(currentParam.weight + 0.01, 0, 1);
+        currentParam.anim.setWeightForAllAnimatables(currentParam.weight);
+      }
+
+      // Decrement the weight of all override animations that aren't current
+      if (currentParam !== idleParam) {
+        idleParam.weight = BABYLON.Scalar.Clamp(idleParam.weight - 0.01, 0, 1);
+        idleParam.anim.setWeightForAllAnimatables(idleParam.weight);
+      }
+
+      if (currentParam !== walkParam) {
+        walkParam.weight = BABYLON.Scalar.Clamp(walkParam.weight - 0.01, 0, 1);
+        walkParam.anim.setWeightForAllAnimatables(walkParam.weight);
+      }
+
+      if (currentParam !== runParam) {
+        runParam.weight = BABYLON.Scalar.Clamp(runParam.weight - 0.01, 0, 1);
+        runParam.anim.setWeightForAllAnimatables(runParam.weight);
+      }
+      // Remove the callback the current animation weight reaches 1 or
+      // when all override animations reach 0 when current is undefined
+      // if ((currentParam && currentParam.weight === 1) ||
+      //   (idleParam.weight === 0 && walkParam.weight === 0 && runParam.weight === 0)) {
+      //   scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
+      // }
     }
-    scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
-    currentParam = idleParam;
-    scene.onBeforeAnimationsObservable.add(onBeforeAnimation);
+    return new Promise((resolve) => {
+      if (currentParam === idleParam) {
+        return;
+      }
+      this.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
+      currentParam = idleParam;
+      this.onBeforeAnimationsObservable.add(onBeforeAnimation);
+      resolve()
+    })
   },
 
   grassRun(time) {
@@ -53,10 +133,10 @@ export default {
   },
 
   iceRun(animationkey) {
-    const role = scene.meshes[3]
-    const box = scene.meshes[4]
-    const fakebox = scene.meshes[5]
-    const xbot = [scene.getMeshByID('__root__')];
+    const role = this.getMeshByName('role')
+    const box = this.meshes[4]
+    const fakebox = this.meshes[5]
+    const xbot = [this.getMeshByID('__root__')];
     const animation1 = new BABYLON.Animation("tutoAnimation",
       "position.z",
       60,
@@ -132,19 +212,20 @@ export default {
   },
 
   changeArea() {
-    const box = scene.getMeshByName('boxx')
+    const box = this.getMeshByName('boxx')
+    console.log(box)
     box.rotation.z = Math.PI / 2;
     box.rotation.x = Math.PI;
     box.position.y = 2.25
   },
 
   smallArea() {
-    const box = scene.getMeshByName('boxx')
+    const box = this.getMeshByName('boxx')
     box.rotation.z = Math.PI / 2;
     box.position.y = 2.25
   },
   largeArea() {
-    const box = scene.getMeshByName('boxx')
+    const box = this.getMeshByName('boxx')
     box.rotation.x = Math.PI / 2;
     box.position.y = 0.6
   },
