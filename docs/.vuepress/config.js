@@ -4,16 +4,28 @@ module.exports = {
     nav: [
       { text: '前端开发文档', link: '/' },
       { text: 'Github', link: 'https://github.com/xuzuodong/lab-3d' },
-      { text: '后端接口文档', link: 'http://api.lab3d.site:3001/swagger' },
+      { text: '后端接口文档', link: 'http://api.lab3d.site:3001/swagger' }
     ],
+
     sidebar: [
       {
-        title: '起步',
+        title: '概述',
+        collapsable: false,
+        path: '/'
+      },
+      {
+        title: '虚拟实验',
         collapsable: false,
         sidebarDepth: 2,
-        children: ['/', '/experiments/']
+        children: [
+          'experiments/introduction',
+          'experiments/get-started',
+          'experiments/talker',
+          'experiments/api',
+        ]
       }
-    ], 
-    lastUpdated: '上次更新', 
+    ],
+
+    lastUpdated: '上次更新'
   }
 }

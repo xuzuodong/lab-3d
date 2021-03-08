@@ -33,7 +33,6 @@
     "node-sass": "^4.13.0",
     "sass": "^1.32.4",
     "sass-loader": "^10.1.1",
-    "type-check": "^0.4.0",
     "vue-cli-plugin-quasar": "~3.0.1",
     "vue-cookies": "^1.7.4",
     "vue-plyr": "^7.0.0",

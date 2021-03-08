@@ -1,8 +1,8 @@
-# 介绍
+# 概述
 
 欢迎来到 Lab 3D 前端开发文档！
 
-本项目基于 Vue 2.x 框架实现，所有虚拟实验基于 Babylon.js 实现。
+本项目是基于 [Vue 2.x](https://cn.vuejs.org/) 构建的，因此掌握 Vue 对于理解和学习本项目异常重要。除此之外，你必须了解 [Node.js](https://nodejs.org/zh-cn/) 及其配套的包管理工具 [npm](https://www.npmjs.cn/)。
 
 ## 项目启动
 
@@ -38,13 +38,15 @@ npm run build
 
 ## 重要依赖
 
+本项目重度依赖以下包，这意味着开始为本项目贡献代码之前，你至少需要**对所有这些依赖有所了解**。
+
 ### 框架
 
-项目使用了 [Vue 2.x](https://cn.vuejs.org/v2/guide/) 作为框架，基于 [Vue CLI](https://cli.vuejs.org/zh/) 提供的标准化目录结构开发。
+项目使用了 [Vue 2.x](https://cn.vuejs.org/v2/guide/) 框架，并基于 [Vue CLI](https://cli.vuejs.org/zh/) 提供的标准化目录结构开发。
 
 ### UI
 
-使用了 [Quasar](https://quasar.dev/) 作为 UI 框架。可以参看第三方维护的[中文文档](http://quasarchs.com/)，但版本略为落后。
+使用了 [Quasar](https://quasar.dev/) 作为 UI 框架，它是一个基于 Vue 生态的异常强大的 UI 框架。该框架同时具有第三方维护的[中文文档](http://quasarchs.com/)，但版本略为落后。
 
 ### 路由
 
@@ -52,17 +54,17 @@ npm run build
 
 ### 网络请求与全局状态管理
 
-Lab 3D 包含于后端的数据交换，使用了 [Axios](http://www.axios-js.com/zh-cn/docs/) 来处理网络请求，并使用 [Vuex](https://vuex.vuejs.org/zh/) 作为数据交换中间层。
+项目需要与后台服务器进行数据交换，对此，使用了 [Axios](http://www.axios-js.com/zh-cn/docs/) 来进行 HTTP 网络请求，并使用 [Vuex](https://vuex.vuejs.org/zh/) 作为数据交换中间层。
 
 ### 3D 引擎
 
-虚拟实验均采用 [Babylon.js](https://www.babylonjs.com) 作为 3D 引擎。
+虚拟实验均采用 [Babylon.js](https://www.babylonjs.com) 作为 3D 引擎。如何使用该引擎进行虚拟实验的开发详见[虚拟实验](./experiments)章节。
 
 ## 理解项目结构
 
 项目结构及其作用如下所示：
 
-```
+``` shell
 ├── node_modules/        # npm 包及其依赖
 │   └── ...
 ├── public/              # 打包时会把该文件夹下的资源原封不动地复制到 dist 文件夹下
@@ -72,10 +74,10 @@ Lab 3D 包含于后端的数据交换，使用了 [Axios](http://www.axios-js.co
 │   ├── assets/              # 存放源码中引用的静态资源，如平台 logo 图片等
 │   ├── components/          # 存放所有会被复用的 Vue 组件，如通用样式的按钮等
 │   ├── experiments/         # 按文件夹存放虚拟实验的源码
-│   │   ├── example-xxx/         # 虚拟实验的教程
 │   │   ├── neutralization/      # 《中和反应》虚拟实验的源码
 │   │   ├── ...
-│   │   └── BabylonApp.js        # 公共组件，帮助在 Vue 组件中快速初始化一个 Babylon 场景
+│   │   ├── BabylonApp.js        # 公共组件，帮助在 Vue 组件中快速初始化一个 Babylon 场景
+│   │   └── list.json            # 记录虚拟实验列表，路由将根据此文件生成
 │   ├── plugins/             # 存放插件，包括自己写的插件和第三方插件
 │   │   ├── talker/              # 对话树插件，用于在虚拟实验中和玩家对话
 │   │   ├── talker.js            # Vue 全局注册该插件

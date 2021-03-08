@@ -1,0 +1,11 @@
+[
+    {
+        "name": "酸碱中和",
+        "alias": "neutralization"
+    }, 
+
+    {
+        "name": "摩擦力",
+        "alias": "friction"
+    }
+]

@@ -272,25 +272,27 @@ export default {
         }
       }
 
-      // scene.state.foo -> scene.foo
-      this.scene = new Proxy(this.scene, {
-        get(obj, prop) {
-          if (prop in obj?.state) {
-            return obj.state[prop]
-          } else if (prop in obj?.actions) {
-            return obj.actions[prop]
-          }
-          return obj[prop]
-        },
-      })
+      if (this.scene) {
+        // scene.state.foo -> scene.foo
+        this.scene = new Proxy(this.scene, {
+          get(obj, prop) {
+            if (obj.state && prop in obj.state) {
+              return obj.state[prop]
+            } else if (obj.actions && prop in obj.actions) {
+              return obj.actions[prop]
+            }
+            return obj[prop]
+          },
+        })
 
-      this.scene.mutate = (newObj) => {
-        for (let prop in newObj) {
-          if (!(prop in this.scene.state)) {
-            throw `未在 state 中定义的字段: "${prop}" , 想要使用 scene.mutate 更改字段值，必须先在 state 中声明它。`
+        this.scene.mutate = (newObj) => {
+          for (let prop in newObj) {
+            if (!(prop in this.scene.state)) {
+              throw `未在 state 中定义的字段: "${prop}" , 想要使用 scene.mutate 更改字段值，必须先在 state 中声明它。`
+            }
           }
+          Object.assign(this.scene.state, newObj)
         }
-        Object.assign(this.scene.state, newObj)
       }
 
       this.talk()
