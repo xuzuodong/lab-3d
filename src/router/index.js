@@ -10,6 +10,16 @@ const routes = [
   { path: '/about', name: 'About', component: () => import('../views/About.vue') },
   { path: '/experiment/:alias', component: () => import('../views/ExperimentDetails.vue') },
   { path: '/classrooms-list', component: () => import('../views/ClassroomsList.vue') },
+  {
+    path: '/dashboard',
+    component: () => import('../views/TeacherDashboard.vue'),
+    children: [
+      {
+        path: 'class/:id',
+        component: () => import('../views/TeacherDashboardContent.vue')
+      }
+    ]
+  },
 
   // 注入虚拟实验内部的路由
   ...experimentsRoutes,
