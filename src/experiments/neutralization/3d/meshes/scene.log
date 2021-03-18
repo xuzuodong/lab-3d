@@ -1,0 +1,185 @@
+Exporter version: 2.91-alpha, Blender version: 2.91.2
+========= Conversion from Blender to Babylon.js =========
+	Scene settings used :
+		Inline textures     :  false
+		Material Type       :  PBR
+		Positions Precision :  4
+		Normals Precision   :  3
+		UVs Precision       :  3
+		Vert Color Precision:  3
+		Mat Weight Precision:  2
+		Keep Z-up r-handed  :  no
+		Texture directory   :  /Users/xuzuodong/VueProject/lab-3d/src/experiments/neutralization/3d/meshes/
+	Python World class constructor completed
+	processing begun of mesh:  dropper
+		processing begun of material:  02 - Default
+		processing begun of material:  01 - Default
+		processing begun of multimaterial:  scene.Multimaterial#0
+		Custom split normals with tangents being used
+		num positions      :  85968
+		num normals        :  85968
+		num tangents       :  343872
+		num uvs            :  171936
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  28656
+	processing begun of mesh:  dropliquid
+		processing begun of material:  02 - Default
+		registered as also a user of material:  02 - Default
+		Custom split normals with tangents being used
+		num positions      :  112020
+		num normals        :  112020
+		num tangents       :  448080
+		num uvs            :  224040
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  37340
+		WARNING: # of 0 area faces found:  6
+	processing begun of mesh:  phebottle
+		processing begun of material:  02 - Default.001
+		Custom split normals with tangents being used
+		num positions      :  61344
+		num normals        :  61344
+		num tangents       :  245376
+		num uvs            :  122688
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  20448
+	processing begun of mesh:  phedropper
+		processing begun of material:  02 - Default.001
+		processing begun of material:  01 - Default.001
+		registered as also a user of material:  02 - Default.001
+		processing begun of multimaterial:  scene.Multimaterial#1
+		Custom split normals with tangents being used
+		num positions      :  85968
+		num normals        :  85968
+		num tangents       :  343872
+		num uvs            :  171936
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  28656
+	processing begun of mesh:  phesolution
+		processing begun of material:  02 - Default.001
+		registered as also a user of material:  02 - Default.001
+		Custom split normals with tangents being used
+		num positions      :  68292
+		num normals        :  68292
+		num tangents       :  273168
+		num uvs            :  136584
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  22764
+	processing begun of mesh:  pheliquid
+		processing begun of material:  02 - Default.001
+		registered as also a user of material:  02 - Default.001
+		Custom split normals with tangents being used
+		num positions      :  112020
+		num normals        :  112020
+		num tangents       :  448080
+		num uvs            :  224040
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  37340
+		WARNING: # of 0 area faces found:  6
+	processing begun of mesh:  purbottle
+		processing begun of material:  02 - Default.002
+		Custom split normals with tangents being used
+		num positions      :  61344
+		num normals        :  61344
+		num tangents       :  245376
+		num uvs            :  122688
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  20448
+	processing begun of mesh:  purdropper
+		processing begun of material:  02 - Default.002
+		processing begun of material:  01 - Default.002
+		registered as also a user of material:  02 - Default.002
+		processing begun of multimaterial:  scene.Multimaterial#2
+		Custom split normals with tangents being used
+		num positions      :  85968
+		num normals        :  85968
+		num tangents       :  343872
+		num uvs            :  171936
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  28656
+	processing begun of mesh:  pursolution
+		processing begun of material:  02 - Default.002
+		registered as also a user of material:  02 - Default.002
+		Custom split normals with tangents being used
+		num positions      :  68292
+		num normals        :  68292
+		num tangents       :  273168
+		num uvs            :  136584
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  22764
+	processing begun of mesh:  purliquid
+		processing begun of material:  02 - Default.002
+		registered as also a user of material:  02 - Default.002
+		Custom split normals with tangents being used
+		num positions      :  112020
+		num normals        :  112020
+		num tangents       :  448080
+		num uvs            :  224040
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  37340
+		WARNING: # of 0 area faces found:  6
+	processing begun of mesh:  tube
+		animation processing begun
+			processing action All Animations_tube:  in[0 - 96], out[0 - 96]
+		processing begun of material:  01 - Default.003
+		Custom split normals with tangents being used
+		num positions      :  2304
+		num normals        :  2304
+		num tangents       :  9216
+		num uvs            :  4608
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  768
+		WARNING: # of 0 area faces found:  64
+	processing begun of mesh:  bottom_liquid
+		animation processing begun
+			processing action All Animations_bottom_liquid:  in[0 - 96], out[0 - 96]
+		WARNING: No materials have been assigned: 
+		Custom split normals with tangents being used
+		num positions      :  768
+		num normals        :  768
+		num tangents       :  3072
+		num uvs            :  1536
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  256
+	processing begun of mesh:  main_liquid
+		animation processing begun
+			processing action All Animations_main_liquid:  in[0 - 96], out[0 - 96]
+		WARNING: No materials have been assigned: 
+		Custom split normals with tangents being used
+		num positions      :  192
+		num normals        :  192
+		num tangents       :  768
+		num uvs            :  384
+		num uvs2           :  0
+		num colors         :  0
+		num triangles      :  64
+	processing begun of camera (UniversalCamera):  Camera
+	processing begun of light (POINT):  Light
+========= Writing of JSON file started =========
+	writing mesh:  dropper
+	writing mesh:  dropliquid
+	writing mesh:  phebottle
+	writing mesh:  phedropper
+	writing mesh:  phesolution
+	writing mesh:  pheliquid
+	writing mesh:  purbottle
+	writing mesh:  purdropper
+	writing mesh:  pursolution
+	writing mesh:  purliquid
+	writing mesh:  tube
+	writing mesh:  bottom_liquid
+	writing mesh:  main_liquid
+========= Writing of JSON file completed =========
+========= end of processing =========
+elapsed time:  0 min, 25.2144 secs

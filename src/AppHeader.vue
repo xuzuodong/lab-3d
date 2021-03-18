@@ -34,6 +34,19 @@
                 <q-item-section>班级</q-item-section>
               </q-item>
 
+              <q-item
+                v-if="userInfo.type == '教师'"
+                clickable
+                v-close-popup
+                :to="'/dashboard'"
+                :active-class="$q.dark.isActive ? 'text-white' : 'text-dark'"
+              >
+                <q-item-section side>
+                  <q-icon name="manage_accounts" size="sm" />
+                </q-item-section>
+                <q-item-section>教师控制台</q-item-section>
+              </q-item>
+
               <q-item clickable v-close-popup @click="logout">
                 <q-item-section side>
                   <q-icon name="logout" size="sm" />

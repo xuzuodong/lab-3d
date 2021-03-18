@@ -1,6 +1,6 @@
 /**
  * BabylonApp 用来在 Vue 组件内创建 Babylon 实例
- * 本文件是复用的，所以在你的实验文件夹里 import 本文件，然后参考 ./example-basic 里的使用方法
+ * 本文件是复用的，所以在你的实验文件夹里 import 本文件
  */
 
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
@@ -16,13 +16,18 @@ export default class BabylonApp {
 
     this.engine = new BABYLON.Engine(this.canvas, true)
     this.engine.displayLoadingUI()
-    window.addEventListener('resize', () => {
+
+    this.resizeFunc = () => {
       this.engine.resize()
-    })
+    }
+    window.addEventListener('resize', this.resizeFunc)
   }
 
-  createScene() {
+  createScene(options) {
     this.scene = new BABYLON.Scene(this.engine)
+
+    this.scene.state = options?.state
+    this.scene.actions = options?.actions
 
     this.engine.runRenderLoop(() => {
       this.scene.render()
@@ -40,5 +45,7 @@ export default class BabylonApp {
     this.scene = null
     this.canvas = null
     this.engine = null
+    window.removeEventListener('resize', this.resizeFunc)
+    this.resizeFunc = null
   }
 }

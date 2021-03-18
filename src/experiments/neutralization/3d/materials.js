@@ -1,6 +1,6 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 
-export const createMaterials = scene => {
+export const createMaterials = (scene) => {
   // 定义地面材质
   const matGround = new BABYLON.StandardMaterial('matGround', scene)
   matGround.diffuseColor = new BABYLON.Color3(218 / 255, 218 / 255, 218 / 255)
