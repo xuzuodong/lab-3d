@@ -25,11 +25,11 @@ const standardColor = (dropType, ph) => {
 
 // 试管中的反应变化（即颜色改变）写在这里，接收三个参数
 // 场景scene；当前试管中的是哪种酸溶液；当前滴加的是什么：碱溶液、石蕊或酚酞；现在滴加了多少
-export const reactions = (scene, acidType, dropType, indicaterType, count) => {
+export const reactions = (scene, acidType, dropType, indicatorType, count) => {
   let matTubeLiquid = scene.getMaterialByName('matTubeLiquid')
 
   if (acidType === 'acid_hcl') {
-    if (indicaterType === 'pur') {
+    if (indicatorType === 'pur') {
       if (dropType === 'alkali_naoh') {
         let color = []
         switch (true) {
@@ -70,7 +70,7 @@ export const reactions = (scene, acidType, dropType, indicaterType, count) => {
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
     }
-    if (indicaterType === 'phe') {
+    if (indicatorType === 'phe') {
       if (dropType === 'alkali_naoh') {
         let color = []
         switch (true) {
@@ -114,7 +114,7 @@ export const reactions = (scene, acidType, dropType, indicaterType, count) => {
   }
 
   if (acidType === 'acid_ch3cooh') {
-    if (indicaterType == 'pur') {
+    if (indicatorType == 'pur') {
       if (dropType === 'alkali_naoh') {
         let color = []
         switch (true) {
@@ -152,7 +152,7 @@ export const reactions = (scene, acidType, dropType, indicaterType, count) => {
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
     }
-    if (indicaterType == 'phe') {
+    if (indicatorType == 'phe') {
       if (dropType === 'alkali_naoh') {
         let color = []
         switch (true) {
