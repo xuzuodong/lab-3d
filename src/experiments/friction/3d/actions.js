@@ -1,5 +1,4 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
-import scene from './initScene'
 
 export default {
   changeGround(ground) {
@@ -133,10 +132,10 @@ export default {
   },
 
   iceRun(animationkey) {
-    const role = this.getMeshByName('role')
+    const role = this.meshes[3]
     const box = this.meshes[4]
     const fakebox = this.meshes[5]
-    const xbot = [this.getMeshByID('__root__')];
+    const xbot = this.meshes[0]
     const animation1 = new BABYLON.Animation("tutoAnimation",
       "position.z",
       60,
@@ -198,7 +197,7 @@ export default {
     }
     animation3.setKeys(an3keys);
 
-    let animationGroup1 = new BABYLON.AnimationGroup("my group");
+    let animationGroup1 = new BABYLON.AnimationGroup("icerunGroup");
     animationGroup1.addTargetedAnimation(animation1, xbot);
     animationGroup1.addTargetedAnimation(animation1, fakebox);
     animationGroup1.addTargetedAnimation(animation2, role);
@@ -228,19 +227,5 @@ export default {
     const box = this.getMeshByName('boxx')
     box.rotation.x = Math.PI / 2;
     box.position.y = 0.6
-  },
-  massChange(tools) {
-    this['this.tools'] = tools
-    this.showSlider = true
-    if (this.confirm == true) {
-      tools.goto({ paragraph: '轻松拉货' })
-      this.showSlider = false
-      this.confirm = false
-    }
-  },
-  getGravity(gravityData) {
-    this.confirm = true
-    this.gravity = gravityData
-    this.massChange(this['this.tools'])
   },
 }

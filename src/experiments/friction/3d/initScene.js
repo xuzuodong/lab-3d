@@ -1,5 +1,6 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import xbot from './meshes/Xbot.glb'
+import woodjpg from '../2d/assets/wood.jpg'
 
 export default (scene) => {
     return new Promise((resolve) => {
@@ -58,7 +59,7 @@ export default (scene) => {
             }
 
             let mat = new BABYLON.StandardMaterial("mat", scene);
-            // mat.diffuseTexture = new BABYLON.Texture(woodjpg, scene);
+            mat.diffuseTexture = new BABYLON.Texture(woodjpg, scene);
             mat.diffuseColor = new BABYLON.Color3(100 / 255, 100 / 255, 100 / 255)
 
             const road = BABYLON.MeshBuilder.CreateGround("road", {
