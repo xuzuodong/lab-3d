@@ -98,7 +98,7 @@ export default {
         main_liquid,
         main_liquid.scaleyFromPivot(pivotAt, 10 * deltaY, 0, frameRate),
         0,
-        2.2 * frameRate,
+        frameRate,
         false,
         1,
         () => {

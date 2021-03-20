@@ -20,10 +20,10 @@ export default [
     method: ({ next, scene, chosen, setSlot }) => {
       if (chosen == 0) {
         setSlot({ 酸溶液: '稀盐酸' })
-        scene.mutate({ acidType: ['acid_hcl', true] })
+        scene.mutate({ acidType: 'acid_hcl' })
       } else {
         setSlot({ 酸溶液: '醋酸溶液' })
-        scene.mutate({ acidType: ['acid_ch3cooh', true] })
+        scene.mutate({ acidType: 'acid_ch3cooh' })
       }
       next()
     }
@@ -35,6 +35,7 @@ export default [
     talk: 'last',
     method: ({ next, scene }) => {
       scene.firstDropLiqiud().then(() => {
+        scene.existLiquid.push(scene.acidType)
         next()
       })
     }
@@ -46,7 +47,9 @@ export default [
     reply: { choice: 'last', index: 'last' },
     method: async ({ restart, scene }) => {
       await generalOperations.showDropper(scene)
-      await scene.firstDropLiqiud()
+      await scene.firstDropLiqiud().then(() => {
+        scene.existLiquid.push(scene.acidType)
+      })
       restart() // 回到段落最开头
     }
   },
@@ -91,10 +94,10 @@ export default [
     method: ({ chosen, scene, next, setSlot }) => {
       if (chosen == 0) {
         setSlot({ 碱溶液: '氢氧化钠' })
-        scene.mutate({ alkaliType: ['alkali_naoh', false] })
+        scene.mutate({ alkaliType: 'alkali_naoh' })
       } else {
         setSlot({ 碱溶液: '小苏打' })
-        scene.mutate({ alkaliType: ['alkali_nahco3', false] })
+        scene.mutate({ alkaliType: 'alkali_nahco3' })
       }
       next()
     }
@@ -108,7 +111,7 @@ export default [
       Dialog.create({
         component: ControlPanelVue,
         scene,
-        dropType: scene.alkaliType[0]
+        dropType: scene.alkaliType
       }).onOk(() => {
         Dialog.create({
           component: DialogQuestionVue,
@@ -127,9 +130,16 @@ export default [
     paragraph: '阶段二开场',
     talk: 2,
     method: ({ next, scene }) => {
-      scene.mutate({ alkaliType: ['', false] })
-      scene.mutate({ indicatorType: ['', false] })
-      scene.resetTube().then(() => next())
+      scene.mutate({ alkaliType: '' })
+      scene.mutate({ indicatorType: '' })
+      scene.resetTube().then(() => {
+        for (let i = 0; i < scene.existLiquid.length; i++) {
+          if (scene.existLiquid[i] == 'alkali_naoh' || scene.existLiquid[i] == 'alkali_nahco3') {
+            scene.existLiquid.splice(i--, 1)
+          }
+        }
+        next()
+      })
     }
   },
 
@@ -148,8 +158,8 @@ export default [
     talk: 'last',
     method: async ({ next, scene, setSlot }) => {
       let indicatorType = await scene.selectIndicator()
-      scene.mutate({ indicatorType: [indicatorType, false] })
-      if (scene.indicatorType[0] == 'pur') {
+      scene.mutate({ indicatorType: indicatorType })
+      if (scene.indicatorType == 'pur') {
         setSlot({ 酸碱指示剂: '紫色石蕊试剂' })
       } else {
         setSlot({ 酸碱指示剂: '酚酞试剂' })
@@ -166,7 +176,7 @@ export default [
       Dialog.create({
         component: ControlPanelVue,
         scene,
-        dropType: scene.indicatorType[0]
+        dropType: scene.indicatorType
       }).onOk(() => {
         next()
       })
@@ -189,10 +199,10 @@ export default [
     method: ({ next, scene, chosen, setSlot }) => {
       if (chosen == 0) {
         setSlot({ 碱溶液: '氢氧化钠' })
-        scene.mutate({ alkaliType: ['alkali_naoh', false] })
+        scene.mutate({ alkaliType: 'alkali_naoh' })
       } else {
         setSlot({ 碱溶液: '小苏打' })
-        scene.mutate({ alkaliType: ['alkali_nahco3', false] })
+        scene.mutate({ alkaliType: 'alkali_nahco3' })
       }
       next()
     }
@@ -207,7 +217,7 @@ export default [
         Dialog.create({
           component: ControlPanelVue,
           scene,
-          dropType: scene.alkaliType[0]
+          dropType: scene.alkaliType
         }).onOk(() => next())
       })
     }
@@ -233,10 +243,13 @@ export default [
     paragraph: '阶段二-提交实验结论后',
     reply: { choice: 'any', index: 'last' },
     method: ({ next, scene }) => {
-      scene.mutate({ acidType: ['', false] })
-      scene.mutate({ alkaliType: ['', false] })
-      scene.mutate({ indicatorType: ['', false] })
-      scene.resetAll().then(() => next())
+      scene.mutate({ acidType: '' })
+      scene.mutate({ alkaliType: '' })
+      scene.mutate({ indicatorType: '' })
+      scene.resetAll().then(() => {
+        scene.existLiquid.splice(0, scene.existLiquid.length)
+        next()
+      })
     }
   },
 
@@ -258,7 +271,7 @@ export default [
       Dialog.create({
         component: ControlPanelVue,
         scene,
-        dropType: scene.acidType[0]
+        dropType: scene.acidType
       }).onOk(() => {
         scene.resetCamera().then(() => next())
       })
@@ -272,10 +285,10 @@ export default [
     method: ({ next, scene, chosen, setSlot }) => {
       if (chosen == 0) {
         setSlot({ 酸溶液: '稀盐酸' })
-        scene.mutate({ acidType: ['acid_hcl', false] })
+        scene.mutate({ acidType: 'acid_hcl' })
       } else {
         setSlot({ 酸溶液: '醋酸溶液' })
-        scene.mutate({ acidType: ['acid_ch3cooh', false] })
+        scene.mutate({ acidType: 'acid_ch3cooh' })
       }
       next()
     }
@@ -288,8 +301,8 @@ export default [
     method: async ({ next, scene, setSlot }) => {
       await scene.pullInCameraToBottle()
       let indicatorType = await scene.selectIndicator()
-      scene.mutate({ indicatorType: [indicatorType, false] })
-      if (scene.indicatorType[0] == 'pur') {
+      scene.mutate({ indicatorType: indicatorType })
+      if (scene.indicatorType == 'pur') {
         setSlot({ 酸碱指示剂: '紫色石蕊试剂' })
       } else {
         setSlot({ 酸碱指示剂: '酚酞试剂' })
@@ -297,7 +310,7 @@ export default [
       Dialog.create({
         component: ControlPanelVue,
         scene,
-        dropType: scene.indicatorType[0]
+        dropType: scene.indicatorType
       }).onOk(() => next())
     }
   },
@@ -318,10 +331,10 @@ export default [
     method: ({ next, scene, chosen, setSlot }) => {
       if (chosen == 0) {
         setSlot({ 碱溶液: '氢氧化钠' })
-        scene.mutate({ alkaliType: ['alkali_naoh', false] })
+        scene.mutate({ alkaliType: 'alkali_naoh' })
       } else {
         setSlot({ 碱溶液: '小苏打' })
-        scene.mutate({ alkaliType: ['alkali_nahco3', false] })
+        scene.mutate({ alkaliType: 'alkali_nahco3' })
       }
       next()
     }
@@ -336,7 +349,7 @@ export default [
         Dialog.create({
           component: ControlPanelVue,
           scene,
-          dropType: scene.alkaliType[0]
+          dropType: scene.alkaliType
         }).onOk(() => next())
       })
     }

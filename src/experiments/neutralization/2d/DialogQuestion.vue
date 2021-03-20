@@ -27,9 +27,7 @@
         <q-input filled v-model="conclusion.textConclusion" :dense="false" />
       </q-card-section>
       <q-card-section class="bg-primary text-white row" v-if="dialogType == 'radioConclusion'">
-        <div class="text-h6">
-          在刚刚的中和反应中，你观察到了什么反应现象？
-        </div>
+        <div class="text-h6">在刚刚的中和反应中，你观察到了什么反应现象？</div>
         <q-radio
           v-model="conclusion.radioConclusion"
           val="A"
@@ -74,18 +72,37 @@ import radioD from './assets/d.png'
 export default {
   props: {
     dialogType: String,
-    acid_alkali: Array
+    acid_alkali: Array,
   },
+
   data() {
     return {
       conclusion: {
         useDropper: '',
         textConclusion: '',
-        radioConclusion: ''
+        radioConclusion: '',
       },
-      radioImgUrl: { radioA, radioB, radioC, radioD }
+      radioImgUrl: { radioA, radioB, radioC, radioD },
     }
   },
+
+  computed: {
+    acid: function () {
+      if (this.acid_alkali[0] == 'acid_hcl') {
+        return '稀盐酸'
+      } else {
+        return '醋酸溶液'
+      }
+    },
+    alkali: function () {
+      if (this.acid_alkali[1] == 'alkali_naoh') {
+        return '氢氧化钠溶液'
+      } else {
+        return '小苏打溶液'
+      }
+    },
+  },
+
   methods: {
     show() {
       this.$refs.dialog.show()
@@ -119,23 +136,7 @@ export default {
           }
           break
       }
-    }
-  },
-  computed: {
-    acid: function() {
-      if (this.acid_alkali[0] == 'acid_hcl') {
-        return '稀盐酸'
-      } else {
-        return '醋酸溶液'
-      }
     },
-    alkali: function() {
-      if (this.acid_alkali[1] == 'alkali_naoh') {
-        return '氢氧化钠溶液'
-      } else {
-        return '小苏打溶液'
-      }
-    }
-  }
+  },
 }
 </script>

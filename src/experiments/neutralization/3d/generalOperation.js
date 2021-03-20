@@ -73,14 +73,14 @@ const dropLiqiud = (scene, beginPosition_y, endPosition_y, liquidColor = new BAB
         animationBox.liquidScale
       ],
       0,
-      2 * frameRate,
+      frameRate,
       false
     )
     scene.beginDirectAnimation(
       main_liquid,
       main_liquid.scaleyFromPivot(pivotAt, 0.2),
       0,
-      2.2 * frameRate,
+      frameRate,
       false,
       1,
       () => {

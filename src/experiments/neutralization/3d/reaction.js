@@ -23,47 +23,54 @@ const standardColor = (dropType, ph) => {
   }
 }
 
+const getRatio = (liquidGroup, acid1, alkali1) => {
+  const acid = liquidGroup.find((p) => p.lqName === acid1)
+  const alkali = liquidGroup.find((p) => p.lqName === alkali1)
+  return Math.floor((acid.volume / alkali.volume) * 1000) / 1000
+}
+
 // 试管中的反应变化（即颜色改变）写在这里，接收三个参数
-// 场景scene；当前试管中的是哪种酸溶液；当前滴加的是什么：碱溶液、石蕊或酚酞；现在滴加了多少
-export const reactions = (scene, acidType, dropType, indicatorType, count) => {
+// 场景scene；试管中的溶液组合；现在滴加的是什么
+export const reactions = (scene, liquidGroup, dropType) => {
   let matTubeLiquid = scene.getMaterialByName('matTubeLiquid')
+  const acidType = scene.acidType
+  const indicatorType = scene.indicatorType
 
   if (acidType === 'acid_hcl') {
     if (indicatorType === 'pur') {
       if (dropType === 'alkali_naoh') {
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         let color = []
         switch (true) {
-          case count === 1:
-            color = [204 / 255, 25 / 255, 102 / 255]
+          case ratio > 1:
+            color = [1, 0, 0]
             break
-          case count === 2:
-            color = [102 / 255, 14 / 255, 200 / 255]
+          case ratio === 1:
+            color = [153 / 255, 50 / 255, 204 / 255]
             break
-          case count === 3:
-            color = [50 / 255, 7 / 255, 240 / 255]
+          case ratio < 1 && ratio > 0.2:
+            color = [ratio * (153 / 255), ratio * (50 / 255), 1 - (51 / 255) * ratio]
             break
-          case count >= 4:
+          case ratio <= 0.2:
             color = [0, 0, 1]
             break
         }
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
       if (dropType === 'alkali_nahco3') {
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         let color = []
         switch (true) {
-          case count === 1:
-            color = [200 / 255, 10 / 255, 51 / 255]
+          case ratio > 0.5:
+            color = [1, 0, 0]
             break
-          case count === 2:
-            color = [180 / 255, 30 / 255, 126 / 255]
+          case ratio === 0.5:
+            color = [153 / 255, 50 / 255, 204 / 255]
             break
-          case count === 3:
-            color = [153 / 255, 50 / 255, 181 / 255]
+          case ratio < 0.5 && ratio > 0.125:
+            color = [ratio * (153 / 255), ratio * (50 / 255), 1 - (51 / 255) * ratio]
             break
-          case count === 4:
-            color = [70 / 255, 25 / 255, 226 / 255]
-            break
-          case count >= 5:
+          case ratio <= 0.125:
             color = [0, 0, 1]
             break
         }
@@ -72,39 +79,32 @@ export const reactions = (scene, acidType, dropType, indicatorType, count) => {
     }
     if (indicatorType === 'phe') {
       if (dropType === 'alkali_naoh') {
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         let color = []
         switch (true) {
-          case count === 1:
+          case ratio >= 1:
             color = [1, 1, 1]
             break
-          case count === 2:
-            color = [1, 80 / 255, 100 / 255]
+          case ratio < 1 && ratio >= 0.5:
+            color = [1, 100 / 255, 100 / 255]
             break
-          case count === 3:
-            color = [1, 50 / 255, 61 / 255]
-            break
-          case count >= 4:
+          case ratio < 0.5:
             color = [1, 0, 0]
             break
         }
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
       if (dropType === 'alkali_nahco3') {
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         let color = []
         switch (true) {
-          case count === 1:
+          case ratio >= 0.5:
             color = [1, 1, 1]
             break
-          case count === 2:
-            color = [1, 1, 1]
+          case ratio < 0.5 && ratio >= 0.125:
+            color = [1, (100 / 255) * ratio, (100 / 255) * ratio]
             break
-          case count === 3:
-            color = [1, 182 / 255, 181 / 255]
-            break
-          case count === 4:
-            color = [1, 100 / 255, 99 / 255]
-            break
-          case count >= 5:
+          case ratio < 0.125:
             color = [1, 0, 0]
             break
         }
@@ -116,36 +116,32 @@ export const reactions = (scene, acidType, dropType, indicatorType, count) => {
   if (acidType === 'acid_ch3cooh') {
     if (indicatorType == 'pur') {
       if (dropType === 'alkali_naoh') {
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         let color = []
         switch (true) {
-          case count === 1:
-            color = [102 / 255, 14 / 255, 200 / 255]
+          case ratio >= 2:
+            color = [153 / 255, 50 / 255, 204 / 255]
             break
-          case count === 2:
-            color = [51 / 255, 7 / 255, 226 / 255]
+          case ratio < 2 && ratio >= 1.5:
+            color = [ratio * (153 / 255), ratio * (50 / 255), 1 - (51 / 255) * ratio]
             break
-          case count >= 3:
+          case ratio < 1.5:
             color = [0, 0, 1]
             break
         }
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
       if (dropType === 'alkali_nahco3') {
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         let color = []
         switch (true) {
-          case count === 1:
-            color = [220 / 255, 15 / 255, 61 / 255]
+          case ratio >= 1:
+            color = [153 / 255, 50 / 255, 204 / 255]
             break
-          case count === 2:
-            color = [160 / 255, 30 / 255, 132 / 255]
+          case ratio < 1 && ratio >= 0.333:
+            color = [ratio * (153 / 255), ratio * (50 / 255), 1 - (51 / 255) * ratio]
             break
-          case count === 3:
-            color = [81 / 255, 18 / 255, 203 / 255]
-            break
-          case count === 4:
-            color = [42 / 255, 9 / 255, 230 / 255]
-            break
-          case count >= 5:
+          case ratio < 0.333:
             color = [0, 0, 1]
             break
         }
@@ -154,12 +150,16 @@ export const reactions = (scene, acidType, dropType, indicatorType, count) => {
     }
     if (indicatorType == 'phe') {
       if (dropType === 'alkali_naoh') {
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         let color = []
         switch (true) {
-          case count === 1:
-            color = [1, 106 / 255, 98 / 255]
+          case ratio >= 2:
+            color = [1, 1, 1]
             break
-          case count >= 2:
+          case ratio < 2 && ratio >= 1.5:
+            color = [1, 100 / 255, 100 / 255]
+            break
+          case ratio < 1.5:
             color = [1, 0, 0]
             break
         }
@@ -167,20 +167,15 @@ export const reactions = (scene, acidType, dropType, indicatorType, count) => {
       }
       if (dropType === 'alkali_nahco3') {
         let color = []
+        const ratio = getRatio(liquidGroup, acidType, dropType)
         switch (true) {
-          case count === 1:
+          case ratio >= 1:
             color = [1, 1, 1]
             break
-          case count === 2:
-            color = [1, 1, 1]
+          case ratio < 1 && ratio >= 0.5:
+            color = [1, 100 / 255, 100 / 255]
             break
-          case count === 3:
-            color = [1, 108 / 255, 110 / 255]
-            break
-          case count === 4:
-            color = [1, 41 / 255, 42 / 255]
-            break
-          case count >= 5:
+          case ratio < 0.5:
             color = [1, 0, 0]
             break
         }

@@ -70,7 +70,7 @@ const dropLiquid_y = (beginPosition_y, endPosition_y) => {
     value: beginPosition_y
   })
   dropFrames.push({
-    frame: 2 * frameRate,
+    frame: frameRate,
     value: endPosition_y
   })
   dropLiquid_y.setKeys(dropFrames)
@@ -93,7 +93,7 @@ scaleFrames.push({
   value: new BABYLON.Vector3(1, 1, 1)
 })
 scaleFrames.push({
-  frame: 0.8 * frameRate,
+  frame: 0.3 * frameRate,
   value: new BABYLON.Vector3(3, 3, 3)
 })
 liquidScale.setKeys(scaleFrames)
@@ -112,8 +112,12 @@ visibileFrames.push({
   value: 1
 })
 visibileFrames.push({
-  frame: 2 * frameRate,
+  frame: 0.95 * frameRate,
   value: 1
+})
+visibileFrames.push({
+  frame: frameRate,
+  value: 0
 })
 liquidSphereVisible.setKeys(visibileFrames)
 
@@ -199,7 +203,7 @@ const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2
 }
 
 // 显示物体的动画（从不可见到可见），接收一个参数（结束帧）
-const showMesh = endFrame => {
+const showMesh = (endFrame) => {
   const showMesh = new BABYLON.Animation(
     'showMesh',
     'visibility',
@@ -223,7 +227,7 @@ const showMesh = endFrame => {
 }
 
 // 隐藏物体的动画（从可见到不可见），接收一个参数（结束帧）
-const hideMesh = endFrame => {
+const hideMesh = (endFrame) => {
   const hideMesh = new BABYLON.Animation(
     'hideMesh',
     'visibility',
@@ -275,8 +279,8 @@ const moveMesh = (beginPosition, endPosition, endFrame) => {
 BABYLON.Mesh.prototype.scaleyFromPivot = function(
   pivotPoint,
   t,
-  midFrame = 1.8 * frameRate,
-  endFrame = 2 * frameRate
+  midFrame = 0.8 * frameRate,
+  endFrame = frameRate
 ) {
   let _sy = (this.scaling.y + t / 10) / this.scaling.y
 
