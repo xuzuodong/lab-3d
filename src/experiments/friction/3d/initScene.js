@@ -1,37 +1,47 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import xbot from './meshes/Xbot.glb'
-import woodjpg from '../2d/assets/wood.jpg'
+import initGround from '../2d/assets/initGround.png'
+import crate from '../2d/assets/crate.png'
 
 export default (scene) => {
     return new Promise((resolve) => {
         // 场景在这里初始化
         // const scene = new BABYLON.Scene(engine)
-        // scene.clearColor = new BABYLON.Color3(240 / 255, 240 / 255, 240 / 255)
+        scene.clearColor = new BABYLON.Color3(217 / 255, 234 / 255, 244 / 255)
         scene.createDefaultCamera(true, true, true)
 
         Promise.all([
             BABYLON.SceneLoader.ImportMeshAsync('', xbot, '', scene, undefined, '.glb')
         ]).then(function (newMeshes) {
 
-            const role = BABYLON.MeshBuilder.CreateBox("box", { depth: 10, height: 0.01, width: 0.01 }, scene);
+            //创建材质
+            const boxMaterial = new BABYLON.StandardMaterial("boxMaterial", scene);
+            boxMaterial.diffuseTexture = new BABYLON.Texture(crate, scene);
+            boxMaterial.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+            const groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
+            groundMaterial.diffuseTexture = new BABYLON.Texture(initGround, scene);
+
+            //创建Meshes
+            const role = BABYLON.MeshBuilder.CreateBox("role", { depth: 10, height: 0.01, width: 0.01 }, scene);
             role.position = new BABYLON.Vector3(0, 1.15, -5.0);
-            const box = BABYLON.MeshBuilder.CreateBox("boxx", { depth: 1.2, height: 2, width: 4.5 }, scene);
-            box.position = new BABYLON.Vector3(0, 1, -10);
-            const fakebox = BABYLON.MeshBuilder.CreateBox("box", { depth: 0.001, height: 0.001, width: 0.001 }, scene);
+            const fakebox = BABYLON.MeshBuilder.CreateBox("fakebox", { depth: 0.001, height: 0.001, width: 0.001 }, scene);
             fakebox.position = new BABYLON.Vector3(0, 1, 0);
+            const box = BABYLON.MeshBuilder.CreateBox("box", { depth: 1.2, height: 2, width: 4.5 }, scene);
+            box.position = new BABYLON.Vector3(0, 1, -10);
+            box.material = boxMaterial;
 
             // 添加一个相机，并绑定鼠标事件
-            const alpha = Math.PI / 4;
-            const beta = Math.PI / 3;
-            const distance = 13;
-            const mainCamera = new BABYLON.ArcRotateCamera("mainCamera", alpha, beta, distance, new BABYLON.Vector3(0, 10, 0), scene);
-            mainCamera.attachControl(true);
-            mainCamera.lowerRadiusLimit = 2;
-            mainCamera.upperRadiusLimit = 15;
-            mainCamera.wheelDeltaPercentage = 0.01;
-            mainCamera.lockedTarget = fakebox;
-            scene.activeCameras.push(mainCamera);
+            settingCamera()
 
+            function settingCamera() {
+                const mainCamera = new BABYLON.ArcRotateCamera("mainCamera", Math.PI / 4, Math.PI / 3, 13, new BABYLON.Vector3(0, 10, 0), scene);
+                mainCamera.attachControl(true);
+                mainCamera.lowerRadiusLimit = 2;
+                mainCamera.upperRadiusLimit = 15;
+                mainCamera.wheelDeltaPercentage = 0.01;
+                mainCamera.lockedTarget = fakebox;
+                scene.activeCameras.push(mainCamera);
+            }
             // 添加一组灯光到场景
             settingLight()
 
@@ -47,20 +57,13 @@ export default (scene) => {
             function settingShadow() {
                 const light2 = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(0, -0.5, -1.0), scene);
                 light2.position = new BABYLON.Vector3(0, 50, 50);
+                light2.intensity = 0.4;
                 const shadowGenerator = new BABYLON.ShadowGenerator(2048, light2);
                 shadowGenerator.useBlurExponentialShadowMap = true;
                 shadowGenerator.getShadowMap().renderList.push(role);
                 shadowGenerator.getShadowMap().renderList.push(box);
-                // shadowGenerator.blurKernel = 16;
                 shadowGenerator.addShadowCaster(scene.meshes[0], true);
-                for (let i = 0; i < newMeshes.length; i++) {
-                    newMeshes[i].receiveShadows = false;
-                }
             }
-
-            let mat = new BABYLON.StandardMaterial("mat", scene);
-            mat.diffuseTexture = new BABYLON.Texture(woodjpg, scene);
-            mat.diffuseColor = new BABYLON.Color3(100 / 255, 100 / 255, 100 / 255)
 
             const road = BABYLON.MeshBuilder.CreateGround("road", {
                 sideOrientation: BABYLON.Mesh.DOUBLESIDE,
@@ -70,7 +73,7 @@ export default (scene) => {
                 tileWidth: 100
             }, scene);
             road.position = new BABYLON.Vector3(0, 0, 0);
-            road.material = mat;
+            road.material = groundMaterial;
             road.receiveShadows = true;
 
             resolve()

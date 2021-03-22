@@ -3,6 +3,7 @@ import storeData from '../2d/storeData'
 import woodjpg from '../2d/assets/wood.jpg'
 import grasspng from '../2d/assets/grass.png'
 import icejpg from '../2d/assets/ice.jpg'
+import initGround from '../2d/assets/initGround.png'
 import gravitySlider from '../2d/gravitySlider'
 
 let howToDecrease = 0
@@ -123,8 +124,11 @@ export default [
   {
     paragraph: '草地后',
     talk: 'last',
-    method: ({ goto }) => {
-      if (roughCount == 3) goto({ paragraph: '接触面总结' })
+    method: ({ goto, scene }) => {
+      if (roughCount == 3) {
+        scene.changeGround(initGround)
+        goto({ paragraph: '接触面总结' })
+      }
       else goto({ paragraph: '改变接触面粗糙程度' })
     },
   },
@@ -157,8 +161,11 @@ export default [
   {
     paragraph: '木板后',
     talk: 'last',
-    method: ({ goto }) => {
-      if (roughCount == 3) goto({ paragraph: '接触面总结' })
+    method: ({ goto, scene }) => {
+      if (roughCount == 3) {
+        scene.changeGround(initGround)
+        goto({ paragraph: '接触面总结' })
+      }
       else goto({ paragraph: '改变接触面粗糙程度' })
     },
   },
@@ -191,8 +198,11 @@ export default [
   {
     paragraph: '冰面后',
     talk: 'last',
-    method: ({ goto }) => {
-      if (roughCount == 3) goto({ paragraph: '接触面总结' })
+    method: ({ goto, scene }) => {
+      if (roughCount == 3) {
+        scene.changeGround(initGround)
+        goto({ paragraph: '接触面总结' })
+      }
       else goto({ paragraph: '改变接触面粗糙程度' })
     },
   },

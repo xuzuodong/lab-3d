@@ -23,7 +23,7 @@ export default {
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene, debug:'重量调节器' })
+      this.$talker({ script, hooks, scene })
     })
   },
 
