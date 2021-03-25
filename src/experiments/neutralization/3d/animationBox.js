@@ -20,11 +20,11 @@ const outDropper = new BABYLON.Animation(
 const outFrames = []
 outFrames.push({
   frame: 0,
-  value: new BABYLON.Vector3(80, 0, 80)
+  value: new BABYLON.Vector3(-20, 0, 80)
 })
 outFrames.push({
   frame: 1 * frameRate,
-  value: new BABYLON.Vector3(80, 20, 80)
+  value: new BABYLON.Vector3(-20, 20, 80)
 })
 outFrames.push({
   frame: 3 * frameRate,
@@ -47,11 +47,11 @@ backFrames.push({
 })
 backFrames.push({
   frame: 2 * frameRate,
-  value: new BABYLON.Vector3(80, 20, 80)
+  value: new BABYLON.Vector3(-20, 20, 80)
 })
 backFrames.push({
   frame: 3 * frameRate,
-  value: new BABYLON.Vector3(80, 0, 80)
+  value: new BABYLON.Vector3(-20, 0, 80)
 })
 backDropper.setKeys(backFrames)
 

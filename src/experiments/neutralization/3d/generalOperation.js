@@ -103,8 +103,8 @@ const registClickActionOnBottle = scene => {
       purBottle.actionManager.registerAction(
         new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
           if (scene.animatables.length === 0) {
-            animationBox.outFrames[0].value = new BABYLON.Vector3(80, 0, 80)
-            animationBox.outFrames[1].value = new BABYLON.Vector3(80, 20, 80)
+            animationBox.outFrames[0].value = new BABYLON.Vector3(-20, 0, 80)
+            animationBox.outFrames[1].value = new BABYLON.Vector3(-20, 20, 80)
             resetCamera(scene).then(() => {
               scene.beginDirectAnimation(purDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
               scene.beginDirectAnimation(
@@ -129,8 +129,8 @@ const registClickActionOnBottle = scene => {
       pheBottle.actionManager.registerAction(
         new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
           if (scene.animatables.length === 0) {
-            animationBox.outFrames[0].value = new BABYLON.Vector3(110, 0, 80)
-            animationBox.outFrames[1].value = new BABYLON.Vector3(110, 20, 80)
+            animationBox.outFrames[0].value = new BABYLON.Vector3(20, 0, 80)
+            animationBox.outFrames[1].value = new BABYLON.Vector3(20, 20, 80)
             resetCamera(scene).then(() => {
               scene.beginDirectAnimation(pheDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
               scene.beginDirectAnimation(
@@ -159,14 +159,14 @@ const putBackDropper = (scene, indicator) => {
   const pheDropper = scene.getTransformNodeByName('phedropper')
   const pheLiquid = scene.getMeshByName('pheliquid')
   if (indicator === 'pur') {
-    animationBox.backFrames[1].value = new BABYLON.Vector3(80, 20, 80)
-    animationBox.backFrames[2].value = new BABYLON.Vector3(80, 0, 80)
+    animationBox.backFrames[1].value = new BABYLON.Vector3(-20, 20, 80)
+    animationBox.backFrames[2].value = new BABYLON.Vector3(-20, 0, 80)
     scene.beginDirectAnimation(purDropper, [animationBox.backDropper], 0, 3 * frameRate, false)
     scene.beginDirectAnimation(purLiquid, [animationBox.backDropper], 0, 3 * frameRate, false)
   }
   if (indicator === 'phe') {
-    animationBox.backFrames[1].value = new BABYLON.Vector3(110, 20, 80)
-    animationBox.backFrames[2].value = new BABYLON.Vector3(110, 0, 80)
+    animationBox.backFrames[1].value = new BABYLON.Vector3(20, 20, 80)
+    animationBox.backFrames[2].value = new BABYLON.Vector3(20, 0, 80)
     scene.beginDirectAnimation(pheDropper, [animationBox.backDropper], 0, 3 * frameRate, false)
     scene.beginDirectAnimation(pheLiquid, [animationBox.backDropper], 0, 3 * frameRate, false)
   }
