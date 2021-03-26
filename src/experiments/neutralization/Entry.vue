@@ -29,7 +29,7 @@ export default {
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene, debug: '滴加碱溶液' })
+      this.$talker({ script, hooks, scene, debug: '选择酸碱指示剂' })
     })
   },
 

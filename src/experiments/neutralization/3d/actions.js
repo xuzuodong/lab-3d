@@ -25,10 +25,17 @@ export default {
     })
   },
 
-  firstDropLiqiud() {
+  firstDropAcid(acidType) {
     return new Promise((resolve) => {
-      const mesh = this.getMeshByName('dropliquid')
       const frameRate = 12
+      let acidDropper, acidLiquid
+      if (acidType === 'acid_hcl') {
+        acidDropper = this.getTransformNodeByName('hclDropper')
+        acidLiquid = this.getMeshByName('hclLiquid')
+      } else if (acidType === 'acid_ch3cooh') {
+        acidDropper = this.getTransformNodeByName('coohDropper')
+        acidLiquid = this.getMeshByName('coohLiquid')
+      }
 
       const moveDropperDown = animationBox.moveMesh(
         new BABYLON.Vector3(0, 50, 0),
@@ -36,8 +43,8 @@ export default {
         frameRate
       )
       const moveDropperDownGroup = new BABYLON.AnimationGroup('moveDropperDown')
-      moveDropperDownGroup.addTargetedAnimation(moveDropperDown, this.getTransformNodeByName('dropper'))
-      moveDropperDownGroup.addTargetedAnimation(moveDropperDown, mesh)
+      moveDropperDownGroup.addTargetedAnimation(moveDropperDown, acidDropper)
+      moveDropperDownGroup.addTargetedAnimation(moveDropperDown, acidLiquid)
       moveDropperDownGroup.normalize(0, frameRate)
       moveDropperDownGroup.play()
 
@@ -47,8 +54,8 @@ export default {
         frameRate
       )
       const resetPositionGroup = new BABYLON.AnimationGroup('resetDropperGroup')
-      resetPositionGroup.addTargetedAnimation(resetDropperPosition, this.getTransformNodeByName('dropper'))
-      resetPositionGroup.addTargetedAnimation(resetDropperPosition, mesh)
+      resetPositionGroup.addTargetedAnimation(resetDropperPosition, acidDropper)
+      resetPositionGroup.addTargetedAnimation(resetDropperPosition, acidLiquid)
       resetPositionGroup.normalize(0, frameRate)
 
       moveDropperDownGroup.onAnimationEndObservable.add(() => {

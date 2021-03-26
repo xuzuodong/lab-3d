@@ -1,25 +1,20 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
-import animationBox from './animationBox'
 
-export const defaultOperations = (
-  scene,
-  {
-    hclBottle,
-    hclDropper,
-    coohBottle,
-    coohDropper,
-    naohBottle,
-    naohDropper,
-    nahcoBottle,
-    nahcoDropper,
-    purBottle,
-    purDropper,
-    pheBottle,
-    pheDropper,
-    purText,
-    pheText
-  }
-) => {
+export const defaultOperations = (scene, { purText, pheText }) => {
+  // 定义需要添加动作的物体
+  const hclBottle = scene.getMeshByName('hclBottle')
+  const hclDropper = scene.getTransformNodeByName('hclDropper')
+  const coohBottle = scene.getMeshByName('coohBottle')
+  const coohDropper = scene.getTransformNodeByName('coohDropper')
+  const naohBottle = scene.getMeshByName('naohBottle')
+  const naohDropper = scene.getTransformNodeByName('naohDropper')
+  const nahcoBottle = scene.getMeshByName('nahcoBottle')
+  const nahcoDropper = scene.getTransformNodeByName('nahcoDropper')
+  const purBottle = scene.getMeshByName('purbottle')
+  const purDropper = scene.getTransformNodeByName('purdropper')
+  const pheBottle = scene.getMeshByName('phebottle')
+  const pheDropper = scene.getTransformNodeByName('phedropper')
+
   //高光
   const highLight = new BABYLON.HighlightLayer('hl1', scene)
 

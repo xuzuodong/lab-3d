@@ -4,7 +4,6 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import tube from './meshes/tube.glb'
 import purbottle from './meshes/purbottle.glb'
 import phebottle from './meshes/phebottle.glb'
-import dropper from './meshes/dropper.glb'
 
 import { createMaterials } from './materials'
 import { defaultOperations } from './defaultOperation'
@@ -45,8 +44,7 @@ export default (scene) => {
     Promise.all([
       BABYLON.SceneLoader.ImportMeshAsync('', tube, '', scene, undefined, '.glb'),
       BABYLON.SceneLoader.ImportMeshAsync('', purbottle, '', scene, undefined, '.glb'),
-      BABYLON.SceneLoader.ImportMeshAsync('', phebottle, '', scene, undefined, '.glb'),
-      BABYLON.SceneLoader.ImportMeshAsync('', dropper, '', scene, undefined, '.glb')
+      BABYLON.SceneLoader.ImportMeshAsync('', phebottle, '', scene, undefined, '.glb')
     ]).then(() => {
       const myan = scene.animationGroups.find((a) => a.name === 'All Animations')
       myan.stop()
@@ -79,10 +77,6 @@ export default (scene) => {
       pheMeshes.push(scene.getMeshByName('pheliquid'))
       pheMeshes.push(scene.getMeshByName('phebottle'))
       pheMeshes.push(scene.getMeshByName('phesolution'))
-
-      const dropperMesh = []
-      dropperMesh.push(scene.getTransformNodeByName('dropper'))
-      dropperMesh.push(scene.getMeshByName('dropliquid'))
 
       const cloneBottle = (name) => {
         return [
@@ -183,28 +177,6 @@ export default (scene) => {
       const nahcoMeshes = ([nahcoDropper, nahcoLiquid, nahcoBottle, nahcoSolution] = cloneBottle('nahco'))
       changeMeshPosition(nahcoMeshes, new BABYLON.Vector3(120, 0, 80))
 
-      const meshObjArray = new Array(
-        { mesh: hclMeshes, position: new BABYLON.Vector3(-120, 0, 80) },
-        { mesh: coohMeshes, position: new BABYLON.Vector3(-90, 0, 80) },
-        { mesh: naohMeshes, position: new BABYLON.Vector3(90, 0, 80) },
-        { mesh: nahcoMeshes, position: new BABYLON.Vector3(120, 0, 80) },
-        { mesh: purMeshes, position: new BABYLON.Vector3(-90, 0, 80) },
-        { mesh: pheMeshes, position: new BABYLON.Vector3(-90, 0, 80) }
-      )
-
-      // // 设置添加溶液的滴管参数
-      let dropper1 = dropperMesh[0]
-      let dropliquid = dropperMesh[1]
-      dropper1.parent = null
-      dropliquid.parent = null
-      dropper1.position = new BABYLON.Vector3(0, 50, 0)
-      dropliquid.position = new BABYLON.Vector3(0, 50, 0)
-      dropliquid.visibility = 0
-      dropper1.getChildMeshes()[0].visibility = 0
-      dropper1.getChildMeshes()[1].visibility = 0
-      dropper1.getChildMeshes()[0].material = materials.matGlass
-      dropliquid.material = materials.matDropperLiquid
-
       // // 添加阴影
       let directionalLight = scene.getLightByName('shadowControlLight')
       const shadowGenerator = new BABYLON.ShadowGenerator(1024, directionalLight)
@@ -277,22 +249,7 @@ export default (scene) => {
       liquidSphere.visibility = 0
       liquidSphere.material = materials.matDropperLiquid
 
-      defaultOperations(scene, {
-        hclBottle,
-        hclDropper,
-        coohBottle,
-        coohDropper,
-        naohBottle,
-        naohDropper,
-        nahcoBottle,
-        nahcoDropper,
-        purBottle,
-        purDropper,
-        pheBottle,
-        pheDropper,
-        purText,
-        pheText
-      })
+      defaultOperations(scene, { purText, pheText })
 
       resolve()
     })

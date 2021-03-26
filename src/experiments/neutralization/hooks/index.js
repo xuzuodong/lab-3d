@@ -34,7 +34,7 @@ export default [
     paragraph: '滴加酸溶液',
     talk: 'last',
     method: ({ next, scene }) => {
-      scene.firstDropLiqiud().then(() => {
+      scene.firstDropAcid(scene.acidType).then(() => {
         scene.existLiquid.push(scene.acidType)
         next()
       })
@@ -47,7 +47,7 @@ export default [
     reply: { choice: 'last', index: 'last' },
     method: async ({ restart, scene }) => {
       await generalOperations.showDropper(scene)
-      await scene.firstDropLiqiud().then(() => {
+      await scene.firstDropAcid(scene.acidType).then(() => {
         scene.existLiquid.push(scene.acidType)
       })
       restart() // 回到段落最开头

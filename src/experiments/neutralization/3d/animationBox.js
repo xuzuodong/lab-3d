@@ -9,51 +9,61 @@ easeInFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEIN)
 const easeInOutFunction = new BABYLON.CubicEase()
 easeInOutFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEINOUT)
 
+let midPositon = (initPosition) => {
+  return new BABYLON.Vector3(initPosition.x, initPosition.y + 20, initPosition.z)
+}
+
 // 拿出试剂瓶上的滴灌
-const outDropper = new BABYLON.Animation(
-  'outDropper',
-  'position',
-  frameRate,
-  BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
-  BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
-)
-const outFrames = []
-outFrames.push({
-  frame: 0,
-  value: new BABYLON.Vector3(-20, 0, 80)
-})
-outFrames.push({
-  frame: 1 * frameRate,
-  value: new BABYLON.Vector3(-20, 20, 80)
-})
-outFrames.push({
-  frame: 3 * frameRate,
-  value: new BABYLON.Vector3(0, 50, 0)
-})
-outDropper.setKeys(outFrames)
+const outDropper = (initPosition) => {
+  const outDropper = new BABYLON.Animation(
+    'outDropper',
+    'position',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const outFrames = []
+  outFrames.push({
+    frame: 0,
+    value: initPosition
+  })
+  outFrames.push({
+    frame: 0.5 * frameRate,
+    value: midPositon(initPosition)
+  })
+  outFrames.push({
+    frame: 1.5 * frameRate,
+    value: new BABYLON.Vector3(0, 50, 0)
+  })
+  outDropper.setKeys(outFrames)
+  return outDropper
+}
 
 // 放回试剂瓶上的滴灌
-const backDropper = new BABYLON.Animation(
-  'backDropper',
-  'position',
-  frameRate,
-  BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
-  BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
-)
-const backFrames = []
-backFrames.push({
-  frame: 0,
-  value: new BABYLON.Vector3(0, 50, 0)
-})
-backFrames.push({
-  frame: 2 * frameRate,
-  value: new BABYLON.Vector3(-20, 20, 80)
-})
-backFrames.push({
-  frame: 3 * frameRate,
-  value: new BABYLON.Vector3(-20, 0, 80)
-})
-backDropper.setKeys(backFrames)
+const backDropper = (initPosition) => {
+  const backDropper = new BABYLON.Animation(
+    'backDropper',
+    'position',
+    frameRate,
+    BABYLON.Animation.ANIMATIONTYPE_VECTOR3,
+    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+  )
+  const backFrames = []
+  backFrames.push({
+    frame: 0,
+    value: new BABYLON.Vector3(0, 50, 0)
+  })
+  backFrames.push({
+    frame: frameRate,
+    value: midPositon(initPosition)
+  })
+  backFrames.push({
+    frame: 1.5 * frameRate,
+    value: initPosition
+  })
+  backDropper.setKeys(backFrames)
+  return backDropper
+}
 
 // 滴管中滴出溶液的过程(由于必定向下低落，故直接取名xx_y)
 const dropLiquid_y = (beginPosition_y, endPosition_y) => {
@@ -122,7 +132,7 @@ visibileFrames.push({
 liquidSphereVisible.setKeys(visibileFrames)
 
 // 通过改变相机的target合radius来移动相机的函数，接受四个参数（需要移动的相机，相机指向的目标点，最终距离目标的半径, 结束帧）
-const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2, beta = Math.PI / 3) => {
+const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2) => {
   const changeTarget = new BABYLON.Animation(
     'changeTarget',
     'target',
@@ -333,9 +343,7 @@ BABYLON.Mesh.prototype.scaleyFromPivot = function(
 
 const animationBox = new Object({
   outDropper,
-  outFrames,
   backDropper,
-  backFrames,
   dropLiquid_y,
   liquidScale,
   liquidSphereVisible,

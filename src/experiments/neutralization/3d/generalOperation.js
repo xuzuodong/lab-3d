@@ -4,32 +4,27 @@ import animationBox from './animationBox'
 const frameRate = 12
 let indicaterUsed = ''
 
-const resetCamera = scene => {
+const resetCamera = (scene) => {
+  const camera = scene.activeCamera
   return new Promise((resolve, reject) => {
-    const cameraAn = animationBox.moveCamera(
-      scene.activeCamera,
-      new BABYLON.Vector3(0, 10, 0),
-      150,
-      frameRate
-    )
-    scene.beginDirectAnimation(scene.activeCamera, cameraAn, 0, frameRate, false, 1, () => {
+    if (camera.getTarget().y === 10 && camera.radius === 150 && camera.alpha === -Math.PI / 2) {
       resolve()
-    })
+    } else {
+      const cameraAn = animationBox.moveCamera(camera, new BABYLON.Vector3(0, 10, 0), 150, frameRate)
+      scene.beginDirectAnimation(camera, cameraAn, 0, frameRate, false, 1, () => {
+        resolve()
+      })
+    }
   })
 }
 
 // 通用滴加酸碱溶液的试管，因为加的酸碱溶液都是无色，所以出现时统一设置颜色，避免之前操作的影响
-const showDropper = scene => {
+const showDropper = (scene) => {
   return new Promise((resolve, reject) => {
     const liquidSphere = scene.getMeshByName('liquidSphere')
-    const dropperLiquid = scene.getMeshByName('dropliquid')
     liquidSphere.material.diffuseColor = new BABYLON.Color3(1, 1, 1)
-    dropperLiquid.material.diffuseColor = new BABYLON.Color3(1, 1, 1)
     const showDropper = animationBox.showMesh(frameRate)
     const showDropperGroup = new BABYLON.AnimationGroup('showDropper')
-    showDropperGroup.addTargetedAnimation(showDropper, scene.getMeshByName('dropper_primitive0'))
-    showDropperGroup.addTargetedAnimation(showDropper, scene.getMeshByName('dropper_primitive1'))
-    showDropperGroup.addTargetedAnimation(showDropper, scene.getMeshByName('dropliquid'))
     showDropperGroup.normalize(0, frameRate)
     showDropperGroup.play()
     showDropperGroup.onAnimationEndObservable.add(() => {
@@ -38,13 +33,10 @@ const showDropper = scene => {
   })
 }
 
-const hideDropper = scene => {
+const hideDropper = (scene) => {
   return new Promise((resolve, reject) => {
     const hideDropper = animationBox.hideMesh(frameRate)
     const hideDropperGroup = new BABYLON.AnimationGroup('hideDropper')
-    hideDropperGroup.addTargetedAnimation(hideDropper, scene.getMeshByName('dropper_primitive0'))
-    hideDropperGroup.addTargetedAnimation(hideDropper, scene.getMeshByName('dropper_primitive1'))
-    hideDropperGroup.addTargetedAnimation(hideDropper, scene.getMeshByName('dropliquid'))
     hideDropperGroup.normalize(0, frameRate)
     hideDropperGroup.play()
     hideDropperGroup.onAnimationEndObservable.add(() => {
@@ -56,11 +48,9 @@ const hideDropper = scene => {
 const dropLiqiud = (scene, beginPosition_y, endPosition_y, liquidColor = new BABYLON.Color3(1, 1, 1)) => {
   return new Promise((resolve, reject) => {
     const liquidSphere = scene.getMeshByName('liquidSphere')
-    const dropperLiquid = scene.getMeshByName('dropliquid')
     const main_liquid = scene.getMeshByName('main_liquid')
     const bottom_liquid = scene.getMeshByName('bottom_liquid')
     liquidSphere.material.diffuseColor = liquidColor
-    dropperLiquid.material.diffuseColor = liquidColor
     bottom_liquid.visibility = 1
     main_liquid.visibility = 1
 
@@ -90,7 +80,7 @@ const dropLiqiud = (scene, beginPosition_y, endPosition_y, liquidColor = new BAB
   })
 }
 
-const registClickActionOnBottle = scene => {
+const registClickActionOnBottle = (scene) => {
   const purBottle = scene.getMeshByName('purbottle')
   const purDropper = scene.getTransformNodeByName('purdropper')
   const purLiquid = scene.getMeshByName('purliquid')
@@ -103,15 +93,19 @@ const registClickActionOnBottle = scene => {
       purBottle.actionManager.registerAction(
         new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
           if (scene.animatables.length === 0) {
-            animationBox.outFrames[0].value = new BABYLON.Vector3(-20, 0, 80)
-            animationBox.outFrames[1].value = new BABYLON.Vector3(-20, 20, 80)
             resetCamera(scene).then(() => {
-              scene.beginDirectAnimation(purDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
               scene.beginDirectAnimation(
-                purLiquid,
-                [animationBox.outDropper],
+                purDropper,
+                [animationBox.outDropper(purBottle.position)],
                 0,
                 3 * frameRate,
+                false
+              )
+              scene.beginDirectAnimation(
+                purLiquid,
+                [animationBox.outDropper(purBottle.position)],
+                0,
+                1.5 * frameRate,
                 false,
                 1,
                 () => {
@@ -129,15 +123,19 @@ const registClickActionOnBottle = scene => {
       pheBottle.actionManager.registerAction(
         new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
           if (scene.animatables.length === 0) {
-            animationBox.outFrames[0].value = new BABYLON.Vector3(20, 0, 80)
-            animationBox.outFrames[1].value = new BABYLON.Vector3(20, 20, 80)
             resetCamera(scene).then(() => {
-              scene.beginDirectAnimation(pheDropper, [animationBox.outDropper], 0, 3 * frameRate, false)
               scene.beginDirectAnimation(
-                pheLiquid,
-                [animationBox.outDropper],
+                pheDropper,
+                [animationBox.outDropper(pheBottle.position)],
                 0,
                 3 * frameRate,
+                false
+              )
+              scene.beginDirectAnimation(
+                pheLiquid,
+                [animationBox.outDropper(pheBottle.position)],
+                0,
+                1.5 * frameRate,
                 false,
                 1,
                 () => {
@@ -154,21 +152,43 @@ const registClickActionOnBottle = scene => {
 }
 
 const putBackDropper = (scene, indicator) => {
+  const purBottle = scene.getMeshByName('purbottle')
   const purDropper = scene.getTransformNodeByName('purdropper')
   const purLiquid = scene.getMeshByName('purliquid')
+  const pheBottle = scene.getMeshByName('phebottle')
   const pheDropper = scene.getTransformNodeByName('phedropper')
   const pheLiquid = scene.getMeshByName('pheliquid')
   if (indicator === 'pur') {
-    animationBox.backFrames[1].value = new BABYLON.Vector3(-20, 20, 80)
-    animationBox.backFrames[2].value = new BABYLON.Vector3(-20, 0, 80)
-    scene.beginDirectAnimation(purDropper, [animationBox.backDropper], 0, 3 * frameRate, false)
-    scene.beginDirectAnimation(purLiquid, [animationBox.backDropper], 0, 3 * frameRate, false)
+    scene.beginDirectAnimation(
+      purDropper,
+      [animationBox.backDropper(purBottle.position)],
+      0,
+      1.5 * frameRate,
+      false
+    )
+    scene.beginDirectAnimation(
+      purLiquid,
+      [animationBox.backDropper(purBottle.position)],
+      0,
+      1.5 * frameRate,
+      false
+    )
   }
   if (indicator === 'phe') {
-    animationBox.backFrames[1].value = new BABYLON.Vector3(20, 20, 80)
-    animationBox.backFrames[2].value = new BABYLON.Vector3(20, 0, 80)
-    scene.beginDirectAnimation(pheDropper, [animationBox.backDropper], 0, 3 * frameRate, false)
-    scene.beginDirectAnimation(pheLiquid, [animationBox.backDropper], 0, 3 * frameRate, false)
+    scene.beginDirectAnimation(
+      pheDropper,
+      [animationBox.backDropper(pheBottle.position)],
+      0,
+      1.5 * frameRate,
+      false
+    )
+    scene.beginDirectAnimation(
+      pheLiquid,
+      [animationBox.backDropper(pheBottle.position)],
+      0,
+      1.5 * frameRate,
+      false
+    )
   }
 }
 
