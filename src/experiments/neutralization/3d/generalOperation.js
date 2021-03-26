@@ -18,30 +18,125 @@ const resetCamera = (scene) => {
   })
 }
 
-// 通用滴加酸碱溶液的试管，因为加的酸碱溶液都是无色，所以出现时统一设置颜色，避免之前操作的影响
-const showDropper = (scene) => {
+const defineOutAn = (bottle, dropper, liquid) => {
+  const putOutLqDropper = animationBox.outDropper(bottle.position)
+  const putOutLqDropperGroup = new BABYLON.AnimationGroup('putOutLqDropperGroup')
+  putOutLqDropperGroup.normalize(0, frameRate)
+  putOutLqDropperGroup.addTargetedAnimation(putOutLqDropper, dropper)
+  putOutLqDropperGroup.addTargetedAnimation(putOutLqDropper, liquid)
+  return putOutLqDropperGroup
+}
+
+const putBackLqDropper = (scene, liquid) => {
   return new Promise((resolve, reject) => {
-    const liquidSphere = scene.getMeshByName('liquidSphere')
-    liquidSphere.material.diffuseColor = new BABYLON.Color3(1, 1, 1)
-    const showDropper = animationBox.showMesh(frameRate)
-    const showDropperGroup = new BABYLON.AnimationGroup('showDropper')
-    showDropperGroup.normalize(0, frameRate)
-    showDropperGroup.play()
-    showDropperGroup.onAnimationEndObservable.add(() => {
-      resolve()
-    })
+    const defineAn = (bottle, dropper, liquid) => {
+      const putBackLqDropper = animationBox.backDropper(bottle.position)
+      const putBackLqDropperGroup = new BABYLON.AnimationGroup('putBackLqDropperGroup')
+      putBackLqDropperGroup.normalize(0, frameRate)
+      putBackLqDropperGroup.addTargetedAnimation(putBackLqDropper, dropper)
+      putBackLqDropperGroup.addTargetedAnimation(putBackLqDropper, liquid)
+      putBackLqDropperGroup.play()
+      putBackLqDropperGroup.onAnimationEndObservable.add(() => {
+        resolve()
+      })
+    }
+
+    if (liquid === 'acid_hcl') {
+      const hclBottle = scene.getMeshByName('hclBottle')
+      const hclDropper = scene.getTransformNodeByName('hclDropper')
+      const hclLiquid = scene.getMeshByName('hclLiquid')
+      defineAn(hclBottle, hclDropper, hclLiquid)
+    }
+    if (liquid === 'acid_ch3cooh') {
+      const coohBottle = scene.getMeshByName('coohBottle')
+      const coohDropper = scene.getTransformNodeByName('coohDropper')
+      const coohLiquid = scene.getMeshByName('coohLiquid')
+      defineAn(coohBottle, coohDropper, coohLiquid)
+    }
+    if (liquid === 'alkali_naoh') {
+      const naohBottle = scene.getMeshByName('naohBottle')
+      const naohDropper = scene.getTransformNodeByName('naohDropper')
+      const naohLiquid = scene.getMeshByName('naohLiquid')
+      defineAn(naohBottle, naohDropper, naohLiquid)
+    }
+    if (liquid === 'alkali_nahco3') {
+      const nahcoBottle = scene.getMeshByName('nahcoBottle')
+      const nahcoDropper = scene.getTransformNodeByName('nahcoDropper')
+      const nahcoLiquid = scene.getMeshByName('nahcoLiquid')
+      defineAn(nahcoBottle, nahcoDropper, nahcoLiquid)
+    }
   })
 }
 
-const hideDropper = (scene) => {
+const registerClickOnAcid = (scene) => {
+  const hclBottle = scene.getMeshByName('hclBottle')
+  const hclDropper = scene.getTransformNodeByName('hclDropper')
+  const hclLiquid = scene.getMeshByName('hclLiquid')
+  const coohBottle = scene.getMeshByName('coohBottle')
+  const coohDropper = scene.getTransformNodeByName('coohDropper')
+  const coohLiquid = scene.getMeshByName('coohLiquid')
+
+  // 因为加的酸碱溶液都是无色，所以出现时统一设置颜色，避免之前操作的影响
+  const liquidSphere = scene.getMeshByName('liquidSphere')
+  liquidSphere.material.diffuseColor = new BABYLON.Color3(1, 1, 1)
+
   return new Promise((resolve, reject) => {
-    const hideDropper = animationBox.hideMesh(frameRate)
-    const hideDropperGroup = new BABYLON.AnimationGroup('hideDropper')
-    hideDropperGroup.normalize(0, frameRate)
-    hideDropperGroup.play()
-    hideDropperGroup.onAnimationEndObservable.add(() => {
-      resolve()
-    })
+    hclBottle.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+        if (scene.animatables.length === 0) {
+          const putOutHclAn = defineOutAn(hclBottle, hclDropper, hclLiquid)
+          putOutHclAn.play()
+          putOutHclAn.onAnimationEndObservable.add(() => {
+            resolve('acid_hcl')
+          })
+        }
+      })
+    )
+    coohBottle.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+        if (scene.animatables.length === 0) {
+          const putOutCoohAn = defineOutAn(coohBottle, coohDropper, coohLiquid)
+          putOutCoohAn.play()
+          putOutCoohAn.onAnimationEndObservable.add(() => {
+            resolve('acid_ch3cooh')
+          })
+        }
+      })
+    )
+  })
+}
+
+const registerClickOnAlkali = (scene) => {
+  const naohBottle = scene.getMeshByName('naohBottle')
+  const naohDropper = scene.getTransformNodeByName('naohDropper')
+  const naohLiquid = scene.getMeshByName('naohLiquid')
+  const nahcoBottle = scene.getMeshByName('nahcoBottle')
+  const nahcoDropper = scene.getTransformNodeByName('nahcoDropper')
+  const nahcoLiquid = scene.getMeshByName('nahcoLiquid')
+
+  return new Promise((resolve, reject) => {
+    naohBottle.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+        if (scene.animatables.length === 0) {
+          const putOutHclAn = defineOutAn(naohBottle, naohDropper, naohLiquid)
+          putOutHclAn.play()
+          putOutHclAn.onAnimationEndObservable.add(() => {
+            resolve('alkali_naoh')
+          })
+        }
+      })
+    )
+    nahcoBottle.actionManager.registerAction(
+      new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
+        if (scene.animatables.length === 0) {
+          const putOutCoohAn = defineOutAn(nahcoBottle, nahcoDropper, nahcoLiquid)
+          putOutCoohAn.play()
+          putOutCoohAn.onAnimationEndObservable.add(() => {
+            resolve('alkali_nahco3')
+          })
+        }
+      })
+    )
   })
 }
 
@@ -98,7 +193,7 @@ const registClickActionOnBottle = (scene) => {
                 purDropper,
                 [animationBox.outDropper(purBottle.position)],
                 0,
-                3 * frameRate,
+                1.5 * frameRate,
                 false
               )
               scene.beginDirectAnimation(
@@ -128,7 +223,7 @@ const registClickActionOnBottle = (scene) => {
                 pheDropper,
                 [animationBox.outDropper(pheBottle.position)],
                 0,
-                3 * frameRate,
+                1.5 * frameRate,
                 false
               )
               scene.beginDirectAnimation(
@@ -193,8 +288,9 @@ const putBackDropper = (scene, indicator) => {
 }
 
 const generalAction = new Object({
-  showDropper,
-  hideDropper,
+  registerClickOnAcid,
+  registerClickOnAlkali,
+  putBackLqDropper,
   dropLiqiud,
   registClickActionOnBottle,
   putBackDropper

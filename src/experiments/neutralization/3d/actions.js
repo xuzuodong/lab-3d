@@ -4,6 +4,7 @@ import animationBox from './animationBox'
 import generalOperations from './generalOperation'
 
 export default {
+  // 用户点击试剂瓶选择酸碱溶液后，酸碱滴管到位，拉近相机的动作
   pullInCamera() {
     return new Promise((resolve) => {
       const frameRate = 12
@@ -13,26 +14,21 @@ export default {
         110,
         frameRate
       )
+      // 拉近相机，延时300ms，再继续对话
       this.beginDirectAnimation(this.activeCamera, pullInCamera, 0, frameRate, false, undefined, () => {
-        // 摄像头动画完成，开始显示滴管
-        generalOperations.showDropper(this).then(() => {
-          // 显示滴管完成，小间隔 300ms 后继续对话
-          setTimeout(() => {
-            resolve()
-          }, 300)
-        })
+        setTimeout(() => resolve(), 300)
       })
     })
   },
 
-  firstDropAcid(acidType) {
+  firstDropAcid(liquidType) {
     return new Promise((resolve) => {
       const frameRate = 12
       let acidDropper, acidLiquid
-      if (acidType === 'acid_hcl') {
+      if (liquidType === 'acid_hcl') {
         acidDropper = this.getTransformNodeByName('hclDropper')
         acidLiquid = this.getMeshByName('hclLiquid')
-      } else if (acidType === 'acid_ch3cooh') {
+      } else if (liquidType === 'acid_ch3cooh') {
         acidDropper = this.getTransformNodeByName('coohDropper')
         acidLiquid = this.getMeshByName('coohLiquid')
       }
@@ -61,7 +57,7 @@ export default {
       moveDropperDownGroup.onAnimationEndObservable.add(() => {
         generalOperations.dropLiqiud(this, 41, 3).then(() => {
           resetPositionGroup.play()
-          generalOperations.hideDropper(this).then(() => resolve())
+          resetPositionGroup.onAnimationEndObservable.add(() => resolve())
         })
       })
     })

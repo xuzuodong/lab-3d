@@ -7,13 +7,16 @@ export default [
   // 拉近摄像头，出现滴管
   {
     paragraph: '选择酸溶液',
-    reply: { choice: 'any', index: 1 },
+    talk: 'last',
     method: ({ next, scene }) => {
-      scene.pullInCamera().then(() => next())
+      generalOperations.registerClickOnAcid(scene).then((val) => {
+        scene.mutate({ acidType: val })
+        scene.pullInCamera().then(() => next())
+      })
     }
   },
 
-  // 记录用户选择的酸溶液
+  /*/ 记录用户选择的酸溶液
   {
     paragraph: '选择酸溶液',
     choice: 'any',
@@ -27,7 +30,7 @@ export default [
       }
       next()
     }
-  },
+  },*/
 
   // 进行滴加酸溶液的错误示范
   {
@@ -46,7 +49,6 @@ export default [
     paragraph: '滴加酸溶液提问',
     reply: { choice: 'last', index: 'last' },
     method: async ({ restart, scene }) => {
-      await generalOperations.showDropper(scene)
       await scene.firstDropAcid(scene.acidType).then(() => {
         scene.existLiquid.push(scene.acidType)
       })
@@ -71,6 +73,7 @@ export default [
         dialogType: 'useDropperRadio',
         acid_alkali: []
       }).onOk(async () => {
+        await generalOperations.putBackLqDropper(scene, scene.acidType)
         await scene.resetCamera()
         next()
       })
@@ -80,14 +83,16 @@ export default [
   // 进入滴加碱溶液环节
   {
     paragraph: '选择碱溶液',
-    reply: { choice: 'any', index: 1 },
+    talk: 'last',
     method: async ({ next, scene }) => {
-      await scene.pullInCamera()
-      next()
+      generalOperations.registerClickOnAlkali(scene).then((val) => {
+        scene.mutate({ alkaliType: val })
+        scene.pullInCamera().then(() => next())
+      })
     }
   },
 
-  // 记录用户选择的碱溶液
+  /*/ 记录用户选择的碱溶液
   {
     paragraph: '选择碱溶液',
     choice: 'any',
@@ -101,7 +106,7 @@ export default [
       }
       next()
     }
-  },
+  },*/
 
   // 用户进行滴加碱溶液操作
   {

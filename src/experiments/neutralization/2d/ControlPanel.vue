@@ -29,11 +29,11 @@
 
       <q-card-section>
         <div class="text-body1">已加入的溶液</div>
-        <transition name="slide">
+        <transition-group name="slide">
           <li v-for="item in liquidGroup" :key="item.lqName">
             {{ changeLiquidName(item.lqName) }} {{ item.volume + 'ml' }}
           </li>
-        </transition>
+        </transition-group>
       </q-card-section>
 
       <q-card-actions align="center">
@@ -77,24 +77,24 @@ export default {
   name: 'controlPanel',
   props: {
     scene: Object,
-    dropType: String,
+    dropType: String
   },
 
   data() {
     return {
       isDropping: false,
       clickCount: 0,
-      fullAlert: false,
+      fullAlert: false
     }
   },
 
   computed: {
-    isAddIndicater: function () {
+    isAddIndicater: function() {
       if (this.scene.existLiquid.indexOf('pur') != -1 || this.scene.existLiquid.indexOf('phe') != -1) {
         return true
       } else return false
     },
-    liquidGroup: function () {
+    liquidGroup: function() {
       let initArr = this.scene.existLiquid
       let formatArr = []
       let returnArr = []
@@ -111,7 +111,7 @@ export default {
         } else continue
       }
       return returnArr
-    },
+    }
   },
 
   methods: {
@@ -152,7 +152,7 @@ export default {
         this.isDropping = true
 
         if (this.dropType === 'acid_hcl' || this.dropType === 'acid_ch3cooh') {
-          await generalOperations.dropLiqiud(this.scene, 51, 3).then(() => {
+          await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
             this.scene.mutate({ acidType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
             this.isDropping = false
@@ -160,7 +160,7 @@ export default {
         }
 
         if (this.dropType === 'alkali_naoh' || this.dropType === 'alkali_nahco3') {
-          await generalOperations.dropLiqiud(this.scene, 51, 3).then(() => {
+          await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
             this.scene.mutate({ alkaliType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
             this.isDropping = false
@@ -202,7 +202,7 @@ export default {
           this.dropType === 'alkali_naoh' ||
           this.dropType === 'alkali_nahco3'
         ) {
-          generalOperations.hideDropper(this.scene)
+          generalOperations.putBackLqDropper(this.scene, this.dropType)
         } else {
           generalOperations.putBackDropper(this.scene, this.dropType)
         }
@@ -210,8 +210,8 @@ export default {
         this.$emit('ok')
         this.hide()
       }
-    },
-  },
+    }
+  }
 }
 </script>
 
