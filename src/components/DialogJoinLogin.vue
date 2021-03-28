@@ -48,7 +48,7 @@ export default {
         },
         failure: () => {
           this.$q.notify({
-            color: 'negative',
+            color: 'red',
             icon: 'error',
             message: '登录失败！请检查账号密码是否正确。',
             position: 'top',

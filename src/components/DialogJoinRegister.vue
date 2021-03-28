@@ -73,7 +73,7 @@ export default {
         },
         failure: (error) => {
           const msg = error.data.code == 500 ? '用户名已存在' : '注册失败'
-          this.$q.notify({ color: 'negative', icon: 'error', message: msg, position: 'top' })
+          this.$q.notify({ color: 'red', icon: 'error', message: msg, position: 'top' })
         },
       })
     },

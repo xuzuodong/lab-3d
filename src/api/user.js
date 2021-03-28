@@ -53,5 +53,38 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
+  },
+
+  createClass({ classInfo, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'teacher/createClass',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { ...classInfo }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  deleteClass({ classId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'teacher/deleteClass',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { classId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  updateClassInfo({ classInfo, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'teacher/updateClassInfo',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { ...classInfo }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
   }
 }

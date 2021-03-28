@@ -100,6 +100,53 @@ const actions = {
         failure(res)
       }
     })
+  },
+
+  createClass({ commit }, { classInfo, success, failure }) {
+    userApi.createClass({
+      classInfo,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
+
+  deleteClass({ state, commit }, { classId, success, failure }) {
+    userApi.deleteClass({
+      classId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          // 找到 state 中该教室存在第几位，找到后使用 splice() 删除
+          commit(
+            'updateClassrooms',
+            state.classrooms.filter((c) => c.id != classId)
+          )
+          success()
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
+
+  updateClassInfo({ commit }, { classInfo, success, failure }) {
+    userApi.updateClassInfo({
+      classInfo,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success()
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
   }
 }
 

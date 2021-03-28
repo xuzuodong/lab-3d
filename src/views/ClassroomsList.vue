@@ -148,14 +148,16 @@ export default {
   },
 
   created() {
-    if (!this.userInfo) this.$router.replace('/')
-
-    this.selectMyClasses({
-      success: () => {},
-      failure: (res) => {
-        console.log(res)
-      },
-    })
+    if (!this.userInfo) {
+      this.$router.replace('/')
+    } else {
+      this.selectMyClasses({
+        success: () => {},
+        failure: (res) => {
+          console.log(res)
+        },
+      })
+    }
   },
 }
 </script>

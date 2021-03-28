@@ -14,9 +14,10 @@ const routes = [
     path: '/dashboard',
     component: () => import('../views/TeacherDashboard.vue'),
     children: [
+      {path: '', component: () => import('../views/TeacherDashboardContentHome.vue')},
       {
-        path: 'class/:id',
-        component: () => import('../views/TeacherDashboardContent.vue')
+        path: 'classroom/:id',
+        component: () => import('../views/TeacherDashboardContentClassroom.vue')
       }
     ]
   },
