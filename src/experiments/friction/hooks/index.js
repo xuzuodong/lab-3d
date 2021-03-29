@@ -5,9 +5,20 @@ import grasspng from '../2d/assets/grass.png'
 import icejpg from '../2d/assets/ice.jpg'
 import initGround from '../2d/assets/initGround.png'
 import gravitySlider from '../2d/gravitySlider'
+import assumePage from '../2d/assumePage'
+import targetPage from '../2d/targetPage'
+import testPage from '../2d/testPage'
 
-let howToDecrease = 0
 let roughCount = 0
+let o1 = false
+let o2 = false
+let o3 = false
+let grass = 0
+let wood = 0
+let ice = 0
+let large = 0
+let small = 0
+let gravity = 0
 
 export default [
   //开始跑步
@@ -28,77 +39,119 @@ export default [
     },
   },
 
-  //隐藏地面粗糙的选项
+  //跳转到选择后的对应段落，并禁用该选项。
   {
     paragraph: '摩擦力是什么',
-    choice: 0,
-    method: ({ next, hideChoice }) => {
-      howToDecrease++
-      hideChoice()
-      next()
+    talk: 'last',
+    method: ({ goto, scene }) => {
+      Dialog.create({
+        component: assumePage,
+        option1: o1,
+        option2: o2,
+        option3: o3,
+        showAssume: true,
+      }).onOk(async () => {
+        if (storeData[0] == 'op1') {
+          o1 = true
+          goto({ paragraph: '改变接触面粗糙程度' })
+        }
+        else if (storeData[0] == 'op2') {
+          o2 = true
+          goto({ paragraph: '改变与接触面的面积' })
+        }
+        else if (storeData[0] == 'op3') {
+          o3 = true
+          goto({ paragraph: '改变物体的质量' })
+        }
+      })
     },
   },
 
-  //在选择地面粗糙程度的选项后，跳转到改变接触面粗糙程度段落
-  {
-    paragraph: '摩擦力是什么',
-    reply: { choice: 0, index: 'last' },
-    method: ({ goto }) => {
-      goto({ paragraph: '改变接触面粗糙程度' })
-    },
-  },
-
-  //隐藏接触面积的选项
-  {
-    paragraph: '摩擦力是什么',
-    choice: 1,
-    method: ({ next, hideChoice }) => {
-      howToDecrease++
-      hideChoice()
-      next()
-    },
-  },
-
-  //在选择接触面积的选项后，跳转到改变接触面积程度段落
-  {
-    paragraph: '摩擦力是什么',
-    reply: { choice: 1, index: 'last' },
-    method: ({ goto }) => {
-      goto({ paragraph: '改变与接触面的面积' })
-    },
-  },
-
-  //隐藏改变质量的选项
-  {
-    paragraph: '摩擦力是什么',
-    choice: 2,
-    method: ({ next, hideChoice }) => {
-      howToDecrease++
-      hideChoice()
-      next()
-    },
-  },
-
-  //在选择质量的选项后，跳转到改变质量段落
-  {
-    paragraph: '摩擦力是什么',
-    reply: { choice: 2, index: 'last' },
-    method: ({ goto }) => {
-      goto({ paragraph: '改变物体的质量' })
-    },
-  },
-
-  //选择草地选项并跳转到草地段落
   {
     paragraph: '改变接触面粗糙程度',
-    choice: 0,
-    method: ({ goto, scene, hideChoice }) => {
-      roughCount++
-      scene.changeGround(grasspng)
-      hideChoice()
-      goto({ paragraph: '草地' })
+    talk: 0,
+    method: ({ next, scene }) => {
+      const target = Dialog.create({
+        component: targetPage,
+        showButton: false,
+        showTarget: true,
+      })
+      scene.mutate({ targetPanel: target })
+      next()
     },
   },
+
+  {
+    paragraph: '改变接触面粗糙程度',
+    talk: 'last',
+    method: ({ scene, goto }) => {
+      Dialog.create({
+        component: testPage,
+        showTest: true,
+        showButton: false,
+      }).onOk(async () => {
+        if (storeData[0] == 'grass') {
+          grass = 1
+          scene.changeGround(grasspng)
+          goto({ paragraph: '草地' })
+        }
+        if (storeData[0] == 'wood') {
+          wood = 1
+          scene.changeGround(woodjpg)
+          goto({ paragraph: '木板' })
+        }
+        if (storeData[0] == 'ice') {
+          ice = 1
+          scene.changeGround(icejpg)
+          goto({ paragraph: '冰面' })
+        }
+        if (storeData[0] == 'large') {
+          scene.largeArea()
+          goto({ paragraph: '增大接触面积' })
+        }
+        if (storeData[0] == 'small') {
+          scene.smallArea()
+          goto({ paragraph: '减小接触面积' })
+        }
+        if (storeData[0] == 1) goto({ paragraph: '轻松拉货' })
+        else if (storeData[0] == 2) goto({ paragraph: '轻松拉货' })
+        else if (storeData[0] == 3) goto({ paragraph: '轻松拉货' })
+      })
+    },
+  },
+
+  // Dialog.create({
+  //   component: targetPage,
+  //   showButton: false,
+  //   showTarget: true,
+  // }),
+  //   Dialog.create({
+  //     component: testPage,
+  //     showTest: true,
+  //   }).onOk(async () => {
+  //     if (storeData[0] == 'grass') {
+  //       scene.changeGround(grasspng)
+  //       goto({ paragraph: '草地' })
+  //     }
+  //     if (storeData[0] == 'wood') goto({ paragraph: '木板' })
+  //     if (storeData[0] == 'ice') goto({ paragraph: '冰面' })
+  //     if (storeData[0] == 'large') goto({ paragraph: '增大接触面积' })
+  //     if (storeData[0] == 'small') goto({ paragraph: '减小接触面积' })
+  //     if (storeData[0] == 1) goto({ paragraph: '轻松拉货' })
+  //     else if (storeData[0] == 2) goto({ paragraph: '轻松拉货' })
+  //     else if (storeData[0] == 3) goto({ paragraph: '轻松拉货' })
+  //   })
+  //选择草地选项并跳转到草地段落
+  // {
+  //   paragraph: '改变接触面粗糙程度',
+  //   choice: 0,
+  //   method: ({ goto, scene, hideChoice }) => {
+  //     roughCount++
+  //     scene.changeGround(grasspng)
+  //     hideChoice()
+  //     goto({ paragraph: '草地' })
+  //   },
+  // },
 
   //使机器人跑起来并跳转到跑步后的段落
   {
@@ -106,7 +159,9 @@ export default [
     talk: 'last',
     method: ({ goto, scene }) => {
       scene.runStart()
-      goto({ paragraph: '草地后' })
+      setTimeout(() => {
+        goto({ paragraph: '草地后' })
+      }, 3000);
     },
   },
 
@@ -125,25 +180,25 @@ export default [
     paragraph: '草地后',
     talk: 'last',
     method: ({ goto, scene }) => {
-      if (roughCount == 3) {
+      if (grass == 1 && wood == 1 && ice == 1) {
         scene.changeGround(initGround)
         goto({ paragraph: '接触面总结' })
       }
-      else goto({ paragraph: '改变接触面粗糙程度' })
+      else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
 
   //选择木板选项并跳转到木板段落
-  {
-    paragraph: '改变接触面粗糙程度',
-    choice: 1,
-    method: ({ scene, hideChoice, goto }) => {
-      roughCount++
-      scene.changeGround(woodjpg)
-      hideChoice()
-      goto({ paragraph: '木板' })
-    },
-  },
+  // {
+  //   paragraph: '改变接触面粗糙程度',
+  //   choice: 1,
+  //   method: ({ scene, hideChoice, goto }) => {
+  //     roughCount++
+  //     scene.changeGround(woodjpg)
+  //     hideChoice()
+  //     goto({ paragraph: '木板' })
+  //   },
+  // },
 
   //使机器人跑起来并跳转到跑步后的段落
   {
@@ -162,25 +217,25 @@ export default [
     paragraph: '木板后',
     talk: 'last',
     method: ({ goto, scene }) => {
-      if (roughCount == 3) {
+      if (grass == 1 && wood == 1 && ice == 1) {
         scene.changeGround(initGround)
         goto({ paragraph: '接触面总结' })
       }
-      else goto({ paragraph: '改变接触面粗糙程度' })
+      else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
 
   //选择冰面选项并跳转到冰面段落
-  {
-    paragraph: '改变接触面粗糙程度',
-    choice: 2,
-    method: ({ scene, goto, hideChoice }) => {
-      roughCount++
-      scene.changeGround(icejpg)
-      hideChoice()
-      goto({ paragraph: '冰面' })
-    },
-  },
+  // {
+  //   paragraph: '改变接触面粗糙程度',
+  //   choice: 2,
+  //   method: ({ scene, goto, hideChoice }) => {
+  //     roughCount++
+  //     scene.changeGround(icejpg)
+  //     hideChoice()
+  //     goto({ paragraph: '冰面' })
+  //   },
+  // },
 
   //使机器人跑起来并跳转到跑步后的段落
   {
@@ -199,11 +254,11 @@ export default [
     paragraph: '冰面后',
     talk: 'last',
     method: ({ goto, scene }) => {
-      if (roughCount == 3) {
+      if (grass == 1 && wood == 1 && ice == 1) {
         scene.changeGround(initGround)
         goto({ paragraph: '接触面总结' })
       }
-      else goto({ paragraph: '改变接触面粗糙程度' })
+      else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
 
@@ -238,19 +293,66 @@ export default [
   {
     paragraph: '接触面正确结束',
     talk: 'last',
-    method: ({ goto }) => {
-      if (howToDecrease == 3) goto({ paragraph: '机器人的吐槽' })
-      else goto({ paragraph: '摩擦力是什么' })
+    method: ({ goto, scene }) => {
+      if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
+      else {
+        scene.targetPanel.update({
+          showTarget: false,
+        })
+        goto({ paragraph: '摩擦力是什么' })
+      }
+    },
+  },
+
+  {
+    paragraph: '改变与接触面的面积',
+    talk: 0,
+    method: ({ next, scene }) => {
+      const target = Dialog.create({
+        component: targetPage,
+        showButton: false,
+        showTarget: true,
+      })
+      scene.mutate({ targetPanel: target })
+      next()
     },
   },
 
   //减小接触面积并跳转到相应段落
   {
     paragraph: '改变与接触面的面积',
-    reply: { choice: 0, index: 'last' },
+    talk: 'last',
     method: ({ goto, scene }) => {
-      scene.smallArea()
-      goto({ paragraph: '减小接触面积' })
+      Dialog.create({
+        component: testPage,
+        showTest: true,
+      }).onOk(async () => {
+        if (storeData[0] == 'grass') {
+          scene.changeGround(grasspng)
+          goto({ paragraph: '草地' })
+        }
+        if (storeData[0] == 'wood') {
+          scene.changeGround(woodjpg)
+          goto({ paragraph: '木板' })
+        }
+        if (storeData[0] == 'ice') {
+          scene.changeGround(icejpg)
+          goto({ paragraph: '冰面' })
+        }
+        if (storeData[0] == 'large') {
+          large = 1
+          scene.largeArea()
+          goto({ paragraph: '增大接触面积' })
+        }
+        if (storeData[0] == 'small') {
+          small = 1
+          scene.smallArea()
+          goto({ paragraph: '减小接触面积' })
+        }
+        if (storeData[0] == 1) goto({ paragraph: '轻松拉货' })
+        else if (storeData[0] == 2) goto({ paragraph: '轻松拉货' })
+        else if (storeData[0] == 3) goto({ paragraph: '轻松拉货' })
+      })
     },
   },
 
@@ -270,62 +372,95 @@ export default [
   {
     paragraph: '减小接触面积',
     talk: 'last',
-    method: ({ next, scene }) => {
+    method: ({ goto, scene }) => {
+      scene.reSmallArea()
       scene.runStop()
-      next()
+      if (large == 1 && small == 1) goto({ paragraph: '接触面积总结' })
+      else {
+        Dialog.create({
+          component: testPage,
+          showTest: true,
+        }).onOk(async () => {
+          if (storeData[0] == 'grass') {
+            scene.changeGround(grasspng)
+            goto({ paragraph: '草地' })
+          }
+          if (storeData[0] == 'wood') {
+            scene.changeGround(woodjpg)
+            goto({ paragraph: '木板' })
+          }
+          if (storeData[0] == 'ice') {
+            scene.changeGround(icejpg)
+            goto({ paragraph: '冰面' })
+          }
+          if (storeData[0] == 'large') {
+            large = 1
+            scene.largeArea()
+            goto({ paragraph: '增大接触面积' })
+          }
+          if (storeData[0] == 'small') {
+            small = 1
+            scene.smallArea()
+            goto({ paragraph: '减小接触面积' })
+          }
+          if (storeData[0] == 1) goto({ paragraph: '轻松拉货' })
+          else if (storeData[0] == 2) goto({ paragraph: '轻松拉货' })
+          else if (storeData[0] == 3) goto({ paragraph: '轻松拉货' })
+        })
+      }
     },
   },
 
   //增大接触面积并跳转到相应段落
-  {
-    paragraph: '减小接触面积',
-    reply: { choice: 0, index: 0 },
-    method: ({ goto, scene }) => {
-      scene.largeArea()
-      goto({ paragraph: '增大接触面积1' })
-    },
-  },
+  // {
+  //   paragraph: '减小接触面积',
+  //   reply: { choice: 0, index: 0 },
+  //   method: ({ goto, scene }) => {
+  //     scene.largeArea()
+  //     goto({ paragraph: '增大接触面积1' })
+  //   },
+  // },
 
   //开始跑步并设置至少看3秒
-  {
-    paragraph: '增大接触面积1',
-    talk: 1,
-    method: ({ next, scene }) => {
-      scene.runStart()
-      setTimeout(() => {
-        next()
-      }, 3000)
-    },
-  },
+  // {
+  //   paragraph: '增大接触面积1',
+  //   talk: 1,
+  //   method: ({ next, scene }) => {
+  //     scene.runStart()
+  //     setTimeout(() => {
+  //       next()
+  //     }, 3000)
+  //   },
+  // },
 
   //停止跑步
-  {
-    paragraph: '增大接触面积1',
-    talk: 'last',
-    method: ({ next, scene }) => {
-      scene.runStop()
-      next()
-    },
-  },
+  // {
+  //   paragraph: '增大接触面积1',
+  //   talk: 'last',
+  //   method: ({ next, scene }) => {
+  //     scene.runStop()
+  //     next()
+  //   },
+  // },
 
   //跳转到相应段落
-  {
-    paragraph: '增大接触面积1',
-    reply: { choice: 0, index: 'last' },
-    method: ({ goto }) => {
-      goto({ paragraph: '接触面积总结' })
-    },
-  },
+  // {
+  //   paragraph: '增大接触面积1',
+  //   reply: { choice: 0, index: 'last' },
+  //   method: ({ goto }) => {
+  //     goto({ paragraph: '接触面积总结' })
+  //   },
+  // },
 
   //增大接触面积，并跳转到相应段落
-  {
-    paragraph: '改变与接触面的面积',
-    reply: { choice: 1, index: 'last' },
-    method: ({ goto, scene }) => {
-      scene.largeArea()
-      goto({ paragraph: '增大接触面积' })
-    },
-  },
+  // {
+  //   paragraph: '改变与接触面的面积',
+  //   reply: { choice: 1, index: 'last' },
+  //   method: ({ goto, scene }) => {
+  //     scene.largeArea()
+  //     goto({ paragraph: '增大接触面积' })
+  //   },
+  // },
 
   //开始跑步并设置至少看3秒
   {
@@ -343,61 +478,116 @@ export default [
   {
     paragraph: '增大接触面积',
     talk: 'last',
-    method: ({ next, scene }) => {
+    method: ({ goto, scene }) => {
       scene.runStop()
-      next()
+      scene.reLargeArea()
+      if (large == 1 && small == 1) goto({ paragraph: '接触面积总结' })
+      else {
+        Dialog.create({
+          component: testPage,
+          showTest: true,
+        }).onOk(async () => {
+          if (storeData[0] == 'grass') {
+            scene.changeGround(grasspng)
+            goto({ paragraph: '草地' })
+          }
+          if (storeData[0] == 'wood') {
+            scene.changeGround(woodjpg)
+            goto({ paragraph: '木板' })
+          }
+          if (storeData[0] == 'ice') {
+            scene.changeGround(icejpg)
+            goto({ paragraph: '冰面' })
+          }
+          if (storeData[0] == 'large') {
+            large = 1
+            scene.largeArea()
+            goto({ paragraph: '增大接触面积' })
+          }
+          if (storeData[0] == 'small') {
+            small = 1
+            scene.smallArea()
+            goto({ paragraph: '减小接触面积' })
+          }
+          if (storeData[0] == 1) goto({ paragraph: '轻松拉货' })
+          else if (storeData[0] == 2) goto({ paragraph: '轻松拉货' })
+          else if (storeData[0] == 3) goto({ paragraph: '轻松拉货' })
+        })
+      }
     },
   },
 
   //减小接触面积并跳转到相应段落
-  {
-    paragraph: '增大接触面积',
-    reply: { choice: 0, index: 'last' },
-    method: ({ goto, scene }) => {
-      scene.changeArea()
-      goto({ paragraph: '减小接触面积1' })
-    },
-  },
+  // {
+  //   paragraph: '增大接触面积',
+  //   reply: { choice: 0, index: 'last' },
+  //   method: ({ goto, scene }) => {
+  //     scene.changeArea()
+  //     goto({ paragraph: '减小接触面积1' })
+  //   },
+  // },
 
   //开始跑步并设置至少看3秒
-  {
-    paragraph: '减小接触面积1',
-    talk: 1,
-    method: ({ next, scene }) => {
-      scene.runStart()
-      setTimeout(() => {
-        next()
-      }, 3000)
-    },
-  },
+  // {
+  //   paragraph: '减小接触面积1',
+  //   talk: 1,
+  //   method: ({ next, scene }) => {
+  //     scene.runStart()
+  //     setTimeout(() => {
+  //       next()
+  //     }, 3000)
+  //   },
+  // },
 
   //停止跑步
-  {
-    paragraph: '减小接触面积1',
-    talk: 'last',
-    method: ({ next, scene }) => {
-      scene.runStop()
-      next()
-    },
-  },
+  // {
+  //   paragraph: '减小接触面积1',
+  //   talk: 'last',
+  //   method: ({ next, scene }) => {
+  //     scene.runStop()
+  //     next()
+  //   },
+  // },
 
   //跳转到相应段落
-  {
-    paragraph: '减小接触面积1',
-    reply: { choice: 0, index: 'last' },
-    method: ({ goto }) => {
-      goto({ paragraph: '接触面积总结' })
-    },
-  },
+  // {
+  //   paragraph: '减小接触面积1',
+  //   reply: { choice: 0, index: 'last' },
+  //   method: ({ goto }) => {
+  //     goto({ paragraph: '接触面积总结' })
+  //   },
+  // },
 
   //判断是否所有减小摩擦的方式都尝试过，如果都尝试过了就跳转到机器人吐槽段落，否则跳转到摩擦力是什么段落
   {
     paragraph: '接触面积总结',
-    reply: { choice: 0, index: 'last' },
-    method: ({ goto }) => {
-      if (howToDecrease == 3) goto({ paragraph: '机器人的吐槽' })
-      else goto({ paragraph: '摩擦力是什么' })
+    reply: { choice: 'any', index: 'last' },
+    method: ({ scene, goto }) => {
+      if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
+      else {
+        scene.targetPanel.update({
+          showTarget: false,
+        })
+        goto({ paragraph: '摩擦力是什么' })
+      }
     },
+  },
+
+  {
+    paragraph: '改变物体的质量',
+    talk: 'last',
+    method: ({ goto }) => {
+      Dialog.create({
+        component: targetPage,
+        showButton: false,
+        showTarget: true,
+      }),
+        Dialog.create({
+          component: testPage,
+          showTest: true,
+        }).onOk(async () => {
+        })
+    }
   },
 
   //调用质量调节器，改变质量
@@ -451,7 +641,7 @@ export default [
     paragraph: '质量结束',
     talk: 'last',
     method: ({ goto }) => {
-      if (howToDecrease == 3) goto({ paragraph: '机器人的吐槽' })
+      if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
       else goto({ paragraph: '摩擦力是什么' })
     },
   },

@@ -17,13 +17,13 @@ export default {
   mounted() {
     babylonApp = new BabylonApp()
     const scene = babylonApp.createScene({
-      state: {},
+      state: { targetPanel: Object },
       actions,
     })
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene })
+      this.$talker({ script, hooks, scene, debug: '摩擦力是什么' })
     })
   },
 

@@ -211,21 +211,36 @@ export default {
     this.iceRun(animationkey)
   },
 
-  changeArea() {
-    const box = this.getMeshByName('box')
-    box.rotation.z = Math.PI / 2;
-    box.rotation.x = Math.PI;
-    box.position.y = 2.25
-  },
-
+  // changeArea() {
+  //   const box = this.getMeshByName('box')
+  //   box.rotation.z = Math.PI / 2;
+  //   box.rotation.x = Math.PI;
+  //   box.position.y = 2.25
+  // },
+  // reChangeArea() {
+  //   const box = this.getMeshByName('box')
+  //   box.rotation.x = Math.PI;
+  //   box.rotation.z = Math.PI / 2
+  //   box.position.y = 1
+  // },
   smallArea() {
     const box = this.getMeshByName('box')
     box.rotation.z = Math.PI / 2;
     box.position.y = 2.25
   },
+  reSmallArea() {
+    const box = this.getMeshByName('box')
+    box.rotation.z = Math.PI;
+    box.position.y = 1
+  },
   largeArea() {
     const box = this.getMeshByName('box')
     box.rotation.x = Math.PI / 2;
     box.position.y = 0.6
+  },
+  reLargeArea() {
+    const box = this.getMeshByName('box')
+    box.rotation.x = Math.PI;
+    box.position.y = 1
   },
 }
