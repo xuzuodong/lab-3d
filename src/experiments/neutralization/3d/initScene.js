@@ -4,6 +4,7 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import tube from './meshes/tube.glb'
 import purbottle from './meshes/purbottle.glb'
 import phebottle from './meshes/phebottle.glb'
+import bottle from './meshes/bottle.glb'
 
 import { createMaterials } from './materials'
 import { defaultOperations } from './defaultOperation'
@@ -44,7 +45,8 @@ export default (scene) => {
     Promise.all([
       BABYLON.SceneLoader.ImportMeshAsync('', tube, '', scene, undefined, '.glb'),
       BABYLON.SceneLoader.ImportMeshAsync('', purbottle, '', scene, undefined, '.glb'),
-      BABYLON.SceneLoader.ImportMeshAsync('', phebottle, '', scene, undefined, '.glb')
+      BABYLON.SceneLoader.ImportMeshAsync('', phebottle, '', scene, undefined, '.glb'),
+      BABYLON.SceneLoader.ImportMeshAsync('', bottle, '', scene, undefined, '.glb')
     ]).then(() => {
       const myan = scene.animationGroups.find((a) => a.name === 'All Animations')
       myan.stop()
@@ -78,12 +80,18 @@ export default (scene) => {
       pheMeshes.push(scene.getMeshByName('phebottle'))
       pheMeshes.push(scene.getMeshByName('phesolution'))
 
+      const hclMeshes = []
+      hclMeshes.push(scene.getTransformNodeByName('hclDropper'))
+      hclMeshes.push(scene.getMeshByName('hclLiquid'))
+      hclMeshes.push(scene.getMeshByName('hclBottle'))
+      hclMeshes.push(scene.getMeshByName('hclSolution'))
+
       const cloneBottle = (name) => {
         return [
-          pheMeshes[0].clone(name + 'Dropper'),
-          pheMeshes[1].clone(name + 'Liquid'),
-          pheMeshes[2].clone(name + 'Bottle'),
-          pheMeshes[3].clone(name + 'Solution')
+          hclMeshes[0].clone(name + 'Dropper'),
+          hclMeshes[1].clone(name + 'Liquid'),
+          hclMeshes[2].clone(name + 'Bottle'),
+          hclMeshes[3].clone(name + 'Solution')
         ]
       }
 
@@ -134,6 +142,12 @@ export default (scene) => {
         purLiquid.parent = null
         purBottle.parent = null
         purSolution.parent = null
+        purSolution.visibility = 0
+        purLiquid.visibility = 0
+        purBottle.visibility = 0
+        purDropper.getChildMeshes()[0].visibility = 0
+        purDropper.getChildMeshes()[1].visibility = 0
+        purBottle.isPickable = false //  设置不能被选取，隐藏的物体默认还是会相应鼠标事件；设置此属性以实现真正的隐藏
         purDropper.position = new BABYLON.Vector3(-15, 0, 80)
         purLiquid.position = new BABYLON.Vector3(-15, 0, 80)
         purBottle.position = new BABYLON.Vector3(-15, 0, 80)
@@ -153,6 +167,12 @@ export default (scene) => {
       pheLiquid.parent = null
       pheBottle.parent = null
       pheSolution.parent = null
+      pheSolution.visibility = 0
+      pheBottle.visibility = 0
+      pheLiquid.visibility = 0
+      pheDropper.getChildMeshes()[0].visibility = 0
+      pheDropper.getChildMeshes()[1].visibility = 0
+      pheBottle.isPickable = false
       pheDropper.position = new BABYLON.Vector3(15, 0, 80)
       pheLiquid.position = new BABYLON.Vector3(15, 0, 80)
       pheBottle.position = new BABYLON.Vector3(15, 0, 80)
@@ -161,9 +181,22 @@ export default (scene) => {
       pheBottle.material = materials.matGlass
       pheDropper.getChildMeshes()[0].material = materials.matGlass
 
-      let hclDropper, hclLiquid, hclBottle, hclSolution
-      const hclMeshes = ([hclDropper, hclLiquid, hclBottle, hclSolution] = cloneBottle('hcl'))
-      changeMeshPosition(hclMeshes, new BABYLON.Vector3(-120, 0, 80))
+      // // 设置稀盐酸溶液的参数
+      let hclDropper = hclMeshes[0]
+      let hclLiquid = hclMeshes[1]
+      let hclBottle = hclMeshes[2]
+      let hclSolution = hclMeshes[3]
+      hclDropper.parent = null
+      hclLiquid.parent = null
+      hclBottle.parent = null
+      hclSolution.parent = null
+      hclDropper.position = new BABYLON.Vector3(-120, 0, 80)
+      hclLiquid.position = new BABYLON.Vector3(-120, 0, 80)
+      hclBottle.position = new BABYLON.Vector3(-120, 0, 80)
+      hclSolution.position = new BABYLON.Vector3(-120, 0, 80)
+      hclSolution.material = materials.matPhesolution
+      hclBottle.material = materials.matGlass
+      hclDropper.getChildMeshes()[0].material = materials.matGlass
 
       let coohDropper, coohLiquid, coohBottle, coohSolution
       const coohMeshes = ([coohDropper, coohLiquid, coohBottle, coohSolution] = cloneBottle('cooh'))
@@ -181,8 +214,6 @@ export default (scene) => {
       let directionalLight = scene.getLightByName('shadowControlLight')
       const shadowGenerator = new BABYLON.ShadowGenerator(1024, directionalLight)
       shadowGenerator.addShadowCaster(main_liquid)
-      shadowGenerator.addShadowCaster(purBottle)
-      shadowGenerator.addShadowCaster(pheBottle)
       shadowGenerator.addShadowCaster(hclBottle)
       shadowGenerator.addShadowCaster(coohBottle)
       shadowGenerator.addShadowCaster(naohBottle)
@@ -250,6 +281,16 @@ export default (scene) => {
       liquidSphere.material = materials.matDropperLiquid
 
       defaultOperations(scene, { purText, pheText })
+
+      // 由于无法取到阴影生成器，故采用添加监听的方法解决（牺牲了一部分性能），场景渲染好之后启动
+      // 等到指示剂的试剂瓶完全出现之后，就加上阴影，然后就销毁该监听
+      scene.onAfterRenderObservable.add(() => {
+        if (purBottle.visibility === 1) {
+          shadowGenerator.addShadowCaster(purBottle)
+          shadowGenerator.addShadowCaster(pheBottle)
+          scene.onAfterRenderObservable.clear()
+        }
+      })
 
       resolve()
     })

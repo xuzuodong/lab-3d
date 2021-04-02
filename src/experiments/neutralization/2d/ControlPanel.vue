@@ -38,33 +38,9 @@
 
       <q-card-actions align="center">
         <q-btn color="primary" label="滴加" @click="drop" class="q-ma-md" unelevated dense />
-        <q-btn
-          :disable="clickCount == 0"
-          color="primary"
-          label="结束"
-          @click="stop"
-          class="q-ma-md"
-          outline
-          dense
-        />
+        <q-btn color="primary" label="结束" @click="stop" class="q-ma-md" outline dense />
       </q-card-actions>
     </q-card>
-
-    <q-dialog v-model="fullAlert" persistent>
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">注意！</div>
-        </q-card-section>
-
-        <q-separator />
-
-        <q-card-section>试管中的溶液容量已达上限，请重新进行实验！</q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn label="确定" color="primary" v-close-popup unelevated dense />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
   </q-dialog>
 </template>
 
@@ -72,29 +48,31 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import generalOperations from '../3d/generalOperation'
 import { reactions } from '../3d/reaction'
+import { Dialog } from 'quasar'
+import WarnPanelVue from './WarnPanel'
 
 export default {
   name: 'controlPanel',
   props: {
     scene: Object,
-    dropType: String
+    dropType: String,
   },
 
   data() {
     return {
       isDropping: false,
       clickCount: 0,
-      fullAlert: false
+      warnInfo: '',
     }
   },
 
   computed: {
-    isAddIndicater: function() {
+    isAddIndicater: function () {
       if (this.scene.existLiquid.indexOf('pur') != -1 || this.scene.existLiquid.indexOf('phe') != -1) {
         return true
       } else return false
     },
-    liquidGroup: function() {
+    liquidGroup: function () {
       let initArr = this.scene.existLiquid
       let formatArr = []
       let returnArr = []
@@ -111,7 +89,7 @@ export default {
         } else continue
       }
       return returnArr
-    }
+    },
   },
 
   methods: {
@@ -121,6 +99,7 @@ export default {
 
     hide() {
       this.$refs.dialog.hide()
+      this.scene.mutate({ liquidPanel: null })
     },
 
     onDialogHide() {
@@ -146,6 +125,21 @@ export default {
       }
     },
 
+    finishStep(dropType) {
+      if (this.scene.progress[0].step.slice(0, 1) != '1') {
+        if (dropType === 'pur' || dropType === 'phe') {
+          this.scene.progress[1].finished = true
+        } else {
+          if (!this.scene.progress[0].finished) {
+            this.scene.progress[0].finished = true
+          } else {
+            this.scene.progress[2].finished = true
+          }
+        }
+      }
+      this.finishStep = function () {}
+    },
+
     async drop() {
       if (!this.isDropping && this.scene.existLiquid.length < 40) {
         this.clickCount++
@@ -155,7 +149,9 @@ export default {
           await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
             this.scene.mutate({ acidType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
+            this.finishStep(this.dropType)
             this.isDropping = false
+            reactions(this.scene, this.liquidGroup, this.dropType)
           })
         }
 
@@ -163,6 +159,7 @@ export default {
           await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
             this.scene.mutate({ alkaliType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
+            this.finishStep(this.dropType)
             this.isDropping = false
             if (this.isAddIndicater) {
               reactions(this.scene, this.liquidGroup, this.dropType)
@@ -172,8 +169,13 @@ export default {
 
         if (this.dropType === 'phe') {
           await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
+            const purBottle = this.scene.getMeshByName('purbottle')
+            const pheBottle = this.scene.getMeshByName('phebottle')
+            purBottle.actionManager.unregisterAction(purBottle.actionManager.actions[2])
+            pheBottle.actionManager.unregisterAction(pheBottle.actionManager.actions[2])
             this.scene.mutate({ indicatorType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
+            this.finishStep(this.dropType)
             this.isDropping = false
             reactions(this.scene, this.liquidGroup, this.dropType)
           })
@@ -183,14 +185,22 @@ export default {
           await generalOperations
             .dropLiqiud(this.scene, 53, 3, new BABYLON.Color3(160 / 255, 32 / 255, 240 / 255))
             .then(() => {
+              const purBottle = this.scene.getMeshByName('purbottle')
+              const pheBottle = this.scene.getMeshByName('phebottle')
+              purBottle.actionManager.unregisterAction(purBottle.actionManager.actions[2])
+              pheBottle.actionManager.unregisterAction(pheBottle.actionManager.actions[2])
               this.scene.mutate({ indicatorType: this.dropType })
               this.scene.existLiquid.push(this.dropType)
+              this.finishStep(this.dropType)
               this.isDropping = false
               reactions(this.scene, this.liquidGroup, this.dropType)
             })
         }
       } else if (this.scene.existLiquid.length == 40) {
-        this.fullAlert = true
+        Dialog.create({
+          component: WarnPanelVue,
+          warnInfo: this.warnInfo,
+        })
       }
     },
 
@@ -202,7 +212,7 @@ export default {
           this.dropType === 'alkali_naoh' ||
           this.dropType === 'alkali_nahco3'
         ) {
-          generalOperations.putBackLqDropper(this.scene, this.dropType)
+          generalOperations.putBackDropper(this.scene, this.dropType)
         } else {
           generalOperations.putBackDropper(this.scene, this.dropType)
         }
@@ -210,8 +220,8 @@ export default {
         this.$emit('ok')
         this.hide()
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

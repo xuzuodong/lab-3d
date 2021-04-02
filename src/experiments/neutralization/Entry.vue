@@ -23,13 +23,16 @@ export default {
         indicatorType: '', // 选择的酸碱指示剂 'pur' or 'phe'，数组第二项表示现在是否已经加入
         existLiquid: [], // 试管中已经存在的溶液，每点击一次滴加溶液，就往数组中push相应字符串（酸、碱、指示剂）
         // 根据重复字符串个数，算出滴加的溶液量为多少
+        progress: [], // 一个对象数组，记录实验步骤；{step: string, finished: boolen}，当前第几步，是否完成
+        targetPanel: null,
+        liquidPanel: null,
       },
       actions,
     })
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene, debug: '' })
+      this.$talker({ script, hooks, scene, debug: '阶段一-提交实验结论后' })
     })
   },
 

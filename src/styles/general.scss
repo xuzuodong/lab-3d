@@ -58,3 +58,11 @@ body {
   }
 }
 
+.top-left-dialog {
+  .q-dialog__inner {
+    top: 5%;
+    bottom: auto;
+    right: auto;
+  }
+}
+

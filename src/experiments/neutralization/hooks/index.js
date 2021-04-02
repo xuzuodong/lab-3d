@@ -2,6 +2,7 @@ import { Dialog } from 'quasar'
 import generalOperations from '../3d/generalOperation'
 import DialogQuestionVue from '../2d/DialogQuestion.vue'
 import ControlPanelVue from '../2d/ControlPanel.vue'
+import TargetPanelVue from '../2d/TargetPanel.vue'
 
 export default [
   // 拉近摄像头，出现滴管
@@ -9,28 +10,19 @@ export default [
     paragraph: '选择酸溶液',
     talk: 'last',
     method: ({ next, scene }) => {
-      generalOperations.registerClickOnAcid(scene).then((val) => {
+      scene.progress.push({ step: '1-1', finished: false })
+      const dialog = Dialog.create({
+        component: TargetPanelVue,
+        progress: scene.progress,
+        scene
+      })
+      scene.mutate({ targetPanel: dialog })
+      scene.registerClickOnAcid().then((val) => {
         scene.mutate({ acidType: val })
         scene.pullInCamera().then(() => next())
       })
     }
   },
-
-  /*/ 记录用户选择的酸溶液
-  {
-    paragraph: '选择酸溶液',
-    choice: 'any',
-    method: ({ next, scene, chosen, setSlot }) => {
-      if (chosen == 0) {
-        setSlot({ 酸溶液: '稀盐酸' })
-        scene.mutate({ acidType: 'acid_hcl' })
-      } else {
-        setSlot({ 酸溶液: '醋酸溶液' })
-        scene.mutate({ acidType: 'acid_ch3cooh' })
-      }
-      next()
-    }
-  },*/
 
   // 进行滴加酸溶液的错误示范
   {
@@ -73,7 +65,7 @@ export default [
         dialogType: 'useDropperRadio',
         acid_alkali: []
       }).onOk(async () => {
-        await generalOperations.putBackLqDropper(scene, scene.acidType)
+        await generalOperations.putBackDropper(scene, scene.acidType)
         await scene.resetCamera()
         next()
       })
@@ -85,28 +77,15 @@ export default [
     paragraph: '选择碱溶液',
     talk: 'last',
     method: async ({ next, scene }) => {
-      generalOperations.registerClickOnAlkali(scene).then((val) => {
+      scene.progress[0].finished = true
+      scene.progress.push({ step: '1-2', finished: false })
+      scene.targetPanel.update({ progress: scene.progress })
+      scene.registerClickOnAlkali().then((val) => {
         scene.mutate({ alkaliType: val })
         scene.pullInCamera().then(() => next())
       })
     }
   },
-
-  /*/ 记录用户选择的碱溶液
-  {
-    paragraph: '选择碱溶液',
-    choice: 'any',
-    method: ({ chosen, scene, next, setSlot }) => {
-      if (chosen == 0) {
-        setSlot({ 碱溶液: '氢氧化钠' })
-        scene.mutate({ alkaliType: 'alkali_naoh' })
-      } else {
-        setSlot({ 碱溶液: '小苏打' })
-        scene.mutate({ alkaliType: 'alkali_nahco3' })
-      }
-      next()
-    }
-  },*/
 
   // 用户进行滴加碱溶液操作
   {
@@ -118,6 +97,8 @@ export default [
         scene,
         dropType: scene.alkaliType
       }).onOk(() => {
+        scene.progress[1].finished = true
+        scene.targetPanel.update({ progress: scene.progress })
         Dialog.create({
           component: DialogQuestionVue,
           dialogType: 'textConclusion',
@@ -130,231 +111,115 @@ export default [
     }
   },
 
-  // 重置试管中的溶液，只留下酸溶液
+  // 
   {
-    paragraph: '阶段二开场',
-    talk: 2,
-    method: ({ next, scene }) => {
-      scene.mutate({ alkaliType: '' })
-      scene.mutate({ indicatorType: '' })
-      scene.resetTube().then(() => {
-        for (let i = 0; i < scene.existLiquid.length; i++) {
-          if (scene.existLiquid[i] == 'alkali_naoh' || scene.existLiquid[i] == 'alkali_nahco3') {
-            scene.existLiquid.splice(i--, 1)
-          }
-        }
-        next()
-      })
-    }
-  },
-
-  // 移动相机，观察试管中的反应
-  {
-    paragraph: '阶段二开场',
+    paragraph: '阶段一-提交实验结论后',
     reply: { choice: 'any', index: 'last' },
     method: ({ next, scene }) => {
-      scene.pullInCameraToBottle().then(() => next())
-    }
-  },
-
-  // 选择酸碱指示剂
-  {
-    paragraph: '选择酸碱指示剂',
-    talk: 'last',
-    method: async ({ next, scene, setSlot }) => {
-      let indicatorType = await scene.selectIndicator()
-      scene.mutate({ indicatorType: indicatorType })
-      if (scene.indicatorType == 'pur') {
-        setSlot({ 酸碱指示剂: '紫色石蕊试剂' })
-      } else {
-        setSlot({ 酸碱指示剂: '酚酞试剂' })
-      }
-      next()
-    }
-  },
-
-  // 滴入酸碱指示剂
-  {
-    paragraph: '滴入酸碱指示剂',
-    talk: 'last',
-    method: async ({ next, scene }) => {
-      Dialog.create({
-        component: ControlPanelVue,
-        scene,
-        dropType: scene.indicatorType
-      }).onOk(() => {
-        next()
-      })
-    }
-  },
-
-  // 选择碱溶液（滴入刚才加了酸碱指示剂的试管）
-  {
-    paragraph: '阶段二-选择碱溶液',
-    reply: { choice: 'any', index: 0 },
-    method: ({ next, scene }) => {
-      scene.pullInCamera().then(() => next())
-    }
-  },
-
-  // 记录用户选择的碱溶液
-  {
-    paragraph: '阶段二-选择碱溶液',
-    choice: 'any',
-    method: ({ next, scene, chosen, setSlot }) => {
-      if (chosen == 0) {
-        setSlot({ 碱溶液: '氢氧化钠' })
-        scene.mutate({ alkaliType: 'alkali_naoh' })
-      } else {
-        setSlot({ 碱溶液: '小苏打' })
-        scene.mutate({ alkaliType: 'alkali_nahco3' })
-      }
-      next()
-    }
-  },
-
-  // 向刚才加了酸碱指示剂的试管中滴加碱溶液
-  {
-    paragraph: '阶段二-滴加碱溶液',
-    talk: 'last',
-    method: ({ next, scene }) => {
-      scene.tubeCloseUp().then(() => {
-        Dialog.create({
-          component: ControlPanelVue,
-          scene,
-          dropType: scene.alkaliType
-        }).onOk(() => next())
-      })
-    }
-  },
-
-  // 弹出选择题，提交观察到的颜色变化现象结论
-  {
-    paragraph: '阶段二-观察反应现象',
-    talk: 'last',
-    method: ({ next, scene }) => {
-      Dialog.create({
-        component: DialogQuestionVue,
-        dialogType: 'radioConclusion',
-        acid_alkali: []
-      }).onOk(() => {
-        scene.resetCamera().then(() => next())
-      })
+      scene.showIndicatorBottle().then(() => next())
     }
   },
 
   // 所有参数、试管、状态重置
   {
-    paragraph: '阶段二-提交实验结论后',
-    reply: { choice: 'any', index: 'last' },
+    paragraph: '清空试管',
+    talk: 'last',
     method: ({ next, scene }) => {
       scene.mutate({ acidType: '' })
       scene.mutate({ alkaliType: '' })
       scene.mutate({ indicatorType: '' })
       scene.resetAll().then(() => {
         scene.existLiquid.splice(0, scene.existLiquid.length)
+        scene.progress.splice(0, scene.progress.length)
+        // scene.targetPanel.hide()
+        scene.mutate({ targetPanel: null })
         next()
       })
     }
   },
 
-  // 彻底重置后，重新开始做一次完整实验
-  // 先选择酸溶液
+  // 彻底重置后，开始做第一次自由实验
   {
-    paragraph: '阶段三-选择酸溶液',
-    reply: { choice: 'any', index: 0 },
+    paragraph: '第一次自由实验导入',
+    talk: 'last',
     method: ({ next, scene }) => {
-      scene.pullInCamera().then(() => next())
-    }
-  },
-
-  // 向空试管中滴加酸溶液
-  {
-    paragraph: '阶段三-选择酸溶液',
-    reply: { choice: 'any', index: 'last' },
-    method: ({ next, scene }) => {
-      Dialog.create({
-        component: ControlPanelVue,
-        scene,
-        dropType: scene.acidType
-      }).onOk(() => {
-        scene.resetCamera().then(() => next())
+      scene.progress.push(
+        { step: '2-1', finished: false },
+        { step: '2-2', finished: false },
+        { step: '2-3', finished: false }
+      )
+      const dialog = Dialog.create({
+        component: TargetPanelVue,
+        progress: scene.progress,
+        scene
       })
-    }
-  },
-
-  // 记录用户所选择的酸溶液
-  {
-    paragraph: '阶段三-选择酸溶液',
-    choice: 'any',
-    method: ({ next, scene, chosen, setSlot }) => {
-      if (chosen == 0) {
-        setSlot({ 酸溶液: '稀盐酸' })
-        scene.mutate({ acidType: 'acid_hcl' })
-      } else {
-        setSlot({ 酸溶液: '醋酸溶液' })
-        scene.mutate({ acidType: 'acid_ch3cooh' })
-      }
-      next()
+      scene.mutate({ targetPanel: dialog })
+      scene.freeExperiment()
+      scene.targetPanel.onOk(() => {
+        Dialog.create({
+          component: DialogQuestionVue,
+          dialogType: 'radioConclusion',
+          acid_alkali: []
+        }).onOk(() => next())
+      })
     }
   },
 
   // 记录用户所选的酸碱指示剂，本次指示剂必定和第一次不同
   {
-    paragraph: '阶段三-选择酸碱指示剂',
-    talk: 'last',
-    method: async ({ next, scene, setSlot }) => {
-      await scene.pullInCameraToBottle()
-      let indicatorType = await scene.selectIndicator()
-      scene.mutate({ indicatorType: indicatorType })
+    paragraph: '第一次自由实验总结',
+    talk: 0,
+    method: ({ next, scene, setSlot }) => {
       if (scene.indicatorType == 'pur') {
         setSlot({ 酸碱指示剂: '紫色石蕊试剂' })
       } else {
         setSlot({ 酸碱指示剂: '酚酞试剂' })
       }
-      Dialog.create({
-        component: ControlPanelVue,
-        scene,
-        dropType: scene.indicatorType
-      }).onOk(() => next())
-    }
-  },
-
-  // 选择碱溶液,拉近镜头
-  {
-    paragraph: '阶段三-选择碱溶液',
-    reply: { choice: 'any', index: 0 },
-    method: ({ next, scene }) => {
-      scene.pullInCamera().then(() => next())
-    }
-  },
-
-  // 记录用户选择的碱溶液
-  {
-    paragraph: '阶段三-选择碱溶液',
-    choice: 'any',
-    method: ({ next, scene, chosen, setSlot }) => {
-      if (chosen == 0) {
-        setSlot({ 碱溶液: '氢氧化钠' })
-        scene.mutate({ alkaliType: 'alkali_naoh' })
-      } else {
-        setSlot({ 碱溶液: '小苏打' })
-        scene.mutate({ alkaliType: 'alkali_nahco3' })
-      }
       next()
     }
   },
 
-  // 用户滴加碱溶液，镜头对试管内反应的特写
   {
-    paragraph: '阶段三-选择碱溶液',
-    reply: { choice: 'any', index: 'last' },
+    paragraph: '第一次自由实验总结',
+    talk: 'last',
     method: ({ next, scene }) => {
-      scene.tubeCloseUp().then(() => {
+      // 第二次自由实验前重置所有条件
+      scene.mutate({ acidType: '' })
+      scene.mutate({ alkaliType: '' })
+      scene.mutate({ indicatorType: '' })
+      scene.resetAll().then(() => {
+        scene.existLiquid.splice(0, scene.existLiquid.length)
+        scene.progress.splice(0, scene.progress.length)
+        scene.targetPanel.hide()
+        scene.mutate({ targetPanel: null })
+        scene.mutate({ liquidPanel: null })
+        next()
+      })
+    }
+  },
+
+  {
+    paragraph: '第二次自由实验导入',
+    talk: 'last',
+    method: ({ next, scene }) => {
+      scene.progress.push(
+        { step: '3-1', finished: false },
+        { step: '3-2', finished: false },
+        { step: '3-3', finished: false }
+      )
+      const dialog = Dialog.create({
+        component: TargetPanelVue,
+        progress: scene.progress,
+        scene
+      })
+
+      scene.mutate({ targetPanel: dialog })
+      scene.freeExperiment()
+      scene.targetPanel.onOk(() => {
         Dialog.create({
-          component: ControlPanelVue,
-          scene,
-          dropType: scene.alkaliType
+          component: DialogQuestionVue,
+          dialogType: 'radioConclusion',
+          acid_alkali: []
         }).onOk(() => next())
       })
     }
@@ -362,16 +227,15 @@ export default [
 
   // 最后一次弹出选择题，提交观察到的颜色变化现象结论
   {
-    paragraph: '阶段三-观察反应现象',
-    talk: 'last',
-    method: ({ next, scene }) => {
-      Dialog.create({
-        component: DialogQuestionVue,
-        dialogType: 'radioConclusion',
-        acid_alkali: []
-      }).onOk(() => {
-        scene.resetCamera().then(() => next())
-      })
+    paragraph: '第二次自由实验完成',
+    talk: 0,
+    method: ({ next, scene, setSlot }) => {
+      if (scene.indicatorType == 'pur') {
+        setSlot({ 酸碱指示剂: '紫色石蕊试剂' })
+      } else {
+        setSlot({ 酸碱指示剂: '酚酞试剂' })
+      }
+      next()
     }
   },
 
