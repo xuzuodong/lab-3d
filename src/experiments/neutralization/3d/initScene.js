@@ -122,7 +122,7 @@ export default (scene) => {
         tube1.parent = null
         bottom_liquid.parent = null
         main_liquid.parent = null
-        let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
+        let pivotAt = new BABYLON.Vector3(0, bottom_liquid.getBoundingInfo().boundingBox.maximumWorld.y, 0)
         main_liquid.originalScale(pivotAt, -2.7)
         main_liquid.visibility = 0
         bottom_liquid.visibility = 0

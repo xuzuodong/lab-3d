@@ -55,24 +55,23 @@ export default {
   name: 'controlPanel',
   props: {
     scene: Object,
-    dropType: String,
+    dropType: String
   },
 
   data() {
     return {
       isDropping: false,
-      clickCount: 0,
-      warnInfo: '',
+      clickCount: 0
     }
   },
 
   computed: {
-    isAddIndicater: function () {
+    isAddIndicater: function() {
       if (this.scene.existLiquid.indexOf('pur') != -1 || this.scene.existLiquid.indexOf('phe') != -1) {
         return true
       } else return false
     },
-    liquidGroup: function () {
+    liquidGroup: function() {
       let initArr = this.scene.existLiquid
       let formatArr = []
       let returnArr = []
@@ -89,7 +88,7 @@ export default {
         } else continue
       }
       return returnArr
-    },
+    }
   },
 
   methods: {
@@ -137,7 +136,13 @@ export default {
           }
         }
       }
-      this.finishStep = function () {}
+      this.finishStep = function() {}
+    },
+
+    liquidLevel() {
+      const main_liquid = this.scene.getMeshByName('main_liquid')
+      let height = main_liquid.getBoundingInfo().boundingBox.maximumWorld.y - 0.5
+      return height
     },
 
     async drop() {
@@ -146,7 +151,7 @@ export default {
         this.isDropping = true
 
         if (this.dropType === 'acid_hcl' || this.dropType === 'acid_ch3cooh') {
-          await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
+          await generalOperations.dropLiqiud(this.scene, 53, this.liquidLevel()).then(() => {
             this.scene.mutate({ acidType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
             this.finishStep(this.dropType)
@@ -156,7 +161,7 @@ export default {
         }
 
         if (this.dropType === 'alkali_naoh' || this.dropType === 'alkali_nahco3') {
-          await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
+          await generalOperations.dropLiqiud(this.scene, 53, this.liquidLevel()).then(() => {
             this.scene.mutate({ alkaliType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
             this.finishStep(this.dropType)
@@ -168,7 +173,7 @@ export default {
         }
 
         if (this.dropType === 'phe') {
-          await generalOperations.dropLiqiud(this.scene, 53, 3).then(() => {
+          await generalOperations.dropLiqiud(this.scene, 53, this.liquidLevel()).then(() => {
             const purBottle = this.scene.getMeshByName('purbottle')
             const pheBottle = this.scene.getMeshByName('phebottle')
             purBottle.actionManager.unregisterAction(purBottle.actionManager.actions[2])
@@ -183,7 +188,12 @@ export default {
 
         if (this.dropType === 'pur') {
           await generalOperations
-            .dropLiqiud(this.scene, 53, 3, new BABYLON.Color3(160 / 255, 32 / 255, 240 / 255))
+            .dropLiqiud(
+              this.scene,
+              53,
+              this.liquidLevel(),
+              new BABYLON.Color3(160 / 255, 32 / 255, 240 / 255)
+            )
             .then(() => {
               const purBottle = this.scene.getMeshByName('purbottle')
               const pheBottle = this.scene.getMeshByName('phebottle')
@@ -199,7 +209,7 @@ export default {
       } else if (this.scene.existLiquid.length == 40) {
         Dialog.create({
           component: WarnPanelVue,
-          warnInfo: this.warnInfo,
+          warnInfo: '当前试管中溶液已满，若要继续实验，请先倒空试管！'
         })
       }
     },
@@ -220,8 +230,8 @@ export default {
         this.$emit('ok')
         this.hide()
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

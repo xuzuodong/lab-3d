@@ -80,10 +80,6 @@ export default {
       }
       this.scene.existLiquid.splice(0, this.scene.existLiquid.length)
       this.scene.freeExperiment('restart')
-
-
-
-      
       await this.scene.resetAll()
     },
     finish() {

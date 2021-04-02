@@ -168,9 +168,8 @@ export default {
       const liquidSphere = this.getMeshByName('liquidSphere')
       let matTubeLiquid = this.getMaterialByName('matTubeLiquid')
       matTubeLiquid.diffuseColor = new BABYLON.Color3(1, 1, 1)
-      main_liquid.scaling.y = main_liquid.scaling.x
-      let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
-      main_liquid.originalScale(pivotAt, -2.7)
+      let pivotAt = new BABYLON.Vector3(0, bottom_liquid.getBoundingInfo().boundingBox.maximumWorld.y, 0)
+      main_liquid.originalScale(pivotAt, - main_liquid.scaling.y * 10 + 0.1)
       main_liquid.visibility = 0
       bottom_liquid.visibility = 0
       liquidSphere.visibility = 0

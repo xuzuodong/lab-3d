@@ -111,7 +111,7 @@ export default [
     }
   },
 
-  // 
+  //
   {
     paragraph: '阶段一-提交实验结论后',
     reply: { choice: 'any', index: 'last' },
@@ -142,7 +142,7 @@ export default [
   {
     paragraph: '第一次自由实验导入',
     talk: 'last',
-    method: ({ next, scene }) => {
+    method: ({ next, scene, setSlot }) => {
       scene.progress.push(
         { step: '2-1', finished: false },
         { step: '2-2', finished: false },
@@ -156,26 +156,20 @@ export default [
       scene.mutate({ targetPanel: dialog })
       scene.freeExperiment()
       scene.targetPanel.onOk(() => {
+        // 记录用户所选的酸碱指示剂，本次指示剂必定和第一次不同
+        if (scene.indicatorType == 'pur') {
+          setSlot({ 酸碱指示剂: '紫色石蕊试剂' })
+        } else {
+          setSlot({ 酸碱指示剂: '酚酞试剂' })
+        }
         Dialog.create({
           component: DialogQuestionVue,
           dialogType: 'radioConclusion',
           acid_alkali: []
-        }).onOk(() => next())
+        }).onOk(() => {
+          next()
+        })
       })
-    }
-  },
-
-  // 记录用户所选的酸碱指示剂，本次指示剂必定和第一次不同
-  {
-    paragraph: '第一次自由实验总结',
-    talk: 0,
-    method: ({ next, scene, setSlot }) => {
-      if (scene.indicatorType == 'pur') {
-        setSlot({ 酸碱指示剂: '紫色石蕊试剂' })
-      } else {
-        setSlot({ 酸碱指示剂: '酚酞试剂' })
-      }
-      next()
     }
   },
 

@@ -202,7 +202,7 @@ const dropLiqiud = (scene, beginPosition_y, endPosition_y, liquidColor = new BAB
     const bottom_liquid = scene.getMeshByName('bottom_liquid')
     liquidSphere.material.diffuseColor = liquidColor
 
-    let pivotAt = new BABYLON.Vector3(0, main_liquid.getBoundingInfo().boundingBox.vectorsWorld[0].y, 0)
+    let pivotAt = new BABYLON.Vector3(0, bottom_liquid.getBoundingInfo().boundingBox.maximumWorld.y, 0)
     scene.beginDirectAnimation(
       liquidSphere,
       [
@@ -268,7 +268,7 @@ const liquidWarn = (scene, liquidType) => {
       if (liquidType != 'pur' && liquidType != 'phe') {
         openWarnPanel('当前进行实验第二步， 请滴加酸碱指示剂')
       }
-    } else {
+    } else if (!scene.progress[2].finished) {
       let haveAcid, haveIndicator, haveAlkali
       if (scene.existLiquid.indexOf('acid_hcl') != -1 || scene.existLiquid.indexOf('acid_ch3cooh') != -1) {
         haveAcid = true
@@ -298,6 +298,8 @@ const liquidWarn = (scene, liquidType) => {
             if (haveAlkali) openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加酸溶液！')
           }
       }
+    } else {
+      openWarnPanel('您现在已完成本轮自由实验，可点击左侧面板的“完成”按钮结束实验！')
     }
   }
 }
