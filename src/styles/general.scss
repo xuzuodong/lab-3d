@@ -58,3 +58,20 @@ body {
   }
 }
 
+.top-left-dialog {
+  .q-dialog__inner {
+    margin-top: 76px;
+    bottom: auto;
+    right: auto;
+  }
+
+  .q-dialog__backdrop {
+    display: none;
+  }
+}
+
+.q-dialog {
+  .q-dialog__inner--minimized {
+    padding: 16px;
+  }
+}
