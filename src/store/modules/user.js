@@ -154,7 +154,7 @@ const actions = {
       classId,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
-          success(res)
+          success(res.data.body)
         } else failure(res)
       },
       failure(res) {
