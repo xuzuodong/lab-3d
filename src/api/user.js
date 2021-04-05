@@ -86,5 +86,16 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
+  },
+
+  selectKexperimentByClass({ classId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/selectKexperimentByClass',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { classId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
   }
 }

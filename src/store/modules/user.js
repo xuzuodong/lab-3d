@@ -147,6 +147,20 @@ const actions = {
         failure(res)
       }
     })
+  },
+
+  selectKexperimentByClass({ commit }, { classId, success, failure }) {
+    userApi.selectKexperimentByClass({
+      classId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
   }
 }
 
