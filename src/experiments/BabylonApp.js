@@ -31,6 +31,7 @@ export default class BabylonApp {
 
     this.engine.runRenderLoop(() => {
       this.scene.render()
+      if (this.loop) this.loop.apply(this.scene)
     })
 
     return this.scene
