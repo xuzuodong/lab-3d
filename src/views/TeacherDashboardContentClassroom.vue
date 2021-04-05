@@ -19,14 +19,14 @@
       </div>
 
       <q-card class="q-mt-md q-mx-sm">
-        <q-tabs v-model="tab" class="text-grey" active-color="primary" narrow-indicator>
+        <q-tabs v-model="tab" class="text-grey" active-color="primary">
           <q-tab name="student" label="学生" />
           <q-tab name="experiment" label="实验" />
         </q-tabs>
 
         <q-separator />
 
-        <q-tab-panels v-model="tab" animated>
+        <q-tab-panels v-model="tab" keep-alive animated>
           <q-tab-panel name="student"><TeacherDashboardContentClassroomStudentVue /></q-tab-panel>
           <q-tab-panel name="experiment"><TeacherDashboardContentClassroomExperimentVue /></q-tab-panel>
         </q-tab-panels>

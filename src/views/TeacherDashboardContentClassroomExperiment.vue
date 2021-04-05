@@ -15,7 +15,13 @@
           {{ props.row.finalScore }}
         </q-td>
         <q-td key="button" :props="props">
-          <q-btn flat color="primary" label="查看详情" style="font-size: 14px" />
+          <q-btn
+            :to="'/dashboard/kexperiment/' + props.row.kexperimentId"
+            style="font-size: 14px"
+            color="primary"
+            label="查看详情"
+            flat
+          />
         </q-td>
       </q-tr>
     </template>

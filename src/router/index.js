@@ -18,6 +18,10 @@ const routes = [
       {
         path: 'classroom/:id',
         component: () => import('../views/TeacherDashboardContentClassroom.vue')
+      }, 
+      {
+        path: 'kexperiment/:id', 
+        component: () => import('../views/TeacherDashboardContentKexperimentDetails.vue')
       }
     ]
   },
