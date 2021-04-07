@@ -44,6 +44,9 @@
                 color="primary"
                 icon-right="arrow_forward"
               />
+              <div class="q-mt-sm">
+                <a @click="pretest(experiment.id, 1)">测试挑战</a>
+              </div>
             </div>
           </div>
         </div>
@@ -148,6 +151,7 @@
 import { mapActions, mapState } from 'vuex'
 import DialogJoinVue from '../components/DialogJoin.vue'
 import vuePlyr from 'vue-plyr'
+import PreTestVue from './PreTest'
 export default {
   components: { vuePlyr },
 
@@ -164,7 +168,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment']),
+    ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment', 'selectChoiceQuestion']),
 
     toggleLike() {
       if (this.userInfo) {
@@ -203,6 +207,27 @@ export default {
           this.experiment = experiment
           document.title = experiment.name + ' | Lab 3D'
           this.knowledgeImageSlides = this.experiment.knowledgePoints.map(() => 0)
+        },
+        failure: (error) => {
+          console.log(error)
+        },
+      })
+    },
+
+    pretest(experimentId, choiceType) {
+      this.selectChoiceQuestion({
+        experimentId: 5,
+        choiceType: choiceType,
+        success: (res) => {
+          this.$q
+            .dialog({
+              component: PreTestVue,
+              parent: this,
+              questionList: res
+            })
+            .onOk(() => {
+              console.log('ok')
+            })
         },
         failure: (error) => {
           console.log(error)
