@@ -18,6 +18,7 @@ let ice = 0
 let large = 0
 let small = 0
 let gravity = 0
+let kexperimentId = 0
 
 export default [
   {
@@ -26,15 +27,16 @@ export default [
     method: ({ next }) => {
       //console.log(user.actions.startExperiment)
       store.dispatch('user/startExperiment', {
-        experimentId: '2',
+        experimentId: 9,
         success: (res) => {
-          console.log(res)
-          next()
+          kexperimentId = res.kexperimentId
+          console.log(kexperimentId);
         },
         failure: (res) => {
           console.log(res)
         },
       })
+      next()
     },
   },
 
@@ -50,6 +52,19 @@ export default [
         option3: o3,
         showAssume: true,
       }).onOk(async () => {
+        store.dispatch('user/submitBehavior', {
+          kexperimentId: kexperimentId,
+          name:'摩擦力是什么',
+          type:'BEHAVIOR_PARAGRAPH',
+          content:'',
+          isCorrect:'',
+          success: (res) => {
+            console.log(res);
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
         if (storeData[0] == 'op1') {
           o1 = true
           goto({ paragraph: '改变接触面粗糙程度' })
