@@ -3,6 +3,9 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import animationBox from './animationBox'
 import generalOperations from './generalOperation'
 
+import { Dialog } from 'quasar'
+import WarnPanelVue from '../2d/WarnPanel.vue'
+
 export default {
   // 用户点击试剂瓶选择酸碱溶液后，酸碱滴管到位，拉近相机的动作
   pullInCamera() {
@@ -55,10 +58,19 @@ export default {
       resetPositionGroup.normalize(0, frameRate)
 
       moveDropperDownGroup.onAnimationEndObservable.add(() => {
-        generalOperations.dropLiqiud(this, 41, 3).then(() => {
-          resetPositionGroup.play()
-          resetPositionGroup.onAnimationEndObservable.add(() => resolve())
-        })
+        if (this.existLiquid.length < 40) {
+          const main_liquid = this.getMeshByName('main_liquid')
+          let height = main_liquid.getBoundingInfo().boundingBox.maximumWorld.y - 0.5
+          generalOperations.dropLiqiud(this, 41, height).then(() => {
+            resetPositionGroup.play()
+            resetPositionGroup.onAnimationEndObservable.add(() => resolve())
+          })
+        } else {
+          Dialog.create({
+            component: WarnPanelVue,
+            warnInfo: '当前试管中溶液已满，若要继续实验，请先倒空试管！'
+          })
+        }
       })
     })
   },
@@ -169,7 +181,7 @@ export default {
       let matTubeLiquid = this.getMaterialByName('matTubeLiquid')
       matTubeLiquid.diffuseColor = new BABYLON.Color3(1, 1, 1)
       let pivotAt = new BABYLON.Vector3(0, bottom_liquid.getBoundingInfo().boundingBox.maximumWorld.y, 0)
-      main_liquid.originalScale(pivotAt, - main_liquid.scaling.y * 10 + 0.1)
+      main_liquid.originalScale(pivotAt, -main_liquid.scaling.y * 10 + 0.1)
       main_liquid.visibility = 0
       bottom_liquid.visibility = 0
       liquidSphere.visibility = 0
@@ -182,5 +194,17 @@ export default {
     // 只有等到用户确定做完一次自由实验，才保留指示剂（即还原时不再还原generalOpeartion.js中的indicatorUsed变量）
     // 可能的取值：restart：单次实验重复做（需要还原） 默认值——new：开始新的实验，不还原
     generalOperations.registerAllAction(this, flag)
+  },
+
+  panelDropperreset() {
+    if (this.liquidPanel != null) {
+      this.liquidPanel.hide()
+      this.mutate({ liquidPanel: null })
+    }
+    if (this.targetPanel != null) {
+      this.targetPanel.hide()
+      this.mutate({ targetPanel: null })
+    }
+    generalOperations.switchDropper(this)
   }
 }

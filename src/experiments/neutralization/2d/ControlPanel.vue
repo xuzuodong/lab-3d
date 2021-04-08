@@ -27,7 +27,7 @@
 
       <q-separator />
 
-      <q-card-section>
+      <q-card-section class="hide-overflow">
         <div class="text-body1">已加入的溶液</div>
         <transition-group name="slide">
           <li v-for="item in liquidGroup" :key="item.lqName">
@@ -238,5 +238,8 @@ export default {
 <style scoped>
 .control-panel {
   max-width: 30vw;
+}
+.hide-overflow {
+  overflow: hidden;
 }
 </style>

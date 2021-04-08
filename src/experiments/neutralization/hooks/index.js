@@ -105,6 +105,7 @@ export default [
           acid_alkali: [scene.acidType, scene.alkaliType]
         }).onOk(async () => {
           await scene.resetCamera()
+          scene.panelDropperreset()
           next()
         })
       })
@@ -131,8 +132,6 @@ export default [
       scene.resetAll().then(() => {
         scene.existLiquid.splice(0, scene.existLiquid.length)
         scene.progress.splice(0, scene.progress.length)
-        // scene.targetPanel.hide()
-        scene.mutate({ targetPanel: null })
         next()
       })
     }
@@ -167,6 +166,7 @@ export default [
           dialogType: 'radioConclusion',
           acid_alkali: []
         }).onOk(() => {
+          scene.panelDropperreset()
           next()
         })
       })
@@ -184,9 +184,6 @@ export default [
       scene.resetAll().then(() => {
         scene.existLiquid.splice(0, scene.existLiquid.length)
         scene.progress.splice(0, scene.progress.length)
-        scene.targetPanel.hide()
-        scene.mutate({ targetPanel: null })
-        scene.mutate({ liquidPanel: null })
         next()
       })
     }
@@ -214,7 +211,10 @@ export default [
           component: DialogQuestionVue,
           dialogType: 'radioConclusion',
           acid_alkali: []
-        }).onOk(() => next())
+        }).onOk(() => {
+          scene.panelDropperreset()
+          next()
+        })
       })
     }
   },

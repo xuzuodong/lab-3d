@@ -440,7 +440,8 @@ const generalAction = new Object({
   putBackDropper,
   dropLiqiud,
   registerAllAction,
-  openLiquidPanel
+  openLiquidPanel,
+  switchDropper
 })
 
 export default generalAction

@@ -35,18 +35,4 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
-
-  selectChoiceQuestion({ experimentId, choiceType, success, failure }) {
-    axios({
-      method: 'post',
-      url: baseUrl + 'experiment/selectChoiceQuestion',
-      headers: { Authorization: store.state.user.userInfo.token },
-      data: {
-        experimentId,
-        choiceType
-      }
-    })
-      .then((res) => success(res))
-      .catch((res) => failure(res))
-  }
 }

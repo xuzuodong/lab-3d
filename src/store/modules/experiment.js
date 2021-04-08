@@ -48,21 +48,6 @@ const actions = {
       }
     })
   },
-
-  selectChoiceQuestion(context, { experimentId, choiceType, success, failure }) {
-    experimentApi.selectChoiceQuestion({
-      experimentId,
-      choiceType,
-      success(res) {
-        if (res.status == 200 && res.data.code == 200) {
-          success(res.data.body)
-        } else failure(res)
-      },
-      failure(res) {
-        failure(res)
-      }
-    })
-  }
 }
 
 export default {
