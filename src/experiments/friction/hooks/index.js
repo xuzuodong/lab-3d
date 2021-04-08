@@ -7,6 +7,7 @@ import initGround from '../2d/assets/initGround.png'
 import assumePage from '../2d/assumePage'
 import targetPage from '../2d/targetPage'
 import testPage from '../2d/testPage'
+import user from '../../../store/modules/user'
 
 let o1 = false
 let o2 = false
@@ -19,6 +20,24 @@ let small = 0
 let gravity = 0
 
 export default [
+  {
+    paragraph: '原因分析',
+    talk: 0,
+    method: ({ next }) => {
+      console.log(user.actions.startExperiment);
+      user.dispatch(user.actions.startExperiment({
+        experimentId: '2',
+        success: (res) => {
+          console.log(res);
+          next()
+        },
+        failure: (res) => {
+          console.log(res);
+        }
+      }))
+    },
+  },
+
   //跳转到选择后的对应段落，并禁用该选项。
   {
     paragraph: '摩擦力是什么',

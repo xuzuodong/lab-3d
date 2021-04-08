@@ -53,5 +53,16 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
-  }
+  },
+
+  startExperiment({ experimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/startExperiment',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { experimentId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
 }

@@ -23,7 +23,7 @@ export default {
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene, debug: '摩擦力是什么' })
+      this.$talker({ script, hooks, scene })
     })
   },
 

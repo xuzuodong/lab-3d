@@ -100,7 +100,21 @@ const actions = {
         failure(res)
       }
     })
-  }
+  },
+
+  startExperiment({ commit }, { experimentId, success, failure }) {
+    userApi.startExperiment({
+      experimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
 }
 
 export default { namespaced: true, state, getters, actions, mutations }
