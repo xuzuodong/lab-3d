@@ -44,6 +44,9 @@
                 color="primary"
                 icon-right="arrow_forward"
               />
+              <div class="q-mt-sm">
+                <a @click="pretest(experiment.id, 1)">测试挑战</a>
+              </div>
             </div>
           </div>
         </div>
@@ -148,6 +151,7 @@
 import { mapActions, mapState } from 'vuex'
 import DialogJoinVue from '../components/DialogJoin.vue'
 import vuePlyr from 'vue-plyr'
+import PreTestVue from './PreTest'
 export default {
   components: { vuePlyr },
 
@@ -155,16 +159,16 @@ export default {
     return {
       experiment: null,
       knowledgePointTab: 0,
-      knowledgeImageSlides: null,
+      knowledgeImageSlides: null
     }
   },
 
   computed: {
-    ...mapState('user', ['userInfo']),
+    ...mapState('user', ['userInfo'])
   },
 
   methods: {
-    ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment']),
+    ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment', 'selectChoiceQuestion']),
 
     toggleLike() {
       if (this.userInfo) {
@@ -182,13 +186,13 @@ export default {
           },
           failure: (res) => {
             console.log(res)
-          },
+          }
         })
       } else {
         this.$q
           .dialog({
             component: DialogJoinVue,
-            parent: this,
+            parent: this
           })
           .onOk(() => {
             this.loadExperimentDetails()
@@ -206,9 +210,30 @@ export default {
         },
         failure: (error) => {
           console.log(error)
-        },
+        }
       })
     },
+
+    pretest(experimentId, choiceType) {
+      this.selectChoiceQuestion({
+        experimentId: 5,
+        choiceType: choiceType,
+        success: (res) => {
+          this.$q
+            .dialog({
+              component: PreTestVue,
+              parent: this,
+              questionList: res
+            })
+            .onOk(() => {
+              console.log('ok')
+            })
+        },
+        failure: (error) => {
+          console.log(error)
+        }
+      })
+    }
   },
 
   created() {
@@ -220,7 +245,7 @@ export default {
       this.$q
         .dialog({
           component: DialogJoinVue,
-          parent: this,
+          parent: this
         })
         .onOk(() => {
           next()
@@ -236,7 +261,7 @@ export default {
     }
 
     document.title = 'Lab 3D - 体验炫酷的科学实验！'
-  },
+  }
 }
 </script>
 
