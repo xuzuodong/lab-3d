@@ -7,7 +7,7 @@ import initGround from '../2d/assets/initGround.png'
 import assumePage from '../2d/assumePage'
 import targetPage from '../2d/targetPage'
 import testPage from '../2d/testPage'
-import user from '../../../store/modules/user'
+import store from '../../../store'
 
 let o1 = false
 let o2 = false
@@ -24,17 +24,17 @@ export default [
     paragraph: '原因分析',
     talk: 0,
     method: ({ next }) => {
-      console.log(user.actions.startExperiment);
-      user.dispatch(user.actions.startExperiment({
+      //console.log(user.actions.startExperiment)
+      store.dispatch('user/startExperiment', {
         experimentId: '2',
         success: (res) => {
-          console.log(res);
+          console.log(res)
           next()
         },
         failure: (res) => {
-          console.log(res);
-        }
-      }))
+          console.log(res)
+        },
+      })
     },
   },
 
@@ -53,12 +53,10 @@ export default [
         if (storeData[0] == 'op1') {
           o1 = true
           goto({ paragraph: '改变接触面粗糙程度' })
-        }
-        else if (storeData[0] == 'op2') {
+        } else if (storeData[0] == 'op2') {
           o2 = true
           goto({ paragraph: '改变与接触面的面积' })
-        }
-        else if (storeData[0] == 'op3') {
+        } else if (storeData[0] == 'op3') {
           o3 = true
           goto({ paragraph: '改变物体的质量' })
         }
@@ -130,7 +128,7 @@ export default [
       scene.runStart()
       setTimeout(() => {
         goto({ paragraph: '草地后' })
-      }, 3000);
+      }, 3000)
     },
   },
 
@@ -152,8 +150,7 @@ export default [
       if (grass == 1 && wood == 1 && ice == 1) {
         scene.changeGround(initGround)
         goto({ paragraph: '接触面总结' })
-      }
-      else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
 
@@ -177,8 +174,7 @@ export default [
       if (grass == 1 && wood == 1 && ice == 1) {
         scene.changeGround(initGround)
         goto({ paragraph: '接触面总结' })
-      }
-      else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
 
@@ -202,8 +198,7 @@ export default [
       if (grass == 1 && wood == 1 && ice == 1) {
         scene.changeGround(initGround)
         goto({ paragraph: '接触面总结' })
-      }
-      else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
 
@@ -442,7 +437,7 @@ export default [
       })
       scene.mutate({ targetPanel: target })
       next()
-    }
+    },
   },
 
   //创建工具箱，并作为跳转的跳板
@@ -479,7 +474,7 @@ export default [
           goto({ paragraph: '轻松拉货' })
         }
       })
-    }
+    },
   },
 
   //根据刚才改变的质量设置跑步速度
@@ -492,7 +487,7 @@ export default [
       else if (storeData[0] == 3) scene.iceRun(0.04)
       setTimeout(() => {
         next()
-      }, 4000);
+      }, 4000)
     },
   },
 
@@ -510,14 +505,10 @@ export default [
     paragraph: '轻松拉货',
     reply: { choice: 1, index: 'last' },
     method: ({ goto }) => {
-      if (gravity == 1)
-        goto({ paragraph: '质量总结' })
-      if (gravity == 0)
-        goto({ paragraph: '改变物体的质量', talk: 'last' })
-      if (gravity == -1)
-        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
-      if (gravity == -2)
-        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      if (gravity == 1) goto({ paragraph: '质量总结' })
+      if (gravity == 0) goto({ paragraph: '改变物体的质量', talk: 'last' })
+      if (gravity == -1) goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      if (gravity == -2) goto({ paragraph: '改变与接触面的面积', talk: 'last' })
     },
   },
 
@@ -553,10 +544,9 @@ export default [
           ],
         },
         persistent: true,
+      }).onOk(() => {
+        next()
       })
-        .onOk(() => {
-          next()
-        })
     },
   },
 
@@ -577,10 +567,9 @@ export default [
           ],
         },
         persistent: true,
+      }).onOk(() => {
+        next()
       })
-        .onOk(() => {
-          next()
-        })
     },
   },
 
@@ -601,10 +590,9 @@ export default [
           ],
         },
         persistent: true,
+      }).onOk(() => {
+        goto({ paragraph: '结局' })
       })
-        .onOk(() => {
-          goto({ paragraph: '结局' })
-        })
     },
   },
 ]
