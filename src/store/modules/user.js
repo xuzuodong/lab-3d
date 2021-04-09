@@ -100,6 +100,38 @@ const actions = {
         failure(res)
       }
     })
+  },
+
+  startExperiment({ commit }, { experimentId, success, failure }) {
+    userApi.startExperiment({
+      experimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  },
+
+  submitBehavior({ commit }, { kexperimentId, name, type, content, isCorrect, success, failure }) {
+    userApi.submitBehavior({
+      kexperimentId,
+      name,
+      type,
+      content,
+      isCorrect,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
   }
 }
 

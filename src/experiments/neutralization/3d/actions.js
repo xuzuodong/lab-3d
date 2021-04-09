@@ -206,5 +206,37 @@ export default {
       this.mutate({ targetPanel: null })
     }
     generalOperations.switchDropper(this)
+  },
+
+  judgeBehavior(choice) {
+    // 通过溶液组合数列existLiquid中的元素顺序，判断用户实验的一系列操作是否正确
+    let acidIndex, alkaliIndex, indicatorIndex, mixError
+    const minNum = (num1, num2) => {
+      if (num1 === -1) return num2
+      if (num2 === -1) return num1
+      if (num1 != 1 && num2 != -1) {
+        console.log('酸溶液或碱溶液混合滴加，错误！')
+        if (num1 > num2) return num2
+        else return num1
+      }
+    }
+    acidIndex = minNum(this.existLiquid.indexOf('acid_hcl'), this.existLiquid.indexOf('acid_ch3cooh'))
+    alkaliIndex = minNum(this.existLiquid.indexOf('alkali_naoh'), this.existLiquid.indexOf('alkali_ch3cooh'))
+    indicatorIndex = minNum(this.existLiquid.indexOf('pur'), this.existLiquid.indexOf('phe'))
+    if (
+      (indicatorIndex > acidIndex && indicatorIndex < alkaliIndex) ||
+      (indicatorIndex > alkaliIndex && indicatorIndex < acidIndex)
+    ) {
+      console.log('溶液顺序滴加正确')
+    } else {
+      console.log('溶液顺序滴加出错')
+    }
+    if (this.indicatorType === 'phe') {
+      if (choice == 'C') return true
+      else return false
+    } else {
+      if (choice == 'A') return true
+      else return false
+    }
   }
 }

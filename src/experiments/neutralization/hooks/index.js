@@ -3,8 +3,29 @@ import generalOperations from '../3d/generalOperation'
 import DialogQuestionVue from '../2d/DialogQuestion.vue'
 import ControlPanelVue from '../2d/ControlPanel.vue'
 import TargetPanelVue from '../2d/TargetPanel.vue'
+import store from '../../../store'
+
+let kexperimentId = 670
 
 export default [
+  /*/ 实验开始，启用一个新的kexperiment
+  {
+    paragraph: '初始画面',
+    talk: 0,
+    method: ({ next }) => {
+      store.dispatch('user/startExperiment', {
+        experimentId: 8,
+        success: (res) => {
+          kexperimentId = res.kexperimentId
+          console.log(kexperimentId)
+        },
+        failure: (res) => {
+          console.log(res)
+        }
+      })
+      next()
+    }
+  },*/
   // 拉近摄像头，出现滴管
   {
     paragraph: '选择酸溶液',
@@ -112,7 +133,7 @@ export default [
     }
   },
 
-  //
+  // 第一阶段结束，出现指示剂，进入自由探究阶段
   {
     paragraph: '阶段一-提交实验结论后',
     reply: { choice: 'any', index: 'last' },
@@ -165,19 +186,33 @@ export default [
           component: DialogQuestionVue,
           dialogType: 'radioConclusion',
           acid_alkali: []
-        }).onOk(() => {
+        }).onOk((val) => {
           scene.panelDropperreset()
+          const isCorrect = scene.judgeBehavior(val.radioConclusion)
+          store.dispatch('user/submitBehavior', {
+            kexperimentId,
+            name: '第一次自由实验选择题结论',
+            type: 'BEHAVIOR_CHOICE',
+            content: 'string',
+            isCorrect,
+            success: (res) => {
+              console.log(res)
+            },
+            failure: (res) => {
+              console.log(res)
+            }
+          })
           next()
         })
       })
     }
   },
 
+  // 第一次自由实验总结，并重置所有条件，开启第二次自由实验
   {
     paragraph: '第一次自由实验总结',
     talk: 'last',
     method: ({ next, scene }) => {
-      // 第二次自由实验前重置所有条件
       scene.mutate({ acidType: '' })
       scene.mutate({ alkaliType: '' })
       scene.mutate({ indicatorType: '' })
@@ -189,6 +224,7 @@ export default [
     }
   },
 
+  // 第二次自由实验开始
   {
     paragraph: '第二次自由实验导入',
     talk: 'last',
@@ -203,7 +239,6 @@ export default [
         progress: scene.progress,
         scene
       })
-
       scene.mutate({ targetPanel: dialog })
       scene.freeExperiment()
       scene.targetPanel.onOk(() => {
