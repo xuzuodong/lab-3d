@@ -97,5 +97,15 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
+  },
+
+  getUserInfo({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'user/getUserInfo',
+      headers: { Authorization: store.state.user.userInfo.token },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
   }
 }

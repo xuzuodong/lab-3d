@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -70,7 +71,41 @@ export default {
           deleteMember: '22',
         },
       ],
+      students: [],
+      loading: true,
     }
+  },
+  methods: {
+    ...mapActions('user', ['getUserInfo']),
+  },
+
+  // computed: {
+  //   studentsList() {
+  //     const arr = []
+  //     this.students.forEach((e, i) => {
+  //       // 如果没有结束时间则未完成
+  //       if (e.classes) {
+  //         let duration = date.getDateDiff(e.kexperimentKtime, e.kexperimentCtime, 'seconds')
+  //         arr.push({ ...this.experiments[i], duration: `${(duration / 60).toFixed(0)}分${duration % 60}秒` })
+  //       } else {
+  //         arr.push({ ...this.experiments[i], duration: '未完成' })
+  //       }
+  //     })
+  //     return arr
+  //   },
+  // },
+
+  created() {
+    this.getUserInfo({
+      success: (userinfo) => {
+        this.students = userinfo
+        console.log(userinfo)
+        this.loading = false
+      },
+      failure: (res) => {
+        console.log(res)
+      },
+    })
   },
 }
 </script>
