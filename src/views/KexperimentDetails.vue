@@ -10,23 +10,7 @@
       </div>
       <div class="row q-my-xl">
         <div class="col-12 col-sm"></div>
-        <div class="col-12 col-sm-auto">
-          <q-item>
-            <q-item-section side>
-              <q-avatar size="60px">
-                <img src="https://cdn.quasar.dev/img/avatar.png" />
-              </q-avatar>
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-weight-bold text-body1 text-grey-8 q-my-md">
-                【实验师】：{{ userName }}
-              </q-item-label>
-              <q-item-label class="text-weight-bold text-body1 text-grey-8 q-my-md">
-                【称号】：{{ badge }}
-              </q-item-label>
-            </q-item-section>
-          </q-item>
-        </div>
+
         <div class="col-12 col-sm"></div>
       </div>
       <div class="row justify-center">
@@ -61,7 +45,7 @@
           </q-card-section>
         </q-card>
       </div>
-      <q-separator class="q-my-lg" color="grey-6" inset/>
+      <q-separator class="q-my-lg" color="grey-6" inset />
     </q-page-container>
   </q-layout>
 </template>

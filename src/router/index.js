@@ -10,21 +10,23 @@ const routes = [
   { path: '/about', name: 'About', component: () => import('../views/About.vue') },
   { path: '/experiment/:alias', component: () => import('../views/ExperimentDetails.vue') },
   { path: '/classrooms-list', component: () => import('../views/ClassroomsList.vue') },
+  { path: '/kexperiments-list', component: () => import('../views/KexperimentsList.vue') },
   {
     path: '/dashboard',
     component: () => import('../views/TeacherDashboard.vue'),
     children: [
-      {path: '', component: () => import('../views/TeacherDashboardContentHome.vue')},
+      { path: '', component: () => import('../views/TeacherDashboardContentHome.vue') },
       {
         path: 'classroom/:id',
         component: () => import('../views/TeacherDashboardContentClassroom.vue')
-      }, 
+      },
       {
-        path: 'kexperiment/:id', 
-        component: () => import('../views/TeacherDashboardContentKexperimentDetails.vue')
+        path: 'kexperiment-details/:id',
+        component: () => import('../views/KexperimentDetails.vue')
       }
     ]
   },
+  { path: '/kexperiment-details/:id', component: () => import('../views/KexperimentDetails.vue') },
 
   // 注入虚拟实验内部的路由
   ...experimentsRoutes,
