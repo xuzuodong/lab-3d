@@ -99,11 +99,23 @@ export default {
       .catch((res) => failure(res))
   },
 
-  getUserInfo({ success, failure }) {
+  getClassById({ classId, success, failure }) {
     axios({
-      method: 'get',
-      url: baseUrl + 'user/getUserInfo',
+      method: 'post',
+      url: baseUrl + 'teacher/getClassById',
       headers: { Authorization: store.state.user.userInfo.token },
+      data: { classId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  removeUser({ userId, classId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'teacher/removeUser',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { userId, classId }
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
