@@ -38,6 +38,7 @@ export default (scene) => {
                 mainCamera.attachControl(true);
                 mainCamera.lowerRadiusLimit = 2;
                 mainCamera.upperRadiusLimit = 15;
+                mainCamera.upperBetaLimit = (Math.PI / 2) * 0.9;
                 mainCamera.wheelDeltaPercentage = 0.01;
                 mainCamera.lockedTarget = fakebox;
                 scene.activeCameras.push(mainCamera);

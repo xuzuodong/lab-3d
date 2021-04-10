@@ -66,12 +66,12 @@ export default {
       .catch((res) => failure(res))
   },
 
-  submitBehavior({ kexperimentId, name, type, content, isCorrect, success, failure }) {
+  submitBehavior({ kexperimentId, name, type, content, correctContent, isCorrect, success, failure }) {
     axios({
       method: 'post',
       url: baseUrl + 'behavior/submitBehavior',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { kexperimentId, name, type, content, isCorrect }
+      data: { kexperimentId, name, type, content, correctContent, isCorrect }
     })
       .then((res) => success(res))
       .catch((res) => failure(res))

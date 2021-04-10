@@ -116,12 +116,13 @@ const actions = {
     })
   },
 
-  submitBehavior({ commit }, { kexperimentId, name, type, content, isCorrect, success, failure }) {
+  submitBehavior({ commit }, { kexperimentId, name, type, content, correctContent, isCorrect, success, failure }) {
     userApi.submitBehavior({
       kexperimentId,
       name,
       type,
       content,
+      correctContent,
       isCorrect,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
