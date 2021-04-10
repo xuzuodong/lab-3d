@@ -45,7 +45,7 @@
                 icon-right="arrow_forward"
               />
               <div class="q-mt-sm">
-                <a @click="pretest(experiment.id, 1)">测试挑战</a>
+                <a @click="pretest(experiment.id, 1)">前测挑战</a>
               </div>
             </div>
           </div>
@@ -159,12 +159,12 @@ export default {
     return {
       experiment: null,
       knowledgePointTab: 0,
-      knowledgeImageSlides: null
+      knowledgeImageSlides: null,
     }
   },
 
   computed: {
-    ...mapState('user', ['userInfo'])
+    ...mapState('user', ['userInfo']),
   },
 
   methods: {
@@ -186,13 +186,13 @@ export default {
           },
           failure: (res) => {
             console.log(res)
-          }
+          },
         })
       } else {
         this.$q
           .dialog({
             component: DialogJoinVue,
-            parent: this
+            parent: this,
           })
           .onOk(() => {
             this.loadExperimentDetails()
@@ -210,7 +210,7 @@ export default {
         },
         failure: (error) => {
           console.log(error)
-        }
+        },
       })
     },
 
@@ -223,7 +223,9 @@ export default {
             .dialog({
               component: PreTestVue,
               parent: this,
-              questionList: res
+              questionList: res,
+              experimentId: 5,
+              type: choiceType,
             })
             .onOk(() => {
               console.log('ok')
@@ -231,9 +233,9 @@ export default {
         },
         failure: (error) => {
           console.log(error)
-        }
+        },
       })
-    }
+    },
   },
 
   created() {
@@ -245,7 +247,7 @@ export default {
       this.$q
         .dialog({
           component: DialogJoinVue,
-          parent: this
+          parent: this,
         })
         .onOk(() => {
           next()
@@ -261,7 +263,7 @@ export default {
     }
 
     document.title = 'Lab 3D - 体验炫酷的科学实验！'
-  }
+  },
 }
 </script>
 

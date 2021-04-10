@@ -62,6 +62,21 @@ const actions = {
         failure(res)
       }
     })
+  },
+
+  submitTest(context, { choiceArray, experimentId,  success, failure }) {
+    experimentApi.submitTest({
+      choiceArray,
+      experimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
   }
 }
 

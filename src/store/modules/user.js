@@ -147,6 +147,22 @@ const actions = {
         failure(res)
       }
     })
+  },
+
+  recordTestTime({ commit }, { experimentId, testName, time, success, failure }) {
+    userApi.recordTestTime({
+      experimentId,
+      testName,
+      time,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
   }
 }
 

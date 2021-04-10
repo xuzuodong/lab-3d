@@ -86,5 +86,16 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
+  },
+
+  recordTestTime({ experimentId, testName, time, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/recordTestTime',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { experimentId, testName, time }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
   }
 }

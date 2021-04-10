@@ -48,5 +48,19 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
+  },
+
+  submitTest({ choiceArray, experimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'experiment/submitTest',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: {
+        choiceArray,
+        experimentId,
+      }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
   }
 }
