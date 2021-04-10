@@ -294,6 +294,20 @@ export default [
     reply: { choice: 0, index: 'last' },
     method: ({ goto }) => {
       goto({ paragraph: '接触面正确结束' })
+      store.dispatch('user/submitBehavior', {
+        kexperimentId: kexperimentId,
+        name: '接触面总结',
+        type: 'BEHAVIOR_CHOICE',
+        content: '接触面越光滑，摩擦力越小',
+        correctContent: '接触面越光滑，摩擦力越小',
+        isCorrect: true,
+        success: (res) => {
+          console.log(res);
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
     },
   },
 
@@ -303,6 +317,20 @@ export default [
     reply: { choice: 1, index: 'last' },
     method: ({ goto }) => {
       goto({ paragraph: '接触面回答错误' })
+      store.dispatch('user/submitBehavior', {
+        kexperimentId: kexperimentId,
+        name: '接触面总结',
+        type: 'BEHAVIOR_CHOICE',
+        content: '接触面越光滑，摩擦力越大',
+        correctContent: '接触面越光滑，摩擦力越小',
+        isCorrect: false,
+        success: (res) => {
+          console.log(res);
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
     },
   },
 
@@ -748,10 +776,10 @@ export default [
     },
   },
 
-  //判断是否所有减小摩擦的方式都尝试过，如果都尝试过了就跳转到机器人吐槽段落，否则跳转到摩擦力是什么段落
+  //判断是否所有减小摩擦的方式都尝试过，如果都尝试过了就跳转到机器人吐槽段落，否则跳转到摩擦力是什么段落，并选择正确正确选项
   {
     paragraph: '接触面积总结',
-    reply: { choice: 'any', index: 'last' },
+    reply: { choice: 0, index: 'last' },
     method: ({ scene, goto }) => {
       if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
       else {
@@ -759,6 +787,49 @@ export default [
           showTarget: false,
         })
         goto({ paragraph: '摩擦力是什么' })
+        store.dispatch('user/submitBehavior', {
+          kexperimentId: kexperimentId,
+          name: '接触面积总结',
+          type: 'BEHAVIOR_CHOICE',
+          content: '摩擦力与物体接触面的面积无关',
+          correctContent: '摩擦力与物体接触面的面积无关',
+          isCorrect: true,
+          success: (res) => {
+            console.log(res);
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
+      }
+    },
+  },
+
+  //判断是否所有减小摩擦的方式都尝试过，如果都尝试过了就跳转到机器人吐槽段落，否则跳转到摩擦力是什么段落，并选择错误选项
+  {
+    paragraph: '接触面积总结',
+    reply: { choice: 1, index: 'last' },
+    method: ({ scene, goto }) => {
+      if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
+      else {
+        scene.targetPanel.update({
+          showTarget: false,
+        })
+        goto({ paragraph: '摩擦力是什么' })
+        store.dispatch('user/submitBehavior', {
+          kexperimentId: kexperimentId,
+          name: '接触面积总结',
+          type: 'BEHAVIOR_CHOICE',
+          content: '摩擦力与物体接触面的面积有关',
+          correctContent: '摩擦力与物体接触面的面积无关',
+          isCorrect: false,
+          success: (res) => {
+            console.log(res);
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
       }
     },
   },
@@ -931,6 +1002,52 @@ export default [
       if (gravity == 0) goto({ paragraph: '改变物体的质量', talk: 'last' })
       if (gravity == -1) goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
       if (gravity == -2) goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+    },
+  },
+
+  //在质量总结部分选择了正确答案
+  {
+    paragraph: '质量总结',
+    reply: { choice: 0, index: 'last' },
+    method: ({ next }) => {
+      next()
+      store.dispatch('user/submitBehavior', {
+        kexperimentId: kexperimentId,
+        name: '质量总结',
+        type: 'BEHAVIOR_CHOICE',
+        content: '物体越轻，对地面的压力越小，摩擦力越小',
+        correctContent: '物体越轻，对地面的压力越小，摩擦力越小',
+        isCorrect: true,
+        success: (res) => {
+          console.log(res);
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
+    },
+  },
+
+  //在质量总结部分选择了错误答案
+  {
+    paragraph: '质量总结',
+    reply: { choice: 1, index: 'last' },
+    method: ({ next }) => {
+      next()
+      store.dispatch('user/submitBehavior', {
+        kexperimentId: kexperimentId,
+        name: '质量总结',
+        type: 'BEHAVIOR_CHOICE',
+        content: '物体越轻，对地面的压力越小，摩擦力越大',
+        correctContent: '物体越轻，对地面的压力越小，摩擦力越小',
+        isCorrect: false,
+        success: (res) => {
+          console.log(res);
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
     },
   },
 
