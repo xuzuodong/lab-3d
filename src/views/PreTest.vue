@@ -20,12 +20,12 @@
           transition-prev="jump-right"
           transition-next="jump-left"
           animated
-          control-color="white"
+          :control-color="$q.dark.isActive ? 'white' : 'dark'"
           ref="carousel"
           padding
           arrows
           height="auto"
-          class="text-white blue-border"
+          class="blue-border"
         >
           <q-carousel-slide
             v-for="(item, index) in questionList"
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   props: {
     questionList: Array,
