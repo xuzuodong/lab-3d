@@ -48,6 +48,7 @@ export default {
     if (storeData[0] == 'op2') this.msg = '尝试改变物品与地面接触面积以减小摩擦'
     if (storeData[0] == 'op3') this.msg = '尝试改变物品质量以减小摩擦'
   },
+
 }
 </script>
 <style scoped>

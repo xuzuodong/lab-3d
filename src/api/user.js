@@ -76,4 +76,15 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
+
+  finishKexperiment({ kexperimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/finishKexperiment',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
 }

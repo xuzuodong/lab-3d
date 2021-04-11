@@ -211,18 +211,6 @@ export default {
     this.iceRun(animationkey)
   },
 
-  // changeArea() {
-  //   const box = this.getMeshByName('box')
-  //   box.rotation.z = Math.PI / 2;
-  //   box.rotation.x = Math.PI;
-  //   box.position.y = 2.25
-  // },
-  // reChangeArea() {
-  //   const box = this.getMeshByName('box')
-  //   box.rotation.x = Math.PI;
-  //   box.rotation.z = Math.PI / 2
-  //   box.position.y = 1
-  // },
   smallArea() {
     const box = this.getMeshByName('box')
     box.rotation.z = Math.PI / 2;
@@ -243,4 +231,17 @@ export default {
     box.rotation.x = Math.PI;
     box.position.y = 1
   },
+
+  backToStart() {
+    const box = this.meshes[5]
+    const xbot = this.meshes[0]
+    const role = this.meshes[3]
+    const fakebox = this.meshes[4]
+    if (xbot.position.z > 1650) {
+      box.position = new BABYLON.Vector3(0, 1, -10);
+      role.position = new BABYLON.Vector3(0, 1.15, -5.0);
+      fakebox.position = new BABYLON.Vector3(0, 1, 0);
+      xbot.position = new BABYLON.Vector3(0, 0, 0)
+    }
+  }
 }

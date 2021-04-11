@@ -21,11 +21,11 @@ let gravity = 0
 let kexperimentId = 0
 
 export default [
+  //开始实验，并获取kexperimentId
   {
     paragraph: '原因分析',
     talk: 0,
     method: ({ next }) => {
-      //console.log(user.actions.startExperiment)
       store.dispatch('user/startExperiment', {
         experimentId: 9,
         success: (res) => {
@@ -44,8 +44,8 @@ export default [
   {
     paragraph: '摩擦力是什么',
     talk: 'last',
-    method: ({ goto }) => {
-      Dialog.create({
+    method: ({ goto, scene }) => {
+      const assume = Dialog.create({
         component: assumePage,
         option1: o1,
         option2: o2,
@@ -55,14 +55,57 @@ export default [
         if (storeData[0] == 'op1') {
           o1 = true
           goto({ paragraph: '改变接触面粗糙程度' })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '如何降低摩擦力',
+            type: 'BEHAVIOR_ASSUMPTION',
+            content: '认为【改变接触面粗糙程度】可以降低摩擦力',
+            correctContent: '认为【改变接触面粗糙程度】可以降低摩擦力',
+            isCorrect: '',
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         } else if (storeData[0] == 'op2') {
           o2 = true
           goto({ paragraph: '改变与接触面的面积' })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '如何降低摩擦力',
+            type: 'BEHAVIOR_ASSUMPTION',
+            content: '认为【改变与接触面的面积】可以降低摩擦力',
+            correctContent: '认为【改变与接触面的面积】可以降低摩擦力',
+            isCorrect: '',
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         } else if (storeData[0] == 'op3') {
           o3 = true
           goto({ paragraph: '改变物体的质量' })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '如何降低摩擦力',
+            type: 'BEHAVIOR_ASSUMPTION',
+            content: '认为【改变物体的质量】可以降低摩擦力',
+            correctContent: '认为【改变物体的质量】可以降低摩擦力',
+            isCorrect: '',
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
       })
+      scene.mutate({ assumePanel: assume })
     },
   },
 
@@ -86,7 +129,7 @@ export default [
     paragraph: '改变接触面粗糙程度',
     talk: 'last',
     method: ({ scene, goto }) => {
-      Dialog.create({
+      const test = Dialog.create({
         component: testPage,
         showTest: true,
         showButton: false,
@@ -202,7 +245,9 @@ export default [
             },
           })
         }
+        scene.backToStart()
       })
+      scene.mutate({ testPanel: test })
     },
   },
 
@@ -236,6 +281,9 @@ export default [
       scene.changeGround(initGround)
       if (grass == 1 && wood == 1 && ice == 1) {
         goto({ paragraph: '接触面总结' })
+        grass = 0
+        wood = 0
+        ice = 0
       } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
@@ -260,6 +308,9 @@ export default [
       scene.changeGround(initGround)
       if (grass == 1 && wood == 1 && ice == 1) {
         goto({ paragraph: '接触面总结' })
+        grass = 0
+        wood = 0
+        ice = 0
       } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
@@ -284,6 +335,9 @@ export default [
       scene.changeGround(initGround)
       if (grass == 1 && wood == 1 && ice == 1) {
         goto({ paragraph: '接触面总结' })
+        grass = 0
+        wood = 0
+        ice = 0
       } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
     },
   },
@@ -349,12 +403,8 @@ export default [
     talk: 'last',
     method: ({ goto, scene }) => {
       if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
-      else {
-        scene.targetPanel.update({
-          showTarget: false,
-        })
-        goto({ paragraph: '摩擦力是什么' })
-      }
+      else goto({ paragraph: '摩擦力是什么' })
+      scene.targetPanel.hide()
     },
   },
 
@@ -378,7 +428,7 @@ export default [
     paragraph: '改变与接触面的面积',
     talk: 'last',
     method: ({ goto, scene }) => {
-      Dialog.create({
+      const test = Dialog.create({
         component: testPage,
         showTest: true,
       }).onOk(async () => {
@@ -493,6 +543,7 @@ export default [
           })
         }
       })
+      scene.mutate({ testPanel: test })
     },
   },
 
@@ -517,7 +568,7 @@ export default [
       scene.runStop()
       if (large == 1 && small == 1) goto({ paragraph: '接触面积总结' })
       else {
-        Dialog.create({
+        const test = Dialog.create({
           component: testPage,
           showTest: true,
         }).onOk(async () => {
@@ -631,7 +682,9 @@ export default [
               },
             })
           }
+          scene.backToStart()
         })
+        scene.mutate({ testPanel: test })
       }
     },
   },
@@ -657,7 +710,7 @@ export default [
       scene.reLargeArea()
       if (large == 1 && small == 1) goto({ paragraph: '接触面积总结' })
       else {
-        Dialog.create({
+        const test = Dialog.create({
           component: testPage,
           showTest: true,
         }).onOk(async () => {
@@ -771,7 +824,9 @@ export default [
               },
             })
           }
+          scene.backToStart()
         })
+        scene.mutate({ testPanel: test })
       }
     },
   },
@@ -783,9 +838,6 @@ export default [
     method: ({ scene, goto }) => {
       if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
       else {
-        scene.targetPanel.update({
-          showTarget: false,
-        })
         goto({ paragraph: '摩擦力是什么' })
         store.dispatch('user/submitBehavior', {
           kexperimentId: kexperimentId,
@@ -801,7 +853,10 @@ export default [
             console.log(res)
           },
         })
+        large = 0
+        small = 0
       }
+      scene.targetPanel.hide()
     },
   },
 
@@ -812,9 +867,6 @@ export default [
     method: ({ scene, goto }) => {
       if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
       else {
-        scene.targetPanel.update({
-          showTarget: false,
-        })
         goto({ paragraph: '摩擦力是什么' })
         store.dispatch('user/submitBehavior', {
           kexperimentId: kexperimentId,
@@ -831,6 +883,7 @@ export default [
           },
         })
       }
+      scene.targetPanel.hide()
     },
   },
 
@@ -854,7 +907,7 @@ export default [
     paragraph: '改变物体的质量',
     talk: 'last',
     method: ({ goto, scene }) => {
-      Dialog.create({
+      const test = Dialog.create({
         component: testPage,
         showTest: true,
       }).onOk(async () => {
@@ -966,7 +1019,9 @@ export default [
             },
           })
         }
+        scene.backToStart()
       })
+      scene.mutate({ testPanel: test })
     },
   },
 
@@ -1058,11 +1113,10 @@ export default [
     method: ({ goto, scene }) => {
       if (o1 == true && o2 == true && o3 == true) goto({ paragraph: '机器人的吐槽' })
       else {
-        scene.targetPanel.update({
-          showTarget: false,
-        })
         goto({ paragraph: '摩擦力是什么' })
+        gravity = 0
       }
+      scene.targetPanel.hide()
     },
   },
 
@@ -1070,8 +1124,8 @@ export default [
   {
     paragraph: '总结任务1',
     talk: 0,
-    method: ({ next }) => {
-      Dialog.create({
+    method: ({ next, scene }) => {
+      const question = Dialog.create({
         title: '关于物体之间接触面的粗糙程度与摩擦力大小关系说法正确的是?( )',
         options: {
           type: 'radio',
@@ -1121,7 +1175,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '接触面的粗糙程度与摩擦力大小关系',
             type: 'BEHAVIOR_CHOICE',
-            content: '接触面粗糙程度与摩擦力大小无关',
+            content: '接触面越粗糙，摩擦力越小',
             correctContent: '接触面越光滑，摩擦力越小',
             isCorrect: false,
             success: (res) => {
@@ -1150,6 +1204,7 @@ export default [
         }
         next()
       })
+      scene.mutate({ questionPanel: question })
     },
   },
 
@@ -1157,8 +1212,8 @@ export default [
   {
     paragraph: '总结任务2',
     talk: 0,
-    method: ({ next }) => {
-      Dialog.create({
+    method: ({ next, scene }) => {
+      const question = Dialog.create({
         title: '关于物体之间接触面的面积大小与摩擦力大小关系说法正确的是?( )',
         options: {
           type: 'radio',
@@ -1237,6 +1292,7 @@ export default [
         }
         next()
       })
+      scene.mutate({ questionPanel: question })
     },
   },
 
@@ -1244,8 +1300,8 @@ export default [
   {
     paragraph: '总结任务3',
     talk: 0,
-    method: ({ goto }) => {
-      Dialog.create({
+    method: ({ goto, scene }) => {
+      const question = Dialog.create({
         title: '关于物体给予接触面的压力大小与摩擦力大小关系说法正确的是?( )',
         options: {
           type: 'radio',
@@ -1324,6 +1380,25 @@ export default [
         }
         goto({ paragraph: '结局' })
       })
+      scene.mutate({ questionPanel: question })
+    },
+  },
+
+  //结束，传一个结束的数据
+  {
+    paragraph: '结局',
+    talk: 0,
+    method: ({ next }) => {
+      store.dispatch('user/finishKexperiment', {
+        kexperimentId: kexperimentId,
+        success: (res) => {
+          console.log(res);
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
+      next()
     },
   },
 ]

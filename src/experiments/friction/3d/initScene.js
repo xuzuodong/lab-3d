@@ -57,7 +57,7 @@ export default (scene) => {
 
             function settingShadow() {
                 const light2 = new BABYLON.DirectionalLight("dir01", new BABYLON.Vector3(0, -0.5, -1.0), scene);
-                light2.position = new BABYLON.Vector3(0, 50, 50);
+                light2.position = new BABYLON.Vector3(0, 180, 1800);
                 light2.intensity = 0.4;
                 const shadowGenerator = new BABYLON.ShadowGenerator(2048, light2);
                 shadowGenerator.useBlurExponentialShadowMap = true;
@@ -68,12 +68,12 @@ export default (scene) => {
 
             const road = BABYLON.MeshBuilder.CreateGround("road", {
                 sideOrientation: BABYLON.Mesh.DOUBLESIDE,
-                width: 100,
-                height: 600,
-                tileSize: 600,
-                tileWidth: 100
+                width: 300,
+                height: 1800,
+                tileSize: 1800,
+                tileWidth: 300
             }, scene);
-            road.position = new BABYLON.Vector3(0, 0, 0);
+            road.position = new BABYLON.Vector3(0, 0, 880);
             road.material = groundMaterial;
             road.receiveShadows = true;
 
