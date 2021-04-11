@@ -115,7 +115,7 @@ export default {
           this.loading = false
           this.jT = this.students
             .find((e) => e.classes.find((e) => e.classId == this.$route.params.id))
-            .classes.find((e) => e.classId == this.$route.params.id).joinedTime
+            ?.classes.find((e) => e.classId == this.$route.params.id).joinedTime
         },
         failure: (res) => {
           console.log(res)

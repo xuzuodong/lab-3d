@@ -218,7 +218,7 @@ export default {
 
     pretest(experimentId, choiceType) {
       this.selectChoiceQuestion({
-        experimentId: 5,
+        experimentId: this.experiment.id,
         choiceType: choiceType,
         success: (res) => {
           this.$q
