@@ -23,7 +23,7 @@ export default {
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene, debug: '质量结束' })
+      this.$talker({ script, hooks, scene })
     })
   },
 

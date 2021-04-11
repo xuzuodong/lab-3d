@@ -1044,7 +1044,9 @@ export default [
     paragraph: '轻松拉货',
     reply: { choice: 0, index: 'last' },
     method: ({ goto }) => {
-      goto({ paragraph: '改变物体的质量', talk: 'last' })
+      if (gravity == 1) goto({ paragraph: '改变物体的质量', talk: 'last' })
+      if (gravity == -1) goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      if (gravity == -2) goto({ paragraph: '改变与接触面的面积', talk: 'last' })
     },
   },
 
