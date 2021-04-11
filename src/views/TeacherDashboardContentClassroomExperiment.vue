@@ -75,6 +75,11 @@ export default {
         this.loading = false
       },
       failure: (res) => {
+        this.loading = false
+        this.$q.notify({
+          message: res.data.info,
+          color: 'negative',
+        })
         console.log(res)
       },
     })
@@ -88,6 +93,11 @@ export default {
           this.loading = false
         },
         failure: (res) => {
+          this.loading = false
+          this.$q.notify({
+            message: res,
+            color: 'negative',
+          })
           console.log(res)
         },
       })

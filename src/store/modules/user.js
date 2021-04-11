@@ -191,6 +191,19 @@ const actions = {
       }
     })
   },
+
+  selectMyKexperiment({ commit }, { success, failure }) {
+    userApi.selectMyKexperiment({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      }
+    })
+  }
 }
 
 export default { namespaced: true, state, getters, actions, mutations }
