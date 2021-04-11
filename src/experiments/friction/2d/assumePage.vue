@@ -3,8 +3,8 @@
     <q-dialog
       ref="dialog"
       seamless
-      transition-show="slide-right"
-      transition-hide="slide-left"
+      transition-show="scale"
+      transition-hide="scale"
       class="q-pa-md row items-start q-gutter-md"
     >
       <q-card class="my-card">
