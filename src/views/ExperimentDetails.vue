@@ -45,7 +45,7 @@
                 icon-right="arrow_forward"
               />
               <div class="q-mt-sm">
-                <a @click="pretest(experiment.id, 1)">前测挑战</a>
+                <a @click="pretest(experiment.id, 1)" v-if="!isPretestFinished" class="underline">前测挑战</a>
               </div>
             </div>
           </div>
@@ -160,6 +160,7 @@ export default {
       experiment: null,
       knowledgePointTab: 0,
       knowledgeImageSlides: null,
+      isPretestFinished: false,
     }
   },
 
@@ -207,6 +208,7 @@ export default {
           this.experiment = experiment
           document.title = experiment.name + ' | Lab 3D'
           this.knowledgeImageSlides = this.experiment.knowledgePoints.map(() => 0)
+          this.isPretestFinished = experiment.isPretestFinished
         },
         failure: (error) => {
           console.log(error)
@@ -300,5 +302,10 @@ export default {
 }
 .q-carousel__next-arrow--horizontal {
   right: 5px !important;
+}
+
+.underline {
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
