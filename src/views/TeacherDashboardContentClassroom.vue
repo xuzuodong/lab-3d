@@ -17,13 +17,37 @@
         <div class="text-body1 q-mb-sm col-6">所属学科：{{ classroom.subject }}</div>
         <div class="text-body1 q-mb-sm col-6">教师：{{ classroom.teacher }}</div>
       </div>
+
+      <q-card class="q-mt-md q-mx-sm">
+        <q-tabs v-model="tab" class="text-grey" active-color="primary">
+          <q-tab name="student" label="学生" />
+          <q-tab name="experiment" label="实验" />
+        </q-tabs>
+
+        <q-separator />
+
+        <q-tab-panels v-model="tab" keep-alive animated>
+          <q-tab-panel name="student"><TeacherDashboardContentClassroomStudentVue /></q-tab-panel>
+          <q-tab-panel name="experiment"><TeacherDashboardContentClassroomExperimentVue /></q-tab-panel>
+        </q-tab-panels>
+      </q-card>
     </div>
   </q-page>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import TeacherDashboardContentClassroomExperimentVue from './TeacherDashboardContentClassroomExperiment.vue'
+import TeacherDashboardContentClassroomStudentVue from './TeacherDashboardContentClassroomStudent.vue'
+
 export default {
+  components: { TeacherDashboardContentClassroomStudentVue, TeacherDashboardContentClassroomExperimentVue },
+  data() {
+    return {
+      tab: 'student',
+    }
+  },
+ 
   computed: {
     ...mapState('user', ['classrooms']),
 
@@ -37,18 +61,8 @@ export default {
 
     setClipboard(text) {
       navigator.clipboard.writeText(text).then(
-        () => {
-          this.$q.notify({
-            message: '复制成功',
-            color: 'positive',
-          })
-        },
-        () => {
-          this.$q.notify({
-            message: '无法复制到剪切板',
-            color: 'red',
-          })
-        }
+        () => this.$q.notify({ message: '复制成功', color: 'positive' }),
+        () => this.$q.notify({ message: '无法复制到剪切板', color: 'red' })
       )
     },
   },

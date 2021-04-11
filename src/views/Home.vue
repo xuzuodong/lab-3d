@@ -11,6 +11,7 @@
 import HomeExperimentsListVue from './HomeExperimentsList.vue'
 import url_background from '../assets/background.jpg'
 
+//先把评价页链接在这里，到时候再改路径
 export default {
   name: 'Home',
 

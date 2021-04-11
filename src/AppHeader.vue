@@ -34,6 +34,13 @@
                 <q-item-section>班级</q-item-section>
               </q-item>
 
+              <q-item to="/kexperiments-list">
+                <q-item-section side>
+                  <q-icon name="group" size="sm" />
+                </q-item-section>
+                <q-item-section>我的实验记录</q-item-section>
+              </q-item>
+
               <q-item
                 v-if="userInfo.type == '教师'"
                 clickable

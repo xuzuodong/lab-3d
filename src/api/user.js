@@ -97,5 +97,48 @@ export default {
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
+  },
+
+  selectKexperimentByClass({ classId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/selectKexperimentByClass',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { classId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getClassById({ classId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'teacher/getClassById',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { classId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  selectMyKexperiment({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'behavior/selectMyKexperiment',
+      headers: { Authorization: store.state.user.userInfo.token }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  removeUser({ userId, classId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'teacher/removeUser',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { userId, classId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
   }
 }
