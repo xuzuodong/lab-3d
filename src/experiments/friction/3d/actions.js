@@ -2,12 +2,11 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 
 export default {
   changeGround(ground) {
-    let mat = this.getMaterialByName('mat')
+    let groundMaterial = this.getMaterialByName('groundMaterial')
     let road = this.getMeshByName('road')
     return new Promise((resolve) => {
-      mat.diffuseTexture = new BABYLON.Texture(ground, this)
-      mat.diffuseColor = new BABYLON.Color3(1, 1, 1)
-      road.material = mat
+      groundMaterial.diffuseTexture = new BABYLON.Texture(ground, this)
+      road.material = groundMaterial
       resolve()
     })
   },
@@ -25,6 +24,7 @@ export default {
     runAnim.play(true);
     runAnim.setWeightForAllAnimatables(0);
     let currentParam = idleParam
+    let scene = this
     //0.01是动画变速的速率，0.05就会很快了已经。
     function onBeforeAnimation() {
       // Increment the weight of the current override animation
@@ -50,10 +50,10 @@ export default {
       }
       // Remove the callback the current animation weight reaches 1 or
       // when all override animations reach 0 when current is undefined
-      // if ((currentParam && currentParam.weight === 1) ||
-      //   (idleParam.weight === 0 && walkParam.weight === 0 && runParam.weight === 0)) {
-      //   scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
-      // }
+      if ((currentParam && currentParam.weight === 1) ||
+        (idleParam.weight === 0 && walkParam.weight === 0 && runParam.weight === 0)) {
+        scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
+      }
     }
     return new Promise((resolve) => {
       if (currentParam === runParam) {
@@ -82,6 +82,7 @@ export default {
     let runParam = { name: "Run", anim: runAnim, weight: 1 };
     runAnim.play(true);
     runAnim.setWeightForAllAnimatables(0);
+    let scene = this
     let currentParam = runParam
     //0.01是动画变速的速率，0.05就会很快了已经。
     function onBeforeAnimation() {
@@ -108,10 +109,10 @@ export default {
       }
       // Remove the callback the current animation weight reaches 1 or
       // when all override animations reach 0 when current is undefined
-      // if ((currentParam && currentParam.weight === 1) ||
-      //   (idleParam.weight === 0 && walkParam.weight === 0 && runParam.weight === 0)) {
-      //   scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
-      // }
+      if ((currentParam && currentParam.weight === 1) ||
+        (idleParam.weight === 0 && walkParam.weight === 0 && runParam.weight === 0)) {
+        scene.onBeforeAnimationsObservable.removeCallback(onBeforeAnimation);
+      }
     }
     return new Promise((resolve) => {
       if (currentParam === idleParam) {
@@ -132,10 +133,10 @@ export default {
   },
 
   iceRun(animationkey) {
-    const role = this.meshes[3]
-    const box = this.meshes[4]
-    const fakebox = this.meshes[5]
+    const box = this.meshes[5]
     const xbot = this.meshes[0]
+    const role = this.meshes[3]
+    const fakebox = this.meshes[4]
     const animation1 = new BABYLON.Animation("tutoAnimation",
       "position.z",
       60,
@@ -146,13 +147,13 @@ export default {
     for (let i = 0; i < 13; i++) {
       an1keys.push({
         frame: i * 10,
-        value: (animationkey * i + animationkey) * i / 2
+        value: (animationkey * i + animationkey) * i / 2 + fakebox.position.z
       })
     }
     for (let i = 36; i < 49; i++) {
       an1keys.push({
         frame: i * 10,
-        value: (animationkey * i + animationkey) * i / 2 - (i - 24) * (i - 24) * animationkey
+        value: (animationkey * i + animationkey) * i / 2 - (i - 24) * (i - 24) * animationkey + fakebox.position.z
       })
     }
     animation1.setKeys(an1keys);
@@ -166,13 +167,13 @@ export default {
     for (let i = 0; i < 13; i++) {
       an2keys.push({
         frame: i * 10,
-        value: (animationkey * i + animationkey) * i / 2 - 5
+        value: (animationkey * i + animationkey) * i / 2 + role.position.z
       })
     }
     for (let i = 36; i < 49; i++) {
       an2keys.push({
         frame: i * 10,
-        value: (animationkey * i + animationkey) * i / 2 - (i - 24) * (i - 24) * animationkey - 5
+        value: (animationkey * i + animationkey) * i / 2 - (i - 24) * (i - 24) * animationkey + role.position.z
       })
     }
     animation2.setKeys(an2keys);
@@ -186,13 +187,13 @@ export default {
     for (let i = 0; i < 13; i++) {
       an3keys.push({
         frame: i * 10,
-        value: (animationkey * i + animationkey) * i / 2 - 10
+        value: (animationkey * i + animationkey) * i / 2 + box.position.z
       })
     }
     for (let i = 36; i < 49; i++) {
       an3keys.push({
         frame: i * 10,
-        value: (animationkey * i + animationkey) * i / 2 - (i - 24) * (i - 24) * animationkey - 10
+        value: (animationkey * i + animationkey) * i / 2 - (i - 24) * (i - 24) * animationkey + box.position.z
       })
     }
     animation3.setKeys(an3keys);
@@ -210,22 +211,37 @@ export default {
     this.iceRun(animationkey)
   },
 
-  changeArea() {
-    const box = this.getMeshByName('boxx')
-    console.log(box)
+  smallArea() {
+    const box = this.getMeshByName('box')
     box.rotation.z = Math.PI / 2;
-    box.rotation.x = Math.PI;
     box.position.y = 2.25
   },
-
-  smallArea() {
-    const box = this.getMeshByName('boxx')
-    box.rotation.z = Math.PI / 2;
-    box.position.y = 2.25
+  reSmallArea() {
+    const box = this.getMeshByName('box')
+    box.rotation.z = Math.PI;
+    box.position.y = 1
   },
   largeArea() {
-    const box = this.getMeshByName('boxx')
+    const box = this.getMeshByName('box')
     box.rotation.x = Math.PI / 2;
     box.position.y = 0.6
   },
+  reLargeArea() {
+    const box = this.getMeshByName('box')
+    box.rotation.x = Math.PI;
+    box.position.y = 1
+  },
+
+  backToStart() {
+    const box = this.meshes[5]
+    const xbot = this.meshes[0]
+    const role = this.meshes[3]
+    const fakebox = this.meshes[4]
+    if (xbot.position.z > 1650) {
+      box.position = new BABYLON.Vector3(0, 1, -10);
+      role.position = new BABYLON.Vector3(0, 1.15, -5.0);
+      fakebox.position = new BABYLON.Vector3(0, 1, 0);
+      xbot.position = new BABYLON.Vector3(0, 0, 0)
+    }
+  }
 }

@@ -3,7 +3,7 @@ import userApi from '../../api/user'
 
 const state = () => ({
   userInfo: Vue.$cookies.get('userInfo'),
-  classrooms: null
+  classrooms: null,
 })
 
 const getters = {}
@@ -21,7 +21,7 @@ const mutations = {
 
   updateClassrooms(state, classrooms) {
     state.classrooms = classrooms
-  }
+  },
 }
 
 const actions = {
@@ -38,7 +38,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -54,7 +54,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -68,7 +68,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -83,7 +83,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -98,7 +98,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -112,7 +112,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -131,7 +131,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -145,7 +145,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -162,7 +162,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -176,7 +176,21 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
+    })
+  },
+
+  startExperiment({ commit }, { experimentId, success, failure }) {
+    userApi.startExperiment({
+      experimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
     })
   },
 
@@ -190,7 +204,7 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
   },
 
@@ -205,7 +219,29 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
+    })
+  },
+
+  submitBehavior(
+    { commit },
+    { kexperimentId, name, type, content, correctContent, isCorrect, success, failure }
+  ) {
+    userApi.submitBehavior({
+      kexperimentId,
+      name,
+      type,
+      content,
+      correctContent,
+      isCorrect,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
     })
   },
 
@@ -218,9 +254,23 @@ const actions = {
       },
       failure(res) {
         failure(res)
-      }
+      },
     })
-  }
+  },
+
+  finishKexperiment({ commit }, { kexperimentId, success, failure }) {
+    userApi.finishKexperiment({
+      kexperimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
 }
 
 export default { namespaced: true, state, getters, actions, mutations }

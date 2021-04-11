@@ -17,17 +17,21 @@ export default {
   mounted() {
     babylonApp = new BabylonApp()
     const scene = babylonApp.createScene({
-      state: {},
+      state: { targetPanel: Object, assumePanel: Object, testPanel: Object, questionPanel: Object },
       actions,
     })
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene, debug:'重量调节器' })
+      this.$talker({ script, hooks, scene, debug: '质量结束' })
     })
   },
 
   beforeDestroy() {
+    babylonApp.scene.state.targetPanel.hide && babylonApp.scene.state.targetPanel.hide()
+    babylonApp.scene.state.assumePanel.hide && babylonApp.scene.state.assumePanel.hide()
+    babylonApp.scene.state.testPanel.hide && babylonApp.scene.state.testPanel.hide()
+    babylonApp.scene.state.questionPanel.hide && babylonApp.scene.state.questionPanel.hide()
     babylonApp.destroy()
     babylonApp = null
   },

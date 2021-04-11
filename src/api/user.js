@@ -7,7 +7,7 @@ export default {
     axios({
       method: 'post',
       url: baseUrl + 'user/login',
-      data: { username, password }
+      data: { username, password },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -17,7 +17,7 @@ export default {
     axios({
       method: 'post',
       url: baseUrl + 'user/register',
-      data: { username, password, userType }
+      data: { username, password, userType },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -27,7 +27,7 @@ export default {
     axios({
       method: 'get',
       url: baseUrl + 'user/selectMyClasses',
-      headers: { Authorization: store.state.user.userInfo.token }
+      headers: { Authorization: store.state.user.userInfo.token },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -38,7 +38,7 @@ export default {
       method: 'post',
       url: baseUrl + 'user/joinClass',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { classCode }
+      data: { classCode },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -49,7 +49,7 @@ export default {
       method: 'post',
       url: baseUrl + 'user/quitClass',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { classId }
+      data: { classId },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -60,7 +60,17 @@ export default {
       method: 'post',
       url: baseUrl + 'teacher/createClass',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { ...classInfo }
+      data: { ...classInfo },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+  startExperiment({ experimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/startExperiment',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { experimentId },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -71,7 +81,18 @@ export default {
       method: 'post',
       url: baseUrl + 'teacher/deleteClass',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { classId }
+      data: { classId },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  submitBehavior({ kexperimentId, name, type, content, correctContent, isCorrect, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/submitBehavior',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId, name, type, content, correctContent, isCorrect },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -82,7 +103,18 @@ export default {
       method: 'post',
       url: baseUrl + 'teacher/updateClassInfo',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { ...classInfo }
+      data: { ...classInfo },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  finishKexperiment({ kexperimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/finishKexperiment',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -93,7 +125,7 @@ export default {
       method: 'post',
       url: baseUrl + 'behavior/recordTestTime',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { experimentId, testName, time }
+      data: { experimentId, testName, time },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -104,7 +136,7 @@ export default {
       method: 'post',
       url: baseUrl + 'behavior/selectKexperimentByClass',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { classId }
+      data: { classId },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -115,7 +147,7 @@ export default {
       method: 'post',
       url: baseUrl + 'teacher/getClassById',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { classId }
+      data: { classId },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -125,7 +157,7 @@ export default {
     axios({
       method: 'get',
       url: baseUrl + 'behavior/selectMyKexperiment',
-      headers: { Authorization: store.state.user.userInfo.token }
+      headers: { Authorization: store.state.user.userInfo.token },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
@@ -136,9 +168,9 @@ export default {
       method: 'post',
       url: baseUrl + 'teacher/removeUser',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { userId, classId }
+      data: { userId, classId },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
-  }
+  },
 }
