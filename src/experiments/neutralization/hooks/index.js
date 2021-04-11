@@ -5,10 +5,10 @@ import ControlPanelVue from '../2d/ControlPanel.vue'
 import TargetPanelVue from '../2d/TargetPanel.vue'
 import store from '../../../store'
 
-let kexperimentId = 670
+let kexperimentId 
 
 export default [
-  /*/ 实验开始，启用一个新的kexperiment
+  // 实验开始，启用一个新的kexperiment
   {
     paragraph: '初始画面',
     talk: 0,
@@ -25,7 +25,8 @@ export default [
       })
       next()
     }
-  },*/
+  },
+
   // 拉近摄像头，出现滴管
   {
     paragraph: '选择酸溶液',
@@ -85,7 +86,21 @@ export default [
         component: DialogQuestionVue,
         dialogType: 'useDropperRadio',
         acid_alkali: []
-      }).onOk(async () => {
+      }).onOk(async (val) => {
+        store.dispatch('user/submitBehavior', {
+          kexperimentId,
+          name: '试管滴加正误选择题结论',
+          type: 'BEHAVIOR_CHOICE',
+          content: '您的选择是' + val.useDropper,
+          isCorrect: val.useDropper == 'B' ? true : false,
+          correctContent: 'B',
+          success: (res) => {
+            console.log(res)
+          },
+          failure: (res) => {
+            console.log(res)
+          }
+        })
         await generalOperations.putBackDropper(scene, scene.acidType)
         await scene.resetCamera()
         next()
@@ -116,15 +131,30 @@ export default [
       Dialog.create({
         component: ControlPanelVue,
         scene,
-        dropType: scene.alkaliType
+        dropType: scene.alkaliType,
+        free: false
       }).onOk(() => {
         scene.progress[1].finished = true
         scene.targetPanel.update({ progress: scene.progress })
         Dialog.create({
           component: DialogQuestionVue,
-          dialogType: 'textConclusion',
+          dialogType: 'changeConclusion',
           acid_alkali: [scene.acidType, scene.alkaliType]
-        }).onOk(async () => {
+        }).onOk(async (val) => {
+          store.dispatch('user/submitBehavior', {
+            kexperimentId,
+            name: '酸碱反应现象选择题结论',
+            type: 'BEHAVIOR_CHOICE',
+            content: '您的选择是' + val.changeConclusion,
+            isCorrect: val.changeConclusion == 'B' ? true : false,
+            correctContent: 'B',
+            success: (res) => {
+              console.log(res)
+            },
+            failure: (res) => {
+              console.log(res)
+            }
+          })
           await scene.resetCamera()
           scene.panelDropperreset()
           next()
@@ -188,13 +218,14 @@ export default [
           acid_alkali: []
         }).onOk((val) => {
           scene.panelDropperreset()
-          const isCorrect = scene.judgeBehavior(val.radioConclusion)
+          const evaluateArr = scene.judgeBehavior(val.radioConclusion)
           store.dispatch('user/submitBehavior', {
             kexperimentId,
             name: '第一次自由实验选择题结论',
             type: 'BEHAVIOR_CHOICE',
-            content: 'string',
-            isCorrect,
+            content: '您的选择是' + val.radioConclusion,
+            isCorrect: evaluateArr.isCorrect,
+            correctContent: evaluateArr.correctContent,
             success: (res) => {
               console.log(res)
             },
@@ -202,6 +233,36 @@ export default [
               console.log(res)
             }
           })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId,
+            name: '第一次自由实验现象评价',
+            type: 'BEHAVIOR_INSPECTION',
+            content: evaluateArr.result.content,
+            isCorrect: evaluateArr.result.isCorrect,
+            correctContent: '',
+            success: (res) => {
+              console.log(res)
+            },
+            failure: (res) => {
+              console.log(res)
+            }
+          })
+          for (let i = 0; i < evaluateArr.behavior.length; i++) {
+            store.dispatch('user/submitBehavior', {
+              kexperimentId,
+              name: '第一次自由实验操作评价' + i,
+              type: 'BEHAVIOR_INQUIRY',
+              content: evaluateArr.behavior[i].content,
+              isCorrect: evaluateArr.behavior[i].isCorrect,
+              correctContent: '',
+              success: (res) => {
+                console.log(res)
+              },
+              failure: (res) => {
+                console.log(res)
+              }
+            })
+          }
           next()
         })
       })
@@ -246,8 +307,53 @@ export default [
           component: DialogQuestionVue,
           dialogType: 'radioConclusion',
           acid_alkali: []
-        }).onOk(() => {
+        }).onOk((val) => {
           scene.panelDropperreset()
+          const evaluateArr = scene.judgeBehavior(val.radioConclusion)
+          store.dispatch('user/submitBehavior', {
+            kexperimentId,
+            name: '第二次自由实验选择题结论',
+            type: 'BEHAVIOR_CHOICE',
+            content: '您的选择是' + val.radioConclusion,
+            isCorrect: evaluateArr.isCorrect,
+            correctContent: evaluateArr.correctContent,
+            success: (res) => {
+              console.log(res)
+            },
+            failure: (res) => {
+              console.log(res)
+            }
+          })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId,
+            name: '第二次自由实验现象评价',
+            type: 'BEHAVIOR_INSPECTION',
+            content: evaluateArr.result.content,
+            isCorrect: evaluateArr.result.isCorrect,
+            correctContent: '',
+            success: (res) => {
+              console.log(res)
+            },
+            failure: (res) => {
+              console.log(res)
+            }
+          })
+          for (let i = 0; i < evaluateArr.behavior.length; i++) {
+            store.dispatch('user/submitBehavior', {
+              kexperimentId,
+              name: '第二次自由实验操作评价' + i,
+              type: 'BEHAVIOR_INQUIRY',
+              content: evaluateArr.behavior[i].content,
+              isCorrect: evaluateArr.behavior[i].isCorrect,
+              correctContent: '',
+              success: (res) => {
+                console.log(res)
+              },
+              failure: (res) => {
+                console.log(res)
+              }
+            })
+          }
           next()
         })
       })
@@ -274,6 +380,32 @@ export default [
     reply: { choice: 1, index: 'last' },
     method: ({ restart }) => {
       restart()
+    }
+  },
+
+  // 结束实验，接下来可自由探究
+  {
+    paragraph: '结束语2',
+    choice: 'last',
+    method: ({ scene }) => {
+      scene.mutate({ allFinished: true })
+      scene.mutate({ acidType: '' })
+      scene.mutate({ alkaliType: '' })
+      scene.mutate({ indicatorType: '' })
+      scene.resetAll().then(() => {
+        scene.existLiquid.splice(0, scene.existLiquid.length)
+        scene.progress.splice(0, scene.progress.length)
+      })
+      scene.freeExperiment('restart')
+      store.dispatch('user/finishKexperiment', {
+        kexperimentId: kexperimentId,
+        success: (res) => {
+          console.log(res)
+        },
+        failure: (res) => {
+          console.log(res)
+        }
+      })
     }
   }
 ]

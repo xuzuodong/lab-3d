@@ -66,14 +66,25 @@ export default {
       .catch((res) => failure(res))
   },
 
-  submitBehavior({ kexperimentId, name, type, content, isCorrect, success, failure }) {
+  submitBehavior({ kexperimentId, name, type, content, isCorrect, correctContent, success, failure }) {
     axios({
       method: 'post',
       url: baseUrl + 'behavior/submitBehavior',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { kexperimentId, name, type, content, isCorrect }
+      data: { kexperimentId, name, type, content, isCorrect, correctContent }
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
-  }
+  },
+
+  finishKexperiment({ kexperimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/finishKexperiment',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId }
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
 }

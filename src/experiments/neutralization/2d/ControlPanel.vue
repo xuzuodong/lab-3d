@@ -40,6 +40,10 @@
         <q-btn color="primary" label="滴加" @click="drop" class="q-ma-md" unelevated dense />
         <q-btn color="primary" label="结束" @click="stop" class="q-ma-md" outline dense />
       </q-card-actions>
+
+      <q-card-actions align="center" v-if="allFinished">
+        <q-btn color="primary" label="清空试管" @click="freeResart" class="q-mb-xs" unelevated dense />
+      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
@@ -55,23 +59,23 @@ export default {
   name: 'controlPanel',
   props: {
     scene: Object,
-    dropType: String
+    dropType: String,
   },
 
   data() {
     return {
       isDropping: false,
-      clickCount: 0
+      clickCount: 0,
     }
   },
 
   computed: {
-    isAddIndicater: function() {
+    isAddIndicater: function () {
       if (this.scene.existLiquid.indexOf('pur') != -1 || this.scene.existLiquid.indexOf('phe') != -1) {
         return true
       } else return false
     },
-    liquidGroup: function() {
+    liquidGroup: function () {
       let initArr = this.scene.existLiquid
       let formatArr = []
       let returnArr = []
@@ -88,7 +92,10 @@ export default {
         } else continue
       }
       return returnArr
-    }
+    },
+    allFinished: function () {
+      return this.scene.allFinished
+    },
   },
 
   methods: {
@@ -125,18 +132,22 @@ export default {
     },
 
     finishStep(dropType) {
-      if (this.scene.progress[0].step.slice(0, 1) != '1') {
-        if (dropType === 'pur' || dropType === 'phe') {
-          this.scene.progress[1].finished = true
-        } else {
-          if (!this.scene.progress[0].finished) {
-            this.scene.progress[0].finished = true
+      if (!this.allFinished) {
+        if (this.scene.progress[0].step.slice(0, 1) != '1') {
+          if (dropType === 'pur' || dropType === 'phe') {
+            this.scene.progress[1].finished = true
           } else {
-            this.scene.progress[2].finished = true
+            if (!this.scene.progress[0].finished) {
+              this.scene.progress[0].finished = true
+            } else {
+              this.scene.progress[2].finished = true
+            }
           }
         }
+        this.finishStep = function () {}
+      } else {
+        this.finishStep = function () {}
       }
-      this.finishStep = function() {}
     },
 
     liquidLevel() {
@@ -209,7 +220,7 @@ export default {
       } else if (this.scene.existLiquid.length == 40) {
         Dialog.create({
           component: WarnPanelVue,
-          warnInfo: '当前试管中溶液已满，若要继续实验，请先倒空试管！'
+          warnInfo: '当前试管中溶液已满，若要继续实验，请先倒空试管！',
         })
       }
     },
@@ -230,8 +241,14 @@ export default {
         this.$emit('ok')
         this.hide()
       }
-    }
-  }
+    },
+
+    async freeResart() {
+      this.scene.existLiquid.splice(0, this.scene.existLiquid.length)
+      this.scene.freeExperiment('restart')
+      await this.scene.resetAll()
+    },
+  },
 }
 </script>
 

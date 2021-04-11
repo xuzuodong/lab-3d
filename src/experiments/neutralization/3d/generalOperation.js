@@ -259,47 +259,49 @@ const openWarnPanel = (warnInfo) => {
 }
 
 const liquidWarn = (scene, liquidType) => {
-  if (scene.progress[0].step.slice(0, 1) != '1') {
-    if (!scene.progress[0].finished) {
-      if (liquidType === 'pur' || liquidType === 'phe') {
-        openWarnPanel('当前进行实验第一步，请先滴加酸或碱溶液吧！')
+  if (!scene.allFinished) {
+    if (scene.progress[0].step.slice(0, 1) != '1') {
+      if (!scene.progress[0].finished) {
+        if (liquidType === 'pur' || liquidType === 'phe') {
+          openWarnPanel('当前进行实验第一步，请先滴加酸或碱溶液吧！')
+        }
+      } else if (!scene.progress[1].finished) {
+        if (liquidType != 'pur' && liquidType != 'phe') {
+          openWarnPanel('当前进行实验第二步， 请滴加酸碱指示剂')
+        }
+      } else if (!scene.progress[2].finished) {
+        let haveAcid, haveIndicator, haveAlkali
+        if (scene.existLiquid.indexOf('acid_hcl') != -1 || scene.existLiquid.indexOf('acid_ch3cooh') != -1) {
+          haveAcid = true
+        }
+        if (scene.existLiquid.indexOf('pur') != -1 || scene.existLiquid.indexOf('phe') != -1) {
+          haveIndicator = true
+        }
+        if (
+          scene.existLiquid.indexOf('alkali_naoh') != -1 ||
+          scene.existLiquid.indexOf('alkali_nahco3') != -1
+        ) {
+          haveAlkali = true
+        }
+        switch (liquidType) {
+          case 'acid_hcl':
+          case 'acid_ch3cooh':
+            if (haveAcid) openWarnPanel('您已滴加过酸溶液，现在进行实验第三步，请滴加碱溶液！')
+            break
+          case 'alkali_naoh':
+          case 'alkali_nahco3':
+            if (haveAlkali) openWarnPanel('您已滴加过碱溶液，现在进行实验第三步，请滴加酸溶液！')
+            break
+          case 'pur':
+          case 'phe':
+            if (haveIndicator) {
+              if (haveAcid) openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加碱溶液！')
+              if (haveAlkali) openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加酸溶液！')
+            }
+        }
+      } else {
+        openWarnPanel('您现在已完成本轮自由实验，可点击左侧面板的“完成”按钮结束实验！')
       }
-    } else if (!scene.progress[1].finished) {
-      if (liquidType != 'pur' && liquidType != 'phe') {
-        openWarnPanel('当前进行实验第二步， 请滴加酸碱指示剂')
-      }
-    } else if (!scene.progress[2].finished) {
-      let haveAcid, haveIndicator, haveAlkali
-      if (scene.existLiquid.indexOf('acid_hcl') != -1 || scene.existLiquid.indexOf('acid_ch3cooh') != -1) {
-        haveAcid = true
-      }
-      if (scene.existLiquid.indexOf('pur') != -1 || scene.existLiquid.indexOf('phe') != -1) {
-        haveIndicator = true
-      }
-      if (
-        scene.existLiquid.indexOf('alkali_naoh') != -1 ||
-        scene.existLiquid.indexOf('alkali_nahco3') != -1
-      ) {
-        haveAlkali = true
-      }
-      switch (liquidType) {
-        case 'acid_hcl':
-        case 'acid_ch3cooh':
-          if (haveAcid) openWarnPanel('您已滴加过酸溶液，现在进行实验第三步，请滴加碱溶液！')
-          break
-        case 'alkali_naoh':
-        case 'alkali_nahco3':
-          if (haveAlkali) openWarnPanel('您已滴加过碱溶液，现在进行实验第三步，请滴加酸溶液！')
-          break
-        case 'pur':
-        case 'phe':
-          if (haveIndicator) {
-            if (haveAcid) openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加碱溶液！')
-            if (haveAlkali) openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加酸溶液！')
-          }
-      }
-    } else {
-      openWarnPanel('您现在已完成本轮自由实验，可点击左侧面板的“完成”按钮结束实验！')
     }
   }
 }

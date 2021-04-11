@@ -210,33 +210,133 @@ export default {
 
   judgeBehavior(choice) {
     // 通过溶液组合数列existLiquid中的元素顺序，判断用户实验的一系列操作是否正确
-    let acidIndex, alkaliIndex, indicatorIndex, mixError
-    const minNum = (num1, num2) => {
-      if (num1 === -1) return num2
-      if (num2 === -1) return num1
-      if (num1 != 1 && num2 != -1) {
-        console.log('酸溶液或碱溶液混合滴加，错误！')
-        if (num1 > num2) return num2
-        else return num1
-      }
+    const matTubeLiquid = this.getMaterialByName('matTubeLiquid')
+    let acidIndex, alkaliIndex, indicatorIndex
+    let returnObj = {
+      behavior: [],
+      result: { content: '', isCorrect: false },
+      isCorrect: false,
+      correctContent: ''
     }
-    acidIndex = minNum(this.existLiquid.indexOf('acid_hcl'), this.existLiquid.indexOf('acid_ch3cooh'))
-    alkaliIndex = minNum(this.existLiquid.indexOf('alkali_naoh'), this.existLiquid.indexOf('alkali_ch3cooh'))
-    indicatorIndex = minNum(this.existLiquid.indexOf('pur'), this.existLiquid.indexOf('phe'))
+
+    const minNum = (liquidType, num1, num2) => {
+      if (num1 === -1 && num2 === -1) {
+        if (liquidType == 'acid')
+          returnObj.behavior.push({ content: '实验操作错误：没有滴加酸溶液！', isCorrect: false })
+        if (liquidType == 'alkali')
+          returnObj.behavior.push({ content: '实验操作错误：没有滴加碱溶液！', isCorrect: false })
+      } else {
+        if (num1 === -1) return num2
+        if (num2 === -1) return num1
+      }
+      if (num1 != 1 && num2 != -1) {
+        if (liquidType == 'acid')
+          returnObj.behavior.push({ content: '实验操作错误：两种酸溶液混合滴加！', isCorrect: false })
+        if (liquidType == 'alkali')
+          returnObj.behavior.push({ content: '实验操作错误：两种碱溶液混合滴加！', isCorrect: false })
+      }
+      if (num1 > num2) return num2
+      else return num1
+    }
+
+    acidIndex = minNum('acid', this.existLiquid.indexOf('acid_hcl'), this.existLiquid.indexOf('acid_ch3cooh'))
+    alkaliIndex = minNum(
+      'alkali',
+      this.existLiquid.indexOf('alkali_naoh'),
+      this.existLiquid.indexOf('alkali_nahco3')
+    )
+    indicatorIndex = minNum('indicator', this.existLiquid.indexOf('pur'), this.existLiquid.indexOf('phe'))
     if (
       (indicatorIndex > acidIndex && indicatorIndex < alkaliIndex) ||
       (indicatorIndex > alkaliIndex && indicatorIndex < acidIndex)
     ) {
-      console.log('溶液顺序滴加正确')
+      returnObj.behavior.push({
+        content: '实验操作正确：酸溶液、碱溶液、指示剂滴加顺序正确！',
+        isCorrect: true
+      })
     } else {
-      console.log('溶液顺序滴加出错')
+      returnObj.behavior.push({
+        content: '实验操作错误：酸溶液、碱溶液、指示剂滴加顺序错误！',
+        isCorrect: false
+      })
     }
-    if (this.indicatorType === 'phe') {
-      if (choice == 'C') return true
-      else return false
+    if (this.indicatorType === 'pur') {
+      if (acidIndex === -1 || alkaliIndex === -1) {
+        if (acidIndex === -1) returnObj.result = { content: '实验现象错误：未滴加酸溶液！', isCorrect: false }
+        if (alkaliIndex === -1)
+          returnObj.result = { content: '实验现象错误：未滴加碱溶液！', isCorrect: false }
+      } else {
+        if (acidIndex < alkaliIndex) {
+          if (matTubeLiquid.diffuseColor.r == 0)
+            returnObj.result = { content: '实验现象正确：可以观察到完整的颜色变化过程！', isCorrect: true }
+          else returnObj.result = { content: '实验现象错误：碱溶液滴加过少！', isCorrect: false }
+          returnObj.correctContent = '石蕊试液先变紫再变蓝'
+          switch (choice) {
+            case 'A':
+              returnObj.isCorrect = true
+              break
+            case 'B':
+            case 'C':
+            case 'D':
+              returnObj.isCorrect = false
+              break
+          }
+        } else {
+          if (matTubeLiquid.diffuseColor.r == 1)
+            returnObj.result = { content: '实验现象正确：可以观察到完整的颜色变化过程！', isCorrect: true }
+          else returnObj.result = { content: '实验现象错误：酸溶液滴加过少！', isCorrect: false }
+          returnObj.correctContent = '石蕊试液先变紫再变红'
+          switch (choice) {
+            case 'B':
+              returnObj.isCorrect = true
+              break
+            case 'A':
+            case 'C':
+            case 'D':
+              returnObj.isCorrect = false
+              break
+          }
+        }
+      }
     } else {
-      if (choice == 'A') return true
-      else return false
+      if (acidIndex === -1 || alkaliIndex === -1) {
+        if (acidIndex === -1) returnObj.result = { content: '实验现象错误：未滴加酸溶液！', isCorrect: false }
+        if (alkaliIndex === -1)
+          returnObj.result = { content: '实验现象错误：未滴加碱溶液！', isCorrect: false }
+      } else {
+        if (acidIndex < alkaliIndex) {
+          if (matTubeLiquid.diffuseColor.b == 0)
+            returnObj.result = { content: '实验现象正确：可以观察到完整的颜色变化过程！', isCorrect: true }
+          else returnObj.result = { content: '实验现象错误：碱溶液滴加过少！', isCorrect: false }
+          returnObj.correctContent = '酚酞试液变红'
+          switch (choice) {
+            case 'C':
+              returnObj.isCorrect = true
+              break
+            case 'A':
+            case 'B':
+            case 'D':
+              returnObj.isCorrect = false
+              break
+          }
+        } else {
+          if (matTubeLiquid.diffuseColor.b == 1)
+            returnObj.result = { content: '实验现象正确：可以观察到完整的颜色变化过程！', isCorrect: true }
+          else returnObj.result = { content: '实验现象错误：酸溶液滴加过少！', isCorrect: false }
+          returnObj.correctContent = '酚酞试液变无色'
+          switch (choice) {
+            case 'D':
+              returnObj.isCorrect = true
+              break
+            case 'A':
+            case 'B':
+            case 'C':
+              returnObj.isCorrect = false
+              break
+          }
+        }
+      }
     }
+    return returnObj
   }
 }

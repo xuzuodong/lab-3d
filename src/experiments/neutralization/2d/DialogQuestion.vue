@@ -20,11 +20,25 @@
           <q-img :src="radioImgUrl.radioD" style="height: 125px; max-width: 80px" contain />
         </div>
       </q-card-section>
-      <q-card-section class="bg-primary text-white" v-if="dialogType == 'textConclusion'">
+      <q-card-section class="bg-primary text-white row" v-if="dialogType == 'changeConclusion'">
         <div class="text-h6">
           在刚刚{{ acid }}和{{ alkali }}的反应中，你有观察到它们之间发生了什么明显的变化吗？
         </div>
-        <q-input filled v-model="conclusion.textConclusion" :dense="false" />
+        <q-separator />
+        <q-radio
+          v-model="conclusion.changeConclusion"
+          val="A"
+          label="A 、有变化"
+          color="white"
+          class="col-12"
+        />
+        <q-radio
+          v-model="conclusion.changeConclusion"
+          val="B"
+          label="B 、没有变化"
+          color="white"
+          class="col-12"
+        />
       </q-card-section>
       <q-card-section class="bg-primary text-white row" v-if="dialogType == 'radioConclusion'">
         <div class="text-h6">在刚刚的中和反应中，你观察到了什么反应现象？</div>
@@ -38,7 +52,7 @@
         <q-radio
           v-model="conclusion.radioConclusion"
           val="B"
-          label="B .石蕊试液先变蓝再变紫"
+          label="B .石蕊试液先变紫再变红"
           color="white"
           class="col-12"
         />
@@ -52,7 +66,7 @@
         <q-radio
           v-model="conclusion.radioConclusion"
           val="D"
-          label="D .酚酞试液变蓝"
+          label="D .酚酞试液变无色"
           color="white"
           class="col-12"
         />
@@ -79,7 +93,7 @@ export default {
     return {
       conclusion: {
         useDropper: '',
-        textConclusion: '',
+        changeConclusion: '',
         radioConclusion: '',
       },
       radioImgUrl: { radioA, radioB, radioC, radioD },
@@ -123,8 +137,8 @@ export default {
             this.hide()
           }
           break
-        case 'textConclusion':
-          if (this.conclusion.textConclusion != '') {
+        case 'changeConclusion':
+          if (this.conclusion.changeConclusion != '') {
             this.$emit('ok', this.conclusion)
             this.hide()
           }

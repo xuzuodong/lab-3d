@@ -26,17 +26,20 @@ export default {
         progress: [], // 一个对象数组，记录实验步骤；{step: string, finished: boolen}，当前第几步，是否完成
         targetPanel: null,
         liquidPanel: null,
+        allFinished: false, // 判断用户是否全部做完，以此判断是否没有引导，完全自由探究
       },
       actions,
     })
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene, debug: '阶段一-提交实验结论后' })
+      this.$talker({ script, hooks, scene, debug: '' })
     })
   },
 
   beforeDestroy() {
+    babylonApp.scene.state.targetPanel?.hide && babylonApp.scene.state.targetPanel.hide()
+    babylonApp.scene.state.liquidPanel?.hide && babylonApp.scene.state.liquidPanel.hide()
     babylonApp.destroy()
     babylonApp = null
   },
