@@ -79,6 +79,20 @@ export default {
       },
     })
   },
+  watch: {
+    $route() {
+      this.selectKexperimentByClass({
+        classId: this.$route.params.id,
+        success: (experiments) => {
+          this.experiments = experiments
+          this.loading = false
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
+    },
+  },
 }
 </script>
 

@@ -163,8 +163,9 @@ const actions = {
     })
   },
 
-  selectMyKexperiment({ commit }, { success, failure }) {
-    userApi.selectMyKexperiment({
+  getClassById({ commit }, { classId, success, failure }) {
+    userApi.getClassById({
+      classId,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
           success(res.data.body)
@@ -176,18 +177,20 @@ const actions = {
     })
   },
 
-  getUserInfo({ commit }, { success, failure }) {
-    userApi.getUserInfo({
+  removeUser({ commit }, { userId, classId, success, failure }) {
+    userApi.removeUser({
+      userId,
+      classId,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
-          success(res.data.body)
+          success(res)
         } else failure(res)
       },
       failure(res) {
         failure(res)
       }
     })
-  }
+  },
 }
 
 export default { namespaced: true, state, getters, actions, mutations }
