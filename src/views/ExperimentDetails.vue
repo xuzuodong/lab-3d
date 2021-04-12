@@ -146,7 +146,7 @@
 import { mapActions, mapState } from 'vuex'
 import DialogJoinVue from '../components/DialogJoin.vue'
 import vuePlyr from 'vue-plyr'
-import PreTestVue from './PreTest'
+import TestVue from './Test'
 export default {
   components: { vuePlyr },
 
@@ -213,15 +213,15 @@ export default {
 
     pretest(experimentId, choiceType) {
       this.selectChoiceQuestion({
-        experimentId: this.experiment.id,
+        experimentId,
         choiceType: choiceType,
         success: (res) => {
           this.$q
             .dialog({
-              component: PreTestVue,
+              component: TestVue,
               parent: this,
               questionList: res,
-              experimentId: 5,
+              experimentId: experimentId,
               type: choiceType,
             })
             .onOk(() => {
