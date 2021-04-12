@@ -223,10 +223,7 @@ const actions = {
     })
   },
 
-  submitBehavior(
-    { commit },
-    { kexperimentId, name, type, content, correctContent, isCorrect, success, failure }
-  ) {
+  submitBehavior({ commit }, { kexperimentId, name, type, content, isCorrect, correctContent, success, failure }) {
     userApi.submitBehavior({
       kexperimentId,
       name,
