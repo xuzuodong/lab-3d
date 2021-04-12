@@ -212,26 +212,37 @@ export default {
     },
 
     pretest(experimentId, choiceType) {
-      this.selectChoiceQuestion({
-        experimentId,
-        choiceType: choiceType,
-        success: (res) => {
-          this.$q
-            .dialog({
-              component: TestVue,
-              parent: this,
-              questionList: res,
-              experimentId: experimentId,
-              type: choiceType,
-            })
-            .onOk(() => {
-              console.log('ok')
-            })
-        },
-        failure: (error) => {
-          console.log(error)
-        },
-      })
+      if (this.userInfo) {
+        this.selectChoiceQuestion({
+          experimentId,
+          choiceType: choiceType,
+          success: (res) => {
+            this.$q
+              .dialog({
+                component: TestVue,
+                parent: this,
+                questionList: res,
+                experimentId: experimentId,
+                type: choiceType,
+              })
+              .onOk(() => {
+                console.log('ok')
+              })
+          },
+          failure: (error) => {
+            console.log(error)
+          },
+        })
+      } else {
+        this.$q
+          .dialog({
+            component: DialogJoinVue,
+            parent: this,
+          })
+          .onOk(() => {
+            this.loadExperimentDetails()
+          })
+      }
     },
   },
 
