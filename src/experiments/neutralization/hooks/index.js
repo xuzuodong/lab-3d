@@ -250,7 +250,7 @@ export default [
           for (let i = 0; i < evaluateArr.behavior.length; i++) {
             store.dispatch('user/submitBehavior', {
               kexperimentId,
-              name: '第一次自由实验操作评价' + i,
+              name: '第一次自由实验操作评价' + `${i + 1}`,
               type: 'BEHAVIOR_INQUIRY',
               content: evaluateArr.behavior[i].content,
               isCorrect: evaluateArr.behavior[i].isCorrect,
@@ -341,7 +341,7 @@ export default [
           for (let i = 0; i < evaluateArr.behavior.length; i++) {
             store.dispatch('user/submitBehavior', {
               kexperimentId,
-              name: '第二次自由实验操作评价' + i,
+              name: '第二次自由实验操作评价' + `${i + 1}`,
               type: 'BEHAVIOR_INQUIRY',
               content: evaluateArr.behavior[i].content,
               isCorrect: evaluateArr.behavior[i].isCorrect,
