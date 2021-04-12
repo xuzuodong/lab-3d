@@ -35,7 +35,15 @@
         </q-card-section>
         <q-card-section class="text-center text-h6">
           实验后测得分：
-          <span><q-btn class="text-h6 q-my-none" color="primary" label="点击前往" flat /></span>
+          <span>
+            <q-btn
+              class="text-h6 q-my-none"
+              color="primary"
+              label="点击前往"
+              @click="postTest(experimentId, 2)"
+              flat
+            />
+          </span>
         </q-card-section>
       </q-card>
     </div>
@@ -83,18 +91,21 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import KexperimentDetailsBehaviorsVue from './KexperimentDetailsBehaviors.vue'
 import KexperimentDetailsSummaryVue from './KexperimentDetailsSummary.vue'
 import KexperimentDetailsTestsVue from './KexperimentDetailsTests.vue'
+import TestVue from './Test'
 
 export default {
   components: { KexperimentDetailsSummaryVue, KexperimentDetailsBehaviorsVue, KexperimentDetailsTestsVue },
 
   data() {
     return {
-      experimentName: '摩擦力实验',
-      grade: 'A',
-      userName: '实验师',
+      experimentId: 0,
+      experimentName: '',
+      grade: '',
+      userName: '',
       badge: '一般路过的实验师',
       evaluation: '太棒了实验师！您在此次的实验中表现十分出色。',
       frontScore: 'B',
@@ -103,6 +114,54 @@ export default {
       left: true,
       tab: 'behaviors',
     }
+  },
+
+  created() {
+    this.loadKexperimentEvaluation()
+  },
+
+  methods: {
+    ...mapActions('user', ['getKexperimentEvaluation']),
+    ...mapActions('experiment', ['selectChoiceQuestion']),
+
+    loadKexperimentEvaluation() {
+      this.getKexperimentEvaluation({
+        kexperimentId: this.$route.params.id,
+        success: (experiment) => {
+          document.title = experiment.experimentName + ' | 实验评价'
+          this.experimentName = experiment.experimentName
+          this.grade = experiment.finalScore
+          this.userName = experiment.userName
+          this.experimentId = experiment.experimentId
+        },
+        failure: (error) => {
+          console.log(error)
+        },
+      })
+    },
+
+    postTest(experimentId, choiceType) {
+      this.selectChoiceQuestion({
+        experimentId,
+        choiceType: choiceType,
+        success: (res) => {
+          this.$q
+            .dialog({
+              component: TestVue,
+              parent: this,
+              questionList: res,
+              experimentId: experimentId,
+              type: choiceType,
+            })
+            .onOk(() => {
+              console.log('ok')
+            })
+        },
+        failure: (error) => {
+          console.log(error)
+        },
+      })
+    },
   },
 }
 </script>
