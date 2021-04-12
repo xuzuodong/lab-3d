@@ -36,7 +36,7 @@
 
               <q-item to="/kexperiments-list">
                 <q-item-section side>
-                  <q-icon name="group" size="sm" />
+                  <q-icon name="history" size="sm" />
                 </q-item-section>
                 <q-item-section>我的实验记录</q-item-section>
               </q-item>

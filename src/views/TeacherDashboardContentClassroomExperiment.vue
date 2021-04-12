@@ -16,7 +16,7 @@
         </q-td>
         <q-td key="button" :props="props">
           <q-btn
-            :to="'/dashboard/kexperiment/' + props.row.kexperimentId"
+            :to="'/dashboard/kexperiment-details/' + props.row.kexperimentId"
             style="font-size: 14px"
             color="primary"
             label="查看详情"
