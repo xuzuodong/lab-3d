@@ -41,7 +41,7 @@
     </div>
     <q-separator class="q-my-lg" color="grey-6" inset />
 
-    <div class="q-mb-lg">
+    <div>
       <q-list bordered class="rounded-borders container">
         <q-expansion-item default-opened expand-separator label="实验流程">
           <KexperimentDetailsSummaryVue />
@@ -59,20 +59,19 @@
                 align="justify"
                 narrow-indicator
               >
-                <q-tab name="mails" label="Mails" />
-                <q-tab name="alarms" label="Alarms" />
-                <q-tab name="movies" label="Movies" />
+                <q-tab name="behaviors" label="实验过程解析" />
+                <q-tab name="tests" label="前后测试挑战解析" />
               </q-tabs>
 
               <q-separator />
 
               <q-tab-panels v-model="tab" animated>
-                <q-tab-panel name="mails">
+                <q-tab-panel name="behaviors">
                   <KexperimentDetailsBehaviorsVue />
                 </q-tab-panel>
 
-                <q-tab-panel name="alarms">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                <q-tab-panel name="tests">
+                  <KexperimentDetailsTestsVue />
                 </q-tab-panel>
               </q-tab-panels>
             </q-card>
@@ -86,9 +85,10 @@
 <script>
 import KexperimentDetailsBehaviorsVue from './KexperimentDetailsBehaviors.vue'
 import KexperimentDetailsSummaryVue from './KexperimentDetailsSummary.vue'
+import KexperimentDetailsTestsVue from './KexperimentDetailsTests.vue'
 
 export default {
-  components: { KexperimentDetailsSummaryVue, KexperimentDetailsBehaviorsVue },
+  components: { KexperimentDetailsSummaryVue, KexperimentDetailsBehaviorsVue, KexperimentDetailsTestsVue },
 
   data() {
     return {
@@ -101,7 +101,7 @@ export default {
       middleScore: 'A',
       right: true,
       left: true,
-      tab: 'mails',
+      tab: 'behaviors',
     }
   },
 }

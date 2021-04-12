@@ -1,5 +1,5 @@
 <template>
-  <div>行为详情表</div>
+  <div>前后测解析表</div>
 </template>
 
 <script>

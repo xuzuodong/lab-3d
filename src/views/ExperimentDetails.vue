@@ -137,11 +137,6 @@
             </video>
           </vue-plyr>
         </div>
-
-        <h5>
-          <q-icon name="code" class="q-mr-xs" />
-          关于
-        </h5>
       </div>
     </div>
   </div>
