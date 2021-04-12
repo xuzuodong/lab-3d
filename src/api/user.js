@@ -65,6 +65,7 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
+
   startExperiment({ experimentId, success, failure }) {
     axios({
       method: 'post',
@@ -87,7 +88,7 @@ export default {
       .catch((res) => failure(res))
   },
 
-  submitBehavior({ kexperimentId, name, type, content, correctContent, isCorrect, success, failure }) {
+  submitBehavior({ kexperimentId, name, type, content, isCorrect, correctContent, success, failure }) {
     axios({
       method: 'post',
       url: baseUrl + 'behavior/submitBehavior',

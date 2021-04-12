@@ -18,9 +18,15 @@ export default {
     babylonApp = new BabylonApp()
     const scene = babylonApp.createScene({
       state: {
-        acidType: ['', false], // 选择的酸溶液 'acid_hcl' or 'acid_ch3cooh', 数组第二项表示现在是否已经加入
-        alkaliType: ['', false], // 选择的碱溶液 'alkali_naoh' or 'alkali_nahco3'，数组第二项表示现在是否已经加入
-        indicatorType: ['', false], // 选择的酸碱指示剂 'pur' or 'phe'，数组第二项表示现在是否已经加入
+        acidType: '', // 选择的酸溶液 'acid_hcl' or 'acid_ch3cooh', 数组第二项表示现在是否已经加入
+        alkaliType: '', // 选择的碱溶液 'alkali_naoh' or 'alkali_nahco3'，数组第二项表示现在是否已经加入
+        indicatorType: '', // 选择的酸碱指示剂 'pur' or 'phe'，数组第二项表示现在是否已经加入
+        existLiquid: [], // 试管中已经存在的溶液，每点击一次滴加溶液，就往数组中push相应字符串（酸、碱、指示剂）
+        // 根据重复字符串个数，算出滴加的溶液量为多少
+        progress: [], // 一个对象数组，记录实验步骤；{step: string, finished: boolen}，当前第几步，是否完成
+        targetPanel: null,
+        liquidPanel: null,
+        allFinished: false, // 判断用户是否全部做完，以此判断是否没有引导，完全自由探究
       },
       actions,
     })
@@ -32,6 +38,8 @@ export default {
   },
 
   beforeDestroy() {
+    babylonApp.scene.state.targetPanel?.hide && babylonApp.scene.state.targetPanel.hide()
+    babylonApp.scene.state.liquidPanel?.hide && babylonApp.scene.state.liquidPanel.hide()
     babylonApp.destroy()
     babylonApp = null
   },
