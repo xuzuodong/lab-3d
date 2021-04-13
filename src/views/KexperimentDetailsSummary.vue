@@ -1,33 +1,45 @@
 <template>
   <div>
-    <q-table :data="data" :columns="columns" row-key="name" dense flat square />
+    <q-table :data="processList" :columns="columns" row-key="name" dense flat square />
   </div>
 </template>
 
 <script>
+import { date } from 'quasar'
 export default {
+  props: {
+    behaviorInfo: Array,
+  },
   data() {
     return {
       columns: [
-        { name: 'time', label: '时间', field: 'name', align: 'left', style: 'width:300px' },
-        { name: 'behavior', label: '操作', field: 'behavior', align: 'left' },
-        { name: '', label: '', field: '', align: 'left' },
+        {
+          name: 'kexperimentCtime',
+          label: '时间',
+          field: 'kexperimentCtime',
+          align: 'left',
+          style: 'width:300px',
+        },
+        { name: 'experimentName', label: '操作', field: 'experimentName', align: 'left' },
       ],
-      data: [
-        {
-          name: '2021-02-23 13:15:11',
-          behavior: '进入情境导入',
-        },
-        {
-          name: '2021-02-23 13:15:40',
-          behavior: '选择探索摩擦力',
-        },
-        {
-          name: '2021-02-23 13:17:40',
-          behavior: '完成测试挑战—前测',
-        },
-      ],
+      process: [],
+      processList: [],
+      eT: '',
     }
   },
+
+  // computed: {
+  //   processList() {
+  //     const arr = []
+  //     this.process.forEach((e, i) => {
+  //       // 如果没有结束时间则未完成
+  //       if (e.kexperimentCtime) {
+  //         let formattedString = date.formatDate(e.kexperimentCtime, 'YYYY-MM-DD HH:mm:ss')
+  //         arr.push({ ...this.process[i], kexperimentCtime: formattedString })
+  //       }
+  //     })
+  //     return arr
+  //   },
+  // },
 }
 </script>

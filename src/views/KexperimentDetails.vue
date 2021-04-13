@@ -75,11 +75,13 @@
 
               <q-tab-panels v-model="tab" animated>
                 <q-tab-panel name="behaviors">
-                  <KexperimentDetailsBehaviorsVue />
+                  <KexperimentDetailsBehaviorsVue
+                    :behaviorInfo="behaviorInfo"
+                  ></KexperimentDetailsBehaviorsVue>
                 </q-tab-panel>
 
                 <q-tab-panel name="tests">
-                  <KexperimentDetailsTestsVue />
+                  <KexperimentDetailsTestsVue :behaviorInfo="behaviorInfo"></KexperimentDetailsTestsVue>
                 </q-tab-panel>
               </q-tab-panels>
             </q-card>
@@ -113,6 +115,7 @@ export default {
       right: true,
       left: true,
       tab: 'behaviors',
+      behaviorInfo: [],
     }
   },
 
@@ -133,6 +136,8 @@ export default {
           this.grade = experiment.finalScore
           this.userName = experiment.userName
           this.experimentId = experiment.experimentId
+          this.behaviorInfo = experiment.behaviorInfo
+          console.log(experiment)
         },
         failure: (error) => {
           console.log(error)
