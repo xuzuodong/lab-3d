@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="KexperimentDetailsSummary">
     <q-table :data="processList" :columns="columns" row-key="name" dense flat square />
   </div>
 </template>
@@ -14,32 +14,30 @@ export default {
     return {
       columns: [
         {
-          name: 'kexperimentCtime',
+          name: 'ctime',
           label: '时间',
-          field: 'kexperimentCtime',
+          field: 'ctime',
           align: 'left',
           style: 'width:300px',
         },
-        { name: 'experimentName', label: '操作', field: 'experimentName', align: 'left' },
+        { name: 'behaviorName', label: '操作', field: 'behaviorName', align: 'left' },
       ],
       process: [],
-      processList: [],
       eT: '',
     }
   },
 
-  // computed: {
-  //   processList() {
-  //     const arr = []
-  //     this.process.forEach((e, i) => {
-  //       // 如果没有结束时间则未完成
-  //       if (e.kexperimentCtime) {
-  //         let formattedString = date.formatDate(e.kexperimentCtime, 'YYYY-MM-DD HH:mm:ss')
-  //         arr.push({ ...this.process[i], kexperimentCtime: formattedString })
-  //       }
-  //     })
-  //     return arr
-  //   },
-  // },
+  computed: {
+    processList() {
+      const arr = []
+      this.behaviorInfo.forEach((e, i) => {
+        if (e.ctime) {
+          let formattedString = date.formatDate(e.ctime, 'YYYY-MM-DD HH:mm:ss')
+          arr.push({ ...this.behaviorInfo[i], ctime: formattedString })
+        }
+      })
+      return arr
+    },
+  },
 }
 </script>

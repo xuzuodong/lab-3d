@@ -52,7 +52,7 @@
     <div>
       <q-list bordered class="rounded-borders container">
         <q-expansion-item default-opened expand-separator label="实验流程">
-          <KexperimentDetailsSummaryVue />
+          <KexperimentDetailsSummaryVue :behaviorInfo="behaviorInfo"></KexperimentDetailsSummaryVue>
         </q-expansion-item>
 
         <q-expansion-item default-opened expand-separator label="得分解析">
@@ -81,7 +81,7 @@
                 </q-tab-panel>
 
                 <q-tab-panel name="tests">
-                  <KexperimentDetailsTestsVue :behaviorInfo="behaviorInfo"></KexperimentDetailsTestsVue>
+                  <KexperimentDetailsTestsVue />
                 </q-tab-panel>
               </q-tab-panels>
             </q-card>
