@@ -226,6 +226,7 @@ export default {
                 type: choiceType,
               })
               .onOk(() => {
+                this.isPretestFinished = true
                 console.log('ok')
               })
           },

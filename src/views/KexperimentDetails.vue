@@ -42,7 +42,9 @@
               label="点击前往"
               @click="postTest(experimentId, 2)"
               flat
+              v-if="showPostTestBtn"
             />
+            <span class="text-red-14" v-else>{{ backScore }}</span>
           </span>
         </q-card-section>
       </q-card>
@@ -79,7 +81,7 @@
                 </q-tab-panel>
 
                 <q-tab-panel name="tests">
-                  <KexperimentDetailsTestsVue />
+                  <KexperimentDetailsTestsVue :pretestInfo="pretestInfo" :posttestInfo="posttestInfo" />
                 </q-tab-panel>
               </q-tab-panels>
             </q-card>
@@ -108,12 +110,22 @@ export default {
       userName: '',
       badge: '一般路过的实验师',
       evaluation: '太棒了实验师！您在此次的实验中表现十分出色。',
-      frontScore: 'B',
-      middleScore: 'A',
+      frontScore: '',
+      middleScore: '',
+      backScore: '',
       right: true,
       left: true,
       tab: 'behaviors',
+      pretestInfo: [],
+      posttestInfo: [],
     }
+  },
+
+  computed: {
+    showPostTestBtn: function() {
+      if (this.backScore === '未完成') return true
+      else return false
+    },
   },
 
   created() {
@@ -127,12 +139,17 @@ export default {
     loadKexperimentEvaluation() {
       this.getKexperimentEvaluation({
         kexperimentId: this.$route.params.id,
-        success: (experiment) => {
-          document.title = experiment.experimentName + ' | 实验评价'
-          this.experimentName = experiment.experimentName
-          this.grade = experiment.finalScore
-          this.userName = experiment.userName
-          this.experimentId = experiment.experimentId
+        success: (evaluation) => {
+          console.log(evaluation)
+          document.title = evaluation.experimentName + ' | 实验评价'
+          this.experimentId = evaluation.experimentId
+          this.experimentName = evaluation.experimentName
+          this.grade = evaluation.finalScore
+          this.userName = evaluation.userName
+          this.frontScore = evaluation.pretestInfo.correct
+          this.backScore = evaluation.posttestInfo.correct
+          this.pretestInfo = evaluation.pretestInfo.errorResolution
+          this.posttestInfo = evaluation.posttestInfo.errorResolution
         },
         failure: (error) => {
           console.log(error)
