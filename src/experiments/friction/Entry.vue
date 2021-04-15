@@ -17,13 +17,18 @@ export default {
   mounted() {
     babylonApp = new BabylonApp()
     const scene = babylonApp.createScene({
-      state: { targetPanel: Object, assumePanel: Object, testPanel: Object, questionPanel: Object },
+      state: {
+        targetPanel: Object,
+        assumePanel: Object,
+        testPanel: Object,
+        questionPanel: Object,
+      },
       actions,
     })
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene })
+      this.$talker({ script, hooks, scene, debug: '' })
     })
   },
 

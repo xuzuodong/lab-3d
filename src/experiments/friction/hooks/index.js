@@ -1,4 +1,5 @@
 import { Dialog } from 'quasar'
+import { Notify } from 'quasar'
 import storeData from '../2d/storeData'
 import woodjpg from '../2d/assets/wood.jpg'
 import grasspng from '../2d/assets/grass.png'
@@ -19,6 +20,7 @@ let large = 0
 let small = 0
 let gravity = 0
 let kexperimentId = 0
+let warnMsg = '请按照左上角的假设进行实验！'
 
 export default [
   //开始实验，并获取kexperimentId
@@ -116,7 +118,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showButton: false,
         showTarget: true,
       })
       scene.mutate({ targetPanel: target })
@@ -132,7 +133,6 @@ export default [
       const test = Dialog.create({
         component: testPage,
         showTest: true,
-        showButton: false,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
           grass = 1
@@ -192,6 +192,13 @@ export default [
           })
         }
         if (storeData[0] == 'large') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.largeArea()
           goto({ paragraph: '增大接触面积' })
           store.dispatch('user/submitBehavior', {
@@ -210,6 +217,13 @@ export default [
           })
         }
         if (storeData[0] == 'small') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.smallArea()
           goto({ paragraph: '减小接触面积' })
           store.dispatch('user/submitBehavior', {
@@ -228,6 +242,13 @@ export default [
           })
         }
         if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           gravity = -1
           goto({ paragraph: '轻松拉货' })
           store.dispatch('user/submitBehavior', {
@@ -415,7 +436,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showButton: false,
         showTarget: true,
       })
       scene.mutate({ targetPanel: target })
@@ -433,6 +453,13 @@ export default [
         showTest: true,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.changeGround(grasspng)
           goto({ paragraph: '草地' })
           store.dispatch('user/submitBehavior', {
@@ -451,6 +478,13 @@ export default [
           })
         }
         if (storeData[0] == 'wood') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.changeGround(woodjpg)
           goto({ paragraph: '木板' })
           store.dispatch('user/submitBehavior', {
@@ -469,6 +503,13 @@ export default [
           })
         }
         if (storeData[0] == 'ice') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.changeGround(icejpg)
           goto({ paragraph: '冰面' })
           store.dispatch('user/submitBehavior', {
@@ -525,6 +566,13 @@ export default [
           })
         }
         if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           gravity = -2
           goto({ paragraph: '轻松拉货' })
           store.dispatch('user/submitBehavior', {
@@ -573,6 +621,13 @@ export default [
           showTest: true,
         }).onOk(async () => {
           if (storeData[0] == 'grass') {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             scene.changeGround(grasspng)
             goto({ paragraph: '草地' })
             store.dispatch('user/submitBehavior', {
@@ -591,6 +646,13 @@ export default [
             })
           }
           if (storeData[0] == 'wood') {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             scene.changeGround(woodjpg)
             goto({ paragraph: '木板' })
             store.dispatch('user/submitBehavior', {
@@ -609,6 +671,13 @@ export default [
             })
           }
           if (storeData[0] == 'ice') {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             scene.changeGround(icejpg)
             goto({ paragraph: '冰面' })
             store.dispatch('user/submitBehavior', {
@@ -665,6 +734,13 @@ export default [
             })
           }
           if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             gravity = -2
             goto({ paragraph: '轻松拉货' })
             store.dispatch('user/submitBehavior', {
@@ -715,6 +791,13 @@ export default [
           showTest: true,
         }).onOk(async () => {
           if (storeData[0] == 'grass') {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             scene.changeGround(grasspng)
             goto({ paragraph: '草地' })
             store.dispatch('user/submitBehavior', {
@@ -733,6 +816,13 @@ export default [
             })
           }
           if (storeData[0] == 'wood') {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             scene.changeGround(woodjpg)
             goto({ paragraph: '木板' })
             store.dispatch('user/submitBehavior', {
@@ -751,6 +841,13 @@ export default [
             })
           }
           if (storeData[0] == 'ice') {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             scene.changeGround(icejpg)
             goto({ paragraph: '冰面' })
             store.dispatch('user/submitBehavior', {
@@ -807,6 +904,13 @@ export default [
             })
           }
           if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
+            Notify.create({
+              message: warnMsg,
+              position: 'center',
+              type: 'negative',
+              timeout: 3500,
+              closeBtn: 'OK',
+            })
             gravity = -2
             goto({ paragraph: '轻松拉货' })
             store.dispatch('user/submitBehavior', {
@@ -894,7 +998,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showButton: false,
         showTarget: true,
       })
       scene.mutate({ targetPanel: target })
@@ -912,6 +1015,13 @@ export default [
         showTest: true,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.changeGround(grasspng)
           goto({ paragraph: '草地' })
           store.dispatch('user/submitBehavior', {
@@ -930,6 +1040,13 @@ export default [
           })
         }
         if (storeData[0] == 'wood') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.changeGround(woodjpg)
           goto({ paragraph: '木板' })
           store.dispatch('user/submitBehavior', {
@@ -948,6 +1065,13 @@ export default [
           })
         }
         if (storeData[0] == 'ice') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.changeGround(icejpg)
           goto({ paragraph: '冰面' })
           store.dispatch('user/submitBehavior', {
@@ -966,6 +1090,13 @@ export default [
           })
         }
         if (storeData[0] == 'large') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.largeArea()
           goto({ paragraph: '增大接触面积' })
           store.dispatch('user/submitBehavior', {
@@ -984,6 +1115,13 @@ export default [
           })
         }
         if (storeData[0] == 'small') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            closeBtn: 'OK',
+          })
           scene.smallArea()
           goto({ paragraph: '减小接触面积' })
           store.dispatch('user/submitBehavior', {
