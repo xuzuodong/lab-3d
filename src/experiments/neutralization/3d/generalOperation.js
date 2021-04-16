@@ -2,8 +2,8 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import animationBox from './animationBox'
 
 import { Dialog } from 'quasar'
+import { Notify } from 'quasar'
 import ControlPanelVue from '../2d/ControlPanel.vue'
-import WarnPanelVue from '../2d/WarnPanel.vue'
 
 const frameRate = 12
 let indicatorUsed = ''
@@ -208,7 +208,7 @@ const dropLiqiud = (scene, beginPosition_y, endPosition_y, liquidColor = new BAB
       [
         animationBox.dropLiquid_y(beginPosition_y, endPosition_y),
         animationBox.liquidSphereVisible,
-        animationBox.liquidScale
+        animationBox.liquidScale,
       ],
       0,
       frameRate,
@@ -246,15 +246,18 @@ const openLiquidPanel = (scene, val) => {
   const liquidPanel = Dialog.create({
     component: ControlPanelVue,
     scene,
-    dropType: val
+    dropType: val,
   })
   scene.mutate({ liquidPanel })
 }
 
-const openWarnPanel = (warnInfo) => {
-  Dialog.create({
-    component: WarnPanelVue,
-    warnInfo: warnInfo
+const openWarnPanel = (warnInfo, type) => {
+  Notify.create({
+    message: warnInfo,
+    type,
+    position: 'center',
+    timeout: 5000,
+    actions: [{ label: 'ok', color: type === 'warning' ? 'black' : 'white', handler: () => {} }],
   })
 }
 
@@ -263,11 +266,11 @@ const liquidWarn = (scene, liquidType) => {
     if (scene.progress[0].step.slice(0, 1) != '1') {
       if (!scene.progress[0].finished) {
         if (liquidType === 'pur' || liquidType === 'phe') {
-          openWarnPanel('当前进行实验第一步，请先滴加酸或碱溶液吧！')
+          openWarnPanel('当前进行实验第一步，请先滴加酸或碱溶液吧！', 'warning')
         }
       } else if (!scene.progress[1].finished) {
         if (liquidType != 'pur' && liquidType != 'phe') {
-          openWarnPanel('当前进行实验第二步， 请滴加酸碱指示剂')
+          openWarnPanel('当前进行实验第二步， 请滴加酸碱指示剂', 'warning')
         }
       } else if (!scene.progress[2].finished) {
         let haveAcid, haveIndicator, haveAlkali
@@ -286,21 +289,23 @@ const liquidWarn = (scene, liquidType) => {
         switch (liquidType) {
           case 'acid_hcl':
           case 'acid_ch3cooh':
-            if (haveAcid) openWarnPanel('您已滴加过酸溶液，现在进行实验第三步，请滴加碱溶液！')
+            if (haveAcid) openWarnPanel('您已滴加过酸溶液，现在进行实验第三步，请滴加碱溶液！', 'warning')
             break
           case 'alkali_naoh':
           case 'alkali_nahco3':
-            if (haveAlkali) openWarnPanel('您已滴加过碱溶液，现在进行实验第三步，请滴加酸溶液！')
+            if (haveAlkali) openWarnPanel('您已滴加过碱溶液，现在进行实验第三步，请滴加酸溶液！', 'warning')
             break
           case 'pur':
           case 'phe':
             if (haveIndicator) {
-              if (haveAcid) openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加碱溶液！')
-              if (haveAlkali) openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加酸溶液！')
+              if (haveAcid)
+                openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加碱溶液！', 'warning')
+              if (haveAlkali)
+                openWarnPanel('您已滴加过酸碱指示剂，现在进行实验第三步，请滴加酸溶液！', 'warning')
             }
         }
       } else {
-        openWarnPanel('您现在已完成本轮自由实验，可点击左侧面板的“完成”按钮结束实验！')
+        openWarnPanel('您已完成本轮自由实验，可点击左侧面板的“完成”按钮结束实验！', 'positive')
       }
     }
   }
@@ -443,7 +448,7 @@ const generalAction = new Object({
   dropLiqiud,
   registerAllAction,
   openLiquidPanel,
-  switchDropper
+  switchDropper,
 })
 
 export default generalAction

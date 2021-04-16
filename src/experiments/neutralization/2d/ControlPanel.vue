@@ -52,8 +52,7 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import generalOperations from '../3d/generalOperation'
 import { reactions } from '../3d/reaction'
-import { Dialog } from 'quasar'
-import WarnPanelVue from './WarnPanel'
+import { Notify } from 'quasar'
 
 export default {
   name: 'controlPanel',
@@ -157,7 +156,7 @@ export default {
     },
 
     async drop() {
-      if (!this.isDropping && this.scene.existLiquid.length < 40) {
+      if (!this.isDropping && this.scene.existLiquid.length < 40 && this.scene.animatables.length === 0) {
         this.clickCount++
         this.isDropping = true
 
@@ -218,9 +217,12 @@ export default {
             })
         }
       } else if (this.scene.existLiquid.length == 40) {
-        Dialog.create({
-          component: WarnPanelVue,
-          warnInfo: '当前试管中溶液已满，若要继续实验，请先倒空试管！',
+        Notify.create({
+          message: '当前试管中溶液已满，若要继续实验，请先倒空试管！',
+          type: 'negative',
+          position: 'center',
+          timeout: 5000,
+          actions: [{ label: 'ok', color: 'white', handler: () => {} }],
         })
       }
     },

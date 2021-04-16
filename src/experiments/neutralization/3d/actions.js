@@ -3,8 +3,7 @@ import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import animationBox from './animationBox'
 import generalOperations from './generalOperation'
 
-import { Dialog } from 'quasar'
-import WarnPanelVue from '../2d/WarnPanel.vue'
+import { Notify } from 'quasar'
 
 export default {
   // 用户点击试剂瓶选择酸碱溶液后，酸碱滴管到位，拉近相机的动作
@@ -66,9 +65,12 @@ export default {
             resetPositionGroup.onAnimationEndObservable.add(() => resolve())
           })
         } else {
-          Dialog.create({
-            component: WarnPanelVue,
-            warnInfo: '当前试管中溶液已满，若要继续实验，请先倒空试管！'
+          Notify.create({
+            message: '当前试管中溶液已满，若要继续实验，请先倒空试管！',
+            type: 'negative',
+            position: 'center',
+            timeout: 5000,
+            actions: [{ label: 'ok', color: 'white', handler: () => {} }],
           })
         }
       })
@@ -216,7 +218,7 @@ export default {
       behavior: [],
       result: { content: '', isCorrect: false },
       isCorrect: false,
-      correctContent: ''
+      correctContent: '',
     }
 
     const minNum = (liquidType, num1, num2) => {
@@ -252,12 +254,12 @@ export default {
     ) {
       returnObj.behavior.push({
         content: '实验操作正确：酸溶液、碱溶液、指示剂滴加顺序正确！',
-        isCorrect: true
+        isCorrect: true,
       })
     } else {
       returnObj.behavior.push({
         content: '实验操作错误：酸溶液、碱溶液、指示剂滴加顺序错误！',
-        isCorrect: false
+        isCorrect: false,
       })
     }
     if (this.indicatorType === 'pur') {
@@ -338,5 +340,5 @@ export default {
       }
     }
     return returnObj
-  }
+  },
 }

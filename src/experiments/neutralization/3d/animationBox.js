@@ -25,15 +25,15 @@ const outDropper = (initPosition) => {
   const outFrames = []
   outFrames.push({
     frame: 0,
-    value: initPosition
+    value: initPosition,
   })
   outFrames.push({
     frame: 0.5 * frameRate,
-    value: midPositon(initPosition)
+    value: midPositon(initPosition),
   })
   outFrames.push({
     frame: 1.5 * frameRate,
-    value: new BABYLON.Vector3(0, 50, 0)
+    value: new BABYLON.Vector3(0, 50, 0),
   })
   outDropper.setKeys(outFrames)
   return outDropper
@@ -51,15 +51,15 @@ const backDropper = (initPosition) => {
   const backFrames = []
   backFrames.push({
     frame: 0,
-    value: new BABYLON.Vector3(0, 50, 0)
+    value: new BABYLON.Vector3(0, 50, 0),
   })
   backFrames.push({
     frame: frameRate,
-    value: midPositon(initPosition)
+    value: midPositon(initPosition),
   })
   backFrames.push({
     frame: 1.5 * frameRate,
-    value: initPosition
+    value: initPosition,
   })
   backDropper.setKeys(backFrames)
   return backDropper
@@ -77,11 +77,11 @@ const dropLiquid_y = (beginPosition_y, endPosition_y) => {
   const dropFrames = []
   dropFrames.push({
     frame: 0,
-    value: beginPosition_y
+    value: beginPosition_y,
   })
   dropFrames.push({
     frame: frameRate,
-    value: endPosition_y
+    value: endPosition_y,
   })
   dropLiquid_y.setKeys(dropFrames)
   dropLiquid_y.setEasingFunction(easeInFunction)
@@ -100,11 +100,11 @@ const liquidScale = new BABYLON.Animation(
 const scaleFrames = []
 scaleFrames.push({
   frame: 0,
-  value: new BABYLON.Vector3(1, 1, 1)
+  value: new BABYLON.Vector3(1, 1, 1),
 })
 scaleFrames.push({
   frame: 0.3 * frameRate,
-  value: new BABYLON.Vector3(3, 3, 3)
+  value: new BABYLON.Vector3(3, 3, 3),
 })
 liquidScale.setKeys(scaleFrames)
 
@@ -119,15 +119,15 @@ const liquidSphereVisible = new BABYLON.Animation(
 const visibileFrames = []
 visibileFrames.push({
   frame: 0,
-  value: 1
+  value: 1,
 })
 visibileFrames.push({
   frame: 0.95 * frameRate,
-  value: 1
+  value: 1,
 })
 visibileFrames.push({
   frame: frameRate,
-  value: 0
+  value: 0,
 })
 liquidSphereVisible.setKeys(visibileFrames)
 
@@ -143,11 +143,11 @@ const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2
   const changeTargetFrames = []
   changeTargetFrames.push({
     frame: 0,
-    value: camera.target
+    value: camera.target,
   })
   changeTargetFrames.push({
     frame: endFrame,
-    value: endTarget
+    value: endTarget,
   })
   changeTarget.setKeys(changeTargetFrames)
   changeTarget.setEasingFunction(easeInOutFunction)
@@ -162,11 +162,11 @@ const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2
   const changeRadiusFrames = []
   changeRadiusFrames.push({
     frame: 0,
-    value: camera.radius
+    value: camera.radius,
   })
   changeRadiusFrames.push({
     frame: endFrame,
-    value: endRadius
+    value: endRadius,
   })
   changeRadius.setKeys(changeRadiusFrames)
   changeRadius.setEasingFunction(easeInOutFunction)
@@ -181,11 +181,11 @@ const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2
   const changeAlphaFrames = []
   changeAlphaFrames.push({
     frame: 0,
-    value: camera.alpha
+    value: camera.alpha,
   })
   changeAlphaFrames.push({
     frame: endFrame,
-    value: alpha
+    value: alpha,
   })
   changeAlpha.setKeys(changeAlphaFrames)
   changeAlpha.setEasingFunction(easeInOutFunction)
@@ -200,11 +200,11 @@ const moveCamera = (camera, endTarget, endRadius, endFrame, alpha = -Math.PI / 2
   const changeBetaFrames = []
   changeBetaFrames.push({
     frame: 0,
-    value: camera.beta
+    value: camera.beta,
   })
   changeBetaFrames.push({
     frame: endFrame,
-    value: camera.upperBetaLimit
+    value: camera.upperBetaLimit,
   })
   changeBeta.setKeys(changeBetaFrames)
   changeBeta.setEasingFunction(easeInOutFunction)
@@ -224,40 +224,16 @@ const showMesh = (endFrame) => {
   const showMeshFrames = []
   showMeshFrames.push({
     frame: 0,
-    value: 0
+    value: 0,
   })
   showMeshFrames.push({
     frame: endFrame,
-    value: 1
+    value: 1,
   })
   showMesh.setKeys(showMeshFrames)
   showMesh.setEasingFunction(easeInFunction)
 
   return showMesh
-}
-
-// 隐藏物体的动画（从可见到不可见），接收一个参数（结束帧）
-const hideMesh = (endFrame) => {
-  const hideMesh = new BABYLON.Animation(
-    'hideMesh',
-    'visibility',
-    frameRate,
-    BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
-  )
-  const hideMeshFrames = []
-  hideMeshFrames.push({
-    frame: 0,
-    value: 1
-  })
-  hideMeshFrames.push({
-    frame: endFrame,
-    value: 0
-  })
-  hideMesh.setKeys(hideMeshFrames)
-  hideMesh.setEasingFunction(easeInFunction)
-
-  return hideMesh
 }
 
 // 物体位置变换动画（position相关）
@@ -273,11 +249,11 @@ const moveMesh = (beginPosition, endPosition, endFrame) => {
   const moveMeshFrames = []
   moveMeshFrames.push({
     frame: 0,
-    value: beginPosition
+    value: beginPosition,
   })
   moveMeshFrames.push({
     frame: endFrame,
-    value: endPosition
+    value: endPosition,
   })
   moveMesh.setKeys(moveMeshFrames)
 
@@ -304,15 +280,15 @@ BABYLON.Mesh.prototype.scaleyFromPivot = function(
   const blscaleYFrames = []
   blscaleYFrames.push({
     frame: 0,
-    value: this.scaling.y
+    value: this.scaling.y,
   })
   blscaleYFrames.push({
     frame: midFrame,
-    value: this.scaling.y
+    value: this.scaling.y,
   })
   blscaleYFrames.push({
     frame: endFrame,
-    value: this.scaling.y + t / 10
+    value: this.scaling.y + t / 10,
   })
   blscaleY.setKeys(blscaleYFrames)
 
@@ -326,15 +302,15 @@ BABYLON.Mesh.prototype.scaleyFromPivot = function(
   const blpositionYFrames = []
   blpositionYFrames.push({
     frame: 0,
-    value: this.position.y
+    value: this.position.y,
   })
   blpositionYFrames.push({
     frame: midFrame,
-    value: this.position.y
+    value: this.position.y,
   })
   blpositionYFrames.push({
     frame: endFrame,
-    value: pivotPoint.y + _sy * (this.position.y - pivotPoint.y)
+    value: pivotPoint.y + _sy * (this.position.y - pivotPoint.y),
   })
   blpositionY.setKeys(blpositionYFrames)
 
@@ -349,8 +325,7 @@ const animationBox = new Object({
   liquidSphereVisible,
   moveCamera,
   showMesh,
-  hideMesh,
-  moveMesh
+  moveMesh,
 })
 
 export default animationBox

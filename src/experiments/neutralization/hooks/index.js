@@ -5,7 +5,9 @@ import ControlPanelVue from '../2d/ControlPanel.vue'
 import TargetPanelVue from '../2d/TargetPanel.vue'
 import store from '../../../store'
 
-let kexperimentId 
+import { Notify } from 'quasar'
+
+let kexperimentId
 
 export default [
   // 实验开始，启用一个新的kexperiment
@@ -24,7 +26,7 @@ export default [
         }
       })
       next()
-    }
+    },
   },
 
   // 拉近摄像头，出现滴管
@@ -36,14 +38,14 @@ export default [
       const dialog = Dialog.create({
         component: TargetPanelVue,
         progress: scene.progress,
-        scene
+        scene,
       })
       scene.mutate({ targetPanel: dialog })
       scene.registerClickOnAcid().then((val) => {
         scene.mutate({ acidType: val })
         scene.pullInCamera().then(() => next())
       })
-    }
+    },
   },
 
   // 进行滴加酸溶液的错误示范
@@ -55,7 +57,7 @@ export default [
         scene.existLiquid.push(scene.acidType)
         next()
       })
-    }
+    },
   },
 
   // 再次进行错误的滴加行为
@@ -67,14 +69,14 @@ export default [
         scene.existLiquid.push(scene.acidType)
       })
       restart() // 回到段落最开头
-    }
+    },
   },
 
   // 再次解释为什么示范的那样子是错误的
   {
     paragraph: '滴管滴加解释',
     reply: { choice: 'last', index: 'last' },
-    method: (tools) => tools.restart()
+    method: (tools) => tools.restart(),
   },
 
   // 小测试：使用胶头滴管的正确方式
@@ -85,7 +87,7 @@ export default [
       Dialog.create({
         component: DialogQuestionVue,
         dialogType: 'useDropperRadio',
-        acid_alkali: []
+        acid_alkali: [],
       }).onOk(async (val) => {
         store.dispatch('user/submitBehavior', {
           kexperimentId,
@@ -99,13 +101,13 @@ export default [
           },
           failure: (res) => {
             console.log(res)
-          }
+          },
         })
         await generalOperations.putBackDropper(scene, scene.acidType)
         await scene.resetCamera()
         next()
       })
-    }
+    },
   },
 
   // 进入滴加碱溶液环节
@@ -120,7 +122,7 @@ export default [
         scene.mutate({ alkaliType: val })
         scene.pullInCamera().then(() => next())
       })
-    }
+    },
   },
 
   // 用户进行滴加碱溶液操作
@@ -132,14 +134,14 @@ export default [
         component: ControlPanelVue,
         scene,
         dropType: scene.alkaliType,
-        free: false
+        free: false,
       }).onOk(() => {
         scene.progress[1].finished = true
         scene.targetPanel.update({ progress: scene.progress })
         Dialog.create({
           component: DialogQuestionVue,
           dialogType: 'changeConclusion',
-          acid_alkali: [scene.acidType, scene.alkaliType]
+          acid_alkali: [scene.acidType, scene.alkaliType],
         }).onOk(async (val) => {
           store.dispatch('user/submitBehavior', {
             kexperimentId,
@@ -153,14 +155,14 @@ export default [
             },
             failure: (res) => {
               console.log(res)
-            }
+            },
           })
           await scene.resetCamera()
           scene.panelDropperreset()
           next()
         })
       })
-    }
+    },
   },
 
   // 第一阶段结束，出现指示剂，进入自由探究阶段
@@ -169,7 +171,7 @@ export default [
     reply: { choice: 'any', index: 'last' },
     method: ({ next, scene }) => {
       scene.showIndicatorBottle().then(() => next())
-    }
+    },
   },
 
   // 所有参数、试管、状态重置
@@ -185,7 +187,7 @@ export default [
         scene.progress.splice(0, scene.progress.length)
         next()
       })
-    }
+    },
   },
 
   // 彻底重置后，开始做第一次自由实验
@@ -201,7 +203,7 @@ export default [
       const dialog = Dialog.create({
         component: TargetPanelVue,
         progress: scene.progress,
-        scene
+        scene,
       })
       scene.mutate({ targetPanel: dialog })
       scene.freeExperiment()
@@ -215,7 +217,7 @@ export default [
         Dialog.create({
           component: DialogQuestionVue,
           dialogType: 'radioConclusion',
-          acid_alkali: []
+          acid_alkali: [],
         }).onOk((val) => {
           scene.panelDropperreset()
           const evaluateArr = scene.judgeBehavior(val.radioConclusion)
@@ -231,7 +233,7 @@ export default [
             },
             failure: (res) => {
               console.log(res)
-            }
+            },
           })
           store.dispatch('user/submitBehavior', {
             kexperimentId,
@@ -245,7 +247,7 @@ export default [
             },
             failure: (res) => {
               console.log(res)
-            }
+            },
           })
           for (let i = 0; i < evaluateArr.behavior.length; i++) {
             store.dispatch('user/submitBehavior', {
@@ -260,13 +262,13 @@ export default [
               },
               failure: (res) => {
                 console.log(res)
-              }
+              },
             })
           }
           next()
         })
       })
-    }
+    },
   },
 
   // 第一次自由实验总结，并重置所有条件，开启第二次自由实验
@@ -282,7 +284,7 @@ export default [
         scene.progress.splice(0, scene.progress.length)
         next()
       })
-    }
+    },
   },
 
   // 第二次自由实验开始
@@ -298,7 +300,7 @@ export default [
       const dialog = Dialog.create({
         component: TargetPanelVue,
         progress: scene.progress,
-        scene
+        scene,
       })
       scene.mutate({ targetPanel: dialog })
       scene.freeExperiment()
@@ -306,7 +308,7 @@ export default [
         Dialog.create({
           component: DialogQuestionVue,
           dialogType: 'radioConclusion',
-          acid_alkali: []
+          acid_alkali: [],
         }).onOk((val) => {
           scene.panelDropperreset()
           const evaluateArr = scene.judgeBehavior(val.radioConclusion)
@@ -322,7 +324,7 @@ export default [
             },
             failure: (res) => {
               console.log(res)
-            }
+            },
           })
           store.dispatch('user/submitBehavior', {
             kexperimentId,
@@ -336,7 +338,7 @@ export default [
             },
             failure: (res) => {
               console.log(res)
-            }
+            },
           })
           for (let i = 0; i < evaluateArr.behavior.length; i++) {
             store.dispatch('user/submitBehavior', {
@@ -351,13 +353,13 @@ export default [
               },
               failure: (res) => {
                 console.log(res)
-              }
+              },
             })
           }
           next()
         })
       })
-    }
+    },
   },
 
   // 最后一次弹出选择题，提交观察到的颜色变化现象结论
@@ -371,7 +373,7 @@ export default [
         setSlot({ 酸碱指示剂: '酚酞试剂' })
       }
       next()
-    }
+    },
   },
 
   // 实验复盘里可重复片段
@@ -380,7 +382,7 @@ export default [
     reply: { choice: 1, index: 'last' },
     method: ({ restart }) => {
       restart()
-    }
+    },
   },
 
   // 结束实验，接下来可自由探究
@@ -404,8 +406,8 @@ export default [
         },
         failure: (res) => {
           console.log(res)
-        }
+        },
       })
-    }
-  }
+    },
+  },
 ]

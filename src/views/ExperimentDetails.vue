@@ -168,6 +168,12 @@ export default {
     ...mapState('user', ['userInfo']),
   },
 
+  watch: {
+    userInfo: function () {
+      this.loadExperimentDetails()
+    },
+  },
+
   methods: {
     ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment', 'selectChoiceQuestion']),
 
