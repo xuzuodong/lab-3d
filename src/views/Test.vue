@@ -76,11 +76,11 @@
       <q-card-actions align="center">
         <q-btn
           rounded
-          label="提交"
+          :label="submitBtnLabel"
           padding="xs lg"
           color="primary"
-          @click="onOKClick"
-          :disable="answer.includes(undefined)"
+          @click="onOKClick(submitBtnLabel)"
+          :disable="submitBtnDisable"
         />
       </q-card-actions>
     </q-card>
@@ -113,6 +113,20 @@ export default {
       if (this.type == 2) return 'Posttest'
       else return ''
     },
+    submitBtnLabel: function () {
+      if (this.slideIndex + 1 != this.questionList.length) return '下一题'
+      else return '提交'
+    },
+    submitBtnDisable: function () {
+      if (this.submitBtnLabel === '下一题') {
+        if (this.answer[this.slideIndex] == undefined) return true
+        else return false
+      } else if (this.submitBtnLabel === '提交') {
+        if (this.answer.includes(undefined)) return true
+        else return false
+      }
+      return false
+    },
   },
 
   created() {
@@ -136,31 +150,35 @@ export default {
       this.$emit('hide')
     },
 
-    onOKClick() {
-      this.$emit('ok')
-      this.hide()
-      clearInterval(this.timer)
-      this.submitTest({
-        choiceArray: this.choiceArray,
-        experimentId: this.experimentId,
-        success: (res) => {
-          console.log(res)
-        },
-        failure: (error) => {
-          console.log(error)
-        },
-      })
-      this.recordTestTime({
-        experimentId: this.experimentId,
-        testName: this.testName,
-        time: `${9 - this.min}分${60 - this.sec}秒`,
-        success: (res) => {
-          console.log(res)
-        },
-        failure: (error) => {
-          console.log(error)
-        },
-      })
+    onOKClick(label) {
+      if (label === '下一题') {
+        this.slideIndex++
+      } else {
+        this.$emit('ok')
+        this.hide()
+        clearInterval(this.timer)
+        this.submitTest({
+          choiceArray: this.choiceArray,
+          experimentId: this.experimentId,
+          success: (res) => {
+            console.log(res)
+          },
+          failure: (error) => {
+            console.log(error)
+          },
+        })
+        this.recordTestTime({
+          experimentId: this.experimentId,
+          testName: this.testName,
+          time: `${9 - this.min}分${60 - this.sec}秒`,
+          success: (res) => {
+            console.log(res)
+          },
+          failure: (error) => {
+            console.log(error)
+          },
+        })
+      }
     },
 
     onCancelClick() {

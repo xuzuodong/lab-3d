@@ -109,7 +109,6 @@ export default {
       grade: '',
       userName: '',
       badge: '一般路过的实验师',
-      evaluation: '太棒了实验师！您在此次的实验中表现十分出色。',
       frontScore: '',
       middleScore: '',
       backScore: '',
@@ -122,9 +121,23 @@ export default {
   },
 
   computed: {
-    showPostTestBtn: function() {
+    showPostTestBtn: function () {
       if (this.backScore === '未完成') return true
       else return false
+    },
+    evaluation: function () {
+      switch (this.grade) {
+        case 'A':
+          return '新大神降临！您在这次的实验中的表现完美无缺！'
+        case 'B':
+          return '太棒了实验师！您在这次的实验中表现得十分出色！'
+        case 'C':
+          return '实验进行得不太顺利呢，实验师还要继续加油哦！'
+        case 'D':
+          return '实验中似乎出现了一些意外，建议查找问题重新实验吧！'
+        default:
+          return ''
+      }
     },
   },
 
