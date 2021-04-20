@@ -30,9 +30,9 @@ export default {
       if (liquidType === 'acid_hcl') {
         acidDropper = this.getTransformNodeByName('hclDropper')
         acidLiquid = this.getMeshByName('hclLiquid')
-      } else if (liquidType === 'acid_ch3cooh') {
-        acidDropper = this.getTransformNodeByName('coohDropper')
-        acidLiquid = this.getMeshByName('coohLiquid')
+      } else if (liquidType === 'acid_hno') {
+        acidDropper = this.getTransformNodeByName('hnoDropper')
+        acidLiquid = this.getMeshByName('hnoLiquid')
       }
 
       const moveDropperDown = animationBox.moveMesh(
@@ -70,7 +70,7 @@ export default {
             type: 'negative',
             position: 'center',
             timeout: 5000,
-            actions: [{ label: 'ok', color: 'white', handler: () => {} }],
+            actions: [{ label: 'X', color: 'white', handler: () => {} }],
           })
         }
       })
@@ -93,12 +93,12 @@ export default {
   registerClickOnAcid() {
     return new Promise((resolve, reject) => {
       const hclBottle = this.getMeshByName('hclBottle')
-      const coohBottle = this.getMeshByName('coohBottle')
+      const hnoBottle = this.getMeshByName('hnoBottle')
       generalOperations.registerClickOnAcid(this).then((val) => {
         resolve(val)
         // 移除酸溶液的点击事件，即一旦选择完成则无法重选
         hclBottle.actionManager.unregisterAction(hclBottle.actionManager.actions[2])
-        coohBottle.actionManager.unregisterAction(coohBottle.actionManager.actions[2])
+        hnoBottle.actionManager.unregisterAction(hnoBottle.actionManager.actions[2])
       })
     })
   },
@@ -106,12 +106,12 @@ export default {
   registerClickOnAlkali() {
     return new Promise((resolve, reject) => {
       const naohBottle = this.getMeshByName('naohBottle')
-      const nahcoBottle = this.getMeshByName('nahcoBottle')
+      const baohBottle = this.getMeshByName('baohBottle')
       generalOperations.registerClickOnAlkali(this).then((val) => {
         resolve(val)
         // 移除碱溶液的点击事件，即一旦选择完成则无法重选
         naohBottle.actionManager.unregisterAction(naohBottle.actionManager.actions[2])
-        nahcoBottle.actionManager.unregisterAction(nahcoBottle.actionManager.actions[2])
+        baohBottle.actionManager.unregisterAction(baohBottle.actionManager.actions[2])
       })
     })
   },
@@ -241,11 +241,11 @@ export default {
       else return num1
     }
 
-    acidIndex = minNum('acid', this.existLiquid.indexOf('acid_hcl'), this.existLiquid.indexOf('acid_ch3cooh'))
+    acidIndex = minNum('acid', this.existLiquid.indexOf('acid_hcl'), this.existLiquid.indexOf('acid_hno'))
     alkaliIndex = minNum(
       'alkali',
       this.existLiquid.indexOf('alkali_naoh'),
-      this.existLiquid.indexOf('alkali_nahco3')
+      this.existLiquid.indexOf('alkali_baoh')
     )
     indicatorIndex = minNum('indicator', this.existLiquid.indexOf('pur'), this.existLiquid.indexOf('phe'))
     if (

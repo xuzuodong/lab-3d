@@ -3,9 +3,8 @@ import generalOperations from '../3d/generalOperation'
 import DialogQuestionVue from '../2d/DialogQuestion.vue'
 import ControlPanelVue from '../2d/ControlPanel.vue'
 import TargetPanelVue from '../2d/TargetPanel.vue'
+import FreeInquiryVue from '../../../components/FreeInquiry.vue'
 import store from '../../../store'
-
-import { Notify } from 'quasar'
 
 let kexperimentId
 
@@ -13,7 +12,7 @@ export default [
   // 实验开始，启用一个新的kexperiment
   {
     paragraph: '初始画面',
-    talk: 0,
+    talk: 'last',
     method: ({ next }) => {
       store.dispatch('user/startExperiment', {
         experimentId: 8,
@@ -390,6 +389,11 @@ export default [
     paragraph: '结束语2',
     choice: 'last',
     method: ({ scene }) => {
+      const dialog =  Dialog.create({
+        component: FreeInquiryVue,
+        hintInfo: '在自由探究环节，自由的选择试剂进行实验探究吧！',
+      })
+      scene.mutate({ inquiryPanel: dialog })
       scene.mutate({ allFinished: true })
       scene.mutate({ acidType: '' })
       scene.mutate({ alkaliType: '' })

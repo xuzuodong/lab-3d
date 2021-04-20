@@ -41,13 +41,13 @@ export const reactions = (scene, liquidGroup, dropType) => {
       case 'acid_hcl':
         liquidAnalysis.acid += element.volume
         break
-      case 'acid_ch3cooh':
+      case 'acid_hno':
         liquidAnalysis.acid += 0.1 * element.volume
         break
       case 'alkali_naoh':
         liquidAnalysis.alkali += element.volume
         break
-      case 'alkali_nahco3':
+      case 'alkali_baoh':
         liquidAnalysis.alkali += 0.1 * element.volume
         break
       case 'pur':
@@ -86,7 +86,7 @@ export const reactions = (scene, liquidGroup, dropType) => {
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
     }
-    if (dropType === 'acid_ch3cooh') {
+    if (dropType === 'acid_hno') {
       if (ratio === 0) {
         const color = standardColor('pur', 1)
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
@@ -126,7 +126,7 @@ export const reactions = (scene, liquidGroup, dropType) => {
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
     }
-    if (dropType === 'alkali_nahco3') {
+    if (dropType === 'alkali_baoh') {
       if (ratio === 0) {
         const color = standardColor('pur', 13)
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
@@ -198,7 +198,7 @@ export const reactions = (scene, liquidGroup, dropType) => {
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
     }
-    if (dropType === 'acid_ch3cooh') {
+    if (dropType === 'acid_hno') {
       if (ratio === 0) {
         const color = standardColor('phe', 1)
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
@@ -238,7 +238,7 @@ export const reactions = (scene, liquidGroup, dropType) => {
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
       }
     }
-    if (dropType === 'alkali_nahco3') {
+    if (dropType === 'alkali_baoh') {
       if (ratio === 0) {
         const color = standardColor('phe', 13)
         matTubeLiquid.diffuseColor = new BABYLON.Color3(color[0], color[1], color[2])
