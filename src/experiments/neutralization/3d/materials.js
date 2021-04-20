@@ -35,4 +35,8 @@ export const createMaterials = (scene) => {
   const matPhesolution = new BABYLON.StandardMaterial('matPhesolution', scene)
   matPhesolution.diffuseColor = new BABYLON.Color3(1, 1, 1)
   matPhesolution.alpha = 0.9
+
+  const matBrownGlass = new BABYLON.StandardMaterial('matBrownGlass', scene)
+  matBrownGlass.diffuseColor = new BABYLON.Color3(115 / 255, 74 / 255, 18/ 255)
+  matBrownGlass.alpha = 0.4
 }

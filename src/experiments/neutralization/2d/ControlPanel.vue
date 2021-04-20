@@ -52,8 +52,7 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
 import generalOperations from '../3d/generalOperation'
 import { reactions } from '../3d/reaction'
-import { Dialog } from 'quasar'
-import WarnPanelVue from './WarnPanel'
+import { Notify } from 'quasar'
 
 export default {
   name: 'controlPanel',
@@ -116,12 +115,12 @@ export default {
       switch (temp) {
         case 'acid_hcl':
           return '稀盐酸'
-        case 'acid_ch3cooh':
-          return '醋酸溶液'
+        case 'acid_hno':
+          return '稀硝酸'
         case 'alkali_naoh':
           return '氢氧化钠溶液'
-        case 'alkali_nahco3':
-          return '小苏打溶液'
+        case 'alkali_baoh':
+          return '氢氧化钡溶液'
         case 'pur':
           return '紫色石蕊试剂'
         case 'phe':
@@ -157,11 +156,11 @@ export default {
     },
 
     async drop() {
-      if (!this.isDropping && this.scene.existLiquid.length < 40) {
+      if (!this.isDropping && this.scene.existLiquid.length < 40 && this.scene.animatables.length === 0) {
         this.clickCount++
         this.isDropping = true
 
-        if (this.dropType === 'acid_hcl' || this.dropType === 'acid_ch3cooh') {
+        if (this.dropType === 'acid_hcl' || this.dropType === 'acid_hno') {
           await generalOperations.dropLiqiud(this.scene, 53, this.liquidLevel()).then(() => {
             this.scene.mutate({ acidType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
@@ -171,7 +170,7 @@ export default {
           })
         }
 
-        if (this.dropType === 'alkali_naoh' || this.dropType === 'alkali_nahco3') {
+        if (this.dropType === 'alkali_naoh' || this.dropType === 'alkali_baoh') {
           await generalOperations.dropLiqiud(this.scene, 53, this.liquidLevel()).then(() => {
             this.scene.mutate({ alkaliType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
@@ -218,9 +217,12 @@ export default {
             })
         }
       } else if (this.scene.existLiquid.length == 40) {
-        Dialog.create({
-          component: WarnPanelVue,
-          warnInfo: '当前试管中溶液已满，若要继续实验，请先倒空试管！',
+        Notify.create({
+          message: '当前试管中溶液已满，若要继续实验，请先倒空试管！',
+          type: 'negative',
+          position: 'center',
+          timeout: 5000,
+          actions: [{ label: 'X', color: 'white', handler: () => {} }],
         })
       }
     },
@@ -229,9 +231,9 @@ export default {
       if (!this.isDropping) {
         if (
           this.dropType === 'acid_hcl' ||
-          this.dropType === 'acid_ch3cooh' ||
+          this.dropType === 'acid_hno' ||
           this.dropType === 'alkali_naoh' ||
-          this.dropType === 'alkali_nahco3'
+          this.dropType === 'alkali_baoh'
         ) {
           generalOperations.putBackDropper(this.scene, this.dropType)
         } else {

@@ -4,12 +4,12 @@ export const defaultOperations = (scene, { purText, pheText }) => {
   // 定义需要添加动作的物体
   const hclBottle = scene.getMeshByName('hclBottle')
   const hclDropper = scene.getTransformNodeByName('hclDropper')
-  const coohBottle = scene.getMeshByName('coohBottle')
-  const coohDropper = scene.getTransformNodeByName('coohDropper')
+  const hnoBottle = scene.getMeshByName('hnoBottle')
+  const hnoDropper = scene.getTransformNodeByName('hnoDropper')
   const naohBottle = scene.getMeshByName('naohBottle')
   const naohDropper = scene.getTransformNodeByName('naohDropper')
-  const nahcoBottle = scene.getMeshByName('nahcoBottle')
-  const nahcoDropper = scene.getTransformNodeByName('nahcoDropper')
+  const baohBottle = scene.getMeshByName('baohBottle')
+  const baohDropper = scene.getTransformNodeByName('baohDropper')
   const purBottle = scene.getMeshByName('purbottle')
   const purDropper = scene.getTransformNodeByName('purdropper')
   const pheBottle = scene.getMeshByName('phebottle')
@@ -20,9 +20,9 @@ export const defaultOperations = (scene, { purText, pheText }) => {
 
   // 创建试剂瓶的鼠标监听事件
   hclBottle.actionManager = new BABYLON.ActionManager(scene)
-  coohBottle.actionManager = new BABYLON.ActionManager(scene)
+  hnoBottle.actionManager = new BABYLON.ActionManager(scene)
   naohBottle.actionManager = new BABYLON.ActionManager(scene)
-  nahcoBottle.actionManager = new BABYLON.ActionManager(scene)
+  baohBottle.actionManager = new BABYLON.ActionManager(scene)
   purBottle.actionManager = new BABYLON.ActionManager(scene)
   pheBottle.actionManager = new BABYLON.ActionManager(scene)
 
@@ -44,9 +44,9 @@ export const defaultOperations = (scene, { purText, pheText }) => {
   }
 
   meshHover(hclBottle, hclDropper)
-  meshHover(coohBottle, coohDropper)
+  meshHover(hnoBottle, hnoDropper)
   meshHover(naohBottle, naohDropper)
-  meshHover(nahcoBottle, nahcoDropper)
+  meshHover(baohBottle, baohDropper)
 
   purBottle.actionManager.registerAction(
     new BABYLON.CombineAction(BABYLON.ActionManager.OnPointerOverTrigger, [

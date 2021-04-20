@@ -46,7 +46,7 @@ export default (scene) => {
       BABYLON.SceneLoader.ImportMeshAsync('', tube, '', scene, undefined, '.glb'),
       BABYLON.SceneLoader.ImportMeshAsync('', purbottle, '', scene, undefined, '.glb'),
       BABYLON.SceneLoader.ImportMeshAsync('', phebottle, '', scene, undefined, '.glb'),
-      BABYLON.SceneLoader.ImportMeshAsync('', bottle, '', scene, undefined, '.glb')
+      BABYLON.SceneLoader.ImportMeshAsync('', bottle, '', scene, undefined, '.glb'),
     ]).then(() => {
       const myan = scene.animationGroups.find((a) => a.name === 'All Animations')
       myan.stop()
@@ -60,7 +60,8 @@ export default (scene) => {
         matGlass: scene.getMaterialByName('matGlass'),
         matDropperLiquid: scene.getMaterialByName('matDropperLiquid'),
         matPursolution: scene.getMaterialByName('matPursolution'),
-        matPhesolution: scene.getMaterialByName('matPhesolution')
+        matPhesolution: scene.getMaterialByName('matPhesolution'),
+        matBrownGlass: scene.getMaterialByName('matBrownGlass'),
       }
 
       const tubeMesh = []
@@ -91,7 +92,7 @@ export default (scene) => {
           hclMeshes[0].clone(name + 'Dropper'),
           hclMeshes[1].clone(name + 'Liquid'),
           hclMeshes[2].clone(name + 'Bottle'),
-          hclMeshes[3].clone(name + 'Solution')
+          hclMeshes[3].clone(name + 'Solution'),
         ]
       }
 
@@ -198,26 +199,28 @@ export default (scene) => {
       hclBottle.material = materials.matGlass
       hclDropper.getChildMeshes()[0].material = materials.matGlass
 
-      let coohDropper, coohLiquid, coohBottle, coohSolution
-      const coohMeshes = ([coohDropper, coohLiquid, coohBottle, coohSolution] = cloneBottle('cooh'))
-      changeMeshPosition(coohMeshes, new BABYLON.Vector3(-90, 0, 80))
+      let hnoDropper, hnoLiquid, hnoBottle, hnoSolution
+      const hnoMeshes = ([hnoDropper, hnoLiquid, hnoBottle, hnoSolution] = cloneBottle('hno'))
+      changeMeshPosition(hnoMeshes, new BABYLON.Vector3(-90, 0, 80))
+      hnoDropper.getChildMeshes()[0].material = materials.matBrownGlass
+      hnoBottle.material = materials.matBrownGlass
 
       let naohDropper, naohLiquid, naohBottle, naohSolution
       const naohMeshes = ([naohDropper, naohLiquid, naohBottle, naohSolution] = cloneBottle('naoh'))
       changeMeshPosition(naohMeshes, new BABYLON.Vector3(90, 0, 80))
 
-      let nahcoDropper, nahcoLiquid, nahcoBottle, nahcoSolution
-      const nahcoMeshes = ([nahcoDropper, nahcoLiquid, nahcoBottle, nahcoSolution] = cloneBottle('nahco'))
-      changeMeshPosition(nahcoMeshes, new BABYLON.Vector3(120, 0, 80))
+      let baohDropper, baohLiquid, baohBottle, baohSolution
+      const baohMeshes = ([baohDropper, baohLiquid, baohBottle, baohSolution] = cloneBottle('baoh'))
+      changeMeshPosition(baohMeshes, new BABYLON.Vector3(120, 0, 80))
 
       // // 添加阴影
       let directionalLight = scene.getLightByName('shadowControlLight')
       const shadowGenerator = new BABYLON.ShadowGenerator(1024, directionalLight)
       shadowGenerator.addShadowCaster(main_liquid)
       shadowGenerator.addShadowCaster(hclBottle)
-      shadowGenerator.addShadowCaster(coohBottle)
+      shadowGenerator.addShadowCaster(hnoBottle)
       shadowGenerator.addShadowCaster(naohBottle)
-      shadowGenerator.addShadowCaster(nahcoBottle)
+      shadowGenerator.addShadowCaster(baohBottle)
       shadowGenerator.useExponentialShadowMap = true
       shadowGenerator.setTransparencyShadow(true)
       shadowGenerator.setDarkness(0.36) //阴影灰度，0为全黑，1为无阴影
@@ -254,22 +257,22 @@ export default (scene) => {
       advancedTexture.addControl(hclText)
       hclText.linkWithMesh(hclBottle)
 
-      const coohText = new GUI.TextBlock()
-      coohText.text = '醋酸溶液'
-      advancedTexture.addControl(coohText)
-      coohText.linkWithMesh(coohBottle)
+      const hnoText = new GUI.TextBlock()
+      hnoText.text = '稀硝酸'
+      advancedTexture.addControl(hnoText)
+      hnoText.linkWithMesh(hnoBottle)
 
       const naohText = new GUI.TextBlock()
       naohText.text = '氢氧化钠溶液'
       advancedTexture.addControl(naohText)
       naohText.linkWithMesh(naohBottle)
 
-      const nahcoText = new GUI.TextBlock()
-      nahcoText.text = '碳酸氢钠溶液'
-      advancedTexture.addControl(nahcoText)
-      nahcoText.linkWithMesh(nahcoBottle)
+      const baohText = new GUI.TextBlock()
+      baohText.text = '氢氧化钡溶液'
+      advancedTexture.addControl(baohText)
+      baohText.linkWithMesh(baohBottle)
 
-      formatText([purText, pheText, hclText, coohText, naohText, nahcoText])
+      formatText([purText, pheText, hclText, hnoText, naohText, baohText])
 
       // // 模拟液滴
       const liquidSphere = BABYLON.MeshBuilder.CreateSphere(
