@@ -1,5 +1,5 @@
 <template>
-  <div class="QTarget" v-if="showTarget">
+  <div class="QTarget" @hide="onDialogHide">
     <q-dialog ref="dialog" transition-show="slide-right" transition-hide="slide-left" class="top-left-dialog">
       <q-card class="my-card">
         <q-card-section class="bg-secondary text-white q-px-md">
@@ -19,15 +19,19 @@ export default {
       msg: '',
     }
   },
-  props: {
-    showTarget: Boolean,
-  },
   methods: {
     show() {
       this.$refs.dialog.show()
     },
     hide() {
       this.$refs.dialog.hide()
+    },
+    onDialogHide() {
+      this.$emit('hide')
+    },
+    onOKClick() {
+      this.$emit('ok')
+      this.hide()
     },
   },
   created: function () {

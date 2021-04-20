@@ -1,10 +1,11 @@
 <template>
-  <div class="QParameter" v-if="showParam">
+  <div class="QParameter" @hide="onDialogHide">
     <q-dialog
       ref="dialog"
       transition-show="slide-left"
       transition-hide="slide-right"
       class="top-right-dialog"
+      seamless
     >
       <q-card style="width: 350px">
         <q-card-section class="bg-secondary text-white q-px-md">
@@ -48,7 +49,6 @@
 export default {
   name: 'paramPage',
   props: {
-    showParam: Boolean,
     information: Array,
   },
   methods: {
@@ -57,6 +57,15 @@ export default {
     },
     hide() {
       this.$refs.dialog.hide()
+    },
+
+    onDialogHide() {
+      this.$emit('hide')
+    },
+
+    onOKClick() {
+      this.$emit('ok')
+      this.hide()
     },
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="QTest" v-if="showTest">
+  <div class="QTest" @hide="onDialogHide">
     <q-dialog
       ref="dialog"
       seamless
@@ -73,9 +73,6 @@ export default {
       gravityData: 75,
     }
   },
-  props: {
-    showTest: Boolean,
-  },
   methods: {
     show() {
       this.$refs.dialog.show()
@@ -83,6 +80,14 @@ export default {
     hide() {
       this.$refs.dialog.hide()
     },
+    onDialogHide() {
+      this.$emit('hide')
+    },
+    onOKClick() {
+      this.$emit('ok')
+      this.hide()
+    },
+
     grass() {
       this.hide()
       storeData.splice(0, storeData.length)

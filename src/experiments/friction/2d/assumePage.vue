@@ -1,5 +1,5 @@
 <template>
-  <div class="QAssume" v-if="showAssume">
+  <div class="QAssume" @hide="onDialogHide">
     <q-dialog
       ref="dialog"
       seamless
@@ -52,7 +52,6 @@ export default {
     }
   },
   props: {
-    showAssume: Boolean,
     option1: Boolean,
     option2: Boolean,
     option3: Boolean,
@@ -64,6 +63,14 @@ export default {
     hide() {
       this.$refs.dialog.hide()
     },
+    onDialogHide() {
+      this.$emit('hide')
+    },
+    onOKClick() {
+      this.$emit('ok')
+      this.hide()
+    },
+
     confirm() {
       if (this.group != '') {
         this.hide()

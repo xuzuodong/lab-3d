@@ -54,7 +54,6 @@ export default [
         option1: o1,
         option2: o2,
         option3: o3,
-        showAssume: true,
       }).onOk(async () => {
         if (storeData[0] == 'op1') {
           o1 = true
@@ -123,7 +122,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showTarget: true,
       })
       scene.mutate({ targetPanel: target })
       next()
@@ -137,7 +135,6 @@ export default [
     method: ({ scene, goto }) => {
       const test = Dialog.create({
         component: testPage,
-        showTest: true,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
           grass = 1
@@ -202,7 +199,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.largeArea()
           goto({ paragraph: '增大接触面积' })
@@ -227,7 +224,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.smallArea()
           goto({ paragraph: '减小接触面积' })
@@ -252,7 +249,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           gravity = -1
           goto({ paragraph: '轻松拉货' })
@@ -296,7 +293,6 @@ export default [
     method: ({ next, scene }) => {
       const param = Dialog.create({
         component: paramPage,
-        showParam: true,
         information: [{
           msg: '失败',
           force: '500',
@@ -342,7 +338,6 @@ export default [
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
-          showParam: true,
           information: [{
             msg: '成功',
             force: '294',
@@ -388,7 +383,6 @@ export default [
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
-          showParam: true,
           information: [{
             msg: '成功',
             force: '98',
@@ -498,7 +492,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showTarget: true,
       })
       scene.mutate({ targetPanel: target })
       next()
@@ -512,7 +505,6 @@ export default [
     method: ({ goto, scene }) => {
       const test = Dialog.create({
         component: testPage,
-        showTest: true,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
           Notify.create({
@@ -520,7 +512,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.changeGround(grasspng)
           goto({ paragraph: '草地' })
@@ -545,7 +537,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.changeGround(woodjpg)
           goto({ paragraph: '木板' })
@@ -570,7 +562,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.changeGround(icejpg)
           goto({ paragraph: '冰面' })
@@ -633,7 +625,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           gravity = -2
           goto({ paragraph: '轻松拉货' })
@@ -666,7 +658,6 @@ export default [
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
-          showParam: true,
           information: [{
             msg: '失败',
             force: '500',
@@ -709,7 +700,6 @@ export default [
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
-          showParam: true,
           information: [{
             msg: '失败',
             force: '500',
@@ -806,7 +796,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showTarget: true,
       })
       scene.mutate({ targetPanel: target })
       next()
@@ -820,7 +809,6 @@ export default [
     method: ({ goto, scene }) => {
       const test = Dialog.create({
         component: testPage,
-        showTest: true,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
           Notify.create({
@@ -828,7 +816,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.changeGround(grasspng)
           goto({ paragraph: '草地' })
@@ -853,7 +841,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.changeGround(woodjpg)
           goto({ paragraph: '木板' })
@@ -878,7 +866,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.changeGround(icejpg)
           goto({ paragraph: '冰面' })
@@ -903,7 +891,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.largeArea()
           goto({ paragraph: '增大接触面积' })
@@ -928,7 +916,7 @@ export default [
             position: 'center',
             type: 'negative',
             timeout: 3500,
-            actions: [{ label: 'ok', color: 'white', handler: () => { } }]
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
           })
           scene.smallArea()
           goto({ paragraph: '减小接触面积' })
@@ -979,7 +967,6 @@ export default [
       if (storeData[0] == 25) {
         const param = Dialog.create({
           component: paramPage,
-          showParam: true,
           information: [{
             msg: '成功',
             force: '441',
@@ -994,7 +981,6 @@ export default [
       else if (storeData[0] == 50) {
         const param = Dialog.create({
           component: paramPage,
-          showParam: true,
           information: [{
             msg: '成功',
             force: '294',
@@ -1009,7 +995,6 @@ export default [
       else if (storeData[0] == 75) {
         const param = Dialog.create({
           component: paramPage,
-          showParam: true,
           information: [{
             msg: '成功',
             force: '147',
