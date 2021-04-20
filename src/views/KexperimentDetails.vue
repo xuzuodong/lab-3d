@@ -166,6 +166,7 @@ export default {
           this.backScore = evaluation.posttestInfo.correct
           this.pretestInfo = evaluation.pretestInfo.errorResolution
           this.posttestInfo = evaluation.posttestInfo.errorResolution
+          this.behaviorInfo = evaluation.behaviorInfo
         },
         failure: (error) => {
           console.log(error)

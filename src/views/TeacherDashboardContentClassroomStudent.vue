@@ -14,9 +14,14 @@
         <q-td key="kexperimentNum" :props="props">
           {{ props.row.kexperimentNum }}
         </q-td>
-        <q-td key="button1" :props="props">
-          <q-btn flat color="primary" label="实验记录" style="font-size: 14px" />
-        </q-td>
+        <!-- <q-td key="button1" :props="props">
+          <q-btn
+            flat
+            color="primary"
+            label="实验记录"
+            style="font-size: 14px"
+          />
+        </q-td> -->
         <q-td key="button2" :props="props">
           <q-btn flat color="red" label="踢出班级" style="font-size: 14px" @click="remove(props.row.id)" />
         </q-td>
@@ -43,7 +48,7 @@ export default {
           align: 'center',
           sortable: true,
         },
-        { name: 'button1', label: '实验记录', field: 'experimentRec', align: 'center' },
+        // { name: 'button1', label: '实验记录', field: 'experimentRec', align: 'center' },
         { name: 'button2', label: '其他', field: 'deleteMember', align: 'center' },
       ],
       students: [],

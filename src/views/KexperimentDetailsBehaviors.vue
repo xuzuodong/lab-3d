@@ -16,7 +16,7 @@
           <q-td key="correctContent" :props="props">
             {{ props.row.correctContent }}
           </q-td>
-          <q-td key="button" :props="props">
+          <!-- <q-td key="button" :props="props">
             <q-btn
               :to="'/dashboard/kexperiment-details/' + props.row.kexperimentId"
               style="font-size: 14px"
@@ -24,7 +24,7 @@
               label="查看知识点"
               flat
             />
-          </q-td>
+          </q-td> -->
         </q-tr>
       </template>
     </q-table>
@@ -43,7 +43,7 @@ export default {
         { name: 'userSolution', label: '您的操作', field: 'userSolution', align: 'left' },
         { name: 'isCorrect', label: '操作判断', field: 'isCorrect', align: 'center' },
         { name: 'correctContent', label: '正确操作', field: 'correctContent', align: 'center' },
-        { name: 'button', label: '知识链接', field: 'button', align: 'center' },
+        // { name: 'button', label: '知识链接', field: 'button', align: 'center' },
       ],
       behavior: [],
       loading: true,
