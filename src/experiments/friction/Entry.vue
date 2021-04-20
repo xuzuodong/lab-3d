@@ -17,21 +17,28 @@ export default {
   mounted() {
     babylonApp = new BabylonApp()
     const scene = babylonApp.createScene({
-      state: { targetPanel: Object, assumePanel: Object, testPanel: Object, questionPanel: Object },
+      state: {
+        targetPanel: Object,
+        assumePanel: Object,
+        testPanel: Object,
+        questionPanel: Object,
+        paramPanel: Object,
+      },
       actions,
     })
 
     initScene(scene).then(() => {
       babylonApp.hideLoadingUI()
-      this.$talker({ script, hooks, scene })
+      this.$talker({ script, hooks, scene, debug: '' })
     })
   },
 
   beforeDestroy() {
+    babylonApp.scene.state.questionPanel.hide && babylonApp.scene.state.questionPanel.hide()
     babylonApp.scene.state.targetPanel.hide && babylonApp.scene.state.targetPanel.hide()
     babylonApp.scene.state.assumePanel.hide && babylonApp.scene.state.assumePanel.hide()
+    babylonApp.scene.state.paramPanel.hide && babylonApp.scene.state.paramPanel.hide()
     babylonApp.scene.state.testPanel.hide && babylonApp.scene.state.testPanel.hide()
-    babylonApp.scene.state.questionPanel.hide && babylonApp.scene.state.questionPanel.hide()
     babylonApp.destroy()
     babylonApp = null
   },

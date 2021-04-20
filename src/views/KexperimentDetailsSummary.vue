@@ -1,19 +1,43 @@
 <template>
-  <div>
-    <q-table :data="data" :columns="columns" row-key="name" />
+  <div id="KexperimentDetailsSummary">
+    <q-table :data="processList" :columns="columns" row-key="name" dense flat square />
   </div>
 </template>
 
 <script>
+import { date } from 'quasar'
 export default {
+  props: {
+    behaviorInfo: Array,
+  },
   data() {
     return {
       columns: [
-        { name: 'time', label: '时间', field: 'name' },
-        { name: 'behavior', label: '操作', field: 'behavior' },
+        {
+          name: 'ctime',
+          label: '时间',
+          field: 'ctime',
+          align: 'left',
+          style: 'width:300px',
+        },
+        { name: 'behaviorName', label: '操作', field: 'behaviorName', align: 'left' },
       ],
-      data: [],
+      process: [],
+      eT: '',
     }
+  },
+
+  computed: {
+    processList() {
+      const arr = []
+      this.behaviorInfo.forEach((e, i) => {
+        if (e.ctime) {
+          let formattedString = date.formatDate(e.ctime, 'YYYY-MM-DD HH:mm:ss')
+          arr.push({ ...this.behaviorInfo[i], ctime: formattedString })
+        }
+      })
+      return arr
+    },
   },
 }
 </script>

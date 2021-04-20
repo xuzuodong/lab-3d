@@ -76,7 +76,6 @@ export default {
     studentsList() {
       const arr = []
       this.students.forEach((e, i) => {
-        // 如果没有结束时间则未完成
         let formattedString = date.formatDate(this.jT, 'YYYY-MM-DD')
         if (e.classes) {
           arr.push({
