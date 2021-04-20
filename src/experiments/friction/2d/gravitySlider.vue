@@ -1,5 +1,5 @@
 <template>
-  <div class="QSlider" v-if="showSlider">
+  <div class="QSlider" @hide="onDialogHide">
     <q-dialog
       ref="dialog"
       seamless
@@ -31,9 +31,6 @@ export default {
       gravityData: 2,
     }
   },
-  props: {
-    showSlider: Boolean,
-  },
   methods: {
     show() {
       this.$refs.dialog.show()
@@ -41,6 +38,14 @@ export default {
     hide() {
       this.$refs.dialog.hide()
     },
+    onDialogHide() {
+      this.$emit('hide')
+    },
+    onOKClick() {
+      this.$emit('ok')
+      this.hide()
+    },
+
     dataPast() {
       this.hide()
       storeData.splice(0, storeData.length)

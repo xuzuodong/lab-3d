@@ -15,7 +15,7 @@ import url_background from '../assets/background.jpg'
 export default {
   name: 'Home',
 
-  components: { HomeExperimentsListVue },
+  components: { HomeExperimentsListVue},
 
   data() {
     return { url_background }

@@ -6,7 +6,6 @@ import crate from '../2d/assets/crate.png'
 export default (scene) => {
     return new Promise((resolve) => {
         // 场景在这里初始化
-        // const scene = new BABYLON.Scene(engine)
         scene.clearColor = new BABYLON.Color3(217 / 255, 234 / 255, 244 / 255)
         scene.createDefaultCamera(true, true, true)
 
@@ -34,7 +33,7 @@ export default (scene) => {
             settingCamera()
 
             function settingCamera() {
-                const mainCamera = new BABYLON.ArcRotateCamera("mainCamera", Math.PI / 4, Math.PI / 3, 13, new BABYLON.Vector3(0, 10, 0), scene);
+                const mainCamera = new BABYLON.ArcRotateCamera("mainCamera", Math.PI / 2.5, Math.PI / 3, 13, new BABYLON.Vector3(0, 10, 0), scene);
                 mainCamera.attachControl(true);
                 mainCamera.lowerRadiusLimit = 2;
                 mainCamera.upperRadiusLimit = 15;

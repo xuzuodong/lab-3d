@@ -1,4 +1,5 @@
 import { Dialog } from 'quasar'
+import { Notify } from 'quasar'
 import storeData from '../2d/storeData'
 import woodjpg from '../2d/assets/wood.jpg'
 import grasspng from '../2d/assets/grass.png'
@@ -6,9 +7,11 @@ import icejpg from '../2d/assets/ice.jpg'
 import initGround from '../2d/assets/initGround.png'
 import assumePage from '../2d/assumePage'
 import targetPage from '../2d/targetPage'
+import paramPage from '../2d/paramPage'
 import testPage from '../2d/testPage'
 import store from '../../../store'
 
+let experAssume = 0
 let o1 = false
 let o2 = false
 let o3 = false
@@ -19,6 +22,7 @@ let large = 0
 let small = 0
 let gravity = 0
 let kexperimentId = 0
+let warnMsg = '请按照左上角的假设进行实验！'
 
 export default [
   //开始实验，并获取kexperimentId
@@ -50,10 +54,10 @@ export default [
         option1: o1,
         option2: o2,
         option3: o3,
-        showAssume: true,
       }).onOk(async () => {
         if (storeData[0] == 'op1') {
           o1 = true
+          experAssume = 1
           goto({ paragraph: '改变接触面粗糙程度' })
           store.dispatch('user/submitBehavior', {
             kexperimentId: kexperimentId,
@@ -71,6 +75,7 @@ export default [
           })
         } else if (storeData[0] == 'op2') {
           o2 = true
+          experAssume = 2
           goto({ paragraph: '改变与接触面的面积' })
           store.dispatch('user/submitBehavior', {
             kexperimentId: kexperimentId,
@@ -88,6 +93,7 @@ export default [
           })
         } else if (storeData[0] == 'op3') {
           o3 = true
+          experAssume = 3
           goto({ paragraph: '改变物体的质量' })
           store.dispatch('user/submitBehavior', {
             kexperimentId: kexperimentId,
@@ -116,8 +122,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showButton: false,
-        showTarget: true,
       })
       scene.mutate({ targetPanel: target })
       next()
@@ -131,8 +135,6 @@ export default [
     method: ({ scene, goto }) => {
       const test = Dialog.create({
         component: testPage,
-        showTest: true,
-        showButton: false,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
           grass = 1
@@ -192,6 +194,13 @@ export default [
           })
         }
         if (storeData[0] == 'large') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.largeArea()
           goto({ paragraph: '增大接触面积' })
           store.dispatch('user/submitBehavior', {
@@ -210,6 +219,13 @@ export default [
           })
         }
         if (storeData[0] == 'small') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.smallArea()
           goto({ paragraph: '减小接触面积' })
           store.dispatch('user/submitBehavior', {
@@ -227,7 +243,14 @@ export default [
             },
           })
         }
-        if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
+        if (storeData[0] == 25 || storeData[0] == 50 || storeData[0] == 75) {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           gravity = -1
           goto({ paragraph: '轻松拉货' })
           store.dispatch('user/submitBehavior', {
@@ -268,6 +291,17 @@ export default [
     paragraph: '草地后',
     talk: 2,
     method: ({ next, scene }) => {
+      const param = Dialog.create({
+        component: paramPage,
+        information: [{
+          msg: '失败',
+          force: '500',
+          coefficient: '0.7',
+          square: '5.4',
+          mass: '100',
+        }]
+      })
+      scene.mutate({ paramPanel: param })
       scene.runStop()
       next()
     },
@@ -279,12 +313,19 @@ export default [
     talk: 'last',
     method: ({ goto, scene }) => {
       scene.changeGround(initGround)
+      scene.paramPanel.hide()
       if (grass == 1 && wood == 1 && ice == 1) {
         goto({ paragraph: '接触面总结' })
         grass = 0
         wood = 0
         ice = 0
-      } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 1) {
+        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 2) {
+        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      } else if (experAssume == 3) {
+        goto({ paragraph: '改变物体的质量', talk: 'last' })
+      }
     },
   },
 
@@ -295,6 +336,17 @@ export default [
     method: ({ goto, scene }) => {
       scene.woodRun(0.02)
       setTimeout(() => {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '成功',
+            force: '294',
+            coefficient: '0.3',
+            square: '5.4',
+            mass: '100',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
         goto({ paragraph: '木板后' })
       }, 6000)
     },
@@ -306,12 +358,19 @@ export default [
     talk: 'last',
     method: ({ goto, scene }) => {
       scene.changeGround(initGround)
+      scene.paramPanel.hide()
       if (grass == 1 && wood == 1 && ice == 1) {
         goto({ paragraph: '接触面总结' })
         grass = 0
         wood = 0
         ice = 0
-      } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 1) {
+        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 2) {
+        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      } else if (experAssume == 3) {
+        goto({ paragraph: '改变物体的质量', talk: 'last' })
+      }
     },
   },
 
@@ -322,6 +381,17 @@ export default [
     method: ({ goto, scene }) => {
       scene.iceRun(0.08)
       setTimeout(() => {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '成功',
+            force: '98',
+            coefficient: '0.1',
+            square: '5.4',
+            mass: '100',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
         goto({ paragraph: '冰面后' })
       }, 6000)
     },
@@ -332,13 +402,20 @@ export default [
     paragraph: '冰面后',
     talk: 'last',
     method: ({ goto, scene }) => {
+      scene.paramPanel.hide()
       scene.changeGround(initGround)
       if (grass == 1 && wood == 1 && ice == 1) {
         goto({ paragraph: '接触面总结' })
         grass = 0
         wood = 0
         ice = 0
-      } else goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 1) {
+        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 2) {
+        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      } else if (experAssume == 3) {
+        goto({ paragraph: '改变物体的质量', talk: 'last' })
+      }
     },
   },
 
@@ -415,8 +492,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showButton: false,
-        showTarget: true,
       })
       scene.mutate({ targetPanel: target })
       next()
@@ -430,9 +505,15 @@ export default [
     method: ({ goto, scene }) => {
       const test = Dialog.create({
         component: testPage,
-        showTest: true,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.changeGround(grasspng)
           goto({ paragraph: '草地' })
           store.dispatch('user/submitBehavior', {
@@ -451,6 +532,13 @@ export default [
           })
         }
         if (storeData[0] == 'wood') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.changeGround(woodjpg)
           goto({ paragraph: '木板' })
           store.dispatch('user/submitBehavior', {
@@ -469,6 +557,13 @@ export default [
           })
         }
         if (storeData[0] == 'ice') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.changeGround(icejpg)
           goto({ paragraph: '冰面' })
           store.dispatch('user/submitBehavior', {
@@ -524,7 +619,14 @@ export default [
             },
           })
         }
-        if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
+        if (storeData[0] == 25 || storeData[0] == 50 || storeData[0] == 75) {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           gravity = -2
           goto({ paragraph: '轻松拉货' })
           store.dispatch('user/submitBehavior', {
@@ -554,6 +656,17 @@ export default [
     method: ({ next, scene }) => {
       scene.runStart()
       setTimeout(() => {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '失败',
+            force: '500',
+            coefficient: '0.6',
+            square: '2.4',
+            mass: '100',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
         next()
       }, 3000)
     },
@@ -566,125 +679,14 @@ export default [
     method: ({ goto, scene }) => {
       scene.reSmallArea()
       scene.runStop()
+      scene.paramPanel.hide()
       if (large == 1 && small == 1) goto({ paragraph: '接触面积总结' })
-      else {
-        const test = Dialog.create({
-          component: testPage,
-          showTest: true,
-        }).onOk(async () => {
-          if (storeData[0] == 'grass') {
-            scene.changeGround(grasspng)
-            goto({ paragraph: '草地' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '草地',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'wood') {
-            scene.changeGround(woodjpg)
-            goto({ paragraph: '木板' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '木板',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'ice') {
-            scene.changeGround(icejpg)
-            goto({ paragraph: '冰面' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '冰面',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'large') {
-            large = 1
-            scene.largeArea()
-            goto({ paragraph: '增大接触面积' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '增大接触面积',
-              correctContent: '改变与接触面的面积中选择了【增大接触面积】',
-              isCorrect: true,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'small') {
-            small = 1
-            scene.smallArea()
-            goto({ paragraph: '减小接触面积' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '减小接触面积',
-              correctContent: '改变与接触面的面积中选择了【减小接触面积】',
-              isCorrect: true,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
-            gravity = -2
-            goto({ paragraph: '轻松拉货' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '改变物体的质量',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          scene.backToStart()
-        })
-        scene.mutate({ testPanel: test })
+      else if (experAssume == 1) {
+        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 2) {
+        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      } else if (experAssume == 3) {
+        goto({ paragraph: '改变物体的质量', talk: 'last' })
       }
     },
   },
@@ -696,6 +698,17 @@ export default [
     method: ({ next, scene }) => {
       scene.runStart()
       setTimeout(() => {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '失败',
+            force: '500',
+            coefficient: '0.6',
+            square: '9',
+            mass: '100',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
         next()
       }, 3000)
     },
@@ -708,125 +721,14 @@ export default [
     method: ({ goto, scene }) => {
       scene.runStop()
       scene.reLargeArea()
+      scene.paramPanel.hide()
       if (large == 1 && small == 1) goto({ paragraph: '接触面积总结' })
-      else {
-        const test = Dialog.create({
-          component: testPage,
-          showTest: true,
-        }).onOk(async () => {
-          if (storeData[0] == 'grass') {
-            scene.changeGround(grasspng)
-            goto({ paragraph: '草地' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '草地',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'wood') {
-            scene.changeGround(woodjpg)
-            goto({ paragraph: '木板' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '木板',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'ice') {
-            scene.changeGround(icejpg)
-            goto({ paragraph: '冰面' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '冰面',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'large') {
-            large = 1
-            scene.largeArea()
-            goto({ paragraph: '增大接触面积' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '增大接触面积',
-              correctContent: '改变与接触面的面积中选择了【增大接触面积】',
-              isCorrect: true,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 'small') {
-            small = 1
-            scene.smallArea()
-            goto({ paragraph: '减小接触面积' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '减小接触面积',
-              correctContent: '改变与接触面的面积中选择了【减小接触面积】',
-              isCorrect: true,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
-            gravity = -2
-            goto({ paragraph: '轻松拉货' })
-            store.dispatch('user/submitBehavior', {
-              kexperimentId: kexperimentId,
-              name: '改变与接触面的面积',
-              type: 'BEHAVIOR_CHOICE',
-              content: '改变物体的质量',
-              correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
-              isCorrect: false,
-              success: (res) => {
-                console.log(res);
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          }
-          scene.backToStart()
-        })
-        scene.mutate({ testPanel: test })
+      else if (experAssume == 1) {
+        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 2) {
+        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      } else if (experAssume == 3) {
+        goto({ paragraph: '改变物体的质量', talk: 'last' })
       }
     },
   },
@@ -894,8 +796,6 @@ export default [
     method: ({ next, scene }) => {
       const target = Dialog.create({
         component: targetPage,
-        showButton: false,
-        showTarget: true,
       })
       scene.mutate({ targetPanel: target })
       next()
@@ -909,9 +809,15 @@ export default [
     method: ({ goto, scene }) => {
       const test = Dialog.create({
         component: testPage,
-        showTest: true,
       }).onOk(async () => {
         if (storeData[0] == 'grass') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.changeGround(grasspng)
           goto({ paragraph: '草地' })
           store.dispatch('user/submitBehavior', {
@@ -930,6 +836,13 @@ export default [
           })
         }
         if (storeData[0] == 'wood') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.changeGround(woodjpg)
           goto({ paragraph: '木板' })
           store.dispatch('user/submitBehavior', {
@@ -948,6 +861,13 @@ export default [
           })
         }
         if (storeData[0] == 'ice') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.changeGround(icejpg)
           goto({ paragraph: '冰面' })
           store.dispatch('user/submitBehavior', {
@@ -966,6 +886,13 @@ export default [
           })
         }
         if (storeData[0] == 'large') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.largeArea()
           goto({ paragraph: '增大接触面积' })
           store.dispatch('user/submitBehavior', {
@@ -984,6 +911,13 @@ export default [
           })
         }
         if (storeData[0] == 'small') {
+          Notify.create({
+            message: warnMsg,
+            position: 'center',
+            type: 'negative',
+            timeout: 3500,
+            actions: [{ label: 'x', color: 'white', handler: () => { } }]
+          })
           scene.smallArea()
           goto({ paragraph: '减小接触面积' })
           store.dispatch('user/submitBehavior', {
@@ -1001,7 +935,7 @@ export default [
             },
           })
         }
-        if (storeData[0] == 1 || storeData[0] == 2 || storeData[0] == 3) {
+        if (storeData[0] == 25 || storeData[0] == 50 || storeData[0] == 75) {
           gravity = 1
           goto({ paragraph: '轻松拉货' })
           store.dispatch('user/submitBehavior', {
@@ -1030,13 +964,62 @@ export default [
     paragraph: '轻松拉货',
     talk: 2,
     method: ({ next, scene }) => {
-      if (storeData[0] == 1) scene.iceRun(0.08)
-      else if (storeData[0] == 2) scene.iceRun(0.06)
-      else if (storeData[0] == 3) scene.iceRun(0.04)
+      if (storeData[0] == 25) {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '成功',
+            force: '441',
+            coefficient: '0.6',
+            square: '5.4',
+            mass: '75',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
+        scene.iceRun(0.08)
+      }
+      else if (storeData[0] == 50) {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '成功',
+            force: '294',
+            coefficient: '0.6',
+            square: '5.4',
+            mass: '50',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
+        scene.iceRun(0.06)
+      }
+      else if (storeData[0] == 75) {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '成功',
+            force: '147',
+            coefficient: '0.6',
+            square: '5.4',
+            mass: '25',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
+        scene.iceRun(0.04)
+      }
       setTimeout(() => {
         next()
       }, 4000)
     },
+  },
+
+  //退出参数页面
+  {
+    paragraph: '轻松拉货',
+    reply: { choice: 'any', index: 0 },
+    method: ({ next, scene }) => {
+      scene.paramPanel.hide()
+      next()
+    }
   },
 
   //选择继续调节质量后跳转到重量调节器部分
