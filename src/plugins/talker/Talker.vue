@@ -1,6 +1,6 @@
 <template>
   <div class="talker" v-show="showBubble">
-    <talker-bubble-vue @click="shouldGoNext" :clickable="!this.typer.typing">
+    <talker-bubble-vue @click="shouldGoNext" :clickable="!this.typer.typing && showBubble">
       <p class="bubble-text" v-html="typed"></p>
     </talker-bubble-vue>
     <transition name="slide">
