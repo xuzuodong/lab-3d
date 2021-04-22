@@ -1395,12 +1395,12 @@ export default [
       const free = Dialog.create({
         component: FreeInquiry,
         hintInfo: '使用右侧的工具栏自由地进行实验探究吧！',
-        kexperimentId: this.kexperimentId,
+        kexperimentId: kexperimentId,
       }).onOk(async () => {
         console.log(111);
       })
       scene.mutate({ FreeInquiryPanel: free })
-      const test = Dialog.create({
+      const freeTest = Dialog.create({
         component: testPage,
         showTest: true,
       }).onOk(async () => {
@@ -1458,7 +1458,7 @@ export default [
         }
         scene.backToStart()
       })
-      scene.mutate({ testPanel: test })
+      scene.mutate({ freeTestPanel: freeTest })
     },
   },
 ]
