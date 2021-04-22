@@ -1,5 +1,6 @@
 import { Dialog } from 'quasar'
 import generalOperations from '../3d/generalOperation'
+import { judgeBehavior } from '../3d/judgeBehavior'
 import DialogQuestionVue from '../2d/DialogQuestion.vue'
 import ControlPanelVue from '../2d/ControlPanel.vue'
 import TargetPanelVue from '../2d/TargetPanel.vue'
@@ -12,7 +13,7 @@ export default [
   // 实验开始，启用一个新的kexperiment
   {
     paragraph: '初始画面',
-    talk: 'last',
+    talk: 0,
     method: ({ next }) => {
       store.dispatch('user/startExperiment', {
         experimentId: 8,
@@ -22,7 +23,7 @@ export default [
         },
         failure: (res) => {
           console.log(res)
-        }
+        },
       })
       next()
     },
@@ -147,8 +148,8 @@ export default [
             name: '酸碱反应现象选择题结论',
             type: 'BEHAVIOR_CHOICE',
             content: '您的选择是' + val.changeConclusion,
-            isCorrect: val.changeConclusion == 'B' ? true : false,
-            correctContent: 'B',
+            isCorrect: val.changeConclusion.slice(0, 1) == 'B' ? true : false,
+            correctContent: 'B .没有变化',
             success: (res) => {
               console.log(res)
             },
@@ -205,7 +206,7 @@ export default [
         scene,
       })
       scene.mutate({ targetPanel: dialog })
-      scene.freeExperiment()
+      scene.freeExperiment('freshAll')
       scene.targetPanel.onOk(() => {
         // 记录用户所选的酸碱指示剂，本次指示剂必定和第一次不同
         if (scene.indicatorType == 'pur') {
@@ -219,14 +220,14 @@ export default [
           acid_alkali: [],
         }).onOk((val) => {
           scene.panelDropperreset()
-          const evaluateArr = scene.judgeBehavior(val.radioConclusion)
+          const evaluateArr = judgeBehavior(scene, '自由实验1', val.radioConclusion)
           store.dispatch('user/submitBehavior', {
             kexperimentId,
-            name: '第一次自由实验选择题结论',
+            name: evaluateArr.conclusion.name,
             type: 'BEHAVIOR_CHOICE',
             content: '您的选择是' + val.radioConclusion,
-            isCorrect: evaluateArr.isCorrect,
-            correctContent: evaluateArr.correctContent,
+            isCorrect: evaluateArr.conclusion.isCorrect,
+            correctContent: evaluateArr.conclusion.correctContent,
             success: (res) => {
               console.log(res)
             },
@@ -234,27 +235,29 @@ export default [
               console.log(res)
             },
           })
-          store.dispatch('user/submitBehavior', {
-            kexperimentId,
-            name: '第一次自由实验现象评价',
-            type: 'BEHAVIOR_INSPECTION',
-            content: evaluateArr.result.content,
-            isCorrect: evaluateArr.result.isCorrect,
-            correctContent: '',
-            success: (res) => {
-              console.log(res)
-            },
-            failure: (res) => {
-              console.log(res)
-            },
-          })
-          for (let i = 0; i < evaluateArr.behavior.length; i++) {
+          for (let i = 0; i < evaluateArr.operation.length; i++) {
             store.dispatch('user/submitBehavior', {
               kexperimentId,
-              name: '第一次自由实验操作评价' + `${i + 1}`,
+              name: evaluateArr.operation[i].name,
               type: 'BEHAVIOR_INQUIRY',
-              content: evaluateArr.behavior[i].content,
-              isCorrect: evaluateArr.behavior[i].isCorrect,
+              content: evaluateArr.operation[i].content,
+              isCorrect: evaluateArr.operation[i].isCorrect,
+              correctContent: '',
+              success: (res) => {
+                console.log(res)
+              },
+              failure: (res) => {
+                console.log(res)
+              },
+            })
+          }
+          for (let i = 0; i < evaluateArr.phenomenon.length; i++) {
+            store.dispatch('user/submitBehavior', {
+              kexperimentId,
+              name: evaluateArr.phenomenon[i].name,
+              type: 'BEHAVIOR_INSPECTION',
+              content: evaluateArr.phenomenon[i].content,
+              isCorrect: evaluateArr.phenomenon[i].isCorrect,
               correctContent: '',
               success: (res) => {
                 console.log(res)
@@ -302,7 +305,7 @@ export default [
         scene,
       })
       scene.mutate({ targetPanel: dialog })
-      scene.freeExperiment()
+      scene.freeExperiment('freshPart')
       scene.targetPanel.onOk(() => {
         Dialog.create({
           component: DialogQuestionVue,
@@ -310,14 +313,14 @@ export default [
           acid_alkali: [],
         }).onOk((val) => {
           scene.panelDropperreset()
-          const evaluateArr = scene.judgeBehavior(val.radioConclusion)
+          const evaluateArr = judgeBehavior(scene, '自由实验2', val.radioConclusion)
           store.dispatch('user/submitBehavior', {
             kexperimentId,
-            name: '第二次自由实验选择题结论',
+            name: evaluateArr.conclusion.name,
             type: 'BEHAVIOR_CHOICE',
             content: '您的选择是' + val.radioConclusion,
-            isCorrect: evaluateArr.isCorrect,
-            correctContent: evaluateArr.correctContent,
+            isCorrect: evaluateArr.conclusion.isCorrect,
+            correctContent: evaluateArr.conclusion.correctContent,
             success: (res) => {
               console.log(res)
             },
@@ -325,27 +328,29 @@ export default [
               console.log(res)
             },
           })
-          store.dispatch('user/submitBehavior', {
-            kexperimentId,
-            name: '第二次自由实验现象评价',
-            type: 'BEHAVIOR_INSPECTION',
-            content: evaluateArr.result.content,
-            isCorrect: evaluateArr.result.isCorrect,
-            correctContent: '',
-            success: (res) => {
-              console.log(res)
-            },
-            failure: (res) => {
-              console.log(res)
-            },
-          })
-          for (let i = 0; i < evaluateArr.behavior.length; i++) {
+          for (let i = 0; i < evaluateArr.operation.length; i++) {
             store.dispatch('user/submitBehavior', {
               kexperimentId,
-              name: '第二次自由实验操作评价' + `${i + 1}`,
+              name: evaluateArr.operation[i].name,
               type: 'BEHAVIOR_INQUIRY',
-              content: evaluateArr.behavior[i].content,
-              isCorrect: evaluateArr.behavior[i].isCorrect,
+              content: evaluateArr.operation[i].content,
+              isCorrect: evaluateArr.operation[i].isCorrect,
+              correctContent: '',
+              success: (res) => {
+                console.log(res)
+              },
+              failure: (res) => {
+                console.log(res)
+              },
+            })
+          }
+          for (let i = 0; i < evaluateArr.phenomenon.length; i++) {
+            store.dispatch('user/submitBehavior', {
+              kexperimentId,
+              name: evaluateArr.phenomenon[i].name,
+              type: 'BEHAVIOR_INSPECTION',
+              content: evaluateArr.phenomenon[i].content,
+              isCorrect: evaluateArr.phenomenon[i].isCorrect,
               correctContent: '',
               success: (res) => {
                 console.log(res)
@@ -389,7 +394,7 @@ export default [
     paragraph: '结束语2',
     choice: 'last',
     method: ({ scene }) => {
-      const dialog =  Dialog.create({
+      const dialog = Dialog.create({
         component: FreeInquiryVue,
         hintInfo: '在自由探究环节，自由的选择试剂进行实验探究吧！',
       })
@@ -402,7 +407,7 @@ export default [
         scene.existLiquid.splice(0, scene.existLiquid.length)
         scene.progress.splice(0, scene.progress.length)
       })
-      scene.freeExperiment('restart')
+      scene.freeExperiment('freshAll')
       store.dispatch('user/finishKexperiment', {
         kexperimentId: kexperimentId,
         success: (res) => {

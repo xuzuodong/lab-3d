@@ -6,7 +6,6 @@ import { Notify } from 'quasar'
 import ControlPanelVue from '../2d/ControlPanel.vue'
 
 const frameRate = 12
-let indicatorUsed = ''
 
 const defineOutAn = (bottle, dropper, liquid) => {
   const putOutLqDropper = animationBox.outDropper(bottle.position)
@@ -297,7 +296,7 @@ const liquidWarn = (scene, liquidType) => {
   }
 }
 
-const registerAllAction = (scene, flag) => {
+const registerAllAction = (scene) => {
   const hclBottle = scene.getMeshByName('hclBottle')
   const hclDropper = scene.getTransformNodeByName('hclDropper')
   const hclLiquid = scene.getMeshByName('hclLiquid')
@@ -316,8 +315,6 @@ const registerAllAction = (scene, flag) => {
   const pheBottle = scene.getMeshByName('phebottle')
   const pheDropper = scene.getTransformNodeByName('phedropper')
   const pheLiquid = scene.getMeshByName('pheliquid')
-
-  if (flag === 'restart') indicatorUsed = ''
 
   hclBottle.actionManager.registerAction(
     new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
@@ -383,7 +380,7 @@ const registerAllAction = (scene, flag) => {
     })
   )
 
-  if (indicatorUsed != 'pur') {
+  if (scene.indicatorUsed == 'phe' || scene.indicatorUsed == '') {
     purBottle.actionManager.registerAction(
       new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
         new Promise((resolve, reject) => {
@@ -394,7 +391,6 @@ const registerAllAction = (scene, flag) => {
             putOutPurAn.play()
             putOutPurAn.onAnimationEndObservable.add(() => {
               resolve('pur')
-              indicatorUsed = 'pur'
             })
           }
         }).then((val) => openLiquidPanel(scene, val))
@@ -402,7 +398,7 @@ const registerAllAction = (scene, flag) => {
     )
   }
 
-  if (indicatorUsed != 'phe') {
+  if (scene.indicatorUsed == 'pur' || scene.indicatorUsed == '') {
     pheBottle.actionManager.registerAction(
       new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, () => {
         new Promise((resolve, reject) => {
@@ -414,7 +410,6 @@ const registerAllAction = (scene, flag) => {
             putOutPheAn.play()
             putOutPheAn.onAnimationEndObservable.add(() => {
               resolve('phe')
-              indicatorUsed = 'phe'
             })
           }
         }).then((val) => openLiquidPanel(scene, val))
