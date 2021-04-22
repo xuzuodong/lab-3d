@@ -23,6 +23,8 @@ export default {
         testPanel: Object,
         questionPanel: Object,
         paramPanel: Object,
+        FreeInquiryPanel: Object,
+        freeTestPanel: Object,
       },
       actions,
     })
@@ -34,6 +36,8 @@ export default {
   },
 
   beforeDestroy() {
+    babylonApp.scene.state.FreeInquiryPanel.hide && babylonApp.scene.state.FreeInquiryPanel.hide()
+    babylonApp.scene.state.freeTestPanel.hide && babylonApp.scene.state.freeTestPanel.hide()
     babylonApp.scene.state.questionPanel.hide && babylonApp.scene.state.questionPanel.hide()
     babylonApp.scene.state.targetPanel.hide && babylonApp.scene.state.targetPanel.hide()
     babylonApp.scene.state.assumePanel.hide && babylonApp.scene.state.assumePanel.hide()

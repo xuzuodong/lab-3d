@@ -20,16 +20,22 @@
       </q-card-section>
 
       <q-card-actions align="center">
-        <q-btn color="primary" label="结束实验" @click="onOKClick" />
+        <q-btn
+          color="primary"
+          label="结束实验"
+          @click="onOKClick"
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
 
 <script>
+import router from '../router/index'
 export default {
   props: {
     hintInfo: String,
+    kexperimentId: Number,
   },
 
   methods: {
@@ -46,6 +52,7 @@ export default {
     },
 
     onOKClick() {
+      router.push('/kexperiment-details/' + this.kexperimentId)
       this.$emit('ok')
       this.hide()
     },

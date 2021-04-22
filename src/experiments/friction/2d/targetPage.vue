@@ -3,7 +3,7 @@
     <q-dialog ref="dialog" transition-show="slide-right" transition-hide="slide-left" class="top-left-dialog">
       <q-card class="my-card">
         <q-card-section class="bg-secondary text-white q-px-md">
-          <div class="text-h6">{{ msg }}</div>
+          <div class="text-h6"><span class="text-weight-bold">{{ msg }}</span>与摩擦力有什么关系呢？</div>
           <div class="text-h7 q-mb-sm">使用右侧工具箱进行实验。</div>
         </q-card-section>
       </q-card>
@@ -35,9 +35,9 @@ export default {
     },
   },
   created: function () {
-    if (storeData[0] == 'op1') this.msg = '尝试改变地面粗糙程度以减小摩擦'
-    if (storeData[0] == 'op2') this.msg = '尝试改变物品与地面接触面积以减小摩擦'
-    if (storeData[0] == 'op3') this.msg = '尝试改变物品质量以减小摩擦'
+    if (storeData[0] == 'op1') this.msg = '地面的粗糙程度'
+    if (storeData[0] == 'op2') this.msg = '物体与地面的接触面积'
+    if (storeData[0] == 'op3') this.msg = '物体给地面的压力'
   },
 }
 </script>
