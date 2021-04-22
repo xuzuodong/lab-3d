@@ -5,6 +5,7 @@ import woodjpg from '../2d/assets/wood.jpg'
 import grasspng from '../2d/assets/grass.png'
 import icejpg from '../2d/assets/ice.jpg'
 import initGround from '../2d/assets/initGround.png'
+import FreeInquiry from '../../../components/FreeInquiry'
 import assumePage from '../2d/assumePage'
 import targetPage from '../2d/targetPage'
 import paramPage from '../2d/paramPage'
@@ -21,7 +22,7 @@ let ice = 0
 let large = 0
 let small = 0
 let gravity = 0
-let kexperimentId = 0
+let kexperimentId
 let warnMsg = '请按照左上角的假设进行实验！'
 
 export default [
@@ -144,7 +145,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变接触面粗糙程度',
             type: 'BEHAVIOR_CHOICE',
-            content: '草地',
+            content: '将地面改变为草地',
             correctContent: '改变接触面粗糙程度中选择了【草地】',
             isCorrect: true,
             success: (res) => {
@@ -163,7 +164,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变接触面粗糙程度',
             type: 'BEHAVIOR_CHOICE',
-            content: '木板',
+            content: '将地面改变为木板',
             correctContent: '改变接触面粗糙程度中选择了【木板】',
             isCorrect: true,
             success: (res) => {
@@ -182,8 +183,8 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变接触面粗糙程度',
             type: 'BEHAVIOR_CHOICE',
+            content: '将地面改变为冰面',
             correctContent: '改变接触面粗糙程度中选择了【冰面】',
-            content: '冰面',
             isCorrect: true,
             success: (res) => {
               console.log(res);
@@ -207,7 +208,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变接触面粗糙程度',
             type: 'BEHAVIOR_CHOICE',
-            content: '增大接触面积',
+            content: '增大物体与地面的接触面积',
             correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
             isCorrect: false,
             success: (res) => {
@@ -232,7 +233,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变接触面粗糙程度',
             type: 'BEHAVIOR_CHOICE',
-            content: '减小接触面积',
+            content: '减小物体与地面的接触面积',
             correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
             isCorrect: false,
             success: (res) => {
@@ -520,7 +521,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变与接触面的面积',
             type: 'BEHAVIOR_CHOICE',
-            content: '草地',
+            content: '将地面改变为草地',
             correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
             isCorrect: false,
             success: (res) => {
@@ -545,7 +546,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变与接触面的面积',
             type: 'BEHAVIOR_CHOICE',
-            content: '木板',
+            content: '将地面改变为木板',
             correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
             isCorrect: false,
             success: (res) => {
@@ -570,7 +571,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变与接触面的面积',
             type: 'BEHAVIOR_CHOICE',
-            content: '冰面',
+            content: '将地面改变为冰面',
             correctContent: '在该选项中，应该选择改变与接触面的面积的选项，【增大接触面积】或【减小接触面积】',
             isCorrect: false,
             success: (res) => {
@@ -589,7 +590,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变与接触面的面积',
             type: 'BEHAVIOR_CHOICE',
-            content: '增大接触面积',
+            content: '增大物体与地面的接触面积',
             correctContent: '改变与接触面的面积中选择了【增大接触面积】',
             isCorrect: true,
             success: (res) => {
@@ -608,7 +609,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变与接触面的面积',
             type: 'BEHAVIOR_CHOICE',
-            content: '减小接触面积',
+            content: '减小物体与地面的接触面积',
             correctContent: '改变与接触面的面积中选择了【减小接触面积】',
             isCorrect: true,
             success: (res) => {
@@ -824,7 +825,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变物体的质量',
             type: 'BEHAVIOR_CHOICE',
-            content: '草地',
+            content: '将地面改变为草地',
             correctContent: '在该选项中，应该选择改变物体的质量的选项，调整质量',
             isCorrect: false,
             success: (res) => {
@@ -849,7 +850,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变物体的质量',
             type: 'BEHAVIOR_CHOICE',
-            content: '草地',
+            content: '将地面改变为木板',
             correctContent: '在该选项中，应该选择改变物体的质量的选项，调整质量',
             isCorrect: false,
             success: (res) => {
@@ -874,7 +875,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变物体的质量',
             type: 'BEHAVIOR_CHOICE',
-            content: '草地',
+            content: '将地面改变为冰面',
             correctContent: '在该选项中，应该选择改变物体的质量的选项，调整质量',
             isCorrect: false,
             success: (res) => {
@@ -899,7 +900,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变物体的质量',
             type: 'BEHAVIOR_CHOICE',
-            content: '草地',
+            content: '增大物体与地面的接触面积',
             correctContent: '在该选项中，应该选择改变物体的质量的选项，调整质量',
             isCorrect: false,
             success: (res) => {
@@ -924,7 +925,7 @@ export default [
             kexperimentId: kexperimentId,
             name: '改变物体的质量',
             type: 'BEHAVIOR_CHOICE',
-            content: '草地',
+            content: '减小物体与地面的接触面积',
             correctContent: '在该选项中，应该选择改变物体的质量的选项，调整质量',
             isCorrect: false,
             success: (res) => {
@@ -969,10 +970,10 @@ export default [
           component: paramPage,
           information: [{
             msg: '成功',
-            force: '441',
+            force: '147',
             coefficient: '0.6',
             square: '5.4',
-            mass: '75',
+            mass: '25',
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -997,10 +998,10 @@ export default [
           component: paramPage,
           information: [{
             msg: '成功',
-            force: '147',
+            force: '441',
             coefficient: '0.6',
             square: '5.4',
-            mass: '25',
+            mass: '75',
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -1372,7 +1373,7 @@ export default [
   //结束，传一个结束的数据
   {
     paragraph: '结局',
-    talk: 0,
+    reply: { choice: 'any', index: 'last' },
     method: ({ next }) => {
       store.dispatch('user/finishKexperiment', {
         kexperimentId: kexperimentId,
@@ -1384,6 +1385,80 @@ export default [
         },
       })
       next()
+    },
+  },
+
+  {
+    paragraph: '自由探究',
+    talk: 0,
+    method: ({ scene, goto }) => {
+      const free = Dialog.create({
+        component: FreeInquiry,
+        hintInfo: '使用右侧的工具栏自由地进行实验探究吧！',
+        kexperimentId: this.kexperimentId,
+      }).onOk(async () => {
+        console.log(111);
+      })
+      scene.mutate({ FreeInquiryPanel: free })
+      const test = Dialog.create({
+        component: testPage,
+        showTest: true,
+      }).onOk(async () => {
+        if (storeData[0] == 'grass') {
+          scene.changeGround(grasspng)
+          scene.runStart()
+          setTimeout(() => {
+            scene.runStop()
+            goto({ paragraph: '自由探究' })
+          }, 6000);
+        }
+        if (storeData[0] == 'wood') {
+          scene.changeGround(woodjpg)
+          scene.woodRun(0.02)
+          setTimeout(() => {
+            goto({ paragraph: '自由探究' })
+          }, 6000);
+        }
+        if (storeData[0] == 'ice') {
+          scene.changeGround(icejpg)
+          scene.iceRun(0.08)
+          setTimeout(() => {
+            goto({ paragraph: '自由探究' })
+          }, 6000);
+        }
+        if (storeData[0] == 'large') {
+          scene.largeArea()
+          scene.runStart()
+          setTimeout(() => {
+            scene.runStop()
+            goto({ paragraph: '自由探究' })
+          }, 6000);
+        }
+        if (storeData[0] == 'small') {
+          scene.smallArea()
+          scene.runStart()
+          setTimeout(() => {
+            scene.runStop()
+            goto({ paragraph: '自由探究' })
+          }, 6000);
+        }
+        if (storeData[0] == 25 || storeData[0] == 50 || storeData[0] == 75) {
+          if (storeData[0] == 25) {
+            scene.iceRun(0.08)
+          }
+          else if (storeData[0] == 50) {
+            scene.iceRun(0.06)
+          }
+          else if (storeData[0] == 75) {
+            scene.iceRun(0.04)
+          }
+          setTimeout(() => {
+            goto({ paragraph: '自由探究' })
+          }, 6000);
+        }
+        scene.backToStart()
+      })
+      scene.mutate({ testPanel: test })
     },
   },
 ]
