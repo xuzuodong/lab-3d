@@ -79,7 +79,11 @@ export default {
         this.progress[i].finished = false
       }
       this.scene.existLiquid.splice(0, this.scene.existLiquid.length)
-      this.scene.freeExperiment('restart')
+      if (this.scene.progress[0].step.slice(0, 1) == '2' || this.scene.allFinished) {
+        this.scene.freeExperiment('freshAll')
+      } else {
+        this.scene.freeExperiment('freshPart')
+      }
       await this.scene.resetAll()
     },
     finish() {

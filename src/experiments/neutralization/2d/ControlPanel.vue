@@ -130,6 +130,14 @@ export default {
       }
     },
 
+    countDropType(dropType) {
+      let count = 0
+      for (let i = 0; i < this.scene.existLiquid.length; i++) {
+        if (this.scene.existLiquid[i] == dropType) count++
+      }
+      return count
+    },
+
     finishStep(dropType) {
       if (!this.allFinished) {
         if (this.scene.progress[0].step.slice(0, 1) != '1') {
@@ -137,13 +145,12 @@ export default {
             this.scene.progress[1].finished = true
           } else {
             if (!this.scene.progress[0].finished) {
-              this.scene.progress[0].finished = true
+              if (this.countDropType(dropType) === 1) this.scene.progress[0].finished = true
             } else {
-              this.scene.progress[2].finished = true
+              if (this.countDropType(dropType) === 1) this.scene.progress[2].finished = true
             }
           }
         }
-        this.finishStep = function () {}
       } else {
         this.finishStep = function () {}
       }
@@ -188,6 +195,9 @@ export default {
             const pheBottle = this.scene.getMeshByName('phebottle')
             purBottle.actionManager.unregisterAction(purBottle.actionManager.actions[2])
             pheBottle.actionManager.unregisterAction(pheBottle.actionManager.actions[2])
+            if (!this.allFinished) {
+              if (this.scene.progress[0].step.slice(0, 1) == '2') this.scene.mutate({ indicatorUsed: 'phe' })
+            }
             this.scene.mutate({ indicatorType: this.dropType })
             this.scene.existLiquid.push(this.dropType)
             this.finishStep(this.dropType)
@@ -209,6 +219,10 @@ export default {
               const pheBottle = this.scene.getMeshByName('phebottle')
               purBottle.actionManager.unregisterAction(purBottle.actionManager.actions[2])
               pheBottle.actionManager.unregisterAction(pheBottle.actionManager.actions[2])
+              if (!this.allFinished) {
+                if (this.scene.progress[0].step.slice(0, 1) == '2')
+                  this.scene.mutate({ indicatorUsed: 'pur' })
+              }
               this.scene.mutate({ indicatorType: this.dropType })
               this.scene.existLiquid.push(this.dropType)
               this.finishStep(this.dropType)
@@ -247,7 +261,7 @@ export default {
 
     async freeResart() {
       this.scene.existLiquid.splice(0, this.scene.existLiquid.length)
-      this.scene.freeExperiment('restart')
+      this.scene.freeExperiment('freshAll')
       await this.scene.resetAll()
     },
   },

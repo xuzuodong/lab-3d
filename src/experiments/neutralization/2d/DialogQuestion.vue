@@ -27,14 +27,14 @@
         <q-separator />
         <q-radio
           v-model="conclusion.changeConclusion"
-          val="A"
+          val="A.有变化"
           label="A 、有变化"
           color="white"
           class="col-12"
         />
         <q-radio
           v-model="conclusion.changeConclusion"
-          val="B"
+          val="B.没有变化"
           label="B 、没有变化"
           color="white"
           class="col-12"
@@ -44,29 +44,29 @@
         <div class="text-h6">在刚刚的中和反应中，你观察到了什么反应现象？</div>
         <q-radio
           v-model="conclusion.radioConclusion"
-          val="A"
-          label="A .石蕊试液先变紫再变蓝"
+          val="A.石蕊试液先变紫再变蓝"
+          label="A 、石蕊试液先变紫再变蓝"
           color="white"
           class="col-12"
         />
         <q-radio
           v-model="conclusion.radioConclusion"
-          val="B"
-          label="B .石蕊试液先变紫再变红"
+          val="B.石蕊试液先变紫再变红"
+          label="B 、石蕊试液先变紫再变红"
           color="white"
           class="col-12"
         />
         <q-radio
           v-model="conclusion.radioConclusion"
-          val="C"
-          label="C .酚酞试液变红"
+          val="C.酚酞试液变红"
+          label="C 、酚酞试液变红"
           color="white"
           class="col-12"
         />
         <q-radio
           v-model="conclusion.radioConclusion"
-          val="D"
-          label="D .酚酞试液变无色"
+          val="D.酚酞试液变无色"
+          label="D 、酚酞试液变无色"
           color="white"
           class="col-12"
         />

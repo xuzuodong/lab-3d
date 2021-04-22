@@ -42,13 +42,13 @@ export const reactions = (scene, liquidGroup, dropType) => {
         liquidAnalysis.acid += element.volume
         break
       case 'acid_hno':
-        liquidAnalysis.acid += 0.1 * element.volume
+        liquidAnalysis.acid += 0.8 * element.volume
         break
       case 'alkali_naoh':
         liquidAnalysis.alkali += element.volume
         break
       case 'alkali_baoh':
-        liquidAnalysis.alkali += 0.1 * element.volume
+        liquidAnalysis.alkali += 0.8 * element.volume
         break
       case 'pur':
         liquidAnalysis.indicatorType = 'pur'

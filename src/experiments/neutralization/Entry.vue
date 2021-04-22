@@ -18,9 +18,10 @@ export default {
     babylonApp = new BabylonApp()
     const scene = babylonApp.createScene({
       state: {
-        acidType: '', // 选择的酸溶液 'acid_hcl' or 'acid_hno', 数组第二项表示现在是否已经加入
-        alkaliType: '', // 选择的碱溶液 'alkali_naoh' or 'alkali_baoh'，数组第二项表示现在是否已经加入
-        indicatorType: '', // 选择的酸碱指示剂 'pur' or 'phe'，数组第二项表示现在是否已经加入
+        acidType: '', // 选择的酸溶液 'acid_hcl' or 'acid_hno'
+        alkaliType: '', // 选择的碱溶液 'alkali_naoh' or 'alkali_baoh'
+        indicatorType: '', // 选择的酸碱指示剂 'pur' or 'phe'
+        indicatorUsed: '', // 已经用过哪一个酸碱指示剂 'pur' or 'phe'
         existLiquid: [], // 试管中已经存在的溶液，每点击一次滴加溶液，就往数组中push相应字符串（酸、碱、指示剂）
         // 根据重复字符串个数，算出滴加的溶液量为多少
         progress: [], // 一个对象数组，记录实验步骤；{step: string, finished: boolen}，当前第几步，是否完成

@@ -21,6 +21,7 @@
               flat
               color="primary"
               label="点击查看"
+              :disable="!props.row.kexperimentKtime"
               dense
               :to="'/kexperiment-details/' + props.row.kexperimentId"
             />
