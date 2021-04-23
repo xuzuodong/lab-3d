@@ -161,6 +161,7 @@ export default {
           this.experimentId = evaluation.experimentId
           this.experimentName = evaluation.experimentName
           this.grade = evaluation.finalScore
+          this.middleScore = evaluation.finalScore
           this.userName = evaluation.userName
           this.frontScore = evaluation.pretestInfo.correct
           this.backScore = evaluation.posttestInfo.correct

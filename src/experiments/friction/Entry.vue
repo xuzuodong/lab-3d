@@ -36,13 +36,13 @@ export default {
   },
 
   beforeDestroy() {
-    babylonApp.scene.state.FreeInquiryPanel.hide && babylonApp.scene.state.FreeInquiryPanel.hide()
-    babylonApp.scene.state.freeTestPanel.hide && babylonApp.scene.state.freeTestPanel.hide()
-    babylonApp.scene.state.questionPanel.hide && babylonApp.scene.state.questionPanel.hide()
-    babylonApp.scene.state.targetPanel.hide && babylonApp.scene.state.targetPanel.hide()
-    babylonApp.scene.state.assumePanel.hide && babylonApp.scene.state.assumePanel.hide()
-    babylonApp.scene.state.paramPanel.hide && babylonApp.scene.state.paramPanel.hide()
-    babylonApp.scene.state.testPanel.hide && babylonApp.scene.state.testPanel.hide()
+    babylonApp.scene.state.freeTestPanel?.hide && babylonApp.scene.state.freeTestPanel.hide()
+    babylonApp.scene.state.FreeInquiryPanel?.hide && babylonApp.scene.state.FreeInquiryPanel.hide()
+    babylonApp.scene.state.questionPanel?.hide && babylonApp.scene.state.questionPanel.hide()
+    babylonApp.scene.state.targetPanel?.hide && babylonApp.scene.state.targetPanel.hide()
+    babylonApp.scene.state.assumePanel?.hide && babylonApp.scene.state.assumePanel.hide()
+    babylonApp.scene.state.paramPanel?.hide && babylonApp.scene.state.paramPanel.hide()
+    babylonApp.scene.state.testPanel?.hide && babylonApp.scene.state.testPanel.hide()
     babylonApp.destroy()
     babylonApp = null
   },

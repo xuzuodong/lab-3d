@@ -55,10 +55,10 @@ export default {
       const arr = []
       this.behaviorInfo.forEach((e, i) => {
         // 如果没有结束时间则未完成
-        if (e.isCorrect == 'true') {
+        if (e.isCorrect == true) {
           arr.push({ ...this.behaviorInfo[i], isCorrect: '正确' })
         }
-        if (e.isCorrect == 'false') {
+        if (e.isCorrect == false) {
           arr.push({ ...this.behaviorInfo[i], isCorrect: '错误' })
         }
       })

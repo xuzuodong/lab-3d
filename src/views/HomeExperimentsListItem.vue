@@ -18,7 +18,7 @@
         </q-card-section>
       </q-card>
     </router-link>
-    <div v-if="experiment.alias == null">
+    <div v-if="experiment.alias == null && userInfo != null">
       <a target="_blank" :href="'http://47.98.192.17/' + oldExperiment + '.html' + '?' + userInfo.token">
         <q-card class="experiment-item cursor-pointer full-height">
           <q-img :src="experiment.image" width="100%" :ratio="3 / 2" />

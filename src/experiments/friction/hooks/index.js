@@ -1396,14 +1396,14 @@ export default [
         component: FreeInquiry,
         hintInfo: '使用右侧的工具栏自由地进行实验探究吧！',
         kexperimentId: kexperimentId,
-      }).onOk(async () => {
+      }).onOk(() => {
         console.log(111);
       })
       scene.mutate({ FreeInquiryPanel: free })
       const freeTest = Dialog.create({
         component: testPage,
         showTest: true,
-      }).onOk(async () => {
+      }).onOk(() => {
         if (storeData[0] == 'grass') {
           scene.changeGround(grasspng)
           scene.runStart()
