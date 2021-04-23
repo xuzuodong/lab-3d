@@ -47,7 +47,7 @@ export default {
   props: { experiment: Object },
   computed: {
     ...mapState('user', ['userInfo']),
-    oldExperiment: function () {
+    oldExperiment: function() {
       if (this.experiment.id === 1) return 'saltpage'
       if (this.experiment.id === 2) return 'phpage'
       return 'homepage'
@@ -59,5 +59,8 @@ export default {
 <style scoped lang="scss">
 .experiment-item {
   width: 250px;
+}
+a {
+  text-decoration: none;
 }
 </style>

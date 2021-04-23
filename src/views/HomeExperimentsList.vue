@@ -38,7 +38,6 @@ export default {
   created() {
     this.selectAllExperiments({
       success: (experiments) => {
-        console.log(experiments)
         this.experiments = experiments.reverse()
         this.failure = false
       },

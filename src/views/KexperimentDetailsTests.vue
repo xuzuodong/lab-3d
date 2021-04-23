@@ -85,7 +85,7 @@ export default {
   computed: {
     preTestList: function() {
       let formatArr = []
-      if (this.pretestInfo.length != 0) {
+      if (this.pretestInfo && this.pretestInfo.length != 0) {
         this.pretestInfo.forEach((e) => {
           if (e.isCorrect === true) e.isCorrect = '正确'
           else e.isCorrect = '错误'
@@ -96,7 +96,7 @@ export default {
     },
     postTestList: function() {
       let formatArr = []
-      if (this.posttestInfo.length != 0) {
+      if (this.posttestInfo && this.posttestInfo.length != 0) {
         this.posttestInfo.forEach((e) => {
           if (e.isCorrect === true) e.isCorrect = '正确'
           else e.isCorrect = '错误'
