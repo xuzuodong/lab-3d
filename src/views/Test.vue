@@ -6,7 +6,8 @@
       </q-card-section>
 
       <q-card-section class="row justify-center items-center q-pb-none">
-        <div rounded class="text-h6 bg-primary title">测试挑战-前测</div>
+        <div rounded class="text-h6 bg-primary title" v-if="type == 1">测试挑战-前测</div>
+        <div rounded class="text-h6 bg-primary title" v-if="type == 2">测试挑战-后测</div>
       </q-card-section>
 
       <q-card-section class="row justify-center items-center q-pb-none">

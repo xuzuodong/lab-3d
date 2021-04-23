@@ -397,6 +397,7 @@ export default [
       const dialog = Dialog.create({
         component: FreeInquiryVue,
         hintInfo: '在自由探究环节，自由的选择试剂进行实验探究吧！',
+        kexperimentId,
       })
       scene.mutate({ inquiryPanel: dialog })
       scene.mutate({ allFinished: true })

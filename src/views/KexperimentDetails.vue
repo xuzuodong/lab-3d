@@ -189,6 +189,7 @@ export default {
               type: choiceType,
             })
             .onOk(() => {
+              this.loadKexperimentEvaluation()
               console.log('ok')
             })
         },

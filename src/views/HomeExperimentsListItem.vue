@@ -62,5 +62,6 @@ export default {
 }
 a {
   text-decoration: none;
+  color: black;
 }
 </style>
