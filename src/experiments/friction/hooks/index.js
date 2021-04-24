@@ -1374,7 +1374,7 @@ export default [
   {
     paragraph: '结局',
     reply: { choice: 'any', index: 'last' },
-    method: ({ next }) => {
+    method: ({ next, scene }) => {
       store.dispatch('user/finishKexperiment', {
         kexperimentId: kexperimentId,
         success: (res) => {
@@ -1384,14 +1384,6 @@ export default [
           console.log(res)
         },
       })
-      next()
-    },
-  },
-
-  {
-    paragraph: '自由探究',
-    talk: 0,
-    method: ({ scene, goto }) => {
       const free = Dialog.create({
         component: FreeInquiry,
         hintInfo: '使用右侧的工具栏自由地进行实验探究吧！',
@@ -1400,6 +1392,14 @@ export default [
         console.log(111);
       })
       scene.mutate({ FreeInquiryPanel: free })
+      next()
+    },
+  },
+
+  {
+    paragraph: '自由探究',
+    talk: 0,
+    method: ({ scene, goto }) => {
       const freeTest = Dialog.create({
         component: testPage,
         showTest: true,
