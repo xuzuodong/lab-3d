@@ -34,7 +34,7 @@
 
 <script>
 import { date } from 'quasar'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -55,6 +55,10 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('user', ['userInfo']),
+  },
+
   methods: {
     ...mapActions('user', ['selectMyKexperiment']),
 
@@ -64,19 +68,21 @@ export default {
 
     diffData(startStamp, endStamp) {
       let diff = date.getDateDiff(endStamp, startStamp, 'seconds')
-      return `${diff % 60} 分 ${(diff / 60).toFixed(0)} 秒`
+      return `${parseInt(diff / 60)} 分 ${(diff % 60).toFixed(0)} 秒`
     },
   },
 
   created() {
-    this.selectMyKexperiment({
-      success: (res) => {
-        this.kexperimentsList = res
-      },
-      failure: (res) => {
-        console.log(res)
-      },
-    })
+    if (this.userInfo != null) {
+      this.selectMyKexperiment({
+        success: (res) => {
+          this.kexperimentsList = res
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
+    }
   },
 }
 </script>

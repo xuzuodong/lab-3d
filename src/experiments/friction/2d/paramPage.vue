@@ -31,7 +31,7 @@
           <div>
             <q-badge class="text-body1 bg-secondary text-white">接触面积：</q-badge>
             <q-badge class="text-body1 bg-secondary text-white float-right">
-              {{ information[0].square }}cm²
+              {{ information[0].square }}m²
             </q-badge>
           </div>
           <div>

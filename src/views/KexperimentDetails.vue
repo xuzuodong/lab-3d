@@ -27,7 +27,12 @@
       <q-card flat class="col-5">
         <q-card-section class="text-center text-h6">
           实验前测得分：
-          <span class="text-blue-6">{{ frontScore }}</span>
+          <span class="text-blue-6">
+            {{ frontScore }}
+            <span v-if="frontScore != '未完成'">
+              {{ `(${countPreTest.countTrue} / ${countPreTest.total})` }}
+            </span>
+          </span>
         </q-card-section>
         <q-card-section class="text-center text-h6">
           实验过程得分：
@@ -44,7 +49,12 @@
               flat
               v-if="showPostTestBtn"
             />
-            <span class="text-red-14" v-else>{{ backScore }}</span>
+            <span class="text-red-14" v-else>
+              {{ backScore }}
+              <span v-if="backScore != '未完成'">
+                {{ `(${countPostTest.countTrue} / ${countPostTest.total})` }}
+              </span>
+            </span>
           </span>
         </q-card-section>
       </q-card>
@@ -124,6 +134,7 @@ export default {
   },
 
   computed: {
+    ...mapState('user', ['userInfo']),
     showPostTestBtn: function () {
       if (this.backScore === '未完成') return true
       else return false
@@ -142,10 +153,26 @@ export default {
           return ''
       }
     },
+    countPreTest: function () {
+        const total = this.pretestInfo.length
+        let countTrue = 0
+        this.pretestInfo.forEach((e) => {
+          if (e.isCorrect == true) countTrue++
+        })
+        return { total, countTrue }
+    },
+    countPostTest: function () {
+      const total = this.posttestInfo.length
+      let countTrue = 0
+      this.posttestInfo.forEach((e) => {
+        if (e.isCorrect == true) countTrue++
+      })
+      return { total, countTrue }
+    },
   },
 
   created() {
-    this.loadKexperimentEvaluation()
+    if (this.userInfo != null) this.loadKexperimentEvaluation()
   },
 
   methods: {
@@ -161,6 +188,7 @@ export default {
           this.experimentId = evaluation.experimentId
           this.experimentName = evaluation.experimentName
           this.grade = evaluation.finalScore
+          this.middleScore = evaluation.finalScore
           this.userName = evaluation.userName
           this.frontScore = evaluation.pretestInfo.correct
           this.backScore = evaluation.posttestInfo.correct
@@ -188,6 +216,7 @@ export default {
               type: choiceType,
             })
             .onOk(() => {
+              this.loadKexperimentEvaluation()
               console.log('ok')
             })
         },

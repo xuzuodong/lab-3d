@@ -1374,7 +1374,7 @@ export default [
   {
     paragraph: '结局',
     reply: { choice: 'any', index: 'last' },
-    method: ({ next }) => {
+    method: ({ next, scene }) => {
       store.dispatch('user/finishKexperiment', {
         kexperimentId: kexperimentId,
         success: (res) => {
@@ -1384,6 +1384,14 @@ export default [
           console.log(res)
         },
       })
+      const free = Dialog.create({
+        component: FreeInquiry,
+        hintInfo: '使用右侧的工具栏自由地进行实验探究吧！',
+        kexperimentId: kexperimentId,
+      }).onOk(() => {
+        console.log(111);
+      })
+      scene.mutate({ FreeInquiryPanel: free })
       next()
     },
   },
@@ -1392,18 +1400,10 @@ export default [
     paragraph: '自由探究',
     talk: 0,
     method: ({ scene, goto }) => {
-      const free = Dialog.create({
-        component: FreeInquiry,
-        hintInfo: '使用右侧的工具栏自由地进行实验探究吧！',
-        kexperimentId: kexperimentId,
-      }).onOk(async () => {
-        console.log(111);
-      })
-      scene.mutate({ FreeInquiryPanel: free })
       const freeTest = Dialog.create({
         component: testPage,
         showTest: true,
-      }).onOk(async () => {
+      }).onOk(() => {
         if (storeData[0] == 'grass') {
           scene.changeGround(grasspng)
           scene.runStart()

@@ -6,7 +6,8 @@
       </q-card-section>
 
       <q-card-section class="row justify-center items-center q-pb-none">
-        <div rounded class="text-h6 bg-primary title">测试挑战-前测</div>
+        <div rounded class="text-h6 bg-primary title" v-if="type == 1">测试挑战-前测</div>
+        <div rounded class="text-h6 bg-primary title" v-if="type == 2">测试挑战-后测</div>
       </q-card-section>
 
       <q-card-section class="row justify-center items-center q-pb-none">
@@ -108,16 +109,16 @@ export default {
   },
 
   computed: {
-    testName: function () {
+    testName: function() {
       if (this.type == 1) return 'Pretest'
       if (this.type == 2) return 'Posttest'
       else return ''
     },
-    submitBtnLabel: function () {
+    submitBtnLabel: function() {
       if (this.slideIndex + 1 != this.questionList.length) return '下一题'
       else return '提交'
     },
-    submitBtnDisable: function () {
+    submitBtnDisable: function() {
       if (this.submitBtnLabel === '下一题') {
         if (this.answer[this.slideIndex] == undefined) return true
         else return false
@@ -157,6 +158,9 @@ export default {
         this.$emit('ok')
         this.hide()
         clearInterval(this.timer)
+        for (let i = 0; i < this.questionList.length; i++) {
+          this.choiceArray[i] = { id: this.questionList[i].id, solution: this.answer[i], type: this.type }
+        }
         this.submitTest({
           choiceArray: this.choiceArray,
           experimentId: this.experimentId,
@@ -201,7 +205,7 @@ export default {
 
     chooseRadio(val, evt) {
       val.type = this.type
-      this.choiceArray.push(val)
+      // this.choiceArray.push(val)
     },
   },
 }

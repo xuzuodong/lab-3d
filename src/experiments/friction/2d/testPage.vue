@@ -1,7 +1,8 @@
 <template>
-  <div class="QTest" @hide="onDialogHide">
+  <div class="QTest" >
     <q-dialog
       ref="dialog"
+      @hide="onDialogHide"
       seamless
       transition-show="slide-left"
       transition-hide="slide-right"

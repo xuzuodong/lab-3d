@@ -18,26 +18,26 @@ const routes = [
       { path: '', component: () => import('../views/TeacherDashboardContentHome.vue') },
       {
         path: 'classroom/:id',
-        component: () => import('../views/TeacherDashboardContentClassroom.vue')
+        component: () => import('../views/TeacherDashboardContentClassroom.vue'),
       },
       {
         path: 'kexperiment-details/:id',
-        component: () => import('../views/KexperimentDetails.vue')
-      }
-    ]
+        component: () => import('../views/KexperimentDetails.vue'),
+      },
+    ],
   },
   { path: '/kexperiment-details/:id', component: () => import('../views/KexperimentDetails.vue') },
 
   // 注入虚拟实验内部的路由
   ...experimentsRoutes,
 
-  { path: '*', component: () => import('../views/NotFound.vue') }
+  { path: '*', component: () => import('../views/NotFound.vue') },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
