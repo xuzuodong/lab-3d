@@ -41,7 +41,13 @@ export default {
       columns: [
         { name: 'behaviorName', label: '行为', field: 'behaviorName', align: 'left' },
         { name: 'userSolution', label: '您的操作', field: 'userSolution', align: 'left' },
-        { name: 'isCorrect', label: '操作判断', field: 'isCorrect', align: 'center' },
+        {
+          name: 'isCorrect',
+          label: '操作判断',
+          field: 'isCorrect',
+          align: 'center',
+          style: 'min-width: 100px',
+        },
         { name: 'correctContent', label: '正确操作', field: 'correctContent', align: 'center' },
         // { name: 'button', label: '知识链接', field: 'button', align: 'center' },
       ],

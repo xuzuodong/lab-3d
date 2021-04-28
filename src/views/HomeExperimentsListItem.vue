@@ -1,6 +1,6 @@
 <template>
-  <!-- <div> -->
-    <router-link tag="div" :to="'/experiment/' + experiment.alias" v-if="experiment.alias != null">
+  <div>
+    <router-link :to="'/experiment/' + experiment.alias" v-if="experiment.alias != null">
       <q-card class="experiment-item cursor-pointer full-height">
         <q-img :src="experiment.image" width="100%" :ratio="3 / 2" />
 
@@ -18,7 +18,7 @@
         </q-card-section>
       </q-card>
     </router-link>
-    <!-- <div v-if="experiment.alias == null && userInfo != null">
+    <div v-if="experiment.alias == null && userInfo != null">
       <a target="_blank" :href="'http://47.98.192.17/' + oldExperiment + '.html' + '?' + userInfo.token">
         <q-card class="experiment-item cursor-pointer full-height">
           <q-img :src="experiment.image" width="100%" :ratio="3 / 2" />
@@ -37,8 +37,8 @@
           </q-card-section>
         </q-card>
       </a>
-    </div> -->
-  <!-- </div> -->
+    </div>
+  </div>
 </template>
 
 <script>
@@ -47,7 +47,7 @@ export default {
   props: { experiment: Object },
   computed: {
     ...mapState('user', ['userInfo']),
-    oldExperiment: function() {
+    oldExperiment: function () {
       if (this.experiment.id === 1) return 'saltpage'
       if (this.experiment.id === 2) return 'phpage'
       return 'homepage'
