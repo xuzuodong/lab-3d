@@ -309,7 +309,7 @@ const actions = {
       school,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
-          success(res.data.body)
+          success(res)
         } else failure(res)
       },
       failure(res) {

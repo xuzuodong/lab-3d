@@ -10,37 +10,39 @@
         <q-separator />
 
         <div class="text-h6 q-my-md">更改密码</div>
-        <q-input
-          class="q-my-sm"
-          filled
-          type="password"
-          v-model="oldPassword"
-          label="当前密码"
-          lazy-rules
-          :rules="[checkOldPwd]"
-        />
+        <q-form ref="myForm">
+          <q-input
+            class="q-my-sm"
+            filled
+            type="password"
+            v-model="oldPassword"
+            label="当前密码"
+            lazy-rules="ondemand"
+            :rules="[checkOldPwd]"
+          />
 
-        <q-input
-          class="q-my-sm"
-          filled
-          type="password"
-          v-model="password"
-          label="新密码"
-          lazy-rules="ondemand"
-          :rules="[(val) => (val !== null && val !== '') || '请输入密码']"
-        />
+          <q-input
+            class="q-my-sm"
+            filled
+            type="password"
+            v-model="password"
+            label="新密码"
+            lazy-rules="ondemand"
+            :rules="[(val) => val !== null || '请输入密码']"
+          />
 
-        <q-input
-          filled
-          type="password"
-          v-model="confirmPassword"
-          label="确认新密码"
-          lazy-rules="ondemand"
-          :rules="[
-            (val) => (val !== null && val !== '') || '请确认密码',
-            (val) => val == password || '两次输入的密码不一致',
-          ]"
-        />
+          <q-input
+            filled
+            type="password"
+            v-model="confirmPassword"
+            label="确认新密码"
+            lazy-rules="ondemand"
+            :rules="[
+              (val) => val !== null || '请确认密码',
+              (val) => val == password || '两次输入的密码不一致',
+            ]"
+          />
+        </q-form>
       </q-card-section>
 
       <q-card-section class="col-6 row">
@@ -79,9 +81,9 @@ export default {
       username: '',
       phone: null,
       realname: null,
-      oldPassword: null,
-      password: null,
-      confirmPassword: null,
+      oldPassword: '',
+      password: '',
+      confirmPassword: '',
       school: null,
       grade: null,
       sex: '',
@@ -112,20 +114,24 @@ export default {
     ...mapActions('user', ['getUserInfo', 'updateUserInfo', 'login']),
 
     checkOldPwd(val) {
-      return new Promise((resovle, reject) => {
-        this.login({
-          username: this.username,
-          password: val,
-          success: () => {
-            this.oldPwdCorrect = true
-            resovle()
-          },
-          failure: () => {
-            this.oldPwdCorrect = false
-            resovle('密码错误')
-          },
+      if (val) {
+        return new Promise((resovle, reject) => {
+          this.login({
+            username: this.username,
+            password: val,
+            success: () => {
+              this.oldPwdCorrect = true
+              resovle()
+            },
+            failure: () => {
+              this.oldPwdCorrect = false
+              resovle('密码错误')
+            },
+          })
         })
-      })
+      } else if (this.password == this.confirmPassword && this.password != '') {
+        return '请输入原密码'
+      }
     },
 
     show() {
@@ -142,26 +148,34 @@ export default {
 
     onOKClick() {
       this.$emit('ok')
-      // if (
-      //   (this.oldPwdCorrect && this.password == this.confirmPassword) ||
-      //   (!this.oldPwdCorrect && this.password == '' && this.confirmPassword == '')
-      // ) {
-      //   this.updateUserInfo({
-      //     passWord: this.password || '',
-      //     phoneNumber: this.phone || '',
-      //     realName: this.realname || '',
-      //     sex: this.sex || '',
-      //     grade: this.grade || '',
-      //     school: this.school || '',
-      //     success: (res) => {
-      //       console.log(res)
-      //     },
-      //     failure: (res) => {
-      //       console.log(res)
-      //     },
-      //   })
-      // }
-      this.hide()
+      this.$refs.myForm.validate().then((success) => {
+        if (success) {
+          if (
+            (this.oldPwdCorrect && this.password == this.confirmPassword) ||
+            (!this.oldPwdCorrect && this.password == '' && this.confirmPassword == '')
+          ) {
+            this.updateUserInfo({
+              passWord: this.password || '',
+              phoneNumber: this.phone || '',
+              realName: this.realname || '',
+              sex: this.sex || '',
+              grade: this.grade || '',
+              school: this.school || '',
+              success: (res) => {
+                console.log(res)
+              },
+              failure: (res) => {
+                console.log(res)
+              },
+            })
+            this.hide()
+          }
+        } else {
+          setTimeout(() => {
+            this.$refs.myForm.resetValidation()
+          }, 2000)
+        }
+      })
     },
 
     onCancelClick() {
@@ -171,7 +185,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
 .q-dialog {
   .q-dialog__inner--minimized {
     padding: 16px;
