@@ -142,26 +142,26 @@ export default {
 
     onOKClick() {
       this.$emit('ok')
-      if (
-        (this.oldPwdCorrect && this.password == this.confirmPassword) ||
-        (!this.oldPwdCorrect && this.password == '' && this.confirmPassword == '')
-      ) {
-        this.updateUserInfo({
-          passWord: this.password || '',
-          phoneNumber: this.phone || '',
-          realName: this.realname || '',
-          sex: this.sex || '',
-          grade: this.grade || '',
-          school: this.school || '',
-          success: (res) => {
-            console.log(res)
-          },
-          failure: (res) => {
-            console.log(res)
-          },
-        })
-        this.hide()
-      }
+      // if (
+      //   (this.oldPwdCorrect && this.password == this.confirmPassword) ||
+      //   (!this.oldPwdCorrect && this.password == '' && this.confirmPassword == '')
+      // ) {
+      //   this.updateUserInfo({
+      //     passWord: this.password || '',
+      //     phoneNumber: this.phone || '',
+      //     realName: this.realname || '',
+      //     sex: this.sex || '',
+      //     grade: this.grade || '',
+      //     school: this.school || '',
+      //     success: (res) => {
+      //       console.log(res)
+      //     },
+      //     failure: (res) => {
+      //       console.log(res)
+      //     },
+      //   })
+      // }
+      this.hide()
     },
 
     onCancelClick() {
