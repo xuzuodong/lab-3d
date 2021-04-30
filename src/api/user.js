@@ -185,4 +185,25 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
+
+  getUserInfo({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'user/getUserInfo',
+      headers: { Authorization: store.state.user.userInfo.token },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+  
+  updateUserInfo({ passWord, phoneNumber, realName, sex, grade, school, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'user/updateUserInfo',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { passWord, phoneNumber, realName, sex, grade, school },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
 }

@@ -223,7 +223,10 @@ const actions = {
     })
   },
 
-  submitBehavior({ commit }, { kexperimentId, name, type, content, isCorrect, correctContent, success, failure }) {
+  submitBehavior(
+    { commit },
+    { kexperimentId, name, type, content, isCorrect, correctContent, success, failure }
+  ) {
     userApi.submitBehavior({
       kexperimentId,
       name,
@@ -275,6 +278,38 @@ const actions = {
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
           success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getUserInfo({ commit }, { success, failure }) {
+    userApi.getUserInfo({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  updateUserInfo({ commit }, { passWord, phoneNumber, realName, sex, grade, school, success, failure }) {
+    userApi.updateUserInfo({
+      passWord,
+      phoneNumber,
+      realName,
+      sex,
+      grade,
+      school,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res)
         } else failure(res)
       },
       failure(res) {

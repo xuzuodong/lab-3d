@@ -21,6 +21,13 @@
             transition-hide="jump-up"
           >
             <q-list style="min-width: 150px" :class="{ 'bg-grey-9': $q.dark.isActive }">
+              <q-item clickable @click="openUserCenter">
+                <q-item-section side>
+                  <q-icon name="account_circle" size="sm" />
+                </q-item-section>
+                <q-item-section>个人中心</q-item-section>
+              </q-item>
+
               <q-item
                 v-if="userInfo.type == '学生'"
                 clickable
@@ -83,6 +90,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import DialogJoinVue from './components/DialogJoin.vue'
+import UserCenter from './views/UserCenter'
 
 export default {
   props: {
@@ -102,6 +110,17 @@ export default {
       this.$q
         .dialog({
           component: DialogJoinVue,
+          parent: this,
+        })
+        .onOk(() => {})
+        .onCancel(() => {})
+        .onDismiss(() => {})
+    },
+
+    openUserCenter() {
+      this.$q
+        .dialog({
+          component: UserCenter,
           parent: this,
         })
         .onOk(() => {})
