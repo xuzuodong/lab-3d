@@ -1,5 +1,5 @@
 <template>
-  <div class="QTest" >
+  <div class="QTest">
     <q-dialog
       ref="dialog"
       @hide="onDialogHide"
@@ -8,58 +8,65 @@
       transition-hide="slide-right"
       class="top-right-dialog"
     >
-      <q-card class="my-card">
-        <q-card-section class="bg-secondary text-white">
-          <div class="text-h6">改变接触面积</div>
-          <div>
-            <q-btn color="secondary" label="使物品与地面接触面积变大" class="q-my-sm" @click="large" />
+      <q-card class="bg-secondary text-white" style="width: 455px">
+        <q-card-section>
+          <q-badge class="text-h6" color="secondary">改变地面材质</q-badge>
+          <q-badge class="q-ml-xl" color="secondary">当前地面材质：{{ landName }}</q-badge>
+          <div class="row">
+            <q-btn
+              v-for="matItem in matItems"
+              :key="matItem.id"
+              :class="{ active: mat_index == matItem.id, inactive: mat_index != matItem.id }"
+              class="q-mx-auto q-my-sm col-5"
+              @click="mat(matItem)"
+              :icon="'img:' + matItem.iconPath"
+              :label="matItem.labelName"
+            />
           </div>
-          <div>
-            <q-btn color="secondary" label="使物品与地面接触面积变小" class="q-my-sm" @click="small" />
+        </q-card-section>
+
+        <q-separator />
+
+        <q-card-section>
+          <q-badge class="text-h6" color="secondary">改变木块与地面的接触面积</q-badge>
+          <q-badge class="q-ml-sm" color="secondary">当前放置状态：{{ areaName }}</q-badge>
+          <div class="row q-my-sm bg-secondary text-white">
+            <q-btn
+              v-for="areaItem in areaItems"
+              :key="areaItem.id"
+              :class="{ active: area_index == areaItem.id, inactive: area_index != areaItem.id }"
+              class="q-mx-sm q-my-sm col"
+              @click="area(areaItem)"
+              :icon="'img:' + areaItem.iconPath"
+              :label="areaItem.labelName"
+            />
           </div>
         </q-card-section>
 
         <q-separator />
 
-        <q-card-section class="bg-secondary text-white">
-          <div class="text-h6">改变地面材质</div>
-          <div>
-            <q-btn color="secondary" class="q-mx-sm q-my-sm" @click="grass">
-              草地
-              <br />
-              (非常粗糙)
-            </q-btn>
-            <q-btn color="secondary" class="q-mx-sm q-my-sm" @click="wood">
-              木板
-              <br />
-              (较为光滑)
-            </q-btn>
-            <q-btn color="secondary" class="q-mx-sm q-my-sm" @click="ice">
-              冰面
-              <br />
-              (非常光滑)
-            </q-btn>
-          </div>
-        </q-card-section>
-
-        <q-separator />
-        <q-card-section class="q-pa-md bg-secondary text-white">
-          <q-badge class="text-h6 q-mb-xl" color="secondary">将质量改变为：{{ gravityData }}</q-badge>
-          <q-badge class="text-h7" color="secondary">kg</q-badge>
-          <q-btn color="secondary" label="确定" class="qbutton q-ml-xl" @click="dataPast" />
+        <q-card-section>
+          <q-badge class="text-h6 q-mb-md" color="secondary">改变木块质量</q-badge>
+          <q-badge class="text-h7" color="secondary">当前质量：{{ gravityData }}kg</q-badge>
           <q-slider
             v-model="gravityData"
             color="white"
             markers
             :min="25"
-            :max="75"
+            :max="100"
             :step="25"
             label
             label-always
             label-color="secondary"
             label-text-color="white"
-            dense
+            style="width: 90%"
+            class="q-mx-auto"
           />
+        </q-card-section>
+        <q-card-section class="row q-pt-none">
+          <div class="col"></div>
+          <q-btn style="background-color: #dcc987" label="确定" class="col-8" @click="dataPast" />
+          <div class="col"></div>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -67,11 +74,35 @@
 </template>
 <script>
 import storeData from './storeData'
+import wastelandIcon from '../2d/assets/wastelandIcon.png'
+import grassIcon from '../2d/assets/grassIcon.png'
+import woodIcon from '../2d/assets/woodIcon.png'
+import iceIcon from '../2d/assets/iceIcon.png'
+import smlPlace from '../2d/assets/smlPlace.png'
+import midPlace from '../2d/assets/midPlace.png'
+import larPlace from '../2d/assets/larPlace.png'
 export default {
   name: 'testPage',
   data() {
     return {
-      gravityData: 75,
+      mat_index: 0,
+      area_index: 0,
+      isActive: true,
+      gravityData: 100,
+      landName: '荒地',
+      areaName: '侧躺放置',
+      areaItems: [
+        { id: 0, iconPath: midPlace, labelName: '侧躺放置' },
+        { id: 1, iconPath: larPlace, labelName: '平躺放置' },
+        { id: 2, iconPath: smlPlace, labelName: '竖向放置' },
+      ],
+      matItems: [
+        { id: 0, iconPath: wastelandIcon, labelName: '荒地(较为粗糙)' },
+        { id: 1, iconPath: grassIcon, labelName: '草地(非常粗糙)' },
+        { id: 2, iconPath: woodIcon, labelName: '木板(较为光滑)' },
+        { id: 3, iconPath: iceIcon, labelName: '冰面(非常光滑)' },
+      ],
+      data: { mat: 0.5, area: 5.4, mass: 100 },
     }
   },
   methods: {
@@ -89,42 +120,109 @@ export default {
       this.hide()
     },
 
-    grass() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('grass')
-      this.$emit('ok', this)
+    mat(matItem) {
+      this.mat_index = matItem.id
+      this.landName = matItem.labelName.substr(0, 2)
+      console.log(this.mat_index)
     },
-    wood() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('wood')
-      this.$emit('ok', this)
+    area(areaItem) {
+      this.area_index = areaItem.id
+      this.areaName = areaItem.labelName.substr(0, 4)
+      console.log(this.area_index)
     },
-    ice() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('ice')
-      this.$emit('ok', this)
+
+    // wasteland() {
+    //   this.landName = '荒地'
+    //   this.activeClass0 = 1
+    // },
+    // grass() {
+    //   this.landName = '草地'
+    //   this.activeClass1 = 1
+    //   storeData.splice(0, storeData.length)
+    //   storeData.push('grass')
+    //   this.$emit('ok', this)
+    // },
+    // wood() {
+    //   this.landName = '木板'
+    //   this.activeClass2 = 1
+    //   storeData.splice(0, storeData.length)
+    //   storeData.push('wood')
+    //   this.$emit('ok', this)
+    // },
+    // ice() {
+    //   this.landName = '冰面'
+    //   this.activeClass3 = 1
+    //   storeData.splice(0, storeData.length)
+    //   storeData.push('ice')
+    //   this.$emit('ok', this)
+    // },
+
+    // large() {
+    //   this.activeClass4 = 1
+    //   storeData.splice(0, storeData.length)
+    //   storeData.push('large')
+    //   this.$emit('ok', this)
+    // },
+    // small() {
+    //   this.activeClass5 = 1
+    //   storeData.splice(0, storeData.length)
+    //   storeData.push('small')
+    //   this.$emit('ok', this)
+    // },
+
+    exchange() {
+      switch (this.mat_index) {
+        case 0:
+          this.data.mat = 0.5
+          break
+        case 1:
+          this.data.mat = 0.7
+          break
+        case 2:
+          this.data.mat = 0.3
+          break
+        case 3:
+          this.data.mat = 0.1
+          break
+      }
+      switch (this.area_index) {
+        case 0:
+          this.data.area = 5.4
+          break
+        case 1:
+          this.data.area = 9.0
+          break
+        case 2:
+          this.data.area = 2.5
+          break
+      }
     },
-    large() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('large')
-      this.$emit('ok', this)
-    },
-    small() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('small')
-      this.$emit('ok', this)
-    },
+
     dataPast() {
-      this.hide()
+      this.exchange()
+      console.log(this.data)
       storeData.splice(0, storeData.length)
       storeData.push(this.gravityData)
       this.$emit('ok', this.gravityData)
+      // this.hide()
     },
+  },
+  created() {
+    this.wastelandIcon = wastelandIcon
+    this.grassIcon = grassIcon
+    this.woodIcon = woodIcon
+    this.iceIcon = iceIcon
+    this.smlPlace = smlPlace
+    this.midPlace = midPlace
+    this.larPlace = larPlace
   },
 }
 </script>
+<style scoped>
+.active {
+  background-color: #4cd0a3;
+}
+.inactive {
+  background-color: #4cb9a3;
+}
+</style>
