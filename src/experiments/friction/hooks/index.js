@@ -25,7 +25,9 @@ export default [
   {
     paragraph: '原因分析',
     talk: 0,
-    method: ({ next }) => {
+    method: ({ next, script }) => {
+      console.log(script);
+      script.paragraphs[1].talks[0] = '123123'
       store.dispatch('user/startExperiment', {
         experimentId: 9,
         success: (res) => {

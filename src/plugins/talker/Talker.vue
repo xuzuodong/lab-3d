@@ -104,6 +104,7 @@ export default {
         outputHook.resolved = true
         outputHook.method({
           next: this.next,
+          script: this.script,
           paragraph: this.paragraph,
           goto: this.goto,
           restart: this.restart,
@@ -189,6 +190,7 @@ export default {
         this.hide()
         inputHook.method({
           next: this.next,
+          script: this.script,
           paragraph: this.paragraph,
           goto: this.goto,
           restart: this.restart,
