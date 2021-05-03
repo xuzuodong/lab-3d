@@ -3,7 +3,7 @@
     <template v-slot:body="props">
       <q-tr :props="props">
         <q-td key="realname" :props="props">
-          {{ props.row.realname || '学生' + props.row.id }}
+          {{ props.row.realname || props.row.name }}
         </q-td>
         <q-td key="sex" :props="props">
           {{ props.row.sex }}
@@ -81,10 +81,12 @@ export default {
     studentsList() {
       const arr = []
       this.students.forEach((e, i) => {
+        let sex = e.sex == 1 ? '男' : 'nv'
         let formattedString = date.formatDate(this.jT, 'YYYY-MM-DD')
         if (e.classes) {
           arr.push({
             ...this.students[i],
+            sex,
             jTime: formattedString,
           })
         }
@@ -130,5 +132,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

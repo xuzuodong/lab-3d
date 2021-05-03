@@ -47,7 +47,7 @@ export default {
       tab: 'student',
     }
   },
- 
+
   computed: {
     ...mapState('user', ['classrooms']),
 
@@ -60,10 +60,10 @@ export default {
     ...mapActions('user', ['selectMyClasses']),
 
     setClipboard(text) {
-      navigator.clipboard.writeText(text).then(
-        () => this.$q.notify({ message: '复制成功', color: 'positive' }),
-        () => this.$q.notify({ message: '无法复制到剪切板', color: 'red' })
-      )
+      navigator.clipboard
+        .writeText(text)
+        .then(() => this.$q.notify({ message: '复制成功', color: 'positive' }))
+        .catch(() => this.$q.notify({ message: '无法复制到剪切板', color: 'red' }))
     },
   },
 }

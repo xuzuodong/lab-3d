@@ -2,8 +2,8 @@
   <q-table :data="experimentsList" :columns="experimentsColumns" :loading="loading" row-key="name" flat>
     <template v-slot:body="props">
       <q-tr :props="props">
-        <q-td key="userName" :props="props">
-          {{ props.row.userName }}
+        <q-td key="realName" :props="props">
+          {{ props.row.realName || props.row.userName }}
         </q-td>
         <q-td key="experimentName" :props="props">
           {{ props.row.experimentName }}
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       experimentsColumns: [
-        { name: 'userName', required: true, label: '姓名', align: 'left', sortable: true },
+        { name: 'realName', required: true, label: '姓名', align: 'left', sortable: true },
         { name: 'experimentName', align: 'left', label: '实验名称', sortable: true },
         { name: 'duration', label: '实验时间', field: 'eTime', align: 'left', sortable: true },
         { name: 'finalScore', label: '成绩', field: 'score', align: 'center', sortable: true },
@@ -72,6 +72,7 @@ export default {
       classId: this.$route.params.id,
       success: (experiments) => {
         this.experiments = experiments
+        console.log(experiments)
         this.loading = false
       },
       failure: (res) => {

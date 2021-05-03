@@ -96,7 +96,6 @@ export default {
   created() {
     this.getUserInfo({
       success: (res) => {
-        console.log(res)
         this.username = res.name
         this.phone = res.phone
         this.realname = res.realname
@@ -104,8 +103,8 @@ export default {
         this.grade = res.grade
         this.sex = String(res.sex)
       },
-      failure: (res) => {
-        console.log(res)
+      failure: (err) => {
+        console.log(err)
       },
     })
   },
@@ -164,8 +163,8 @@ export default {
               success: (res) => {
                 console.log(res)
               },
-              failure: (res) => {
-                console.log(res)
+              failure: (err) => {
+                console.log(err)
               },
             })
             this.hide()
