@@ -81,7 +81,7 @@ export default {
     studentsList() {
       const arr = []
       this.students.forEach((e, i) => {
-        let sex = e.sex == 1 ? '男' : 'nv'
+        let sex = e.sex == 1 ? '男' : '女'
         let formattedString = date.formatDate(this.jT, 'YYYY-MM-DD')
         if (e.classes) {
           arr.push({
