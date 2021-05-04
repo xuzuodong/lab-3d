@@ -11,6 +11,7 @@ import targetPage from '../2d/targetPage'
 import paramPage from '../2d/paramPage'
 import testPage from '../2d/testPage'
 import store from '../../../store'
+import judge from './judge'
 
 let experAssume = 0
 let o1 = false
@@ -24,6 +25,7 @@ let small = 0
 let gravity = 0
 let kexperimentId
 let warnMsg = '请按照左上角的假设进行实验！'
+let lastTimeData = []
 
 export default [
   //开始实验，并获取kexperimentId
@@ -57,7 +59,6 @@ export default [
         option3: o3,
       }).onOk(async () => {
         if (storeData[0] == 'op1') {
-          o1 = true
           experAssume = 1
           goto({ paragraph: '改变接触面粗糙程度' })
           store.dispatch('user/submitBehavior', {
@@ -93,7 +94,6 @@ export default [
             },
           })
         } else if (storeData[0] == 'op3') {
-          o3 = true
           experAssume = 3
           goto({ paragraph: '改变物体的质量' })
           store.dispatch('user/submitBehavior', {
@@ -137,54 +137,28 @@ export default [
       const test = Dialog.create({
         component: testPage,
       }).onOk(async () => {
-        if (storeData[0] == 'grass') {
-          grass = 1
-          scene.changeGround(grasspng)
-          goto({ paragraph: '草地' })
+        console.log(judge.judge(o1, experAssume));
+        let judgeResult = judge.judge(o1, experAssume)
+        if (judgeResult == '荒地' || judgeResult == '草地' || judgeResult == '木板' || judgeResult == '冰面') {
+          if (judgeResult == '草地') {
+            grass = 1
+            scene.changeGround(grasspng)
+          }
+          if (judgeResult == '木板') {
+            wood = 1
+            scene.changeGround(woodjpg)
+          }
+          if (judgeResult == '冰面') {
+            ice = 1
+            scene.changeGround(icejpg)
+          }
+          goto({ paragraph: judgeResult })
           store.dispatch('user/submitBehavior', {
             kexperimentId: kexperimentId,
             name: '改变接触面粗糙程度',
             type: 'BEHAVIOR_CHOICE',
-            content: '将地面改变为草地',
-            correctContent: '改变接触面粗糙程度中选择了【草地】',
-            isCorrect: true,
-            success: (res) => {
-              console.log(res);
-            },
-            failure: (res) => {
-              console.log(res)
-            },
-          })
-        }
-        if (storeData[0] == 'wood') {
-          wood = 1
-          scene.changeGround(woodjpg)
-          goto({ paragraph: '木板' })
-          store.dispatch('user/submitBehavior', {
-            kexperimentId: kexperimentId,
-            name: '改变接触面粗糙程度',
-            type: 'BEHAVIOR_CHOICE',
-            content: '将地面改变为木板',
-            correctContent: '改变接触面粗糙程度中选择了【木板】',
-            isCorrect: true,
-            success: (res) => {
-              console.log(res);
-            },
-            failure: (res) => {
-              console.log(res)
-            },
-          })
-        }
-        if (storeData[0] == 'ice') {
-          ice = 1
-          scene.changeGround(icejpg)
-          goto({ paragraph: '冰面' })
-          store.dispatch('user/submitBehavior', {
-            kexperimentId: kexperimentId,
-            name: '改变接触面粗糙程度',
-            type: 'BEHAVIOR_CHOICE',
-            content: '将地面改变为冰面',
-            correctContent: '改变接触面粗糙程度中选择了【冰面】',
+            content: '将地面改变为' + judgeResult,
+            correctContent: '改变接触面粗糙程度中选择了【' + judgeResult + '】',
             isCorrect: true,
             success: (res) => {
               console.log(res);
@@ -269,6 +243,7 @@ export default [
             },
           })
         }
+        o1 = true
         scene.backToStart()
       })
       scene.mutate({ testPanel: test })
@@ -645,6 +620,8 @@ export default [
             },
           })
         }
+        o2 = true
+        scene.backToStart()
       })
       scene.mutate({ testPanel: test })
     },
@@ -955,6 +932,7 @@ export default [
           })
         }
         scene.backToStart()
+        o3 = true
       })
       scene.mutate({ testPanel: test })
     },
@@ -1402,8 +1380,30 @@ export default [
     method: ({ scene, goto }) => {
       const freeTest = Dialog.create({
         component: testPage,
-        showTest: true,
       }).onOk(() => {
+        // console.log(storeData[0]);
+        // console.log(lastTimeData[0]);
+        // if (storeData[0] == lastTimeData[0]) {
+        //   console.log(111);
+        // }
+        // else console.log(222);
+        lastTimeData.splice(0, lastTimeData.length)
+        lastTimeData.push(storeData[0])
+        console.log(lastTimeData[0]);
+        switch (lastTimeData[0].mass) {
+          case 100:
+            console.log(100);
+            break
+          case 75:
+            console.log(75);
+            break
+          case 50:
+            console.log(50);
+            break
+          case 25:
+            console.log(25);
+            break
+        }
         if (storeData[0] == 'grass') {
           scene.changeGround(grasspng)
           scene.runStart()

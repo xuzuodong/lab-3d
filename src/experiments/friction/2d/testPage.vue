@@ -131,79 +131,48 @@ export default {
       console.log(this.area_index)
     },
 
-    // wasteland() {
-    //   this.landName = '荒地'
-    //   this.activeClass0 = 1
-    // },
-    // grass() {
-    //   this.landName = '草地'
-    //   this.activeClass1 = 1
-    //   storeData.splice(0, storeData.length)
-    //   storeData.push('grass')
-    //   this.$emit('ok', this)
-    // },
-    // wood() {
-    //   this.landName = '木板'
-    //   this.activeClass2 = 1
-    //   storeData.splice(0, storeData.length)
-    //   storeData.push('wood')
-    //   this.$emit('ok', this)
-    // },
-    // ice() {
-    //   this.landName = '冰面'
-    //   this.activeClass3 = 1
-    //   storeData.splice(0, storeData.length)
-    //   storeData.push('ice')
-    //   this.$emit('ok', this)
-    // },
-
-    // large() {
-    //   this.activeClass4 = 1
-    //   storeData.splice(0, storeData.length)
-    //   storeData.push('large')
-    //   this.$emit('ok', this)
-    // },
-    // small() {
-    //   this.activeClass5 = 1
-    //   storeData.splice(0, storeData.length)
-    //   storeData.push('small')
-    //   this.$emit('ok', this)
-    // },
-
     exchange() {
       switch (this.mat_index) {
         case 0:
-          this.data.mat = 0.5
+          // this.data.mat = 0.5
+          this.data.mat = '荒地'
           break
         case 1:
-          this.data.mat = 0.7
+          // this.data.mat = 0.7
+          this.data.mat = '草地'
           break
         case 2:
-          this.data.mat = 0.3
+          // this.data.mat = 0.3
+          this.data.mat = '木板'
           break
         case 3:
-          this.data.mat = 0.1
+          // this.data.mat = 0.1
+          this.data.mat = '冰面'
           break
       }
       switch (this.area_index) {
         case 0:
-          this.data.area = 5.4
+          // this.data.area = 5.4
+          this.data.area = '侧躺放置'
           break
         case 1:
-          this.data.area = 9.0
+          // this.data.area = 9.0
+          this.data.area = '平躺放置'
           break
         case 2:
-          this.data.area = 2.5
+          // this.data.area = 2.5
+          this.data.area = '竖向放置'
           break
       }
+      this.data.mass = this.gravityData
     },
 
     dataPast() {
       this.exchange()
       console.log(this.data)
       storeData.splice(0, storeData.length)
-      storeData.push(this.gravityData)
-      this.$emit('ok', this.gravityData)
+      storeData.push(this.data)
+      this.$emit('ok', this.data)
       // this.hide()
     },
   },
