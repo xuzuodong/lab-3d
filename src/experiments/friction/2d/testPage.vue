@@ -65,7 +65,13 @@
         </q-card-section>
         <q-card-section class="row q-pt-none">
           <div class="col"></div>
-          <q-btn style="background-color: #dcc987" label="确定" class="col-8" @click="dataPast" />
+          <q-btn
+            style="background-color: #dcc987"
+            label="确定"
+            class="col-8"
+            @click="dataPast"
+            :disable="disTestPage"
+          />
           <div class="col"></div>
         </q-card-section>
       </q-card>
@@ -83,6 +89,9 @@ import midPlace from '../2d/assets/midPlace.png'
 import larPlace from '../2d/assets/larPlace.png'
 export default {
   name: 'testPage',
+  props: {
+    disTestPage: Boolean,
+  },
   data() {
     return {
       mat_index: 0,
@@ -102,7 +111,7 @@ export default {
         { id: 2, iconPath: woodIcon, labelName: '木板(较为光滑)' },
         { id: 3, iconPath: iceIcon, labelName: '冰面(非常光滑)' },
       ],
-      data: { mat: 0.5, area: 5.4, mass: 100 },
+      data: { mat: '荒地', area: '侧躺放置', mass: 100 },
     }
   },
   methods: {
@@ -123,44 +132,35 @@ export default {
     mat(matItem) {
       this.mat_index = matItem.id
       this.landName = matItem.labelName.substr(0, 2)
-      console.log(this.mat_index)
     },
     area(areaItem) {
       this.area_index = areaItem.id
       this.areaName = areaItem.labelName.substr(0, 4)
-      console.log(this.area_index)
     },
 
     exchange() {
       switch (this.mat_index) {
         case 0:
-          // this.data.mat = 0.5
           this.data.mat = '荒地'
           break
         case 1:
-          // this.data.mat = 0.7
           this.data.mat = '草地'
           break
         case 2:
-          // this.data.mat = 0.3
           this.data.mat = '木板'
           break
         case 3:
-          // this.data.mat = 0.1
           this.data.mat = '冰面'
           break
       }
       switch (this.area_index) {
         case 0:
-          // this.data.area = 5.4
           this.data.area = '侧躺放置'
           break
         case 1:
-          // this.data.area = 9.0
           this.data.area = '平躺放置'
           break
         case 2:
-          // this.data.area = 2.5
           this.data.area = '竖向放置'
           break
       }
@@ -173,7 +173,7 @@ export default {
       storeData.splice(0, storeData.length)
       storeData.push(this.data)
       this.$emit('ok', this.data)
-      // this.hide()
+      this.hide()
     },
   },
   created() {
