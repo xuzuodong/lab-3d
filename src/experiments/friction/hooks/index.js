@@ -30,13 +30,66 @@ let gravity = 0
 let kexperimentId
 let warnMsg = '请按照左上角的假设进行实验！'
 
+function changeShape(scene) {
+  if (storeData[0].mat == '荒地') {
+    scene.changeGround(initGround)
+  }
+  if (storeData[0].mat == '草地') {
+    scene.changeGround(grasspng)
+  }
+  if (storeData[0].mat == '木板') {
+    scene.changeGround(woodjpg)
+  }
+  if (storeData[0].mat == '冰面') {
+    scene.changeGround(icejpg)
+  }
+  if (storeData[0].area == '侧躺放置') {
+    scene.reSmallArea()
+  }
+  if (storeData[0].area == '平躺放置') {
+    scene.reSmallArea()
+    scene.largeArea()
+  }
+  if (storeData[0].area == '竖向放置') {
+    scene.reSmallArea()
+    scene.smallArea()
+  }
+}
+
+function cue() {
+  Notify.create({
+    message: warnMsg,
+    position: 'center',
+    type: 'negative',
+    timeout: 3500,
+    actions: [{ label: 'x', color: 'white', handler: () => { } }]
+  })
+}
+
+function getRunSpeed() {
+  let runSpeed = 0.04
+  switch (storeData[0].mat) {
+    case '荒地':
+      runSpeed = (1000 - (storeData[0].mass * 0.5 * 10)) / (storeData[0].mass * 487.5)
+      break
+    case '草地':
+      runSpeed = (1000 - (storeData[0].mass * 0.7 * 10)) / (storeData[0].mass * 487.5)
+      break
+    case '木板':
+      runSpeed = (1000 - (storeData[0].mass * 0.3 * 10)) / (storeData[0].mass * 487.5)
+      break
+    case '冰面':
+      runSpeed = (1000 - (storeData[0].mass * 0.1 * 10)) / (storeData[0].mass * 487.5)
+      break
+  }
+  return runSpeed
+}
 export default [
   //开始实验，并获取kexperimentId
   {
     paragraph: '原因分析',
     talk: 0,
     method: ({ next }) => {
-
       // store.dispatch('user/startExperiment', {
       //   experimentId: 9,
       //   success: (res) => {
@@ -80,7 +133,6 @@ export default [
           //   },
           // })
         } else if (storeData[0] == 'op2') {
-          o2 = true
           experAssume = 2
           goto({ paragraph: '改变与接触面的面积' })
           store.dispatch('user/submitBehavior', {
@@ -143,22 +195,19 @@ export default [
         disTestPage: false,
       }).onOk(async () => {
         let judgeResult = judgeOfAssume1.judge(o1)
+        changeShape(scene)
         if (judgeResult == '荒地' || judgeResult == '草地' || judgeResult == '木板' || judgeResult == '冰面') {
           if (judgeResult == '荒地') {
             waste = 1
-            scene.changeGround(initGround)
           }
           if (judgeResult == '草地') {
             grass = 1
-            scene.changeGround(grasspng)
           }
           if (judgeResult == '木板') {
             wood = 1
-            scene.changeGround(woodjpg)
           }
           if (judgeResult == '冰面') {
             ice = 1
-            scene.changeGround(icejpg)
           }
           goto({ paragraph: judgeResult })
           // store.dispatch('user/submitBehavior', {
@@ -177,23 +226,8 @@ export default [
           // })
         }
         if (judgeResult == '侧躺放置' || judgeResult == '平躺放置' || judgeResult == '竖向放置') {
-          Notify.create({
-            message: warnMsg,
-            position: 'center',
-            type: 'negative',
-            timeout: 3500,
-            actions: [{ label: 'x', color: 'white', handler: () => { } }]
-          })
-          if (judgeResult == '侧躺放置')
-            scene.reSmallArea()
-          if (judgeResult == '平躺放置') {
-            scene.reSmallArea()
-            scene.largeArea()
-          }
-          if (judgeResult == '竖向放置') {
-            scene.reSmallArea()
-            scene.smallArea()
-          }
+          cue()
+          goto({ paragraph: judgeResult })
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
           //   name: '改变接触面粗糙程度',
@@ -210,13 +244,7 @@ export default [
           // })
         }
         if (judgeResult == 25 || judgeResult == 50 || judgeResult == 75 || judgeResult == 100) {
-          Notify.create({
-            message: warnMsg,
-            position: 'center',
-            type: 'negative',
-            timeout: 3500,
-            actions: [{ label: 'x', color: 'white', handler: () => { } }]
-          })
+          cue()
           gravity = -1
           goto({ paragraph: '轻松拉货' })
           // store.dispatch('user/submitBehavior', {
@@ -265,12 +293,55 @@ export default [
     },
   },
 
+  {
+    paragraph: '荒地',
+    talk: 'last',
+    method: ({ goto, scene }) => {
+      scene.iceRun(getRunSpeed())
+      setTimeout(() => {
+        goto({ paragraph: '荒地后' })
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '失败',
+            force: '500',
+            coefficient: '0.7',
+            square: '5.4',
+            mass: '100',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
+      }, 3000)
+    },
+  },
+
+  {
+    paragraph: '荒地后',
+    talk: 'last',
+    method: ({ goto, scene }) => {
+      scene.changeGround(initGround)
+      scene.paramPanel.hide()
+      if (grass + wood + ice + waste >= 2) {
+        goto({ paragraph: '接触面总结' })
+        waste = 0
+        grass = 0
+        wood = 0
+        ice = 0
+      } else if (experAssume == 1) {
+        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 2) {
+        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      } else if (experAssume == 3) {
+        goto({ paragraph: '改变物体的质量', talk: 'last' })
+      }
+    },
+  },
   //使机器人跑起来并跳转到跑步后的段落
   {
     paragraph: '草地',
     talk: 'last',
     method: ({ goto, scene }) => {
-      scene.runStart()
+      scene.iceRun(getRunSpeed())
       setTimeout(() => {
         goto({ paragraph: '草地后' })
       }, 3000)
@@ -293,7 +364,6 @@ export default [
         }]
       })
       scene.mutate({ paramPanel: param })
-      scene.runStop()
       next()
     },
   },
@@ -326,7 +396,7 @@ export default [
     paragraph: '木板',
     talk: 'last',
     method: ({ goto, scene }) => {
-      scene.woodRun(0.02)
+      scene.iceRun(getRunSpeed())
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
@@ -372,7 +442,7 @@ export default [
     paragraph: '冰面',
     talk: 'last',
     method: ({ goto, scene }) => {
-      scene.iceRun(0.08)
+      scene.iceRun(getRunSpeed())
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
@@ -502,26 +572,9 @@ export default [
         disTestPage: false,
       }).onOk(async () => {
         let judgeResult = judgeOfAssume2.judge(o2)
+        changeShape(scene)
         if (judgeResult == '荒地' || judgeResult == '草地' || judgeResult == '木板' || judgeResult == '冰面') {
-          Notify.create({
-            message: warnMsg,
-            position: 'center',
-            type: 'negative',
-            timeout: 3500,
-            actions: [{ label: 'x', color: 'white', handler: () => { } }]
-          })
-          if (judgeResult == '荒地') {
-            scene.changeGround(initGround)
-          }
-          if (judgeResult == '草地') {
-            scene.changeGround(grasspng)
-          }
-          if (judgeResult == '木板') {
-            scene.changeGround(woodjpg)
-          }
-          if (judgeResult == '冰面') {
-            scene.changeGround(icejpg)
-          }
+          cue()
           goto({ paragraph: judgeResult })
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
@@ -540,20 +593,15 @@ export default [
         }
         if (judgeResult == '侧躺放置' || judgeResult == '平躺放置' || judgeResult == '竖向放置') {
           if (judgeResult == '侧躺放置') {
-            scene.reSmallArea()
             middle = 1
           }
-
           if (judgeResult == '平躺放置') {
-            scene.reSmallArea()
-            scene.largeArea()
             large = 1
           }
           if (judgeResult == '竖向放置') {
-            scene.reSmallArea()
-            scene.smallArea()
             small = 1
           }
+          goto({ paragraph: judgeResult })
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
           //   name: '改变与接触面的面积',
@@ -570,13 +618,7 @@ export default [
           // })
         }
         if (judgeResult == 25 || judgeResult == 50 || judgeResult == 75 || judgeResult == 100) {
-          Notify.create({
-            message: warnMsg,
-            position: 'center',
-            type: 'negative',
-            timeout: 3500,
-            actions: [{ label: 'x', color: 'white', handler: () => { } }]
-          })
+          cue()
           gravity = -2
           goto({ paragraph: '轻松拉货' })
           // store.dispatch('user/submitBehavior', {
@@ -625,12 +667,52 @@ export default [
     },
   },
 
+  //侧躺放置后跑步动画，并设置至少看3秒
+  {
+    paragraph: '侧躺放置',
+    talk: 1,
+    method: ({ next, scene }) => {
+      scene.iceRun(getRunSpeed())
+      setTimeout(() => {
+        const param = Dialog.create({
+          component: paramPage,
+          information: [{
+            msg: '失败',
+            force: '500',
+            coefficient: '0.6',
+            square: '5.4',
+            mass: '100',
+          }]
+        })
+        scene.mutate({ paramPanel: param })
+        next()
+      }, 3000)
+    },
+  },
+
+  //停止跑步，并跳转
+  {
+    paragraph: '侧躺放置',
+    talk: 'last',
+    method: ({ goto, scene }) => {
+      scene.paramPanel.hide()
+      if (large + middle + small >= 2) goto({ paragraph: '接触面积总结' })
+      else if (experAssume == 1) {
+        goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
+      } else if (experAssume == 2) {
+        goto({ paragraph: '改变与接触面的面积', talk: 'last' })
+      } else if (experAssume == 3) {
+        goto({ paragraph: '改变物体的质量', talk: 'last' })
+      }
+    },
+  },
+
   //竖向放置后跑步动画，并设置至少看3秒
   {
     paragraph: '竖向放置',
     talk: 1,
     method: ({ next, scene }) => {
-      scene.runStart()
+      scene.iceRun(getRunSpeed())
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
@@ -648,13 +730,11 @@ export default [
     },
   },
 
-  //停止跑步，并作为跳转的跳板
+  //停止跑步，并跳转
   {
     paragraph: '竖向放置',
     talk: 'last',
     method: ({ goto, scene }) => {
-      scene.reSmallArea()
-      scene.runStop()
       scene.paramPanel.hide()
       if (large + middle + small >= 2) goto({ paragraph: '接触面积总结' })
       else if (experAssume == 1) {
@@ -672,7 +752,7 @@ export default [
     paragraph: '平躺放置',
     talk: 1,
     method: ({ next, scene }) => {
-      scene.runStart()
+      scene.iceRun(getRunSpeed())
       setTimeout(() => {
         const param = Dialog.create({
           component: paramPage,
@@ -690,13 +770,11 @@ export default [
     },
   },
 
-  //停止跑步，并作为跳转的跳板
+  //停止跑步，并跳转
   {
     paragraph: '平躺放置',
     talk: 'last',
     method: ({ goto, scene }) => {
-      scene.runStop()
-      scene.reLargeArea()
       scene.paramPanel.hide()
       if (large + middle + small >= 2) goto({ paragraph: '接触面积总结' })
       else if (experAssume == 1) {
@@ -789,26 +867,9 @@ export default [
         disTestPage: false,
       }).onOk(async () => {
         let judgeResult = judgeOfAssume3.judge(o3)
+        changeShape(scene)
         if (judgeResult == '荒地' || judgeResult == '草地' || judgeResult == '木板' || judgeResult == '冰面') {
-          Notify.create({
-            message: warnMsg,
-            position: 'center',
-            type: 'negative',
-            timeout: 3500,
-            actions: [{ label: 'x', color: 'white', handler: () => { } }]
-          })
-          if (judgeResult == '荒地') {
-            scene.changeGround(initGround)
-          }
-          if (judgeResult == '草地') {
-            scene.changeGround(grasspng)
-          }
-          if (judgeResult == '木板') {
-            scene.changeGround(woodjpg)
-          }
-          if (judgeResult == '冰面') {
-            scene.changeGround(icejpg)
-          }
+          cue()
           goto({ paragraph: judgeResult })
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
@@ -826,24 +887,8 @@ export default [
           // })
         }
         if (judgeResult == '侧躺放置' || judgeResult == '平躺放置' || judgeResult == '竖向放置') {
-          Notify.create({
-            message: warnMsg,
-            position: 'center',
-            type: 'negative',
-            timeout: 3500,
-            actions: [{ label: 'x', color: 'white', handler: () => { } }]
-          })
-          if (judgeResult == '侧躺放置') {
-            scene.reSmallArea()
-          }
-          if (judgeResult == '平躺放置') {
-            scene.reSmallArea()
-            scene.largeArea()
-          }
-          if (judgeResult == '竖向放置') {
-            scene.reSmallArea()
-            scene.smallArea()
-          }
+          cue()
+          goto({ paragraph: judgeResult })
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
           //   name: '改变物体的质量',
@@ -860,13 +905,6 @@ export default [
           // })
         }
         if (judgeResult == 25 || judgeResult == 50 || judgeResult == 75 || judgeResult == 100) {
-          Notify.create({
-            message: warnMsg,
-            position: 'center',
-            type: 'negative',
-            timeout: 3500,
-            actions: [{ label: 'x', color: 'white', handler: () => { } }]
-          })
           gravity = 1
           goto({ paragraph: '轻松拉货' })
           // store.dispatch('user/submitBehavior', {
@@ -933,7 +971,7 @@ export default [
           }]
         })
         scene.mutate({ paramPanel: param })
-        scene.iceRun(0.08)
+        scene.iceRun(getRunSpeed())
       }
       else if (judgeResult == 50) {
         const param = Dialog.create({
@@ -947,7 +985,7 @@ export default [
           }]
         })
         scene.mutate({ paramPanel: param })
-        scene.iceRun(0.06)
+        scene.iceRun(getRunSpeed())
       }
       else if (judgeResult == 75) {
         const param = Dialog.create({
@@ -961,7 +999,7 @@ export default [
           }]
         })
         scene.mutate({ paramPanel: param })
-        scene.iceRun(0.04)
+        scene.iceRun(getRunSpeed())
       }
       setTimeout(() => {
         next()
@@ -1360,58 +1398,11 @@ export default [
         component: testPage,
         disTestPage: false,
       }).onOk(() => {
-        if (storeData[0] == 'grass') {
-          scene.changeGround(grasspng)
-          scene.runStart()
-          setTimeout(() => {
-            scene.runStop()
-            goto({ paragraph: '自由探究' })
-          }, 6000);
-        }
-        if (storeData[0] == 'wood') {
-          scene.changeGround(woodjpg)
-          scene.woodRun(0.02)
-          setTimeout(() => {
-            goto({ paragraph: '自由探究' })
-          }, 6000);
-        }
-        if (storeData[0] == 'ice') {
-          scene.changeGround(icejpg)
-          scene.iceRun(0.08)
-          setTimeout(() => {
-            goto({ paragraph: '自由探究' })
-          }, 6000);
-        }
-        if (storeData[0] == 'large') {
-          scene.largeArea()
-          scene.runStart()
-          setTimeout(() => {
-            scene.runStop()
-            goto({ paragraph: '自由探究' })
-          }, 6000);
-        }
-        if (storeData[0] == 'small') {
-          scene.smallArea()
-          scene.runStart()
-          setTimeout(() => {
-            scene.runStop()
-            goto({ paragraph: '自由探究' })
-          }, 6000);
-        }
-        if (storeData[0] == 25 || storeData[0] == 50 || storeData[0] == 75) {
-          if (storeData[0] == 25) {
-            scene.iceRun(0.08)
-          }
-          else if (storeData[0] == 50) {
-            scene.iceRun(0.06)
-          }
-          else if (storeData[0] == 75) {
-            scene.iceRun(0.04)
-          }
-          setTimeout(() => {
-            goto({ paragraph: '自由探究' })
-          }, 6000);
-        }
+        changeShape(scene)
+        scene.iceRun(getRunSpeed())
+        setTimeout(() => {
+          goto({ paragraph: '自由探究' })
+        }, 4000);
         scene.backToStart()
       })
       scene.mutate({ freeTestPanel: freeTest })
@@ -1421,11 +1412,8 @@ export default [
     paragraph: '自由改变部分',
     talk: 1,
     method: ({ scene, next }) => {
-      if (storeData[0].area == '平躺放置')
-        scene.largeArea()
-      if (storeData[0].area == '竖向放置')
-        scene.smallArea()
-      scene.iceRun(0.04)
+      changeShape(scene)
+      scene.iceRun(getRunSpeed())
       setTimeout(() => {
         next()
       }, 4000);
@@ -1443,10 +1431,10 @@ export default [
         timeout: 3500,
         actions: [{ label: 'x', color: 'white', handler: () => { } }]
       })
-      if (storeData[0].area == '平躺放置')
-        scene.reLargeArea()
-      if (storeData[0].area == '竖向放置')
-        scene.reSmallArea()
+      // if (storeData[0].area == '平躺放置')
+      //   scene.reLargeArea()
+      // if (storeData[0].area == '竖向放置')
+      //   scene.reSmallArea()
       if (experAssume == 1)
         goto({ paragraph: '改变接触面粗糙程度', talk: 'last' })
       if (experAssume == 2)
