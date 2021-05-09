@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import storeData from './storeData'
+import storeOption from './storeOption'
 export default {
   name: 'assumePage',
   data() {
@@ -39,12 +39,12 @@ export default {
           disable: this.option1,
         },
         {
-          label: '货物与地面的接触面积也许会影响摩擦力',
+          label: '物体与地面的接触面积也许会影响摩擦力',
           value: 'op2',
           disable: this.option2,
         },
         {
-          label: '货物给地面的压力也许会影响摩擦力',
+          label: '物体对地面的压力也许会影响摩擦力',
           value: 'op3',
           disable: this.option3,
         },
@@ -73,10 +73,10 @@ export default {
 
     confirm() {
       if (this.group != '') {
-        this.hide()
-        storeData.splice(0, storeData.length)
-        storeData.push(this.group)
+        console.log(this.group)
+        storeOption.push(this.group)
         this.$emit('ok', this.group)
+        this.hide()
       }
     },
   },

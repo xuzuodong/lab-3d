@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import storeData from './storeData'
+import storeOption from './storeOption'
 export default {
   name: 'targetPage',
   data() {
@@ -46,9 +46,9 @@ export default {
     },
   },
   created: function () {
-    if (storeData[0] == 'op1') this.msg = '接触面的粗糙程度'
-    if (storeData[0] == 'op2') this.msg = '物体与地面的接触面积'
-    if (storeData[0] == 'op3') this.msg = '物体给地面的压力'
+    if (storeOption[storeOption.length - 1] == 'op1') this.msg = '接触面的粗糙程度'
+    if (storeOption[storeOption.length - 1] == 'op2') this.msg = '物体与地面的接触面积'
+    if (storeOption[storeOption.length - 1] == 'op3') this.msg = '物体对地面的压力'
   },
 }
 </script>

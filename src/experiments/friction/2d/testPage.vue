@@ -28,7 +28,7 @@
         <q-separator />
 
         <q-card-section>
-          <q-badge class="text-h6" color="secondary">改变木块与地面的接触面积</q-badge>
+          <q-badge class="text-h6" color="secondary">改变物体与地面的接触面积</q-badge>
           <q-badge class="q-ml-sm" color="secondary">当前放置状态：{{ areaName }}</q-badge>
           <div class="row q-my-sm bg-secondary text-white">
             <q-btn
@@ -46,15 +46,15 @@
         <q-separator />
 
         <q-card-section>
-          <q-badge class="text-h6 q-mb-md" color="secondary">改变木块质量</q-badge>
-          <q-badge class="text-h7" color="secondary">当前质量：{{ gravityData }}kg</q-badge>
+          <q-badge class="text-h6 q-mb-md" color="secondary">改变物体对地面的压力</q-badge>
+          <q-badge class="text-h7" color="secondary">当前压力：{{ massName }}N</q-badge>
           <q-slider
             v-model="gravityData"
             color="white"
             markers
-            :min="25"
-            :max="100"
-            :step="25"
+            :min="250"
+            :max="1000"
+            :step="250"
             label
             label-always
             label-color="secondary"
@@ -97,9 +97,10 @@ export default {
       mat_index: 0,
       area_index: 0,
       isActive: true,
-      gravityData: 100,
-      landName: '荒地',
-      areaName: '侧躺放置',
+      gravityData: 1000,
+      landName: storeData[0].mat,
+      areaName: storeData[0].area,
+      massName: storeData[0].mass,
       areaItems: [
         { id: 0, iconPath: midPlace, labelName: '侧躺放置' },
         { id: 1, iconPath: larPlace, labelName: '平躺放置' },
@@ -111,7 +112,7 @@ export default {
         { id: 2, iconPath: woodIcon, labelName: '木板(较为光滑)' },
         { id: 3, iconPath: iceIcon, labelName: '冰面(非常光滑)' },
       ],
-      data: { mat: '荒地', area: '侧躺放置', mass: 100 },
+      data: { mat: '荒地', area: '侧躺放置', mass: 1000 },
     }
   },
   methods: {
@@ -131,11 +132,11 @@ export default {
 
     mat(matItem) {
       this.mat_index = matItem.id
-      this.landName = matItem.labelName.substr(0, 2)
+      // this.landName = matItem.labelName.substr(0, 2)
     },
     area(areaItem) {
       this.area_index = areaItem.id
-      this.areaName = areaItem.labelName.substr(0, 4)
+      // this.areaName = areaItem.labelName.substr(0, 4)
     },
 
     exchange() {

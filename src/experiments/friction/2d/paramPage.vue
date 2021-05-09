@@ -35,9 +35,9 @@
             </q-badge>
           </div>
           <div>
-            <q-badge class="text-body1 bg-secondary text-white">木块质量：</q-badge>
+            <q-badge class="text-body1 bg-secondary text-white">压力大小：</q-badge>
             <q-badge class="text-body1 bg-secondary text-white float-right">
-              {{ information[0].mass }}kg
+              {{ information[0].mass }}N
             </q-badge>
           </div>
         </q-card-section>
