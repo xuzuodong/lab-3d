@@ -83,27 +83,25 @@ export default {
     }
   },
   computed: {
-    preTestList: function() {
+    preTestList: function () {
       let formatArr = []
       if (this.pretestInfo && this.pretestInfo.length != 0) {
-        this.pretestInfo.forEach((e) => {
-          if (e.isCorrect === true) e.isCorrect = '正确'
-          else e.isCorrect = '错误'
-          formatArr.push(e)
+        this.pretestInfo.forEach((e, i) => {
+          if (e.isCorrect === true) formatArr.push({ ...this.pretestInfo[i], isCorrect: '正确' })
+          if (e.isCorrect === false) formatArr.push({ ...this.pretestInfo[i], isCorrect: '错误' })
         })
-        return formatArr
-      } else return []
+      }
+      return formatArr
     },
-    postTestList: function() {
+    postTestList: function () {
       let formatArr = []
       if (this.posttestInfo && this.posttestInfo.length != 0) {
-        this.posttestInfo.forEach((e) => {
-          if (e.isCorrect === true) e.isCorrect = '正确'
-          else e.isCorrect = '错误'
-          formatArr.push(e)
+        this.posttestInfo.forEach((e, i) => {
+          if (e.isCorrect === true) formatArr.push({ ...this.posttestInfo[i], isCorrect: '正确' })
+          else formatArr.push({ ...this.posttestInfo[i], isCorrect: '错误' })
         })
-        return formatArr
-      } else return []
+      }
+      return formatArr
     },
   },
 
