@@ -8,10 +8,19 @@ import list from '../experiments/list.json'
 const experimentsRoutes = []
 
 list.forEach((experiment) => {
-  experimentsRoutes.push({
-    path: `/scene/${experiment.alias}`,
-    component: () => import(`../experiments/${experiment.alias}/Entry.vue`)
-  })
+  if (experiment.type == 'virtual') {
+    experimentsRoutes.push({
+      path: `/scene/${experiment.alias}`,
+      component: () => import(`../experiments/${experiment.alias}/Entry.vue`),
+    })
+  }
+  if (experiment.type == 'real') {
+    experimentsRoutes.push({
+      path: `/scene/${experiment.alias}`,
+      component: () => import('../views/RealExperiment.vue'),
+      props: { experimentName: experiment.name },
+    })
+  }
 })
 
 export default experimentsRoutes

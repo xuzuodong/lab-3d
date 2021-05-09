@@ -1,11 +1,19 @@
 [
     {
         "name": "酸碱中和",
-        "alias": "neutralization"
+        "alias": "neutralization",
+        "type":"virtual"
     }, 
 
     {
         "name": "摩擦力",
-        "alias": "friction"
-    }
+        "alias": "friction",
+        "type":"virtual"
+    },
+
+    {
+        "name":"胆矾与氢氧化钠反应",
+        "alias":"sodiumHydroxide",
+        "type":"real"
+        }
 ]
