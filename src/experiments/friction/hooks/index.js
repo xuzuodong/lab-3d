@@ -323,6 +323,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -363,6 +364,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         goto({ paragraph: '草地后' })
@@ -406,6 +408,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -449,6 +452,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -608,6 +612,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -652,6 +657,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -696,6 +702,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -858,6 +865,7 @@ export default [
             mass: storeData[0].mass,
             force: storeData[0].mass * matParam,
             square: areaParam,
+            mat: storeData[0].mat.substr(0, 2)
           }]
         })
         scene.mutate({ paramPanel: param })
@@ -902,12 +910,12 @@ export default [
     talk: 0,
     method: ({ next, scene, script }) => {
       const question = Dialog.create({
-        title: '关于物体之间接触面的粗糙程度与滑动摩擦力大小关系说法正确的是?( )',
+        title: '关于滑动摩擦力大小与物体之间接触面的粗糙程度关系说法正确的是？( )',
         options: {
           type: 'radio',
           model: '',
           items: [
-            { label: '接触面粗糙程度与滑动摩擦力大小无关', value: 'rough1' },
+            { label: '滑动摩擦力大小与接触面粗糙程度无关', value: 'rough1' },
             { label: '接触面越光滑，滑动摩擦力越小', value: 'rough2' },
             { label: '接触面越粗糙，滑动摩擦力越小', value: 'rough3' },
           ],
@@ -918,7 +926,7 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '恭喜你！回答正确！'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '接触面的粗糙程度与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
           //   type: 'BEHAVIOR_CHOICE',
           //   content: '接触面越光滑，滑动摩擦力越小',
           //   correctContent: '接触面越光滑，滑动摩擦力越小',
@@ -935,9 +943,9 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '很遗憾噢，正确答案为**接触面越光滑，滑动摩擦力越小**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '接触面的粗糙程度与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
           //   type: 'BEHAVIOR_CHOICE',
-          //   content: '接触面粗糙程度与滑动摩擦力大小无关',
+          //   content: '滑动摩擦力大小与接触面粗糙程度无关',
           //   correctContent: '接触面越光滑，滑动摩擦力越小',
           //   isCorrect: false,
           //   success: (res) => {
@@ -952,7 +960,7 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '很遗憾噢，正确答案为**接触面越光滑，滑动摩擦力越小**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '接触面的粗糙程度与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
           //   type: 'BEHAVIOR_CHOICE',
           //   content: '接触面越粗糙，滑动摩擦力越小',
           //   correctContent: '接触面越光滑，滑动摩擦力越小',
@@ -969,7 +977,7 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '请回答问题！正确答案为**接触面越光滑，滑动摩擦力越小**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '接触面的粗糙程度与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
           //   type: 'BEHAVIOR_CHOICE',
           //   content: '未选择选项',
           //   correctContent: '接触面越光滑，滑动摩擦力越小',
@@ -994,12 +1002,12 @@ export default [
     talk: 0,
     method: ({ next, scene, script }) => {
       const question = Dialog.create({
-        title: '关于物体之间接触面的面积大小与滑动摩擦力大小关系说法正确的是?( )',
+        title: '关于滑动摩擦力大小与物体之间接触面的面积大小关系说法正确的是？( )',
         options: {
           type: 'radio',
           model: '',
           items: [
-            { label: '接触面的面积大小与滑动摩擦力大小无关', value: 'area1' },
+            { label: '滑动摩擦力大小与接触面的面积大小无关', value: 'area1' },
             { label: '接触面越大，滑动摩擦力越小', value: 'area2' },
             { label: '接触面越小，滑动摩擦力越小', value: 'area3' },
           ],
@@ -1010,10 +1018,10 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '恭喜你！回答正确！'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体之间接触面的面积大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
           //   type: 'BEHAVIOR_CHOICE',
-          //   content: '接触面的面积大小与滑动摩擦力大小无关',
-          //   correctContent: '接触面的面积大小与滑动摩擦力大小无关',
+          //   content: '滑动摩擦力大小与接触面的面积大小无关',
+          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
           //   isCorrect: true,
           //   success: (res) => {
           //     console.log(res);
@@ -1024,13 +1032,13 @@ export default [
           // })
         }
         else if (value == 'area2') {
-          script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '很遗憾噢，正确答案为**接触面的面积大小与滑动摩擦力大小无关**。'
+          script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '很遗憾噢，正确答案为**滑动摩擦力大小与接触面的面积大小无关**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体之间接触面的面积大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
           //   type: 'BEHAVIOR_CHOICE',
           //   content: '接触面越大，滑动摩擦力越小',
-          //   correctContent: '接触面的面积大小与滑动摩擦力大小无关',
+          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
           //   isCorrect: false,
           //   success: (res) => {
           //     console.log(res);
@@ -1041,13 +1049,13 @@ export default [
           // })
         }
         else if (value == 'area3') {
-          script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '很遗憾噢，正确答案为**接触面的面积大小与滑动摩擦力大小无关**。'
+          script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '很遗憾噢，正确答案为**滑动摩擦力大小与接触面的面积大小无关**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体之间接触面的面积大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
           //   type: 'BEHAVIOR_CHOICE',
           //   content: '接触面越小，滑动摩擦力越小',
-          //   correctContent: '接触面的面积大小与滑动摩擦力大小无关',
+          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
           //   isCorrect: false,
           //   success: (res) => {
           //     console.log(res);
@@ -1058,13 +1066,13 @@ export default [
           // })
         }
         else {
-          script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '请回答问题！正确答案为**接触面的面积大小与滑动摩擦力大小无关**。'
+          script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '请回答问题！正确答案为**滑动摩擦力大小与接触面的面积大小无关**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体之间接触面的面积大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
           //   type: 'BEHAVIOR_CHOICE',
           //   content: '未选择选项',
-          //   correctContent: '接触面的面积大小与滑动摩擦力大小无关',
+          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
           //   isCorrect: false,
           //   success: (res) => {
           //     console.log(res);
@@ -1086,12 +1094,12 @@ export default [
     talk: 0,
     method: ({ next, scene, script }) => {
       const question = Dialog.create({
-        title: '关于物体给予接触面的压力大小与滑动摩擦力大小关系说法正确的是?( )',
+        title: '关于滑动摩擦力大小与物体对接触面的压力大小关系说法正确的是？( )',
         options: {
           type: 'radio',
           model: '',
           items: [
-            { label: '物体对接触面的压力大小与滑动摩擦力大小无关', value: 'pressure1' },
+            { label: '滑动摩擦力与物体对接触面的压力大小大小无关', value: 'pressure1' },
             { label: '物体对地面的压力越小，滑动摩擦力越小', value: 'pressure2' },
             { label: '物体对地面的压力越大，滑动摩擦力越小', value: 'pressure3' },
           ],
@@ -1102,10 +1110,10 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '恭喜你！回答正确！'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体给予接触面的压力大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
           //   type: 'BEHAVIOR_CHOICE',
-          //   content: '物体越轻，对地面的压力越小，滑动摩擦力越小',
-          //   correctContent: '物体越轻，对地面的压力越小，滑动摩擦力越小',
+          //   content: '物体对地面的压力越小，滑动摩擦力越小',
+          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
           //   isCorrect: true,
           //   success: (res) => {
           //     console.log(res);
@@ -1119,10 +1127,10 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '很遗憾噢，正确答案为**物体对地面的压力越小，滑动摩擦力越小**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体给予接触面的压力大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
           //   type: 'BEHAVIOR_CHOICE',
-          //   content: '物体给予接触面的压力大小与滑动摩擦力大小无关',
-          //   correctContent: '物体越轻，对地面的压力越小，滑动摩擦力越小',
+          //   content: '滑动摩擦力与物体对接触面的压力大小大小无关',
+          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
           //   isCorrect: false,
           //   success: (res) => {
           //     console.log(res);
@@ -1136,10 +1144,10 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '很遗憾噢，正确答案为**物体对地面的压力越小，滑动摩擦力越小**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体给予接触面的压力大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
           //   type: 'BEHAVIOR_CHOICE',
-          //   content: '物体越重，对地面的压力越大，滑动摩擦力越小',
-          //   correctContent: '物体越轻，对地面的压力越小，滑动摩擦力越小',
+          //   content: '物体对地面的压力越大，滑动摩擦力越小',
+          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
           //   isCorrect: false,
           //   success: (res) => {
           //     console.log(res);
@@ -1153,10 +1161,10 @@ export default [
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '请回答问题！正确答案为**物体对地面的压力越小，滑动摩擦力越小**。'
           // store.dispatch('user/submitBehavior', {
           //   kexperimentId: kexperimentId,
-          //   name: '物体给予接触面的压力大小与滑动摩擦力大小关系',
+          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
           //   type: 'BEHAVIOR_CHOICE',
           //   content: '未选择选项',
-          //   correctContent: '物体越轻，对地面的压力越小，滑动摩擦力越小',
+          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
           //   isCorrect: false,
           //   success: (res) => {
           //     console.log(res);

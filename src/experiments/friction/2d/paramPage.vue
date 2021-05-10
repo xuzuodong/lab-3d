@@ -23,6 +23,12 @@
             </q-badge>
           </div>
           <div>
+            <q-badge class="text-body1 bg-secondary text-white">接触面材质：</q-badge>
+            <q-badge class="text-body1 bg-secondary text-white float-right">
+              {{ information[0].mat }}
+            </q-badge>
+          </div>
+          <div>
             <q-badge class="text-body1 bg-secondary text-white">摩擦系数（μ）：</q-badge>
             <q-badge class="text-body1 bg-secondary text-white float-right">
               {{ information[0].coefficient }}
