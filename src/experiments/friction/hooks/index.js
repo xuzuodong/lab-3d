@@ -131,6 +131,16 @@ export default [
     paragraph: '原因分析',
     talk: 0,
     method: ({ next }) => {
+      store.dispatch('user/startExperiment', {
+        experimentId: 9,
+        success: (res) => {
+          kexperimentId = res.kexperimentId
+          console.log(kexperimentId);
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
       next()
     }
   },
@@ -145,59 +155,34 @@ export default [
         option2: o2,
         option3: o3,
       }).onOk(async () => {
-        console.log(storeOption);
+        let paragraphName
         if (storeOption[storeOption.length - 1] == 'op1') {
           experAssume = 1
-          goto({ paragraph: '改变接触面粗糙程度' })
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '如何降低摩擦力',
-          //   type: 'BEHAVIOR_ASSUMPTION',
-          //   content: '认为【改变接触面粗糙程度】可以降低摩擦力',
-          //   correctContent: '认为【改变接触面粗糙程度】可以降低摩擦力',
-          //   isCorrect: '',
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          paragraphName = '改变接触面粗糙程度'
+          goto({ paragraph: paragraphName })
         } else if (storeOption[storeOption.length - 1] == 'op2') {
           experAssume = 2
-          goto({ paragraph: '改变与接触面的面积' })
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '如何降低摩擦力',
-          //   type: 'BEHAVIOR_ASSUMPTION',
-          //   content: '认为【改变与接触面的面积】可以降低摩擦力',
-          //   correctContent: '认为【改变与接触面的面积】可以降低摩擦力',
-          //   isCorrect: '',
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          paragraphName = '改变与接触面的面积'
+          goto({ paragraph: paragraphName })
         } else if (storeOption[storeOption.length - 1] == 'op3') {
           experAssume = 3
-          goto({ paragraph: '改变物体的质量' })
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '如何降低摩擦力',
-          //   type: 'BEHAVIOR_ASSUMPTION',
-          //   content: '认为【改变物体的质量】可以降低摩擦力',
-          //   correctContent: '认为【改变物体的质量】可以降低摩擦力',
-          //   isCorrect: '',
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          paragraphName = '改变物体的质量'
+          goto({ paragraph: paragraphName })
         }
+        store.dispatch('user/submitBehavior', {
+          kexperimentId: kexperimentId,
+          name: '如何减小滑动摩擦力',
+          type: 'BEHAVIOR_ASSUMPTION',
+          content: '认为【' + paragraphName + '】可以减小滑动摩擦力',
+          correctContent: '认为【' + paragraphName + '】可以减小滑动摩擦力',
+          isCorrect: '',
+          success: (res) => {
+            console.log(res);
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
       })
       scene.mutate({ assumePanel: assume })
     },
@@ -232,59 +217,75 @@ export default [
           script.paragraphs.find(e => e.id == judgeResult).talks[0] = '变量调整完毕！我看到地面材质变成**' + storeData[0].mat + '**，货物翻转为**' + storeData[0].area + '**，对接触面的压力变成**' + storeData[0].mass + '**N了。'
           goto({ paragraph: judgeResult })
           o1 = true
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '将地面改变为' + judgeResult,
-          //   correctContent: '改变接触面粗糙程度中选择了【' + judgeResult + '】',
-          //   isCorrect: true,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变接触面粗糙程度',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将地面改变为' + judgeResult,
+            correctContent: '改变接触面粗糙程度中选择了【' + judgeResult + '】',
+            isCorrect: true,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
         else if (judgeResult == '侧躺放置' || judgeResult == '平躺放置' || judgeResult == '竖向放置') {
           cue()
           next()
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: judgeResult,
-          //   correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变接触面粗糙程度',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将物体放置方式改变为' + judgeResult,
+            correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
         else if (judgeResult == 250 || judgeResult == 500 || judgeResult == 750 || judgeResult == 1000) {
           cue()
           gravity = -1
           next()
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '将物体的质量改变为' + judgeResult + 'kg',
-          //   correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变接触面粗糙程度',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将物体的质量改变为' + judgeResult + 'kg',
+            correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
-        else if (judgeResult == 'goback') next()
+        else if (judgeResult == 'goback') {
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变接触面粗糙程度',
+            type: 'BEHAVIOR_CHOICE',
+            content: '改变了多个变量，不符合控制变量法',
+            correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
+          next()
+        }
         else next()
         scene.backToStart()
         script.paragraphs.find(e => e.id == '改变接触面粗糙程度').talks[1] = '实验师可以继续通过控制地面材质来探索它们的关系！'
@@ -517,20 +518,20 @@ export default [
         if (judgeResult == '荒地' || judgeResult == '草地' || judgeResult == '木板' || judgeResult == '冰面') {
           cue()
           next()
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '将地面改变为' + judgeResult,
-          //   correctContent: '改变接触面粗糙程度中选择了【' + judgeResult + '】',
-          //   isCorrect: true,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变与接触面的面积',
+            type: 'BEHAVIOR_CHOICE',
+            content: judgeResult,
+            correctContent: '在该选项中，应该选择改变物体与接触面的面积的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
         else if (judgeResult == '侧躺放置' || judgeResult == '平躺放置' || judgeResult == '竖向放置') {
           script.paragraphs.find(e => e.id == judgeResult).talks[0] = '变量调整完毕！我看到地面材质变成**' + storeData[0].mat + '**，货物翻转为**' + storeData[0].area + '**，对接触面的压力变成**' + storeData[0].mass + '**N了。'
@@ -538,45 +539,61 @@ export default [
           count2++
           goto({ paragraph: judgeResult })
           o2 = true
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: judgeResult,
-          //   correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变与接触面的面积',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将物体摆放为' + judgeResult,
+            correctContent: '改变物体与接触面的面积中选择了【' + judgeResult + '】',
+            isCorrect: true,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
         else if (judgeResult == 250 || judgeResult == 500 || judgeResult == 750 || judgeResult == 1000) {
           script.paragraphs.find(e => e.id == '轻松拉货').talks[0] = '变量调整完毕！我看到地面材质变成**' + storeData[0].mat + '**，货物翻转为**' + storeData[0].area + '**，对接触面的压力变成**' + storeData[0].mass + '**N了。'
           cue()
           gravity = -2
           next()
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '将物体的质量改变为' + judgeResult + 'kg',
-          //   correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变与接触面的面积',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将物体的质量改变为' + judgeResult + 'kg',
+            correctContent: '在该选项中，应该选择改变物体与接触面的面积的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
-        else if (judgeResult == 'goback') next()
+        else if (judgeResult == 'goback') {
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变与接触面的面积',
+            type: 'BEHAVIOR_CHOICE',
+            content: '改变了多个变量，不符合控制变量法',
+            correctContent: '在该选项中，应该选择改变物体与接触面的面积的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
+          next()
+        }
         else next()
         scene.backToStart()
-        script.paragraphs.find(e => e.id == '改变与接触面的面积').talks[1] = '实验师可以继续通过变换货物放置位置来探索它们的关系！'
+        script.paragraphs.find(e => e.id == '改变与接触面的面积').talks[1] = '实验师可以继续通过变换货物放置方式来探索它们的关系！'
       })
       scene.mutate({ testPanel: test })
     },
@@ -770,39 +787,39 @@ export default [
           script.paragraphs.find(e => e.id == judgeResult).talks[0] = '变量调整完毕！我看到地面材质变成**' + storeData[0].mat + '**，货物翻转为**' + storeData[0].area + '**，对接触面的压力变成**' + storeData[0].mass + '**N了。'
           cue()
           next()
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '将地面改变为' + judgeResult,
-          //   correctContent: '改变接触面粗糙程度中选择了【' + judgeResult + '】',
-          //   isCorrect: true,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变物体的质量',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将地面改变为' + judgeResult,
+            correctContent: '在该选项中，应该选择改变物体质量的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
         else if (judgeResult == '侧躺放置' || judgeResult == '平躺放置' || judgeResult == '竖向放置') {
           script.paragraphs.find(e => e.id == judgeResult).talks[0] = '变量调整完毕！我看到地面材质变成**' + storeData[0].mat + '**，货物翻转为**' + storeData[0].area + '**，对接触面的压力变成**' + storeData[0].mass + '**N了。'
           cue()
           next()
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: judgeResult,
-          //   correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变物体的质量',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将物体放置方式改变为' + judgeResult,
+            correctContent: '在该选项中，应该选择改变物体质量的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
         else if (judgeResult == 250 || judgeResult == 500 || judgeResult == 750 || judgeResult == 1000) {
           count3++
@@ -811,22 +828,38 @@ export default [
           goto({ paragraph: '轻松拉货' })
           changeShape(scene)
           o3 = true
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '改变接触面粗糙程度',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '将物体的质量改变为' + judgeResult + 'kg',
-          //   correctContent: '在该选项中，应该选择改变地面粗糙程度的选项',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变物体的质量',
+            type: 'BEHAVIOR_CHOICE',
+            content: '将物体的质量改变为' + judgeResult + 'kg',
+            correctContent: '改变物体的质量',
+            isCorrect: true,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
         }
-        else if (judgeResult == 'goback') next()
+        else if (judgeResult == 'goback') {
+          store.dispatch('user/submitBehavior', {
+            kexperimentId: kexperimentId,
+            name: '改变物体的质量',
+            type: 'BEHAVIOR_CHOICE',
+            content: '改变了多个变量，不符合控制变量法',
+            correctContent: '在该选项中，应该选择改变物体的质量的选项',
+            isCorrect: false,
+            success: (res) => {
+              console.log(res);
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
+          next()
+        }
         else next()
         scene.backToStart()
         script.paragraphs.find(e => e.id == '改变物体的质量').talks[1] = '实验师可以继续通过调整压力大小来探索它们的关系！'
@@ -922,74 +955,42 @@ export default [
         },
         persistent: true
       }).onOk((value) => {
+        let isTrue
+        let choiceContent
         if (value == 'rough2') {
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '恭喜你！回答正确！'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '接触面越光滑，滑动摩擦力越小',
-          //   correctContent: '接触面越光滑，滑动摩擦力越小',
-          //   isCorrect: true,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = true
+          choiceContent = '接触面越光滑，滑动摩擦力越小'
         }
         else if (value == 'rough1') {
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '很遗憾噢，正确答案为**接触面越光滑，滑动摩擦力越小**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '滑动摩擦力大小与接触面粗糙程度无关',
-          //   correctContent: '接触面越光滑，滑动摩擦力越小',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '滑动摩擦力大小与接触面粗糙程度无关'
         }
         else if (value == 'rough3') {
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '很遗憾噢，正确答案为**接触面越光滑，滑动摩擦力越小**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '接触面越粗糙，滑动摩擦力越小',
-          //   correctContent: '接触面越光滑，滑动摩擦力越小',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '接触面越粗糙，滑动摩擦力越小'
         }
         else {
           script.paragraphs.find(e => e.id == '总结任务1').talks[1] = '请回答问题！正确答案为**接触面越光滑，滑动摩擦力越小**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '未选择选项',
-          //   correctContent: '接触面越光滑，滑动摩擦力越小',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '未选择选项'
         }
+        store.dispatch('user/submitBehavior', {
+          kexperimentId: kexperimentId,
+          name: '滑动摩擦力大小与物体之间接触面的粗糙程度关系',
+          type: 'BEHAVIOR_CHOICE',
+          content: choiceContent,
+          correctContent: '接触面越光滑，滑动摩擦力越小',
+          isCorrect: isTrue,
+          success: (res) => {
+            console.log(res);
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
         next()
       })
       scene.mutate({ questionPanel: question })
@@ -1014,74 +1015,42 @@ export default [
         },
         persistent: true,
       }).onOk((value) => {
+        let isTrue
+        let choiceContent
         if (value == 'area1') {
           script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '恭喜你！回答正确！'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '滑动摩擦力大小与接触面的面积大小无关',
-          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
-          //   isCorrect: true,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = true
+          choiceContent = '滑动摩擦力大小与接触面的面积大小无关'
         }
         else if (value == 'area2') {
           script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '很遗憾噢，正确答案为**滑动摩擦力大小与接触面的面积大小无关**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '接触面越大，滑动摩擦力越小',
-          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '接触面越大，滑动摩擦力越小'
         }
         else if (value == 'area3') {
           script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '很遗憾噢，正确答案为**滑动摩擦力大小与接触面的面积大小无关**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '接触面越小，滑动摩擦力越小',
-          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '接触面越小，滑动摩擦力越小'
         }
         else {
           script.paragraphs.find(e => e.id == '总结任务2').talks[1] = '请回答问题！正确答案为**滑动摩擦力大小与接触面的面积大小无关**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '未选择选项',
-          //   correctContent: '滑动摩擦力大小与接触面的面积大小无关',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '未选择选项'
         }
+        store.dispatch('user/submitBehavior', {
+          kexperimentId: kexperimentId,
+          name: '滑动摩擦力大小与物体之间接触面的面积大小关系',
+          type: 'BEHAVIOR_CHOICE',
+          content: choiceContent,
+          correctContent: '滑动摩擦力大小与接触面的面积大小无关',
+          isCorrect: isTrue,
+          success: (res) => {
+            console.log(res);
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
         next()
       })
       scene.mutate({ questionPanel: question })
@@ -1106,77 +1075,61 @@ export default [
         },
         persistent: true,
       }).onOk((value) => {
+        let isTrue
+        let choiceContent
         if (value == 'pressure2') {
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '恭喜你！回答正确！'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '物体对地面的压力越小，滑动摩擦力越小',
-          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
-          //   isCorrect: true,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = true
+          choiceContent = '物体对地面的压力越小，滑动摩擦力越小'
         }
         else if (value == 'pressure1') {
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '很遗憾噢，正确答案为**物体对地面的压力越小，滑动摩擦力越小**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '滑动摩擦力与物体对接触面的压力大小大小无关',
-          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '滑动摩擦力与物体对接触面的压力大小大小无关'
         }
         else if (value == 'pressure3') {
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '很遗憾噢，正确答案为**物体对地面的压力越小，滑动摩擦力越小**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '物体对地面的压力越大，滑动摩擦力越小',
-          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '物体对地面的压力越大，滑动摩擦力越小'
         }
         else {
           script.paragraphs.find(e => e.id == '总结任务3').talks[1] = '请回答问题！正确答案为**物体对地面的压力越小，滑动摩擦力越小**。'
-          // store.dispatch('user/submitBehavior', {
-          //   kexperimentId: kexperimentId,
-          //   name: '滑动摩擦力大小与物体对接触面的压力大小关系',
-          //   type: 'BEHAVIOR_CHOICE',
-          //   content: '未选择选项',
-          //   correctContent: '物体对地面的压力越小，滑动摩擦力越小',
-          //   isCorrect: false,
-          //   success: (res) => {
-          //     console.log(res);
-          //   },
-          //   failure: (res) => {
-          //     console.log(res)
-          //   },
-          // })
+          isTrue = false
+          choiceContent = '未选择选项'
         }
+        store.dispatch('user/submitBehavior', {
+          kexperimentId: kexperimentId,
+          name: '滑动摩擦力大小与物体对接触面的压力大小关系',
+          type: 'BEHAVIOR_CHOICE',
+          content: choiceContent,
+          correctContent: '物体对地面的压力越小，滑动摩擦力越小',
+          isCorrect: isTrue,
+          success: (res) => {
+            console.log(res);
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
         next()
       })
       scene.mutate({ questionPanel: question })
+    },
+  },
+  {
+    paragraph: '结局',
+    talk: 0,
+    method: ({ next }) => {
+      store.dispatch('user/finishKexperiment', {
+        kexperimentId: kexperimentId,
+        success: (res) => {
+          console.log(res);
+        },
+        failure: (res) => {
+          console.log(res)
+        },
+      })
+      next()
     },
   },
 ]
