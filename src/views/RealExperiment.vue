@@ -1,20 +1,22 @@
 <template>
   <div class="container">
-    <h6 class="q-my-xs">【{{ experimentName }}】实时实验与评价</h6>
-    <vue-plyr class="q-my-md" loading>
+    <h6 class="q-my-sm">【{{ experimentName }}】实时实验与评价</h6>
+    <vue-plyr v-if="liveBegin">
       <video controls crossorigin playsinline>
         <source size="720" :src="liveUrl" type="video/mp4" />
       </video>
     </vue-plyr>
 
-    <q-circular-progress
-      indeterminate
-      size="75px"
-      :thickness="0.6"
-      color="lime"
-      center-color="grey-8"
-      class="q-ma-md"
-    />
+    <div v-else class="flex flex-center bg-loading">
+      <q-circular-progress
+        indeterminate
+        size="75px"
+        :thickness="0.6"
+        color="lime"
+        center-color="grey-8"
+        class="q-ma-md"
+      />
+    </div>
 
     <q-table :data="liveList" :columns="liveColumns" row-key="name" class="q-mt-lg">
       <template v-slot:body="props">
@@ -70,7 +72,18 @@ export default {
       liveList: [],
     }
   },
+  computed: {
+    liveBegin: function () {
+      if (this.liveUrl != '') return true
+      else return false
+    },
+  },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.bg-loading {
+  background-color: black;
+  padding: 22% 0;
+}
+</style>
