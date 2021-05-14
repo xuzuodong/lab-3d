@@ -1,11 +1,8 @@
 <template>
   <div class="container">
-    <h6 class="q-my-sm">【{{ experimentName }}】实时实验与评价</h6>
-    <vue-plyr v-if="liveBegin">
-      <video controls crossorigin playsinline>
-        <source size="720" :src="liveUrl" type="video/mp4" />
-      </video>
-    </vue-plyr>
+    <h6 class="q-my-xs">【{{ experimentName }}】实时实验与评价</h6>
+
+    <video v-if="liveBegin" id="videoElement" controls autoplay muted width="600" height="450"></video>
 
     <div v-else class="flex flex-center bg-loading">
       <q-circular-progress
@@ -52,15 +49,16 @@
 </template>
 
 <script>
-import vuePlyr from 'vue-plyr'
+import flvjs from 'flv.js/dist/flv.min.js'
+import { mapState } from 'vuex'
 export default {
-  components: { vuePlyr },
+  // components: { flvjs },
   props: {
     experimentName: String,
   },
   data() {
     return {
-      liveUrl: '',
+      // liveUrl: `http://play-stream.lab3d.site/app/stream.flv?auth_key=${this.userInfo.token}`,
       liveColumns: [
         { name: 'title', required: true, label: '实验行为操作', align: 'center' },
         { name: 'time', align: 'center', label: '动作时间', field: 'time' },
@@ -76,7 +74,22 @@ export default {
     liveBegin: function () {
       if (this.liveUrl != '') return true
       else return false
-    },
+    }
+  },
+  mounted() {
+    if (flvjs.isSupported()) {
+      let videoElement = document.getElementById('videoElement')
+      let flvPlayer = flvjs.createPlayer({
+        type: 'flv',
+        isLive: true,
+        hasAudio: false,
+        url: 'http://play-stream.lab3d.site/app/stream.flv',
+      })
+      console.log(flvPlayer, 'flv对象')
+      flvPlayer.attachMediaElement(videoElement)
+      flvPlayer.load()
+      flvPlayer.play()
+    }
   },
 }
 </script>
