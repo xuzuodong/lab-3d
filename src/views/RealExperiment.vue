@@ -1,8 +1,16 @@
 <template>
   <div class="container">
-    <h6 class="q-my-xs">【{{ experimentName }}】实时实验与评价</h6>
+    <h6 class="q-my-lg">【{{ experimentName }}】实时实验与评价</h6>
 
-    <video v-if="liveBegin" id="videoElement" controls autoplay muted width="600" height="450"></video>
+    <div v-if="liveBegin">
+      <video
+        id="videoElement"
+        controls
+        autoplay
+        muted
+        style="width: 100%; height: 100%; object-fit: fill; margin: auto"
+      ></video>
+    </div>
 
     <div v-else class="flex flex-center bg-loading">
       <q-circular-progress
@@ -50,15 +58,12 @@
 
 <script>
 import flvjs from 'flv.js/dist/flv.min.js'
-import { mapState } from 'vuex'
 export default {
-  // components: { flvjs },
   props: {
     experimentName: String,
   },
   data() {
     return {
-      // liveUrl: `http://play-stream.lab3d.site/app/stream.flv?auth_key=${this.userInfo.token}`,
       liveColumns: [
         { name: 'title', required: true, label: '实验行为操作', align: 'center' },
         { name: 'time', align: 'center', label: '动作时间', field: 'time' },
@@ -74,7 +79,7 @@ export default {
     liveBegin: function () {
       if (this.liveUrl != '') return true
       else return false
-    }
+    },
   },
   mounted() {
     if (flvjs.isSupported()) {
