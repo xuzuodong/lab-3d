@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h6 class="q-my-lg">【{{ experimentName }}】实时实验与评价</h6>
+    <h6 class="q-my-lg" @click="sendmsg">【{{ experimentName }}】实时实验与评价</h6>
 
     <div v-if="liveBegin">
       <video
@@ -59,6 +59,7 @@
 <script>
 import flvjs from 'flv.js/dist/flv.min.js'
 import { mapActions } from 'vuex'
+import TestVue from './Test'
 export default {
   props: {
     experimentName: String,
@@ -76,6 +77,12 @@ export default {
       liveList: [],
       kexperimentId: '',
       // liveUrl: '',
+      path: 'ws://47.98.192.17:8002',
+      socket: '',
+      videoElement: '',
+      flvPlayer: '',
+      playUrl: '',
+      experimentId: '',
     }
   },
   computed: {
@@ -89,26 +96,41 @@ export default {
     this.selectAllExperiments({
       success: (experiments) => {
         console.log(experiments)
-        // this.startExperiment({
-        //   experimentId: experiments.find((e) => e.name == this.experimentName).id,
-        //   success: (res) => {
-        //     this.kexperimentId = res.kexperimentId
-        //     console.log(this.kexperimentId)
-        //     this.getStreamingDomainName({
-        //       kexperimentId: res.kexperimentId,
-        //       success: (res) => {
-        //         console.log(res)
-        //         this.liveUrl = res.playUrl
-        //       },
-        //       failure: (res) => {
-        //         console.log(res)
-        //       },
-        //     })
-        //   },
-        //   failure: (res) => {
-        //     console.log(res)
-        //   },
-        // })
+        this.experimentId = experiments.find((e) => e.name == this.experimentName).id
+        this.startExperiment({
+          experimentId: experiments.find((e) => e.name == this.experimentName).id,
+          success: (res) => {
+            this.kexperimentId = res.kexperimentId
+            console.log(this.kexperimentId)
+            this.getStreamingDomainName({
+              kexperimentId: res.kexperimentId,
+              success: (res) => {
+                console.log(res)
+                this.playUrl = res.url
+                this.send()
+                if (flvjs.isSupported()) {
+                  this.videoElement = document.getElementById('videoElement')
+                  this.flvPlayer = flvjs.createPlayer({
+                    type: 'flv',
+                    isLive: true,
+                    hasAudio: false,
+                    url: res.playUrl,
+                  })
+                  console.log(this.flvPlayer, 'flv对象')
+                  // this.flvPlayer.attachMediaElement(this.videoElement)
+                  // this.flvPlayer.load()
+                  // this.flvPlayer.play()
+                }
+              },
+              failure: (res) => {
+                console.log(res)
+              },
+            })
+          },
+          failure: (res) => {
+            console.log(res)
+          },
+        })
       },
       failure: (res) => {
         this.failure = true
@@ -117,23 +139,71 @@ export default {
     })
   },
   mounted() {
-    if (flvjs.isSupported()) {
-      let videoElement = document.getElementById('videoElement')
-      let flvPlayer = flvjs.createPlayer({
-        type: 'flv',
-        isLive: true,
-        hasAudio: false,
-        url: 'http://play-stream.lab3d.site/app/stream.flv',
-      })
-      // console.log(flvPlayer, 'flv对象')
-      flvPlayer.attachMediaElement(videoElement)
-      flvPlayer.load()
-      flvPlayer.play()
-    }
+    this.init()
   },
   methods: {
     ...mapActions('user', ['startExperiment', 'getEquipment', 'getStreamingDomainName']),
-    ...mapActions('experiment', ['selectAllExperiments']),
+    ...mapActions('experiment', ['selectAllExperiments', 'selectChoiceQuestion']),
+    init: function () {
+      if (typeof WebSocket === 'undefined') {
+        alert('您的浏览器不支持socket')
+      } else {
+        // 实例化socket
+        this.socket = new WebSocket(this.path)
+        // 监听socket连接
+        this.socket.onopen = this.open
+        // 监听socket错误信息
+        this.socket.onerror = this.error
+        // 监听socket消息
+        this.socket.onmessage = this.getMessage
+      }
+    },
+    postTest(experimentId, choiceType) {
+      this.selectChoiceQuestion({
+        experimentId,
+        choiceType: choiceType,
+        success: (res) => {
+          this.$q
+            .dialog({
+              component: TestVue,
+              parent: this,
+              questionList: res,
+              experimentId: experimentId,
+              type: choiceType,
+            })
+            .onOk(() => {
+              // this.loadKexperimentEvaluation()
+              console.log('ok')
+            })
+        },
+        failure: (error) => {
+          console.log(error)
+        },
+      })
+    },
+    open: function () {
+      console.log('socket连接成功')
+    },
+    error: function () {
+      console.log('连接错误')
+    },
+    getMessage: function (msg) {
+      console.log(msg.data)
+    },
+    send: function () {
+      this.socket.send(this.kexperimentId)
+    },
+    close: function () {
+      console.log('socket已经关闭')
+    },
+    sendmsg() {
+      this.flvPlayer.attachMediaElement(this.videoElement)
+      this.flvPlayer.load()
+      this.flvPlayer.play()
+    },
+  },
+  destroyed() {
+    this.socket.onclose = this.close
   },
 }
 </script>
