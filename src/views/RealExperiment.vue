@@ -58,6 +58,7 @@
 
 <script>
 import flvjs from 'flv.js/dist/flv.min.js'
+import { mapActions } from 'vuex'
 export default {
   props: {
     experimentName: String,
@@ -73,6 +74,8 @@ export default {
         { name: 'button', align: 'center', label: '相关知识链接', field: 'button' },
       ],
       liveList: [],
+      kexperimentId: '',
+      // liveUrl: '',
     }
   },
   computed: {
@@ -80,6 +83,38 @@ export default {
       if (this.liveUrl != '') return true
       else return false
     },
+  },
+  created() {
+    console.log(this.experimentName)
+    this.selectAllExperiments({
+      success: (experiments) => {
+        console.log(experiments)
+        // this.startExperiment({
+        //   experimentId: experiments.find((e) => e.name == this.experimentName).id,
+        //   success: (res) => {
+        //     this.kexperimentId = res.kexperimentId
+        //     console.log(this.kexperimentId)
+        //     this.getStreamingDomainName({
+        //       kexperimentId: res.kexperimentId,
+        //       success: (res) => {
+        //         console.log(res)
+        //         this.liveUrl = res.playUrl
+        //       },
+        //       failure: (res) => {
+        //         console.log(res)
+        //       },
+        //     })
+        //   },
+        //   failure: (res) => {
+        //     console.log(res)
+        //   },
+        // })
+      },
+      failure: (res) => {
+        this.failure = true
+        console.log(res)
+      },
+    })
   },
   mounted() {
     if (flvjs.isSupported()) {
@@ -90,11 +125,15 @@ export default {
         hasAudio: false,
         url: 'http://play-stream.lab3d.site/app/stream.flv',
       })
-      console.log(flvPlayer, 'flv对象')
+      // console.log(flvPlayer, 'flv对象')
       flvPlayer.attachMediaElement(videoElement)
       flvPlayer.load()
       flvPlayer.play()
     }
+  },
+  methods: {
+    ...mapActions('user', ['startExperiment', 'getEquipment', 'getStreamingDomainName']),
+    ...mapActions('experiment', ['selectAllExperiments']),
   },
 }
 </script>

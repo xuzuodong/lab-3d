@@ -317,6 +317,48 @@ const actions = {
       },
     })
   },
+
+  getEquipment({ commit }, { experimentId, success, failure }) {
+    userApi.getEquipment({
+      experimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getStreamingDomainName({ commit }, { kexperimentId, success, failure }) {
+    userApi.getStreamingDomainName({
+      kexperimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getRealExperimentEvaluation({ commit }, { kexperimentId, success, failure }) {
+    userApi.getRealExperimentEvaluation({
+      kexperimentId,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
 }
 
 export default { namespaced: true, state, getters, actions, mutations }

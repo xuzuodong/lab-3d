@@ -206,4 +206,37 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
+
+  getEquipment({ experimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getEquipment',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { experimentId },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getStreamingDomainName({ kexperimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getStreamingDomainName',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getRealExperimentEvaluation({ kexperimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getRealExperimentEvaluation',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
 }
