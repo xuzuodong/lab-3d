@@ -91,7 +91,8 @@
                 </q-tab-panel>
 
                 <q-tab-panel name="tests">
-                  <KexperimentDetailsTestsVue :pretestInfo="pretestInfo" :posttestInfo="posttestInfo" />
+                  <KexperimentDetailsTestsVue :testTitle="'前测选项解析'" :testInfo="pretestInfo" />
+                  <KexperimentDetailsTestsVue :testTitle="'后测选项解析'" :testInfo="posttestInfo" />
                 </q-tab-panel>
               </q-tab-panels>
             </q-card>

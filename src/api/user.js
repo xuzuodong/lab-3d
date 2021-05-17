@@ -195,7 +195,7 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
-  
+
   updateUserInfo({ passWord, phoneNumber, realName, sex, grade, school, success, failure }) {
     axios({
       method: 'post',
