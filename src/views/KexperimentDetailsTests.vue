@@ -1,7 +1,7 @@
 <template>
   <div>
     <h6 class="q-my-sm">- 前测选项解析 -</h6>
-    <q-table :data="preTestList" :columns="testColumns" row-key="name">
+    <q-table :data="preTestList" :columns="testColumns" :rows-per-page-options="[0]" row-key="name">
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
@@ -83,7 +83,7 @@ export default {
     }
   },
   computed: {
-    preTestList: function() {
+    preTestList: function () {
       let formatArr = []
       if (this.pretestInfo && this.pretestInfo.length != 0) {
         this.pretestInfo.forEach((e) => {
@@ -94,7 +94,7 @@ export default {
         return formatArr
       } else return []
     },
-    postTestList: function() {
+    postTestList: function () {
       let formatArr = []
       if (this.posttestInfo && this.posttestInfo.length != 0) {
         this.posttestInfo.forEach((e) => {

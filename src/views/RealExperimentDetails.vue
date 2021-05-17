@@ -179,7 +179,7 @@ export default {
 
   methods: {
     ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment', 'selectChoiceQuestion']),
-    ...mapActions('user', ['getEquipment']),
+    ...mapActions('user', ['getEquipment', 'startExperiment']),
 
     toggleLike() {
       if (this.userInfo) {
@@ -215,10 +215,23 @@ export default {
       this.selectExperimentByAlias({
         alias: this.$route.params.alias,
         success: (experiment) => {
+          this.startExperiment({
+            experimentId: experiment.id,
+            success: (res) => {
+              this.kexperimentId = res.kexperimentId
+              console.log(this.kexperimentId)
+              localStorage.setItem('kexperimentId', res.kexperimentId)
+              console.log(localStorage.getItem('kexperimentId'))
+            },
+            failure: (res) => {
+              console.log(res)
+            },
+          })
           this.getEquipment({
             experimentId: experiment.id,
             success: (res) => {
               // this.steps = res
+
               console.log(res)
             },
             failure: (res) => {

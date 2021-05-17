@@ -1,11 +1,11 @@
 <template>
   <div class="" style="min-height: calc(100vh - 105px)">
     <div class="row">
-      <div class="col-12 text-h5 text-center">“{{ experimentName }}”实验结果</div>
+      <div class="col-12 text-h5 text-center q-my-md">“{{ experimentName }}”实验结果</div>
     </div>
-    <div class="row q-my-xl">
-      <div class="col-12 col-sm"></div>
-      <div class="col-12 col-sm"></div>
+    <div class="row q-my-xm">
+      <div class="col-10"></div>
+      <q-btn label="导出报告" color="primary" class="text-h7" @click="exportReport" />
     </div>
     <div class="row justify-center">
       <q-card flat class="col-5">
@@ -87,9 +87,7 @@
 
               <q-tab-panels v-model="tab" animated>
                 <q-tab-panel name="behaviors">
-                  <KexperimentDetailsBehaviorsVue
-                    :behaviorInfo="behaviorInfo"
-                  ></KexperimentDetailsBehaviorsVue>
+                  <KexperimentDetailsBehaviorsVue :behaviorInfo="behaviorInfo" />
                 </q-tab-panel>
 
                 <q-tab-panel name="tests">
@@ -154,12 +152,12 @@ export default {
       }
     },
     countPreTest: function () {
-        const total = this.pretestInfo.length
-        let countTrue = 0
-        this.pretestInfo.forEach((e) => {
-          if (e.isCorrect == true) countTrue++
-        })
-        return { total, countTrue }
+      const total = this.pretestInfo.length
+      let countTrue = 0
+      this.pretestInfo.forEach((e) => {
+        if (e.isCorrect == true) countTrue++
+      })
+      return { total, countTrue }
     },
     countPostTest: function () {
       const total = this.posttestInfo.length
@@ -224,6 +222,10 @@ export default {
           console.log(error)
         },
       })
+    },
+
+    exportReport() {
+      document.execCommand('print')
     },
   },
 }

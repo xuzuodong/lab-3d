@@ -1,7 +1,14 @@
 <template>
   <div id="KexperimentDetailsBehaviors">
     <div class="text-h6 q-my-md">—过程复盘—</div>
-    <q-table :data="behaviorList" :columns="columns" :loading="loading" row-key="behaviorName" flat>
+    <q-table
+      :data="behaviorList"
+      :columns="columns"
+      :loading="loading"
+      :rows-per-page-options="[0]"
+      row-key="behaviorName"
+      flat
+    >
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="behaviorName" :props="props">

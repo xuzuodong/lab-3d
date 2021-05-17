@@ -9,6 +9,7 @@
         autoplay
         muted
         style="width: 100%; height: 100%; object-fit: fill; margin: auto"
+        @ended="startPosttest"
       ></video>
     </div>
 
@@ -23,7 +24,7 @@
       />
     </div>
 
-    <q-table :data="liveList" :columns="liveColumns" row-key="name" class="q-mt-lg">
+    <!-- <q-table :data="liveList" :columns="liveColumns" row-key="name" class="q-mt-lg">
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
@@ -52,7 +53,7 @@
           </q-td>
         </q-tr>
       </template>
-    </q-table>
+    </q-table> -->
   </div>
 </template>
 
@@ -66,15 +67,15 @@ export default {
   },
   data() {
     return {
-      liveColumns: [
-        { name: 'title', required: true, label: '实验行为操作', align: 'center' },
-        { name: 'time', align: 'center', label: '动作时间', field: 'time' },
-        { name: 'isCorrect', align: 'center', label: '行为判断', field: 'isCorrect' },
-        { name: 'analysis', align: 'center', label: '错误解析', field: 'analysis' },
-        { name: 'suggest', align: 'left', label: '改进建议', field: 'suggest' },
-        { name: 'button', align: 'center', label: '相关知识链接', field: 'button' },
-      ],
-      liveList: [],
+      // liveColumns: [
+      //   { name: 'title', required: true, label: '实验行为操作', align: 'center' },
+      //   { name: 'time', align: 'center', label: '动作时间', field: 'time' },
+      //   { name: 'isCorrect', align: 'center', label: '行为判断', field: 'isCorrect' },
+      //   { name: 'analysis', align: 'center', label: '错误解析', field: 'analysis' },
+      //   { name: 'suggest', align: 'left', label: '改进建议', field: 'suggest' },
+      //   { name: 'button', align: 'center', label: '相关知识链接', field: 'button' },
+      // ],
+      // liveList: [],
       kexperimentId: '',
       // liveUrl: '',
       path: 'ws://47.98.192.17:8002',
@@ -83,6 +84,7 @@ export default {
       flvPlayer: '',
       playUrl: '',
       experimentId: '',
+      experimentType: '',
     }
   },
   computed: {
@@ -93,50 +95,65 @@ export default {
   },
   created() {
     console.log(this.experimentName)
-    this.selectAllExperiments({
-      success: (experiments) => {
-        console.log(experiments)
-        this.experimentId = experiments.find((e) => e.name == this.experimentName).id
-        this.startExperiment({
-          experimentId: experiments.find((e) => e.name == this.experimentName).id,
-          success: (res) => {
-            this.kexperimentId = res.kexperimentId
-            console.log(this.kexperimentId)
-            this.getStreamingDomainName({
-              kexperimentId: res.kexperimentId,
-              success: (res) => {
-                console.log(res)
-                this.playUrl = res.url
-                this.send()
-                if (flvjs.isSupported()) {
-                  this.videoElement = document.getElementById('videoElement')
-                  this.flvPlayer = flvjs.createPlayer({
-                    type: 'flv',
-                    isLive: true,
-                    hasAudio: false,
-                    url: res.playUrl,
-                  })
-                  console.log(this.flvPlayer, 'flv对象')
-                  // this.flvPlayer.attachMediaElement(this.videoElement)
-                  // this.flvPlayer.load()
-                  // this.flvPlayer.play()
-                }
-              },
-              failure: (res) => {
-                console.log(res)
-              },
-            })
-          },
-          failure: (res) => {
-            console.log(res)
-          },
-        })
+    this.getStreamingDomainName({
+      kexperimentId: localStorage.getItem('kexperimentId'),
+      success: (res) => {
+        console.log(localStorage.getItem('kexperimentId'))
+        this.kexperimentId = localStorage.getItem('kexperimentId')
+        console.log(res)
+        this.playUrl = res.url
+        this.createFivjs(res)
+        this.send()
+        this.sendmsg()
+        // setTimeout(() => {
+        //   this.flvPlayer.attachMediaElement(this.videoElement)
+        //   this.flvPlayer.load()
+        //   this.flvPlayer.play()
+        // }, 8000)
       },
       failure: (res) => {
-        this.failure = true
         console.log(res)
       },
     })
+    // this.selectAllExperiments({
+    //   success: (experiments) => {
+    //     console.log(experiments)
+    //     this.experimentId = experiments.find((e) => e.name == this.experimentName).id
+    //     this.experimentType = experiments.find((e) => e.name == this.experimentName).type
+    //     console.log(this.experimentType)
+    //     this.startExperiment({
+    //       experimentId: experiments.find((e) => e.name == this.experimentName).id,
+    //       success: (res) => {
+    //         this.kexperimentId = res.kexperimentId
+    //         console.log(this.kexperimentId)
+    //         this.getStreamingDomainName({
+    //           kexperimentId: res.kexperimentId,
+    //           success: (res) => {
+    //             console.log(res)
+    //             this.playUrl = res.url
+    //             this.createFivjs(res)
+    //             this.send()
+    //             // setTimeout(() => {
+    //             //   this.flvPlayer.attachMediaElement(this.videoElement)
+    //             //   this.flvPlayer.load()
+    //             //   this.flvPlayer.play()
+    //             // }, 8000)
+    //           },
+    //           failure: (res) => {
+    //             console.log(res)
+    //           },
+    //         })
+    //       },
+    //       failure: (res) => {
+    //         console.log(res)
+    //       },
+    //     })
+    //   },
+    //   failure: (res) => {
+    //     this.failure = true
+    //     console.log(res)
+    //   },
+    // })
   },
   mounted() {
     this.init()
@@ -170,6 +187,7 @@ export default {
               questionList: res,
               experimentId: experimentId,
               type: choiceType,
+              experimentType: this.experimentType,
             })
             .onOk(() => {
               // this.loadKexperimentEvaluation()
@@ -180,6 +198,21 @@ export default {
           console.log(error)
         },
       })
+    },
+    startPosttest() {
+      this.postTest(this.experimentId, 2)
+    },
+    createFivjs(res) {
+      if (flvjs.isSupported()) {
+        this.videoElement = document.getElementById('videoElement')
+        this.flvPlayer = flvjs.createPlayer({
+          type: 'flv',
+          isLive: true,
+          hasAudio: false,
+          url: res.playUrl,
+        })
+        console.log(this.flvPlayer, 'flv对象')
+      }
     },
     open: function () {
       console.log('socket连接成功')
