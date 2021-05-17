@@ -37,6 +37,16 @@
             <q-space />
             <div class="text-center">
               <q-btn
+                v-if="experiment.id == 10"
+                @click="opensodiumReactsWithWater"
+                unelevated
+                rounded
+                label="进入实验"
+                color="primary"
+                icon-right="arrow_forward"
+              />
+              <q-btn
+                v-else
                 :to="'/scene/' + $route.params.alias"
                 unelevated
                 rounded
@@ -221,7 +231,7 @@ export default {
       this.selectExperimentByAlias({
         alias: this.$route.params.alias,
         success: (experiment) => {
-          console.log(localStorage.getItem('kexperimentId'));
+          console.log(localStorage.getItem('kexperimentId'))
           if (localStorage.getItem('kexperimentId') != null) console.log('kk')
           else if (localStorage.getItem('kexperimentId') == null) {
             this.startExperiment({
@@ -260,6 +270,9 @@ export default {
         },
       })
     },
+    opensodiumReactsWithWater() {
+      window.open('http://47.98.192.17/sodiumReactsWithWater/situation.html')
+    }
   },
 
   created() {

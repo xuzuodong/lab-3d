@@ -100,6 +100,10 @@
         </q-expansion-item>
       </q-list>
     </div>
+    <div class="container">
+      <div class="text-h6 q-my-md">- 复习建议 -</div>
+      <p class="text-body1">{{ experimentReview }}</p>
+    </div>
   </div>
 </template>
 
@@ -129,6 +133,7 @@ export default {
       pretestInfo: [],
       posttestInfo: [],
       behaviorInfo: [],
+      experimentReview: '',
     }
   },
 
@@ -194,6 +199,7 @@ export default {
           this.pretestInfo = evaluation.pretestInfo.errorResolution
           this.posttestInfo = evaluation.posttestInfo.errorResolution
           this.behaviorInfo = evaluation.behaviorInfo
+          this.experimentReview = evaluation.experimentReview
         },
         failure: (error) => {
           console.log(error)
