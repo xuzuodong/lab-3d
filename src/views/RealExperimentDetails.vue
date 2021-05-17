@@ -221,18 +221,24 @@ export default {
       this.selectExperimentByAlias({
         alias: this.$route.params.alias,
         success: (experiment) => {
-          this.startExperiment({
-            experimentId: experiment.id,
-            success: (res) => {
-              this.kexperimentId = res.kexperimentId
-              console.log(this.kexperimentId)
-              localStorage.setItem('kexperimentId', res.kexperimentId)
-              console.log(localStorage.getItem('kexperimentId'))
-            },
-            failure: (res) => {
-              console.log(res)
-            },
-          })
+          console.log(localStorage.getItem('kexperimentId'));
+          if (localStorage.getItem('kexperimentId') != null) console.log('kk')
+          else if (localStorage.getItem('kexperimentId') == null) {
+            this.startExperiment({
+              experimentId: experiment.id,
+              success: (res) => {
+                this.kexperimentId = res.kexperimentId
+                console.log(this.kexperimentId)
+                localStorage.setItem('kexperimentId', res.kexperimentId)
+                console.log(localStorage.getItem('kexperimentId'))
+              },
+              failure: (res) => {
+                console.log(res)
+              },
+            })
+          }
+          console.log(localStorage.getItem('kexperimentId'))
+
           this.getEquipment({
             experimentId: experiment.id,
             success: (res) => {

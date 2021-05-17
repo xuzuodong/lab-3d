@@ -95,7 +95,6 @@ export default {
     questionList: Array,
     experimentId: Number,
     type: Number,
-    experimentType: Number,
   },
 
   data() {
@@ -187,9 +186,7 @@ export default {
     },
 
     onCancelClick() {
-      if (this.experimentType == 2) {
-        return
-      } else this.hide()
+      this.hide()
     },
 
     countDown() {

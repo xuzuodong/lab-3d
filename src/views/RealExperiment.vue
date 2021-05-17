@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h6 class="q-my-lg" @click="sendmsg">【{{ experimentName }}】实时实验与评价</h6>
+    <h6 class="q-my-lg">【{{ experimentName }}】实时实验与评价</h6>
 
     <div v-if="liveBegin">
       <video
@@ -9,7 +9,6 @@
         autoplay
         muted
         style="width: 100%; height: 100%; object-fit: fill; margin: auto"
-        @ended="startPosttest"
       ></video>
     </div>
 
@@ -22,6 +21,10 @@
         center-color="grey-8"
         class="q-ma-md"
       />
+    </div>
+
+    <div>
+      <q-btn label="结束实验" @click="startPosttest" color="primary" />
     </div>
 
     <!-- <q-table :data="liveList" :columns="liveColumns" row-key="name" class="q-mt-lg">
@@ -61,6 +64,7 @@
 import flvjs from 'flv.js/dist/flv.min.js'
 import { mapActions } from 'vuex'
 import TestVue from './Test'
+import router from '../router/index'
 export default {
   props: {
     experimentName: String,
@@ -84,7 +88,6 @@ export default {
       flvPlayer: '',
       playUrl: '',
       experimentId: '',
-      experimentType: '',
     }
   },
   computed: {
@@ -99,19 +102,28 @@ export default {
       kexperimentId: localStorage.getItem('kexperimentId'),
       success: (res) => {
         console.log(localStorage.getItem('kexperimentId'))
+        console.log(localStorage.getItem('kexperimentId'))
         this.kexperimentId = localStorage.getItem('kexperimentId')
         console.log(res)
         this.playUrl = res.url
         this.createFivjs(res)
         this.send()
-        this.sendmsg()
-        // setTimeout(() => {
-        //   this.flvPlayer.attachMediaElement(this.videoElement)
-        //   this.flvPlayer.load()
-        //   this.flvPlayer.play()
-        // }, 8000)
+        this.flvPlayer.attachMediaElement(this.videoElement)
+        this.flvPlayer.load()
+        this.flvPlayer.play()
       },
       failure: (res) => {
+        console.log(res)
+      },
+    })
+
+    this.selectAllExperiments({
+      success: (experiments) => {
+        console.log(experiments)
+        this.experimentId = experiments.find((e) => e.name == this.experimentName).id
+      },
+      failure: (res) => {
+        this.failure = true
         console.log(res)
       },
     })
@@ -159,7 +171,7 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions('user', ['startExperiment', 'getEquipment', 'getStreamingDomainName']),
+    ...mapActions('user', ['startExperiment', 'getEquipment', 'getStreamingDomainName', 'finishKexperiment']),
     ...mapActions('experiment', ['selectAllExperiments', 'selectChoiceQuestion']),
     init: function () {
       if (typeof WebSocket === 'undefined') {
@@ -187,10 +199,18 @@ export default {
               questionList: res,
               experimentId: experimentId,
               type: choiceType,
-              experimentType: this.experimentType,
             })
             .onOk(() => {
-              // this.loadKexperimentEvaluation()
+              this.finishKexperiment({
+                kexperimentId: this.kexperimentId,
+                success: (res) => {
+                  router.push('/real-kexperiment-details/' + this.kexperimentId)
+                  console.log(res)
+                },
+                failure: (res) => {
+                  console.log(res)
+                },
+              })
               console.log('ok')
             })
         },
@@ -212,6 +232,9 @@ export default {
           url: res.playUrl,
         })
         console.log(this.flvPlayer, 'flv对象')
+        this.flvPlayer.attachMediaElement(this.videoElement)
+        this.flvPlayer.load()
+        this.flvPlayer.play()
       }
     },
     open: function () {
