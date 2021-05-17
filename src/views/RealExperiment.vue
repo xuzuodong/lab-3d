@@ -107,7 +107,7 @@ export default {
         console.log(res)
         this.playUrl = res.url
         this.createFivjs(res)
-        this.send()
+        // this.send()
         this.flvPlayer.attachMediaElement(this.videoElement)
         this.flvPlayer.load()
         this.flvPlayer.play()
@@ -171,7 +171,13 @@ export default {
     this.init()
   },
   methods: {
-    ...mapActions('user', ['startExperiment', 'getEquipment', 'getStreamingDomainName', 'finishKexperiment']),
+    ...mapActions('user', [
+      'startExperiment',
+      'getEquipment',
+      'getStreamingDomainName',
+      'finishKexperiment',
+      'submitRealExperimentPosttest',
+    ]),
     ...mapActions('experiment', ['selectAllExperiments', 'selectChoiceQuestion']),
     init: function () {
       if (typeof WebSocket === 'undefined') {
@@ -200,18 +206,33 @@ export default {
               experimentId: experimentId,
               type: choiceType,
             })
-            .onOk(() => {
-              this.finishKexperiment({
+            .onOk((choiceArray) => {
+              console.log(choiceArray)
+              let choiceArray1 = choiceArray
+              setTimeout(() =>{
+              this.submitRealExperimentPosttest({
                 kexperimentId: this.kexperimentId,
+                choiceArray: choiceArray1,
                 success: (res) => {
-                  router.push('/real-kexperiment-details/' + this.kexperimentId)
+                  console.log(choiceArray)
                   console.log(res)
+                  this.finishKexperiment({
+                    kexperimentId: this.kexperimentId,
+                    success: (res) => {
+                      router.push('/real-kexperiment-details/' + this.kexperimentId)
+                      console.log(res)
+                    },
+                    failure: (res) => {
+                      console.log(res)
+                    },
+                  })
                 },
                 failure: (res) => {
                   console.log(res)
                 },
               })
-              console.log('ok')
+              }, 100)
+
             })
         },
         failure: (error) => {

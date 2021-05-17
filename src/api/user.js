@@ -239,4 +239,15 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
+
+  submitRealExperimentPosttest({ kexperimentId, choiceArray, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/submitRealExperimentPosttest',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId, choiceArray },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
 }

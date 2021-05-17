@@ -1,11 +1,11 @@
 <template>
   <div class="" style="min-height: calc(100vh - 105px)">
     <div class="row">
-      <div class="col-12 text-h5 text-center">“{{ experimentName }}”实验结果</div>
+      <div class="col-12 text-h5 text-center q-my-lg">“{{ experimentName }}”实验结果</div>
     </div>
-    <div class="row q-my-xl">
-      <div class="col-12 col-sm"></div>
-      <div class="col-12 col-sm"></div>
+    <div class="row q-my-xm">
+      <div class="col-10"></div>
+      <q-btn label="导出报告" color="primary" class="text-h7" @click="exportReport" />
     </div>
     <div class="row justify-center items-center">
       <div class="col-1">
@@ -13,10 +13,9 @@
       </div>
       <q-card flat class="col-5">
         <q-card-section>
-          <div class="q-my-xl"></div>
           <div class="text-h6 text-center text-weight-bold">
             实验综合得分（百分制）：
-            <span class="text-red-14">{{ percentageScore }}</span>
+            <span class="text-red-14">{{ presentScore }}</span>
           </div>
         </q-card-section>
 
@@ -35,30 +34,32 @@
 
     <div class="container">
       <div class="text-h6 q-my-md">- 实验过程解析 -</div>
-      <q-table :data="behaviorList" :columns="columns" :loading="loading" row-key="behaviorName" >
+      <q-table :data="behaviorList" :columns="columns" :loading="loading" row-key="behaviorName">
         <template v-slot:body="props">
           <q-tr :props="props">
-            <q-td key="behaviorName" :props="props">
-              {{ props.row.behaviorName }}
+            <q-td key="rbehaviorName" :props="props">
+              {{ props.row.rbehaviorName }}
             </q-td>
-            <q-td key="userSolution" :props="props">
-              {{ props.row.userSolution }}
+            <q-td key="duration" :props="props">
+              {{ diffData(props.row.stime, props.row.ktime) }}
             </q-td>
-            <q-td key="isCorrect" :props="props">
-              {{ props.row.isCorrect }}
+            <q-td key="isCorrect" :props="props">{{ props.row.isCorrect }}（{{ props.row.score }}分）</q-td>
+            <q-td key="wrong" :props="props">
+              {{ props.row.wrong }}
             </q-td>
             <q-td key="analysis" :props="props">
               {{ props.row.analysis }}
             </q-td>
-            <q-td key="correctContent" :props="props">
-              {{ props.row.correctContent }}
-            </q-td>
             <q-td key="sensor" :props="props">
               {{ props.row.sensor }}
             </q-td>
+            <q-td key="emotion" :props="props">
+              {{ props.row.emotion }}
+            </q-td>
             <q-td key="button" :props="props">
               <q-btn
-                :to="'/dashboard/kexperiment-details/' + props.row.kexperimentId"
+                @click="openVideo(props.row.videoUrl)"
+                :disable="props.row.videoUrl == null"
                 style="font-size: 14px"
                 color="primary"
                 label="查看知识点"
@@ -80,6 +81,7 @@
 </template>
 
 <script>
+import { date } from 'quasar'
 import { mapActions, mapState } from 'vuex'
 import KexperimentDetailsTestsVue from './KexperimentDetailsTests.vue'
 export default {
@@ -88,19 +90,32 @@ export default {
   data() {
     return {
       columns: [
-        { name: 'behaviorName', label: '实验行为操作', field: 'behaviorName', align: 'left' },
-        { name: 'userSolution', label: '操作持续时间', field: 'userSolution', align: 'left' },
+        {
+          name: 'rbehaviorName',
+          label: '实验行为操作',
+          field: 'rbehaviorName',
+          align: 'left',
+          style: 'min-width: 120px',
+        },
+        {
+          name: 'duration',
+          label: '操作持续时间',
+          field: 'duration',
+          align: 'left',
+          style: 'min-width: 120px',
+        },
         {
           name: 'isCorrect',
           label: '行为判断',
           field: 'isCorrect',
           align: 'center',
-          style: 'min-width: 100px',
+          style: 'min-width: 120px',
         },
-        { name: 'analysis', label: '错误解析', field: 'analysis', align: 'center' },
-        { name: 'correctContent', label: '改进建议', field: 'correctContent', align: 'center' },
-        { name: 'sensor', label: '感应媒介', field: 'sensor', align: 'center' },
-        { name: 'button', label: '知识点分析', field: 'button', align: 'center' },
+        { name: 'wrong', label: '错误解析', field: 'wrong', align: 'center', style: 'min-width: 120px' },
+        { name: 'analysis', label: '改进建议', field: 'analysis', align: 'center' },
+        { name: 'sensor', label: '感应媒介', field: 'sensor', align: 'center', style: 'min-width: 100px' },
+        { name: 'emotion', label: '情绪', field: 'emotion', align: 'center', style: 'min-width: 100px' },
+        { name: 'button', label: '知识点分析', field: 'button', align: 'center', style: 'min-width: 140px' },
       ],
       experimentId: 0,
       experimentName: '',
@@ -111,7 +126,7 @@ export default {
       badge: '一般路过的实验师',
       loading: true,
       realBehaviorInfo: [],
-      experimentReview:''
+      experimentReview: '',
     }
   },
 
@@ -119,14 +134,14 @@ export default {
     ...mapState('user', ['userInfo']),
 
     evaluation: function () {
-      switch (this.percentageScore) {
-        case 'A':
+      switch (true) {
+        case this.presentScore >= 90:
           return '新大神降临！您在这次的实验中的表现完美无缺！'
-        case 'B':
+        case this.presentScore >= 80 && this.presentScore < 90:
           return '太棒了实验师！您在这次的实验中表现得十分出色！'
-        case 'C':
+        case this.presentScore >= 60 && this.presentScore < 80:
           return '实验进行得不太顺利呢，实验师还要继续加油哦！'
-        case 'D':
+        case this.presentScore < 60:
           return '实验中似乎出现了一些意外，建议查找问题重新实验吧！'
         default:
           return ''
@@ -136,9 +151,14 @@ export default {
     behaviorList: function () {
       const returnArr = []
       this.realBehaviorInfo.forEach((e, i) => {
-        returnArr.push({ ...e })
+        if (e.isCorrect === true) returnArr.push({ ...e, isCorrect: '正确' })
+        else returnArr.push({ ...e, isCorrect: '错误' })
       })
       return returnArr
+    },
+
+    presentScore: function () {
+      return Math.round(this.percentageScore * 100)
     },
   },
 
@@ -169,6 +189,19 @@ export default {
           console.log(error)
         },
       })
+    },
+
+    diffData(startStamp, endStamp) {
+      let diff = date.getDateDiff(endStamp, startStamp, 'seconds')
+      return `${parseInt(diff / 60)} 分 ${(diff % 60).toFixed(0)} 秒`
+    },
+
+    openVideo(url) {
+      window.open(url, '_blank')
+    },
+
+    exportReport() {
+      document.execCommand('print')
     },
   },
 }

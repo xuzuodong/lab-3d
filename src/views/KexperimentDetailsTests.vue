@@ -65,9 +65,8 @@ export default {
       let formatArr = []
       if (this.testInfo && this.testInfo.length != 0) {
         this.testInfo.forEach((e) => {
-          if (e.isCorrect === true) e.isCorrect = '正确'
-          else e.isCorrect = '错误'
-          formatArr.push(e)
+          if (e.isCorrect === true) formatArr.push({ ...e, isCorrect: '正确' })
+          else formatArr.push({ ...e, isCorrect: '错误' })
         })
         return formatArr
       } else return []

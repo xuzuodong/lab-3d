@@ -78,7 +78,6 @@ export default {
   },
   created() {
     localStorage.clear()
-    console.log(localStorage);
   },
 }
 </script>

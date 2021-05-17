@@ -16,8 +16,9 @@
         </q-td>
         <q-td key="button" :props="props">
           <q-btn
-            :to="'/dashboard/kexperiment-details/' + props.row.kexperimentId"
+            :to="'/dashboard'+`/${props.row.kexperimentRouter}/` + props.row.kexperimentId"
             style="font-size: 14px"
+            :disable = "props.row.kexperimentKtime == 0"
             color="primary"
             label="查看详情"
             flat
@@ -54,9 +55,31 @@ export default {
         // 如果没有结束时间则未完成
         if (e.kexperimentKtime) {
           let duration = date.getDateDiff(e.kexperimentKtime, e.kexperimentCtime, 'seconds')
-          arr.push({ ...this.experiments[i], duration: `${(duration / 60).toFixed(0)}分${duration % 60}秒` })
+          if (e.experimentType == 1)
+            arr.push({
+              ...e,
+              kexperimentRouter: 'kexperiment-details',
+              duration: `${(duration / 60).toFixed(0)}分${duration % 60}秒`,
+            })
+          if (e.experimentType == 2)
+            arr.push({
+              ...e,
+              kexperimentRouter: 'real-kexperiment-details',
+              duration: `${(duration / 60).toFixed(0)}分${duration % 60}秒`,
+            })
         } else {
-          arr.push({ ...this.experiments[i], duration: '未完成' })
+          if (e.experimentType == 1)
+            arr.push({
+              ...e,
+              kexperimentRouter: 'kexperiment-details',
+              duration: '未完成',
+            })
+          if (e.experimentType == 2)
+            arr.push({
+              ...e,
+              kexperimentRouter: 'real-kexperiment-details',
+              duration: '未完成',
+            })
         }
       })
       return arr

@@ -242,7 +242,7 @@ export default {
           this.getEquipment({
             experimentId: experiment.id,
             success: (res) => {
-              this.steps = res
+              this.steps = res.equipmentInfo
               console.log(res)
             },
             failure: (res) => {

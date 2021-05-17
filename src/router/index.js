@@ -25,6 +25,10 @@ const routes = [
         path: 'kexperiment-details/:id',
         component: () => import('../views/KexperimentDetails.vue'),
       },
+      {
+        path: 'real-kexperiment-details/:id',
+        component: () => import('../views/RealKexperimentDetails.vue'),
+      },
     ],
   },
   { path: '/kexperiment-details/:id', component: () => import('../views/KexperimentDetails.vue') },
