@@ -93,7 +93,8 @@
                 </q-tab-panel>
 
                 <q-tab-panel name="tests">
-                  <KexperimentDetailsTestsVue :pretestInfo="pretestInfo" :posttestInfo="posttestInfo" />
+                  <KexperimentDetailsTestsVue :testTitle="'前测选项解析'" :testInfo="pretestInfo" />
+                  <KexperimentDetailsTestsVue :testTitle="'后测选项解析'" :testInfo="posttestInfo" />
                 </q-tab-panel>
               </q-tab-panels>
             </q-card>
@@ -154,12 +155,12 @@ export default {
       }
     },
     countPreTest: function () {
-        const total = this.pretestInfo.length
-        let countTrue = 0
-        this.pretestInfo.forEach((e) => {
-          if (e.isCorrect == true) countTrue++
-        })
-        return { total, countTrue }
+      const total = this.pretestInfo.length
+      let countTrue = 0
+      this.pretestInfo.forEach((e) => {
+        if (e.isCorrect == true) countTrue++
+      })
+      return { total, countTrue }
     },
     countPostTest: function () {
       const total = this.posttestInfo.length

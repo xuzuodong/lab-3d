@@ -44,9 +44,6 @@
                 color="primary"
                 icon-right="arrow_forward"
               />
-              <div class="q-mt-sm">
-                <a @click="pretest(experiment.id, 1)" v-if="!isPretestFinished" class="underline">前测挑战</a>
-              </div>
             </div>
           </div>
         </div>
@@ -63,14 +60,14 @@
         <q-table :data="stepList" :columns="stepColumns" row-key="name" class="q-mt-lg">
           <template v-slot:body="props">
             <q-tr :props="props">
-              <q-td key="title" :props="props">
-                {{ props.row.title }}
+              <q-td key="index" :props="props">
+                {{ props.row.index }}
               </q-td>
               <q-td key="experimentSteps" :props="props">
                 {{ props.row.experimentSteps }}({{ props.row.score }}分)
               </q-td>
-              <q-td key="isCorrect" :props="props">
-                {{ props.row.analysis }}
+              <q-td key="wrong" :props="props">
+                {{ props.row.wrong }}
               </q-td>
             </q-tr>
           </template>
@@ -141,14 +138,13 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import DialogJoinVue from '../components/DialogJoin.vue'
-import TestVue from './Test'
 export default {
   data() {
     return {
       stepColumns: [
-        { name: 'title', required: true, label: '步骤序号', align: 'center' },
+        { name: 'index', required: true, label: '步骤序号', align: 'center' },
         { name: 'experimentSteps', align: 'center', label: '实验操作', field: 'experimentSteps' },
-        { name: 'analysis', align: 'center', label: '易错点', field: 'analysis' },
+        { name: 'wrong', align: 'center', label: '易错点', field: 'wrong' },
       ],
       steps: [],
       experiment: null,
@@ -163,9 +159,19 @@ export default {
     stepList() {
       const arr = []
       this.steps.forEach((e, i) => {
-        if (e.classes) {
-          arr.push({ ...this.steps[i] })
+        let wrongStr = ''
+        if (e.wrong) {
+          if (e.wrong.length == 1) {
+            wrongStr = `${e.wrong}；`
+          } else {
+            for (let i = 0; i < e.wrong.length; i++) {
+              wrongStr += `${i + 1}、${e.wrong[i]}；`
+            }
+          }
+        } else {
+          wrongStr = '/'
         }
+        arr.push({ index: i + 1, ...this.steps[i], wrong: wrongStr })
       })
       return arr
     },
@@ -178,7 +184,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment', 'selectChoiceQuestion']),
+    ...mapActions('experiment', ['selectExperimentByAlias', 'likeExperiment']),
     ...mapActions('user', ['getEquipment']),
 
     toggleLike() {
@@ -218,7 +224,7 @@ export default {
           this.getEquipment({
             experimentId: experiment.id,
             success: (res) => {
-              // this.steps = res
+              this.steps = res
               console.log(res)
             },
             failure: (res) => {
@@ -235,41 +241,6 @@ export default {
           console.log(error)
         },
       })
-    },
-
-    pretest(experimentId, choiceType) {
-      if (this.userInfo) {
-        this.selectChoiceQuestion({
-          experimentId,
-          choiceType: choiceType,
-          success: (res) => {
-            this.$q
-              .dialog({
-                component: TestVue,
-                parent: this,
-                questionList: res,
-                experimentId: experimentId,
-                type: choiceType,
-              })
-              .onOk(() => {
-                this.isPretestFinished = true
-                console.log('ok')
-              })
-          },
-          failure: (error) => {
-            console.log(error)
-          },
-        })
-      } else {
-        this.$q
-          .dialog({
-            component: DialogJoinVue,
-            parent: this,
-          })
-          .onOk(() => {
-            this.loadExperimentDetails()
-          })
-      }
     },
   },
 

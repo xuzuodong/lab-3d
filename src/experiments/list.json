@@ -21,5 +21,11 @@
     "name": "稀硫酸的化学性质探究",
     "alias": "chemicalPropertiesOfDiluteSulfuricAcid",
     "type": "real"
+  },
+
+  {
+    "name": "钠和水反应",
+    "alias": "sodiumReactsWithWater",
+    "type": "real"
   }
 ]
