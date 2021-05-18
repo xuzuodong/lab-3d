@@ -161,16 +161,16 @@ export default {
         for (let i = 0; i < this.questionList.length; i++) {
           this.choiceArray[i] = { id: this.questionList[i].id, solution: this.answer[i], type: this.type }
         }
-        // this.submitTest({
-        //   choiceArray: this.choiceArray,
-        //   experimentId: this.experimentId,
-        //   success: (res) => {
-        //     console.log(res)
-        //   },
-        //   failure: (error) => {
-        //     console.log(error)
-        //   },
-        // })
+        this.submitTest({
+          choiceArray: this.choiceArray,
+          experimentId: this.experimentId,
+          success: (res) => {
+            console.log(res)
+          },
+          failure: (error) => {
+            console.log(error)
+          },
+        })
         this.recordTestTime({
           experimentId: this.experimentId,
           testName: this.testName,

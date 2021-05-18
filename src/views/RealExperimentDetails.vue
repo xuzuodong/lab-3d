@@ -37,8 +37,8 @@
             <q-space />
             <div class="text-center">
               <q-btn
-                v-if="experiment.id == 10"
-                @click="opensodiumReactsWithWater"
+                v-if="experiment.id != 11"
+                @click="openOldRealExperiment(experiment.id)"
                 unelevated
                 rounded
                 label="进入实验"
@@ -232,8 +232,9 @@ export default {
         alias: this.$route.params.alias,
         success: (experiment) => {
           console.log(localStorage.getItem('kexperimentId'))
-          if (localStorage.getItem('kexperimentId') != null) console.log('kk')
-          else if (localStorage.getItem('kexperimentId') == null) {
+          // if (localStorage.getItem('kexperimentId') != null) console.log('kk')
+          // else
+          if (localStorage.getItem('kexperimentId') == null && experiment.id == 11) {
             this.startExperiment({
               experimentId: experiment.id,
               success: (res) => {
@@ -270,9 +271,19 @@ export default {
         },
       })
     },
-    opensodiumReactsWithWater() {
-      window.open('http://47.98.192.17/sodiumReactsWithWater/situation.html')
-    }
+    openOldRealExperiment(id) {
+      switch (id) {
+        case 4:
+          window.open('http://47.98.192.17/fehcltask/qingjing.html', '_blank')
+          break
+        case 5:
+          window.open('http://47.98.192.17/coppertask/qingjing.html', '_blank')
+          break
+        case 10:
+          window.open('http://47.98.192.17/sodiumReactsWithWater/situation.html', '_blank')
+          break
+      }
+    },
   },
 
   created() {
