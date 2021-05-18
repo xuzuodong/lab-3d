@@ -211,7 +211,6 @@ export default {
     axios({
       method: 'post',
       url: baseUrl + 'behavior/getEquipment',
-      headers: { Authorization: store.state.user.userInfo.token },
       data: { experimentId },
     })
       .then((res) => success(res))

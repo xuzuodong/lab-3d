@@ -148,6 +148,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import DialogJoinVue from '../components/DialogJoin.vue'
+import { Notify } from 'quasar'
 export default {
   data() {
     return {
@@ -160,7 +161,6 @@ export default {
       experiment: null,
       knowledgePointTab: 0,
       knowledgeImageSlides: null,
-      isPretestFinished: false,
     }
   },
 
@@ -188,7 +188,7 @@ export default {
   },
 
   watch: {
-    userInfo: function () {
+    userInfo: function() {
       this.loadExperimentDetails()
     },
   },
@@ -231,7 +231,7 @@ export default {
       this.selectExperimentByAlias({
         alias: this.$route.params.alias,
         success: (experiment) => {
-          console.log(localStorage.getItem('kexperimentId'))
+          // console.log(localStorage.getItem('kexperimentId'))
           // if (localStorage.getItem('kexperimentId') != null) console.log('kk')
           // else
           if (localStorage.getItem('kexperimentId') == null && experiment.id == 11) {
@@ -248,13 +248,12 @@ export default {
               },
             })
           }
-          console.log(localStorage.getItem('kexperimentId'))
+          // console.log(localStorage.getItem('kexperimentId'))
 
           this.getEquipment({
             experimentId: experiment.id,
             success: (res) => {
               this.steps = res.equipmentInfo
-              console.log(res)
             },
             failure: (res) => {
               console.log(res)
@@ -264,7 +263,6 @@ export default {
           this.experiment = experiment
           document.title = experiment.name + ' | Lab 3D'
           this.knowledgeImageSlides = this.experiment.knowledgePoints.map(() => 0)
-          this.isPretestFinished = experiment.isPretestFinished
         },
         failure: (error) => {
           console.log(error)
@@ -279,6 +277,14 @@ export default {
         case 5:
           window.open('http://47.98.192.17/coppertask/qingjing.html', '_blank')
           break
+        case 6:
+        case 7:
+          Notify.create({
+            message: '请到真实环境中进行实验！',
+            type: 'warning',
+            position: 'top',
+          })
+          break
         case 10:
           window.open('http://47.98.192.17/sodiumReactsWithWater/situation.html', '_blank')
           break
@@ -288,29 +294,6 @@ export default {
 
   created() {
     this.loadExperimentDetails()
-  },
-
-  beforeRouteLeave(to, from, next) {
-    if (!this.userInfo && to.path.match('/scene')) {
-      this.$q
-        .dialog({
-          component: DialogJoinVue,
-          parent: this,
-        })
-        .onOk(() => {
-          next()
-        })
-        .onCancel(() => {
-          next(false)
-        })
-        .onDismiss(() => {
-          next(false)
-        })
-    } else {
-      next()
-    }
-
-    document.title = 'Lab 3D - 体验炫酷的科学实验！'
   },
 }
 </script>

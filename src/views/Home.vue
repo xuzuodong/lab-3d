@@ -28,7 +28,7 @@ export default {
   },
 
   beforeRouteLeave(to, from, next) {
-    if (!this.userInfo && to.path.match('/realExperiment')) {
+    if (!this.userInfo && to.path.match('/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid')) {
       this.$q
         .dialog({
           component: DialogJoinVue,
