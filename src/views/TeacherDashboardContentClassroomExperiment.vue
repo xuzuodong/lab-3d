@@ -11,14 +11,14 @@
         <q-td key="duration" :props="props">
           {{ props.row.duration }}
         </q-td>
-        <q-td key="finalScore" :props="props">
-          {{ props.row.finalScore }}
+        <q-td key="score" :props="props">
+          {{ props.row.score }}
         </q-td>
         <q-td key="button" :props="props">
           <q-btn
-            :to="'/dashboard'+`/${props.row.kexperimentRouter}/` + props.row.kexperimentId"
+            :to="'/dashboard' + `/${props.row.kexperimentRouter}/` + props.row.kexperimentId"
             style="font-size: 14px"
-            :disable = "props.row.kexperimentKtime == 0"
+            :disable="props.row.kexperimentKtime == 0"
             color="primary"
             label="查看详情"
             flat
@@ -40,7 +40,7 @@ export default {
         { name: 'realName', required: true, label: '姓名', align: 'left', sortable: true },
         { name: 'experimentName', align: 'left', label: '实验名称', sortable: true },
         { name: 'duration', label: '实验时间', field: 'eTime', align: 'left', sortable: true },
-        { name: 'finalScore', label: '成绩', field: 'score', align: 'center', sortable: true },
+        { name: 'score', label: '成绩', field: 'score', align: 'center', sortable: true },
         { name: 'button', label: '详情', field: 'other', align: 'center' },
       ],
       experiments: [],
@@ -66,6 +66,7 @@ export default {
               ...e,
               kexperimentRouter: 'real-kexperiment-details',
               duration: `${(duration / 60).toFixed(0)}分${duration % 60}秒`,
+              score: `${(e.finalScore.percentageScore * 100).toFixed(2)}`,
             })
         } else {
           if (e.experimentType == 1)

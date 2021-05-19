@@ -87,7 +87,6 @@ export default {
   },
 
   created() {
-    console.log(111)
     if (this.userInfo != null) {
       this.selectMyKexperiment({
         success: (res) => {
