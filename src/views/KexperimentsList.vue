@@ -66,7 +66,8 @@ export default {
     formatKexperimentsList: function () {
       const returnArr = []
       this.kexperimentsList.forEach((e, i) => {
-        if (e.experimentType == 1) returnArr.push({ ...e, kexperimentRouter: 'kexperiment-details' })
+        if (e.experimentType == 1 || e.experimentType == 3)
+          returnArr.push({ ...e, kexperimentRouter: 'kexperiment-details' })
         if (e.experimentType == 2) returnArr.push({ ...e, kexperimentRouter: 'real-kexperiment-details' })
       })
       return returnArr

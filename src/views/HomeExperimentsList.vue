@@ -10,9 +10,9 @@
         v-for="experiment in experiments"
         :key="experiment.id"
         :experiment="experiment"
-        class="q-ma-md"
+        class="q-ma-lg"
       />
-      <div class="spacer q-mx-md" v-for="i in 8" :key="'spacer' + i" />
+      <div class="spacer q-mx-lg" v-for="i in 8" :key="'spacer' + i" />
     </div>
   </div>
 </template>

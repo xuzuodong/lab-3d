@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <q-layout view="hhh lpR fff">
+    <q-layout view="hhh lpR fff" class="bg-color">
       <AppHeaderVue :insideExperiment="insideExperiment" />
 
       <q-page-container>
@@ -9,6 +9,7 @@
 
       <q-footer v-if="!insideExperiment" class="text-center bg-navBar">
         <q-separator />
+        <div class="q-pt-md"> © 2011-2019 lab3d.site , All Rights Reserved 浙公网安备 11010350032510号</div>
         <div class="q-py-md">© Lab 3D 版权所有</div>
       </q-footer>
     </q-layout>
@@ -60,5 +61,8 @@ export default {
   .tabs .q-tab__content {
     min-width: 0;
   }
+}
+.bg-color {
+  background-color: #f8f9fa;
 }
 </style>

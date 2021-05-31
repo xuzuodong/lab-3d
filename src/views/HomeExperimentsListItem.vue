@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div v-if="experiment.id == 1 || experiment.id == 2 || experiment.id == 8 || experiment.id == 9">
     <router-link
       tag="div"
       :to="`/${experimentRouter}/` + experiment.alias"
-      v-if="experiment.type == 1 || experiment.type == 2"
+      v-if="experiment.id == 8 || experiment.id == 9"
       class="full-height"
     >
       <q-card class="experiment-item cursor-pointer full-height">
@@ -23,7 +23,11 @@
         </q-card-section>
       </q-card>
     </router-link>
-    <div v-else @click.prevent="openOldExperiment()" class="full-height">
+    <div
+      v-if="experiment.id == 1 || experiment.id == 2"
+      @click.prevent="openOldExperiment()"
+      class="full-height"
+    >
       <q-card class="experiment-item cursor-pointer full-height">
         <q-img :src="experiment.image" width="100%" :ratio="3 / 2" />
 
