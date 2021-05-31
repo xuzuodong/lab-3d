@@ -7,7 +7,7 @@
         <q-route-tab label="实验列表" to="/about" exact />
         <q-route-tab label="服务与支持" to="/about" exact />
         <q-route-tab label="教学研究" to="/about" exact />
-        <q-route-tab label="使用手册" to="/about" exact />
+        <q-route-tab label="使用手册" to="/mamual" exact />
         <q-route-tab label="关于我们" to="/about" exact />
       </q-tabs>
       <q-space />
