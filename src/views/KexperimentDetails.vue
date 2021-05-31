@@ -1,11 +1,11 @@
 <template>
   <div class="" style="min-height: calc(100vh - 105px)">
     <div class="row">
-      <div class="col-12 text-h5 text-center">“{{ experimentName }}”实验结果</div>
+      <div class="col-12 text-h5 text-center q-my-md">“{{ experimentName }}”实验结果</div>
     </div>
-    <div class="row q-my-xl">
-      <div class="col-12 col-sm"></div>
-      <div class="col-12 col-sm"></div>
+    <div class="row q-my-xm">
+      <div class="col-10"></div>
+      <q-btn label="导出报告" color="primary" class="text-h7" @click="exportReport" />
     </div>
     <div class="row justify-center">
       <q-card flat class="col-5">
@@ -87,19 +87,22 @@
 
               <q-tab-panels v-model="tab" animated>
                 <q-tab-panel name="behaviors">
-                  <KexperimentDetailsBehaviorsVue
-                    :behaviorInfo="behaviorInfo"
-                  ></KexperimentDetailsBehaviorsVue>
+                  <KexperimentDetailsBehaviorsVue :behaviorInfo="behaviorInfo" />
                 </q-tab-panel>
 
                 <q-tab-panel name="tests">
-                  <KexperimentDetailsTestsVue :pretestInfo="pretestInfo" :posttestInfo="posttestInfo" />
+                  <KexperimentDetailsTestsVue :testTitle="'前测选项解析'" :testInfo="pretestInfo" />
+                  <KexperimentDetailsTestsVue :testTitle="'后测选项解析'" :testInfo="posttestInfo" />
                 </q-tab-panel>
               </q-tab-panels>
             </q-card>
           </q-card>
         </q-expansion-item>
       </q-list>
+    </div>
+    <div class="container">
+      <div class="text-h6 q-my-md">- 复习建议 -</div>
+      <p class="text-body1">{{ experimentReview }}</p>
     </div>
   </div>
 </template>
@@ -130,6 +133,7 @@ export default {
       pretestInfo: [],
       posttestInfo: [],
       behaviorInfo: [],
+      experimentReview: '',
     }
   },
 
@@ -154,12 +158,12 @@ export default {
       }
     },
     countPreTest: function () {
-        const total = this.pretestInfo.length
-        let countTrue = 0
-        this.pretestInfo.forEach((e) => {
-          if (e.isCorrect == true) countTrue++
-        })
-        return { total, countTrue }
+      const total = this.pretestInfo.length
+      let countTrue = 0
+      this.pretestInfo.forEach((e) => {
+        if (e.isCorrect == true) countTrue++
+      })
+      return { total, countTrue }
     },
     countPostTest: function () {
       const total = this.posttestInfo.length
@@ -195,6 +199,7 @@ export default {
           this.pretestInfo = evaluation.pretestInfo.errorResolution
           this.posttestInfo = evaluation.posttestInfo.errorResolution
           this.behaviorInfo = evaluation.behaviorInfo
+          this.experimentReview = evaluation.experimentReview
         },
         failure: (error) => {
           console.log(error)
@@ -224,6 +229,10 @@ export default {
           console.log(error)
         },
       })
+    },
+
+    exportReport() {
+      document.execCommand('print')
     },
   },
 }

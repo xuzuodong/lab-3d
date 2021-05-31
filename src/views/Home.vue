@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import DialogJoinVue from '../components/DialogJoin.vue'
 import HomeExperimentsListVue from './HomeExperimentsList.vue'
 import url_background from '../assets/background.jpg'
 
@@ -15,10 +17,37 @@ import url_background from '../assets/background.jpg'
 export default {
   name: 'Home',
 
-  components: { HomeExperimentsListVue},
+  components: { HomeExperimentsListVue },
 
   data() {
     return { url_background }
+  },
+
+  computed: {
+    ...mapState('user', ['userInfo']),
+  },
+
+  beforeRouteLeave(to, from, next) {
+    if (!this.userInfo && to.path.match('/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid')) {
+      this.$q
+        .dialog({
+          component: DialogJoinVue,
+          parent: this,
+        })
+        .onOk(() => {
+          next()
+        })
+        .onCancel(() => {
+          next(false)
+        })
+        .onDismiss(() => {
+          next(false)
+        })
+    } else {
+      next()
+    }
+
+    document.title = 'Lab 3D - 体验炫酷的科学实验！'
   },
 }
 </script>

@@ -109,16 +109,16 @@ export default {
   },
 
   computed: {
-    testName: function() {
+    testName: function () {
       if (this.type == 1) return 'Pretest'
       if (this.type == 2) return 'Posttest'
       else return ''
     },
-    submitBtnLabel: function() {
+    submitBtnLabel: function () {
       if (this.slideIndex + 1 != this.questionList.length) return '下一题'
       else return '提交'
     },
-    submitBtnDisable: function() {
+    submitBtnDisable: function () {
       if (this.submitBtnLabel === '下一题') {
         if (this.answer[this.slideIndex] == undefined) return true
         else return false
@@ -155,7 +155,7 @@ export default {
       if (label === '下一题') {
         this.slideIndex++
       } else {
-        this.$emit('ok')
+        this.$emit('ok',this.choiceArray)
         this.hide()
         clearInterval(this.timer)
         for (let i = 0; i < this.questionList.length; i++) {

@@ -195,13 +195,56 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
-  
+
   updateUserInfo({ passWord, phoneNumber, realName, sex, grade, school, success, failure }) {
     axios({
       method: 'post',
       url: baseUrl + 'user/updateUserInfo',
       headers: { Authorization: store.state.user.userInfo.token },
       data: { passWord, phoneNumber, realName, sex, grade, school },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getEquipment({ experimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getEquipment',
+      data: { experimentId },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getStreamingDomainName({ kexperimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getStreamingDomainName',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getRealExperimentEvaluation({ kexperimentId, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getRealExperimentEvaluation',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  submitRealExperimentPosttest({ kexperimentId, choiceArray, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/submitRealExperimentPosttest',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperimentId, choiceArray },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))

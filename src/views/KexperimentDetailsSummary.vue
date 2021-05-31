@@ -1,6 +1,14 @@
 <template>
   <div id="KexperimentDetailsSummary">
-    <q-table :data="processList" :columns="columns" row-key="name" dense flat square />
+    <q-table
+      :data="processList"
+      :columns="columns"
+      :rows-per-page-options="[0]"
+      row-key="name"
+      dense
+      flat
+      square
+    />
   </div>
 </template>
 

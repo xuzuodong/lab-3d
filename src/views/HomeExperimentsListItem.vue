@@ -1,6 +1,11 @@
 <template>
   <div>
-    <router-link :to="'/experiment/' + experiment.alias" v-if="experiment.alias != null">
+    <router-link
+      tag="div"
+      :to="`/${experimentRouter}/` + experiment.alias"
+      v-if="experiment.type == 1 || experiment.type == 2"
+      class="full-height"
+    >
       <q-card class="experiment-item cursor-pointer full-height">
         <q-img :src="experiment.image" width="100%" :ratio="3 / 2" />
 
@@ -18,7 +23,7 @@
         </q-card-section>
       </q-card>
     </router-link>
-    <div v-if="experiment.alias == null" @click.prevent="openOldExperiment()">
+    <div v-else @click.prevent="openOldExperiment()" class="full-height">
       <q-card class="experiment-item cursor-pointer full-height">
         <q-img :src="experiment.image" width="100%" :ratio="3 / 2" />
 
@@ -46,6 +51,11 @@ export default {
   props: { experiment: Object },
   computed: {
     ...mapState('user', ['userInfo']),
+    experimentRouter: function () {
+      if (this.experiment.type == 1) return 'experiment'
+      if (this.experiment.type == 2) return 'realExperiment'
+      return ''
+    },
     oldExperiment: function () {
       if (this.experiment.id === 1) return 'saltpage'
       if (this.experiment.id === 2) return 'phpage'
@@ -66,15 +76,14 @@ export default {
       }
     },
   },
+  created() {
+    localStorage.clear()
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .experiment-item {
   width: 250px;
-}
-a {
-  text-decoration: none;
-  color: black;
 }
 </style>

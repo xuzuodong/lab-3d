@@ -1,6 +1,12 @@
 <template>
   <div class="container">
-    <q-table class="q-mt-xl" title="做过的实验" :data="kexperimentsList" :columns="columns" row-key="name">
+    <q-table
+      class="q-mt-xl"
+      title="做过的实验"
+      :data="formatKexperimentsList"
+      :columns="columns"
+      row-key="name"
+    >
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="experimentName" :props="props">
@@ -23,7 +29,7 @@
               label="点击查看"
               :disable="!props.row.kexperimentKtime"
               dense
-              :to="'/kexperiment-details/' + props.row.kexperimentId"
+              :to="`/${props.row.kexperimentRouter}/` + props.row.kexperimentId"
             />
           </q-td>
         </q-tr>
@@ -57,6 +63,15 @@ export default {
 
   computed: {
     ...mapState('user', ['userInfo']),
+    formatKexperimentsList: function () {
+      const returnArr = []
+      this.kexperimentsList.forEach((e, i) => {
+        if (e.experimentType == 1 || e.experimentType == 3)
+          returnArr.push({ ...e, kexperimentRouter: 'kexperiment-details' })
+        if (e.experimentType == 2) returnArr.push({ ...e, kexperimentRouter: 'real-kexperiment-details' })
+      })
+      return returnArr
+    },
   },
 
   methods: {
@@ -76,6 +91,7 @@ export default {
     if (this.userInfo != null) {
       this.selectMyKexperiment({
         success: (res) => {
+          console.log(res)
           this.kexperimentsList = res
         },
         failure: (res) => {

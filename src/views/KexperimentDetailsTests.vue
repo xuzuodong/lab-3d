@@ -1,29 +1,7 @@
 <template>
   <div>
-    <h6 class="q-my-sm">- 前测选项解析 -</h6>
-    <q-table :data="preTestList" :columns="testColumns" row-key="name">
-      <template v-slot:body="props">
-        <q-tr :props="props">
-          <q-td key="title" :props="props">
-            {{ props.row.title }}
-          </q-td>
-          <q-td key="userSolution" :props="props">
-            {{ props.row.userSolution }}
-          </q-td>
-          <q-td key="isCorrect" :props="props">
-            {{ props.row.isCorrect }}
-          </q-td>
-          <q-td key="correctSolution" :props="props">
-            {{ props.row.correctSolution }}
-          </q-td>
-          <q-td key="analysis" :props="props">
-            {{ props.row.analysis }}
-          </q-td>
-        </q-tr>
-      </template>
-    </q-table>
-    <h6 class="q-my-sm">- 后测选项解析 -</h6>
-    <q-table :data="postTestList" :columns="testColumns" row-key="name">
+    <h6 class="q-my-sm">- {{ testTitle }} -</h6>
+    <q-table :data="TestList" :columns="testColumns" row-key="name">
       <template v-slot:body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
@@ -50,8 +28,8 @@
 <script>
 export default {
   props: {
-    pretestInfo: Array,
-    posttestInfo: Array,
+    testTitle: String,
+    testInfo: Array,
   },
   data() {
     return {
@@ -83,22 +61,12 @@ export default {
     }
   },
   computed: {
-    preTestList: function () {
+    TestList: function () {
       let formatArr = []
-      if (this.pretestInfo && this.pretestInfo.length != 0) {
-        this.pretestInfo.forEach((e, i) => {
-          if (e.isCorrect === true) formatArr.push({ ...this.pretestInfo[i], isCorrect: '正确' })
-          if (e.isCorrect === false) formatArr.push({ ...this.pretestInfo[i], isCorrect: '错误' })
-        })
-      }
-      return formatArr
-    },
-    postTestList: function () {
-      let formatArr = []
-      if (this.posttestInfo && this.posttestInfo.length != 0) {
-        this.posttestInfo.forEach((e, i) => {
-          if (e.isCorrect === true) formatArr.push({ ...this.posttestInfo[i], isCorrect: '正确' })
-          else formatArr.push({ ...this.posttestInfo[i], isCorrect: '错误' })
+      if (this.testInfo && this.testInfo.length != 0) {
+        this.testInfo.forEach((e) => {
+          if (e.isCorrect === true) formatArr.push({ ...e, isCorrect: '正确' })
+          else formatArr.push({ ...e, isCorrect: '错误' })
         })
       }
       return formatArr

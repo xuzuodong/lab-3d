@@ -1,11 +1,31 @@
 [
-    {
-        "name": "酸碱中和",
-        "alias": "neutralization"
-    }, 
+  {
+    "name": "酸碱中和",
+    "alias": "neutralization",
+    "type": "virtual"
+  },
 
-    {
-        "name": "摩擦力",
-        "alias": "friction"
-    }
+  {
+    "name": "摩擦力",
+    "alias": "friction",
+    "type": "virtual"
+  },
+
+  {
+    "name": "胆矾与氢氧化钠反应",
+    "alias": "sodiumHydroxide",
+    "type": "real"
+  },
+
+  {
+    "name": "稀硫酸的化学性质探究",
+    "alias": "chemicalPropertiesOfDiluteSulfuricAcid",
+    "type": "real"
+  },
+
+  {
+    "name": "钠和水反应",
+    "alias": "sodiumReactsWithWater",
+    "type": "real"
+  }
 ]
