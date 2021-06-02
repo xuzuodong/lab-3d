@@ -4,7 +4,7 @@
       <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" />
       <q-tabs shrink content-class="tabs">
         <q-route-tab label="首页" to="/" exact />
-        <q-route-tab label="实验列表" to="/about" exact />
+        <q-route-tab label="实验列表" to="/experiments-list" exact />
         <q-route-tab label="服务与支持" to="/about" exact />
         <q-route-tab label="教学研究" to="/about" exact />
         <q-route-tab label="使用手册" to="/mamual" exact />

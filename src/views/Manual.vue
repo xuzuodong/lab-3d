@@ -1,23 +1,26 @@
 <template>
   <div class="container">
-    <pdf ref="pdf" :src="url"></pdf>
+    <iframe
+      style="width: 100%; height: 100vh;"
+      scrolling="no"
+      :src="`${baseUrl}web/viewer.html?file=${baseUrl}web/manual.pdf`"
+    ></iframe>
   </div>
 </template>
 
 <script>
-import pdf from 'vue-pdf'
 export default {
-  components: {
-    pdf,
-  },
+  components: {},
   data() {
     return {
-      url: 'http://storage.xuetangx.com/public_assets/xuetangx/PDF/PlayerAPI_v1.0.6.pdf',
+      baseUrl: process.env.BASE_URL,
     }
   },
 }
-</script>   
-
+</script>
 
 <style scoped>
+.test-color {
+  background-color: red;
+}
 </style>

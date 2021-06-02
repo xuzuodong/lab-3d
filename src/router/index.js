@@ -8,6 +8,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', name: 'Home', component: Home },
   { path: '/mamual', component: () => import('../views/Manual.vue') },
+  { path: '/experiments-list', component: () => import('../views/ExperimentsList.vue') },
   { path: '/about', name: 'About', component: () => import('../views/About.vue') },
   { path: '/experiment/:alias', component: () => import('../views/ExperimentDetails.vue') },
   { path: '/realExperiment/:alias', component: () => import('../views/RealExperimentDetails.vue') },
