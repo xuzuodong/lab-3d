@@ -29,10 +29,22 @@
         </q-card-section>
       </q-card>
     </div>
+    <div class="row justify-center">
+      <HighchartsPie style="border: 1px solid" :chartConfig="chartConfig" :styles="styles" />
+    </div>
 
     <q-separator class="q-my-lg" color="grey-6" inset />
 
     <div class="container">
+      <div class="text-h6 q-my-md">- 实验操作总评 -</div>
+      <q-separator class="q-my-lg" color="grey-6" inset />
+
+      <div class="text-h6 q-my-md">- 知识学习总评 -</div>
+      <q-separator class="q-my-lg" color="grey-6" inset />
+
+      <div class="text-h6 q-my-md">- 情感态度总评 -</div>
+      <q-separator class="q-my-lg" color="grey-6" inset />
+
       <div class="text-h6 q-my-md">- 实验过程解析 -</div>
       <q-table :data="behaviorList" :columns="columns" :loading="loading" row-key="behaviorName">
         <template v-slot:body="props">
@@ -84,8 +96,9 @@
 import { date } from 'quasar'
 import { mapActions, mapState } from 'vuex'
 import KexperimentDetailsTestsVue from './KexperimentDetailsTests.vue'
+import HighchartsPie from './HighchartsPie.vue'
 export default {
-  components: { KexperimentDetailsTestsVue },
+  components: { KexperimentDetailsTestsVue, HighchartsPie },
 
   data() {
     return {
@@ -117,6 +130,55 @@ export default {
         { name: 'emotion', label: '情绪', field: 'emotion', align: 'center', style: 'min-width: 100px' },
         { name: 'button', label: '知识点分析', field: 'button', align: 'center', style: 'min-width: 140px' },
       ],
+      chartConfig: {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie',
+        },
+        title: {
+          text: '评分模块',
+          style: {
+            color: '#707171',
+            fontSize: '24px',
+          },
+        },
+        series: [
+          {
+            name: '比例',
+            colorByPoint: true,
+            data: [
+              {
+                name: '稀硫酸与酚酞试剂的反应',
+                y: 25,
+                sliced: true,
+                selected: true,
+              },
+              {
+                name: '稀硫酸与紫色石蕊的反应',
+                y: 25,
+              },
+              {
+                name: '稀硫酸与碳酸钠的反应',
+                y: 35.7,
+              },
+              {
+                name: '实验现象观察',
+                y: 10.7,
+              },
+              {
+                name: '整理与清洗',
+                y: 3.6,
+              },
+            ],
+          },
+        ],
+      },
+      styles: {
+        width: 600,
+        height: 400,
+      },
       experimentId: 0,
       experimentName: '',
       percentageScore: '',
