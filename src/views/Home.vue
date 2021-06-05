@@ -3,13 +3,27 @@
     <q-parallax :height="300" :src="url_background">
       <h4 class="text-white">体验炫酷的科学实验！</h4>
     </q-parallax>
+    <div class="row justify-end">
+      <div class="text-subtitle1 self-center">页面大小：</div>
+      <q-btn-toggle
+        v-model="model"
+        toggle-color="primary"
+        flat
+        class="q-mr-md"
+        :options="[
+          { label: '大', value: 'large' },
+          { label: '中', value: 'middle' },
+          { label: '小', value: 'small' },
+        ]"
+        @click="websize"
+      />
+    </div>
+
     <HomeExperimentsListVue />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import DialogJoinVue from '../components/DialogJoin.vue'
 import HomeExperimentsListVue from './HomeExperimentsList.vue'
 import url_background from '../assets/background.jpg'
 
@@ -20,34 +34,23 @@ export default {
   components: { HomeExperimentsListVue },
 
   data() {
-    return { url_background }
-  },
-
-  computed: {
-    ...mapState('user', ['userInfo']),
-  },
-
-  beforeRouteLeave(to, from, next) {
-    if (!this.userInfo && to.path.match('/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid')) {
-      this.$q
-        .dialog({
-          component: DialogJoinVue,
-          parent: this,
-        })
-        .onOk(() => {
-          next()
-        })
-        .onCancel(() => {
-          next(false)
-        })
-        .onDismiss(() => {
-          next(false)
-        })
-    } else {
-      next()
+    return {
+      url_background,
+      model: 'middle',
     }
+  },
 
-    document.title = 'Lab 3D - 体验炫酷的科学实验！'
+  methods: {
+    websize() {
+      let body = document.getElementsByTagName('body')[0]
+      console.log(body)
+      if (this.model == 'large') body.style.zoom = 1.4
+      if (this.model == 'middle') body.style.zoom = 1.2
+      if (this.model == 'small') body.style.zoom = 1
+    },
+  },
+  created() {
+    this.websize()
   },
 }
 </script>

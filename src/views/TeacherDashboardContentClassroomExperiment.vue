@@ -11,8 +11,8 @@
         <q-td key="duration" :props="props">
           {{ props.row.duration }}
         </q-td>
-        <q-td key="score" :props="props">
-          {{ props.row.score }}
+        <q-td key="finalScore" :props="props">
+          {{ props.row.finalScore }}
         </q-td>
         <q-td key="button" :props="props">
           <q-btn
@@ -40,7 +40,7 @@ export default {
         { name: 'realName', required: true, label: '姓名', align: 'left', sortable: true },
         { name: 'experimentName', align: 'left', label: '实验名称', sortable: true },
         { name: 'duration', label: '实验时间', field: 'eTime', align: 'left', sortable: true },
-        { name: 'score', label: '成绩', field: 'score', align: 'center', sortable: true },
+        { name: 'finalScore', label: '成绩', field: 'finalScore', align: 'center', sortable: true },
         { name: 'button', label: '详情', field: 'other', align: 'center' },
       ],
       experiments: [],
@@ -55,7 +55,7 @@ export default {
         // 如果没有结束时间则未完成
         if (e.kexperimentKtime) {
           let duration = date.getDateDiff(e.kexperimentKtime, e.kexperimentCtime, 'seconds')
-          if (e.experimentType == 1)
+          if (e.experimentType == 1 || e.experimentType == 3)
             arr.push({
               ...e,
               kexperimentRouter: 'kexperiment-details',
@@ -66,10 +66,10 @@ export default {
               ...e,
               kexperimentRouter: 'real-kexperiment-details',
               duration: `${(duration / 60).toFixed(0)}分${duration % 60}秒`,
-              score: `${(e.finalScore.percentageScore * 100).toFixed(2)}`,
+              finalScore: `${(e.finalScore.percentageScore * 100).toFixed(2)}`,
             })
         } else {
-          if (e.experimentType == 1)
+          if (e.experimentType == 1 || e.experimentType == 3)
             arr.push({
               ...e,
               kexperimentRouter: 'kexperiment-details',
@@ -80,6 +80,7 @@ export default {
               ...e,
               kexperimentRouter: 'real-kexperiment-details',
               duration: '未完成',
+              finalScore: `${(e.finalScore.percentageScore * 100).toFixed(2)}`,
             })
         }
       })
