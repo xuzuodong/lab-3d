@@ -286,7 +286,7 @@ export default {
           })
           break
         case 10:
-          window.open('http://47.98.192.17/sodiumReactsWithWater/situation.html', '_blank')
+          window.open('http://47.98.192.17/sodiumReactsWithWaterShow/frontTest.html', '_blank')
           break
       }
     },
