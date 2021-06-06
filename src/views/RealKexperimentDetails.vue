@@ -29,23 +29,39 @@
         </q-card-section>
       </q-card>
     </div>
-    <div class="row justify-center">
+    <div class="row justify-around">
       <HighchartsPie style="border: 1px solid" :chartConfig="chartConfig" :styles="styles" />
+      <HighchartsPie style="border: 1px solid" :chartConfig="wrongChartConf" :styles="styles" />
     </div>
 
     <q-separator class="q-my-lg" color="grey-6" inset />
 
     <div class="container">
-      <div class="text-h6 q-my-md">- 实验操作总评 -</div>
+      <div class="text-h6 q-my-md">
+        <q-icon :name="fasBookOpen" />
+        - 实验操作总评 -
+      </div>
+      <div class="text-body1">{{ operationJudge }}</div>
       <q-separator class="q-my-lg" color="grey-6" inset />
 
-      <div class="text-h6 q-my-md">- 知识学习总评 -</div>
+      <div class="text-h6 q-my-md">
+        <q-icon :name="fasVials" />
+        - 知识学习总评 -
+      </div>
+      <div class="text-body1">{{ knowledgeJudge }}</div>
       <q-separator class="q-my-lg" color="grey-6" inset />
 
-      <div class="text-h6 q-my-md">- 情感态度总评 -</div>
+      <div class="text-h6 q-my-md">
+        <q-icon :name="fasAngry" />
+        - 情感态度总评 -
+      </div>
+      <div class="text-body1">{{ emotionJudge }}</div>
       <q-separator class="q-my-lg" color="grey-6" inset />
 
-      <div class="text-h6 q-my-md">- 实验过程解析 -</div>
+      <div class="text-h6 q-my-md">
+        <q-icon :name="fasAddressCard" />
+        - 实验过程解析 -
+      </div>
       <q-table :data="behaviorList" :columns="columns" :loading="loading" row-key="behaviorName">
         <template v-slot:body="props">
           <q-tr :props="props">
@@ -85,7 +101,10 @@
         <KexperimentDetailsTestsVue :testTitle="'实验现象判断'" :testInfo="posttestInfo" />
       </div>
       <div>
-        <div class="text-h6 q-my-md">- 复习建议 -</div>
+        <div class="text-h6 q-my-md">
+          <q-icon :name="fasBell" />
+          - 复习建议 -
+        </div>
         <p class="text-body1">{{ experimentReview }}</p>
       </div>
     </div>
@@ -95,13 +114,19 @@
 <script>
 import { date } from 'quasar'
 import { mapActions, mapState } from 'vuex'
+import { fasBookOpen, fasVials, fasAngry, fasAddressCard, fasBell } from '@quasar/extras/fontawesome-v5'
 import KexperimentDetailsTestsVue from './KexperimentDetailsTests.vue'
-import HighchartsPie from './HighchartsPie.vue'
+import HighchartsPie from '../components/HighchartsPie.vue'
 export default {
   components: { KexperimentDetailsTestsVue, HighchartsPie },
 
   data() {
     return {
+      fasBookOpen: '',
+      fasVials: '',
+      fasAngry: '',
+      fasAddressCard: '',
+      fasBell: '',
       columns: [
         {
           name: 'rbehaviorName',
@@ -175,10 +200,48 @@ export default {
           },
         ],
       },
-      styles: {
-        width: 600,
-        height: 400,
+      wrongChartConf: {
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          type: 'pie',
+        },
+        title: {
+          text: '错误占比',
+          style: {
+            color: '#707171',
+            fontSize: '24px',
+          },
+        },
+        series: [
+          {
+            name: '比例',
+            colorByPoint: true,
+            data: [
+              {
+                name: '正确',
+                y: 69,
+                sliced: true,
+                selected: true,
+              },
+              {
+                name: '错误',
+                y: 31,
+              },
+            ],
+          },
+        ],
       },
+      styles: {
+        width: 0,
+        height: 0,
+      },
+      operationJudge:
+        '在实验步骤上，您基本上能达成正确的实验要求，不过部分的流程步骤上还有一些生疏，比如您在结束实验时，未对实验器材进行清洗和整理。建议对实验的详细步骤在做进一步复习与巩固。规范操作是实验成功的根本保证，在实验的操作规范性上，您对实验的细节把握的较为不错，但是部分实验细节还需注意，如取稀硫酸试剂瓶，稀硫酸试剂瓶瓶盖未倒放。建议对实验的规范操作做一个细致的整理。',
+      emotionJudge:
+        '您在进行该实验操作时能够保持较高的专注度，对实验的整个流程都能较为专心地对待。且在危险实验操作时能保持冷静，规范地完成实验步骤。',
+      knowledgeJudge: '对于实验现象与原理的认识上，您的掌握程度较好，能完全理解稀硫酸的化学性质。',
       experimentId: 0,
       experimentName: '',
       percentageScore: '',
@@ -226,6 +289,11 @@ export default {
 
   created() {
     if (this.userInfo != null) this.loadKexperimentEvaluation()
+    ;(this.fasBookOpen = fasBookOpen),
+      (this.fasVials = fasVials),
+      (this.fasAngry = fasAngry),
+      (this.fasAddressCard = fasAddressCard),
+      (this.fasBell = fasBell)
   },
 
   methods: {

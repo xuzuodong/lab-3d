@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h6 class="text-h6 q-my-md">- {{ testTitle }} -</h6>
+    <h6 class="text-h6 q-my-md"><q-icon :name="fasFlask" />- {{ testTitle }} -</h6>
     <q-table :data="TestList" :columns="testColumns" row-key="name">
       <template v-slot:body="props">
         <q-tr :props="props">
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { fasFlask } from '@quasar/extras/fontawesome-v5'
 export default {
   props: {
     testTitle: String,
@@ -33,6 +34,7 @@ export default {
   },
   data() {
     return {
+      fasFlask: '',
       testColumns: [
         { name: 'title', required: true, label: '题目', align: 'center' },
         {
@@ -59,6 +61,9 @@ export default {
         { name: 'analysis', align: 'center', label: '答案解析', field: 'analysis' },
       ],
     }
+  },
+  created() {
+    this.fasFlask = fasFlask
   },
   computed: {
     TestList: function () {

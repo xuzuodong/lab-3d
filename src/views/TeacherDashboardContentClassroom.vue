@@ -39,7 +39,7 @@
                 style="min-width: 300px"
               />
             </div>
-            <div class="row justify-center q-my-md" v-if="experimentName">
+            <div class="column items-center q-my-md" v-if="experimentName">
               <HighchartsPie :chartConfig="chartConfig1" :styles="styles" />
               <HighchartsColumn :chartConfig="chartConfig2" :styles="styles" />
               <HighchartsColumn :chartConfig="chartConfig3" :styles="styles" />
@@ -68,8 +68,8 @@
 import { mapActions, mapState } from 'vuex'
 import TeacherDashboardContentClassroomExperimentVue from './TeacherDashboardContentClassroomExperiment.vue'
 import TeacherDashboardContentClassroomStudentVue from './TeacherDashboardContentClassroomStudent.vue'
-import HighchartsPie from './HighchartsPie.vue'
-import HighchartsColumn from './HightchartsColumn.vue'
+import HighchartsPie from '../components/HighchartsPie.vue'
+import HighchartsColumn from '../components/HightchartsColumn.vue'
 
 export default {
   components: {
@@ -209,7 +209,7 @@ export default {
         ],
       },
       styles: {
-        width: 0,
+        width: '60%',
         height: 0,
       },
       columns: [

@@ -45,8 +45,8 @@ export default {
     initChart() {
       console.log(this.$el)
       this.options = { ...this.options, ...this.chartConfig }
-      this.$el.style.width = (this.styles.width || 800) + 'px'
-      this.$el.style.height = (this.styles.height || 400) + 'px'
+      this.$el.style.width = this.styles.width || '40%'
+      this.$el.style.height = this.styles.height || '100%'
       this.chart = new Highcharts.Chart(this.$el, this.options)
     },
   },
@@ -55,7 +55,8 @@ export default {
 
 <style lang="scss">
 .highcharts-container {
-  width: 800px;
-  height: 400px;
+  width: 40%;
+  height: 100%;
+  min-width: 500px;
 }
 </style>

@@ -4,6 +4,7 @@
       <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" />
       <q-tabs shrink content-class="tabs">
         <q-route-tab label="首页" to="/" exact />
+        <q-route-tab label="知识图谱" @click="knowledge" to="/" exact />
         <q-route-tab label="关于我们" to="/about" exact />
       </q-tabs>
       <q-space />
@@ -105,6 +106,10 @@ export default {
 
   methods: {
     ...mapMutations('user', ['logout']),
+
+    knowledge(){
+      window.open('http://lab3d.site/knowledge-map/index.html', '_blank')
+    },
 
     openLoginDialog() {
       this.$q
