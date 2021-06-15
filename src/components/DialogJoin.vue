@@ -5,7 +5,18 @@
         <q-card-section>
           <h6 class="q-my-sm">
             欢迎来到 Lab 3D
-            <q-icon name="mdi-test-tube" size="sm" />
+            <img
+              :src="headerLogo"
+              style="
+                margin:7px 0 0 4px
+                width: auto;
+                height: 15px;
+                max-width: 90%;
+                max-height: 90%;
+                position: absolute;
+                clip: rect(0px 25px 15px 0px);
+              "
+            />
           </h6>
         </q-card-section>
         <q-card-section class="q-pa-none">
@@ -47,6 +58,7 @@
 import smoothHeight from 'vue-smooth-height'
 import DialogJoinLoginVue from './DialogJoinLogin.vue'
 import DialogJoinRegisterVue from './DialogJoinRegister.vue'
+import headerLogo from '../assets/headerLogo.png'
 
 export default {
   components: { DialogJoinLoginVue, DialogJoinRegisterVue },
@@ -61,6 +73,7 @@ export default {
   data() {
     return {
       tab: this.join || 'login',
+      headerLogo,
     }
   },
 

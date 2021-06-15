@@ -1,7 +1,10 @@
 <template>
   <q-header v-if="!insideExperiment" class="bg-navBar">
     <q-toolbar class="container toolbar text-white q-mx-auto">
-      <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" />
+      <q-btn stretch flat no-caps size="16px" to="/">
+        <img :src="headerLogo" style="width: auto; height: 50px; max-width: 90%; max-height: 90%" />
+      </q-btn>
+      <!-- <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" /> -->
       <q-tabs shrink content-class="tabs">
         <q-route-tab label="首页" to="/" exact />
         <q-route-tab label="知识图谱" @click="knowledge" to="/" exact />
@@ -92,12 +95,17 @@
 import { mapMutations, mapState } from 'vuex'
 import DialogJoinVue from './components/DialogJoin.vue'
 import UserCenter from './views/UserCenter'
+import headerLogo from './assets/headerLogo.png'
 
 export default {
   props: {
     insideExperiment: {
       type: Boolean,
     },
+  },
+
+  data() {
+    return { headerLogo }
   },
 
   computed: {
@@ -107,7 +115,7 @@ export default {
   methods: {
     ...mapMutations('user', ['logout']),
 
-    knowledge(){
+    knowledge() {
       window.open('http://lab3d.site/knowledge-map/index.html', '_blank')
     },
 
