@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <q-layout view="hhh lpR fff">
+    <q-layout view="hhh lpR fff" class="bg-color">
       <AppHeaderVue :insideExperiment="insideExperiment" />
 
       <q-page-container>
@@ -60,5 +60,8 @@ export default {
   .tabs .q-tab__content {
     min-width: 0;
   }
+}
+.bg-color {
+  background-color: #f8f9fa;
 }
 </style>
