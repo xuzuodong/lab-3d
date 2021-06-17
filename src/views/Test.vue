@@ -34,7 +34,10 @@
             :name="index"
             class="hide-overflow"
           >
-            <div class="q-py-sm">{{ index + 1 }} 、{{ item.content }}</div>
+            <div class="q-py-sm">
+              {{ index + 1 }} 、{{ item.content }}
+              <span v-if="item.imgsrc != null" @click="viewImg(item.imgsrc)">查看图片</span>
+            </div>
             <q-separator />
             <div class="row">
               <q-radio
@@ -89,7 +92,9 @@
 </template>
 
 <script>
+import { Dialog } from 'quasar'
 import { mapActions } from 'vuex'
+import testImagesPanel from '../components/TestImagePanel.vue'
 export default {
   props: {
     questionList: Array,
@@ -155,7 +160,7 @@ export default {
       if (label === '下一题') {
         this.slideIndex++
       } else {
-        this.$emit('ok',this.choiceArray)
+        this.$emit('ok', this.choiceArray)
         this.hide()
         clearInterval(this.timer)
         for (let i = 0; i < this.questionList.length; i++) {
@@ -205,7 +210,13 @@ export default {
 
     chooseRadio(val, evt) {
       val.type = this.type
-      // this.choiceArray.push(val)
+    },
+
+    viewImg(imageUrl) {
+      Dialog.create({
+        component: testImagesPanel,
+        imageUrl,
+      }).onOk(() => {})
     },
   },
 }
