@@ -4,7 +4,24 @@
       <q-btn stretch flat label="Lab 3D" no-caps icon="mdi-test-tube" size="16px" to="/" />
       <q-tabs shrink content-class="tabs">
         <q-route-tab label="首页" to="/" exact />
-        <q-route-tab label="知识图谱" @click="knowledge" to="/" exact />
+        <q-btn dense unelevated no-caps class="full-height" padding="0 16px" label="知识图谱">
+          <q-menu
+            anchor="bottom middle"
+            self="top middle"
+            transition-show="jump-down"
+            transition-hide="jump-up"
+          >
+            <q-list style="min-width: 150px" :class="{ 'bg-grey-9': $q.dark.isActive }">
+              <q-item clickable v-close-popup @click="knowledge('Vitriol')">
+                <q-item-section>稀硫酸</q-item-section>
+              </q-item>
+
+              <q-item clickable v-close-popup @click="knowledge('Friction')">
+                <q-item-section>摩擦力</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
         <q-route-tab label="关于我们" to="/about" exact />
       </q-tabs>
       <q-space />
@@ -22,7 +39,7 @@
             transition-hide="jump-up"
           >
             <q-list style="min-width: 150px" :class="{ 'bg-grey-9': $q.dark.isActive }">
-              <q-item clickable @click="openUserCenter">
+              <q-item clickable v-close-popup @click="openUserCenter">
                 <q-item-section side>
                   <q-icon name="account_circle" size="sm" />
                 </q-item-section>
@@ -107,8 +124,8 @@ export default {
   methods: {
     ...mapMutations('user', ['logout']),
 
-    knowledge(){
-      window.open('http://lab3d.site/knowledge-map/index.html', '_blank')
+    knowledge(experiment) {
+      window.open(`http://lab3d.site/knowledgeMap${experiment}/index.html`, '_blank')
     },
 
     openLoginDialog() {

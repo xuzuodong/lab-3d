@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h6 class="text-h6 q-my-md"><q-icon :name="fasFlask" />- {{ testTitle }} -</h6>
+    <h6 class="text-h6 q-my-md"><q-icon :name="fasFlask" size="xs" />- {{ testTitle }} -</h6>
     <q-table :data="TestList" :columns="testColumns" row-key="name">
       <template v-slot:body="props">
         <q-tr :props="props">

@@ -38,28 +38,28 @@
 
     <div class="container">
       <div class="text-h6 q-my-md">
-        <q-icon :name="fasBookOpen" />
+        <q-icon name="import_contacts" size="sm" />
         - 实验操作总评 -
       </div>
       <div class="text-body1">{{ operationJudge }}</div>
       <q-separator class="q-my-lg" color="grey-6" inset />
 
       <div class="text-h6 q-my-md">
-        <q-icon :name="fasVials" />
+        <q-icon name="lightbulb" size="sm" />
         - 知识学习总评 -
       </div>
       <div class="text-body1">{{ knowledgeJudge }}</div>
       <q-separator class="q-my-lg" color="grey-6" inset />
 
       <div class="text-h6 q-my-md">
-        <q-icon :name="fasAngry" />
+        <q-icon name="mood" size="sm" />
         - 情感态度总评 -
       </div>
       <div class="text-body1">{{ emotionJudge }}</div>
       <q-separator class="q-my-lg" color="grey-6" inset />
 
       <div class="text-h6 q-my-md">
-        <q-icon :name="fasAddressCard" />
+        <q-icon name="rotate_right" size="sm" />
         - 实验过程解析 -
       </div>
       <q-table :data="behaviorList" :columns="columns" :loading="loading" row-key="behaviorName">
@@ -102,7 +102,7 @@
       </div>
       <div>
         <div class="text-h6 q-my-md">
-          <q-icon :name="fasBell" />
+          <q-icon name="notifications" size="sm" />
           - 复习建议 -
         </div>
         <p class="text-body1">{{ experimentReview }}</p>
@@ -114,7 +114,6 @@
 <script>
 import { date } from 'quasar'
 import { mapActions, mapState } from 'vuex'
-import { fasBookOpen, fasVials, fasAngry, fasAddressCard, fasBell } from '@quasar/extras/fontawesome-v5'
 import KexperimentDetailsTestsVue from './KexperimentDetailsTests.vue'
 import HighchartsPie from '../components/HighchartsPie.vue'
 export default {
@@ -122,11 +121,6 @@ export default {
 
   data() {
     return {
-      fasBookOpen: '',
-      fasVials: '',
-      fasAngry: '',
-      fasAddressCard: '',
-      fasBell: '',
       columns: [
         {
           name: 'rbehaviorName',
@@ -289,11 +283,6 @@ export default {
 
   created() {
     if (this.userInfo != null) this.loadKexperimentEvaluation()
-    ;(this.fasBookOpen = fasBookOpen),
-      (this.fasVials = fasVials),
-      (this.fasAngry = fasAngry),
-      (this.fasAddressCard = fasAddressCard),
-      (this.fasBell = fasBell)
   },
 
   methods: {
