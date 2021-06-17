@@ -9,7 +9,6 @@
 
       <q-footer v-if="!insideExperiment" class="text-center bg-navBar">
         <q-separator />
-        <div class="q-pt-md"> © 2011-2019 lab3d.site , All Rights Reserved 浙公网安备 11010350032510号</div>
         <div class="q-py-md">© Lab 3D 版权所有</div>
       </q-footer>
     </q-layout>
