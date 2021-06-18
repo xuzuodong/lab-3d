@@ -1,7 +1,9 @@
 <template>
   <q-dialog ref="dialog" @hide="onDialogHide">
-    <q-card class="q-dialog-plugin">
-      <q-img :src="imageUrl" />
+    <q-card class="q-dialog">
+      <q-card-section>
+        <q-img :src="imageUrl" contain />
+      </q-card-section>
       <q-card-actions align="right">
         <q-btn color="primary" label="确定" @click="onOKClick" />
       </q-card-actions>
@@ -51,5 +53,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.q-dialog {
+  .q-dialog__inner--minimized {
+    padding: 16px;
+  }
+  .q-dialog__inner--minimized > div {
+    max-width: 1000px;
+    min-width: 450px;
+  }
+}
 </style>
