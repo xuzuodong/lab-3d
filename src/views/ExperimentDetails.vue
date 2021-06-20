@@ -109,6 +109,7 @@
                   :key="image.caption"
                   :name="imageIndex"
                   :img-src="image.url"
+                  @click="zoomImage(image.url)"
                 >
                   <div class="absolute-bottom knowledge-point-image-caption">
                     <div class="text-subtitle2">{{ image.caption }}</div>
@@ -145,6 +146,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import DialogJoinVue from '../components/DialogJoin.vue'
+import testImagesPanel from '../components/TestImagePanel.vue'
 import vuePlyr from 'vue-plyr'
 import TestVue from './Test'
 export default {
@@ -250,6 +252,13 @@ export default {
             this.loadExperimentDetails()
           })
       }
+    },
+    zoomImage(imageUrl) {
+      this.$q.dialog({
+        component: testImagesPanel,
+        parent:this,
+        imageUrl,
+      }).onOk(() => {})
     },
   },
 
