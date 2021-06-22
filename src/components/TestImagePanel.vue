@@ -51,5 +51,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.q-dialog {
+  .q-dialog__inner--minimized {
+    padding: 16px;
+  }
+  .q-dialog__inner--minimized > div {
+    max-width: 1000px;
+    min-width: 450px;
+  }
+}
 </style>

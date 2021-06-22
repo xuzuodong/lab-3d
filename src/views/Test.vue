@@ -36,7 +36,7 @@
           >
             <div class="q-py-sm">
               {{ index + 1 }} 、{{ item.content }}
-              <span v-if="item.imgsrc != null" @click="viewImg(item.imgsrc)">查看图片</span>
+              <span v-if="item.imgsrc != null" @click="viewImg(item.imgsrc)" class="viewImg">查看图片</span>
             </div>
             <q-separator />
             <div class="row">
@@ -114,16 +114,16 @@ export default {
   },
 
   computed: {
-    testName: function () {
+    testName: function() {
       if (this.type == 1) return 'Pretest'
       if (this.type == 2) return 'Posttest'
       else return ''
     },
-    submitBtnLabel: function () {
+    submitBtnLabel: function() {
       if (this.slideIndex + 1 != this.questionList.length) return '下一题'
       else return '提交'
     },
-    submitBtnDisable: function () {
+    submitBtnDisable: function() {
       if (this.submitBtnLabel === '下一题') {
         if (this.answer[this.slideIndex] == undefined) return true
         else return false
@@ -235,5 +235,10 @@ export default {
 
 .hide-overflow {
   overflow: hidden;
+}
+
+.viewImg {
+  cursor: pointer;
+  color: red;
 }
 </style>
