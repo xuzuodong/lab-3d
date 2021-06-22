@@ -15,6 +15,10 @@ body {
 
 @import './quasar.variables.scss';
 
+body {
+  zoom: 1.2;
+}
+
 .container {
   margin: 0 auto;
   @media screen and (max-width: $breakpoint-xl-max) {

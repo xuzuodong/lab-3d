@@ -39,9 +39,14 @@ export default {
       const insideExperiment = this.$route.matched.some((r) => r.path.match('/scene/'))
       this.insideExperiment = insideExperiment
 
+      if (insideExperiment) document.body.setAttribute('style', 'zoom: 1')
+
       // 如果从实验内部出来，则确保 talker 组件关闭
       let talkerNode = document.getElementById('talker')
-      if (talkerNode && !insideExperiment) document.body.removeChild(talkerNode)
+      if (talkerNode && !insideExperiment) {
+        document.body.removeChild(talkerNode)
+        document.body.removeAttribute('style')
+      }
 
       // 进入实验内部时（通过输入 url 进入），如果没有登录，则回到首页
       if (insideExperiment && !this.userInfo) this.$router.replace({ path: '/' })
@@ -50,7 +55,7 @@ export default {
 
   created() {
     this.$q.dark.set('auto')
-  }
+  },
 }
 </script>
 
