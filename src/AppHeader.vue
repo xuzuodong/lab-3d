@@ -16,11 +16,11 @@
           >
             <q-list style="min-width: 150px" :class="{ 'bg-grey-9': $q.dark.isActive }">
               <q-item clickable v-close-popup @click="knowledge('Vitriol')">
-                <q-item-section>稀硫酸</q-item-section>
+                <q-item-section>化学图谱</q-item-section>
               </q-item>
 
               <q-item clickable v-close-popup @click="knowledge('Friction')">
-                <q-item-section>摩擦力</q-item-section>
+                <q-item-section>物理图谱</q-item-section>
               </q-item>
             </q-list>
           </q-menu>

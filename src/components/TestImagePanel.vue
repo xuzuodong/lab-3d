@@ -1,5 +1,5 @@
 <template>
-  <q-dialog ref="dialog" @hide="onDialogHide">
+  <q-dialog ref="dialog" @hide="onDialogHide" persistent>
     <q-card class="q-dialog-plugin">
       <q-img :src="imageUrl" />
       <q-card-actions align="right">

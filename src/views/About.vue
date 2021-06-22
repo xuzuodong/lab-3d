@@ -16,7 +16,7 @@
               <q-item-section avatar>
                 <q-avatar class="text-orange-8">></q-avatar>
               </q-item-section>
-              <q-item-section class="text-h6">Lab 3D</q-item-section>
+              <q-item-section class="text-h6">关于本项目</q-item-section>
             </q-item>
             <q-separator inset />
 
@@ -55,8 +55,9 @@
               {{ contacts.find((e) => e.id == i).content1 }}
             </div>
           </q-card-section>
-          <div v-if="showpic">
-            <img src="../assets/ScreenShot.png" alt="" height="100%" width="100%" />
+          <div v-if="showpic" class="row justify-around">
+            <div class="col-5"><img src="../assets/about1.png" alt="" height="100%" width="100%" /></div>
+            <div class="col-5"><img src="../assets/about2.png" alt="" height="100%" width="100%" /></div>
           </div>
           <div class="row">
             <div class="q-mx-auto q-my-xl q-pt-xl">
@@ -66,7 +67,7 @@
               <img src="../assets/jyxyLogo.png" alt="" height="70" width="276" />
             </div>
             <div class="q-mx-auto q-my-xl q-pt-xl">
-              <img src="../assets/babylonjs.png" alt="" height="70" width="278" />
+              <img src="../assets/projectLogo.png" alt="" height="70" width="278" />
             </div>
           </div>
         </q-card>
@@ -78,11 +79,11 @@
 const contacts = [
   {
     id: 0,
-    name: 'Lab 3D',
+    name: '关于本项目',
     content:
-      'Lab3d是一个炫酷的线上虚拟仿真科学实验室。在这里，提供了有趣、免费、互动、基于研究的科学仿真实验。3D化的建模与场景为学生带来了更为真实的实验情境，故事化的引导模式与自由探索相结合，让学生在游戏化的实验情境中建构知识，强化情景式记忆，做到寓教于乐。',
+      '本项目是国家重点研发计划“多模态自然交互的虚实融合开放式实验教学环境（应用示范类）”中的第三子课题“探究式学习模型与交互行为分析”的研发项目，该项目研发任务由杭州师范大学、中山大学、同济大学科研团队共同合作承担。',
     content1:
-      '我们使用Vue与BabylonJS进行结合，将虚拟实验搭载至网页端，实验无需下载，在线上即可实时进行模拟，赶紧开启你的实验师之旅吧！',
+      '本项目拟通过对中学主干课程实验教学中多种交互模型的融合共存、多模态交互意图的精确理解，提供复杂实验教学环境中虚实融合的实时仿真、多通道感知（视、听、触、嗅）同步呈现，研究探究式学习过程建模与行为量化评估等科学问题。项目预期实现我国优质教学资源远程教育的共建共享，更好地阐释和展现科学原理，并开发新型的教学实验，解决现有中学实验课程中探究性弱、自主性差、精准性低、实验成本高等系列难题。',
   },
   {
     id: 1,
