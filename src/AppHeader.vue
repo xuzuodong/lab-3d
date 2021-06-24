@@ -25,6 +25,7 @@
             </q-list>
           </q-menu>
         </q-btn>
+        <q-route-tab label="使用手册" to="/manual" exact />
         <q-route-tab label="关于我们" to="/about" exact />
       </q-tabs>
       <q-space />
