@@ -15,12 +15,28 @@
             transition-hide="jump-up"
           >
             <q-list style="min-width: 150px" :class="{ 'bg-grey-9': $q.dark.isActive }">
-              <q-item clickable v-close-popup @click="knowledge('Vitriol')">
+              <q-item clickable v-close-popup @click="knowledge('chemistry')">
                 <q-item-section>化学图谱</q-item-section>
               </q-item>
 
-              <q-item clickable v-close-popup @click="knowledge('Friction')">
+              <q-item clickable>
                 <q-item-section>物理图谱</q-item-section>
+                <q-item-section side>
+                  <q-icon name="keyboard_arrow_right" />
+                </q-item-section>
+                <q-menu anchor="top end" self="top start">
+                  <q-list dense>
+                    <q-item
+                      v-for="item in physicalItems"
+                      :key="item.id"
+                      clickable
+                      v-close-popup
+                      @click="knowledge(item.knowledgeMap)"
+                    >
+                      <q-item-section>{{ item.subItem }}</q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
               </q-item>
             </q-list>
           </q-menu>
@@ -123,7 +139,16 @@ export default {
   },
 
   data() {
-    return { headerLogo }
+    return {
+      headerLogo,
+      physicalItems: [
+        { id: 1, subItem: '力学', knowledgeMap: 'dynamics' },
+        { id: 2, subItem: '电学', knowledgeMap: 'electricity' },
+        { id: 3, subItem: '热学', knowledgeMap: '' },
+        { id: 4, subItem: '光学', knowledgeMap: '' },
+        { id: 5, subItem: '现代物理', knowledgeMap: '' },
+      ],
+    }
   },
 
   computed: {
@@ -134,7 +159,7 @@ export default {
     ...mapMutations('user', ['logout']),
 
     knowledge(experiment) {
-      window.open(`http://lab3d.site/knowledgeMap${experiment}/index.html`, '_blank')
+      window.open(`http://lab3d.site/knowledgeMap/${experiment}/index.html`, '_blank')
     },
 
     openLoginDialog() {
@@ -174,5 +199,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
