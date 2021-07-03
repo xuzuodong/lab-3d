@@ -37,8 +37,17 @@
             <q-space />
             <div class="text-center">
               <q-btn
-                v-if="experiment.id != 11"
+                v-if="experiment.id != 11 && experiment.id != 5"
                 @click="openOldRealExperiment(experiment.id)"
+                unelevated
+                rounded
+                label="进入实验"
+                color="primary"
+                icon-right="arrow_forward"
+              />
+              <q-btn
+                v-else-if="experiment.id == 5"
+                @click="sodiumHydroxideConfirm()"
                 unelevated
                 rounded
                 label="进入实验"
@@ -289,6 +298,22 @@ export default {
           window.open('http://47.98.192.17/sodiumReactsWithWaterShow/frontTest.html', '_blank')
           break
       }
+    },
+
+    sodiumHydroxideConfirm() {
+      this.$q
+        .dialog({
+          title: '进入实验',
+          message: '确定进入实验？',
+          cancel: true,
+          persistent: true,
+        })
+        .onOk(() => {
+          window.open('http://47.98.192.17/coppertask/qingjing.html', '_blank')
+        })
+        .onCancel(() => {
+          console.log('不进入实验')
+        })
     },
   },
 
