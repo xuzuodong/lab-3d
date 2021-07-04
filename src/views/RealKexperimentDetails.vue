@@ -29,7 +29,7 @@
         </q-card-section>
       </q-card>
     </div>
-    <div class="row justify-around">
+    <div class="row justify-around" v-if="experimentId == 11">
       <HighchartsPie style="border: 1px solid" :chartConfig="chartConfig" :styles="styles" />
       <HighchartsPie style="border: 1px solid" :chartConfig="wrongChartConf" :styles="styles" />
     </div>
@@ -41,22 +41,25 @@
         <q-icon name="import_contacts" size="sm" />
         - 实验操作总评 -
       </div>
-      <div class="text-body1">{{ operationJudge }}</div>
+      <div class="text-body1" v-if="experimentId == 11">{{ operationJudge }}</div>
+      <div class="text-body1" v-if="experimentId == 12">
+        在实验操作的规范性上，表现良好；在步骤顺序上表现良好；正确性上表现良好
+      </div>
       <q-separator class="q-my-lg" color="grey-6" inset />
 
-      <div class="text-h6 q-my-md">
+      <div class="text-h6 q-my-md" v-if="experimentId == 11">
         <q-icon name="lightbulb" size="sm" />
         - 知识学习总评 -
       </div>
-      <div class="text-body1">{{ knowledgeJudge }}</div>
-      <q-separator class="q-my-lg" color="grey-6" inset />
+      <div class="text-body1" v-if="experimentId == 11">{{ knowledgeJudge }}</div>
+      <q-separator class="q-my-lg" color="grey-6" inset v-if="experimentId == 11" />
 
-      <div class="text-h6 q-my-md">
+      <div class="text-h6 q-my-md" v-if="experimentId == 11">
         <q-icon name="mood" size="sm" />
         - 情感态度总评 -
       </div>
-      <div class="text-body1">{{ emotionJudge }}</div>
-      <q-separator class="q-my-lg" color="grey-6" inset />
+      <div class="text-body1" v-if="experimentId == 11">{{ emotionJudge }}</div>
+      <q-separator class="q-my-lg" color="grey-6" inset v-if="experimentId == 11" />
 
       <div class="text-h6 q-my-md">
         <q-icon name="rotate_right" size="sm" />
@@ -252,7 +255,7 @@ export default {
   computed: {
     ...mapState('user', ['userInfo']),
 
-    evaluation: function () {
+    evaluation: function() {
       switch (true) {
         case this.presentScore >= 90:
           return '新大神降临！您在这次的实验中的表现完美无缺！'
@@ -267,7 +270,7 @@ export default {
       }
     },
 
-    behaviorList: function () {
+    behaviorList: function() {
       const returnArr = []
       this.realBehaviorInfo.forEach((e, i) => {
         if (e.isCorrect === true) returnArr.push({ ...e, isCorrect: '正确' })
@@ -276,7 +279,7 @@ export default {
       return returnArr
     },
 
-    presentScore: function () {
+    presentScore: function() {
       return Math.round(this.percentageScore * 100)
     },
   },
