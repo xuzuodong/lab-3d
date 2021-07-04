@@ -27,5 +27,11 @@
     "name": "钠和水反应",
     "alias": "sodiumReactsWithWater",
     "type": "real"
+  },
+
+  {
+    "name": "磁场探秘",
+    "alias": "explorationOfMagneticField",
+    "type": "real"
   }
 ]

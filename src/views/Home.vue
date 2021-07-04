@@ -36,7 +36,6 @@ import HomeExperimentsListVue from './HomeExperimentsList.vue'
 import url_background from '../assets/banner.png'
 import exp from '../assets/exp.png'
 
-//先把评价页链接在这里，到时候再改路径
 export default {
   name: 'Home',
 
@@ -84,9 +83,9 @@ export default {
   methods: {
     websize() {
       let body = document.getElementsByTagName('body')[0]
-      if (this.model == 'exlarge') body.setAttribute('style','zoom: 1.4')
-      if (this.model == 'large') body.setAttribute('style','zoom: 1.2')
-      if (this.model == 'normal') body.setAttribute('style','zoom: 1')
+      if (this.model == 'exlarge') body.setAttribute('style', 'zoom: 1.4')
+      if (this.model == 'large') body.setAttribute('style', 'zoom: 1.2')
+      if (this.model == 'normal') body.setAttribute('style', 'zoom: 1')
     },
   },
 }

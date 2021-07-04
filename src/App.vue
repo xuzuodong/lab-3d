@@ -39,7 +39,11 @@ export default {
       const insideExperiment = this.$route.matched.some((r) => r.path.match('/scene/'))
       this.insideExperiment = insideExperiment
 
-      if (insideExperiment) document.body.setAttribute('style', 'zoom: 1')
+      if (insideExperiment) {
+        document.body.setAttribute('style', 'zoom: 1')
+      } else {
+        document.body.setAttribute('style', 'zoom: 1.2')
+      }
 
       // 如果从实验内部出来，则确保 talker 组件关闭
       let talkerNode = document.getElementById('talker')
