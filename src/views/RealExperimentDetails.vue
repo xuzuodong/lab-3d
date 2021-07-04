@@ -178,7 +178,7 @@ export default {
   },
 
   watch: {
-    userInfo: function() {
+    userInfo: function () {
       this.loadExperimentDetails()
     },
   },
@@ -293,10 +293,12 @@ export default {
           .onOk(() => {
             switch (id) {
               case 5:
-                window.open('http://47.98.192.17/coppertask/qingjing.html', '_blank')
+                // window.open('http://47.98.192.17/coppertask/qingjing.html', '_blank')
+                this.$router.push('/')
                 break
               case 10:
-                window.open('http://47.98.192.17/sodiumReactsWithWaterShow/frontTest.html', '_blank')
+                // window.open('http://47.98.192.17/sodiumReactsWithWaterShow/frontTest.html', '_blank')
+                this.$router.push('/')
                 break
               case 11:
                 this.$router.push('/scene/' + this.$route.params.alias)
