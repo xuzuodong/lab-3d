@@ -37,26 +37,7 @@
             <q-space />
             <div class="text-center">
               <q-btn
-                v-if="experiment.id != 11 && experiment.id != 5"
-                @click="openOldRealExperiment(experiment.id)"
-                unelevated
-                rounded
-                label="进入实验"
-                color="primary"
-                icon-right="arrow_forward"
-              />
-              <q-btn
-                v-else-if="experiment.id == 5"
-                @click="sodiumHydroxideConfirm()"
-                unelevated
-                rounded
-                label="进入实验"
-                color="primary"
-                icon-right="arrow_forward"
-              />
-              <q-btn
-                v-else
-                :to="'/scene/' + $route.params.alias"
+                @click="enterExperimentConfirm(experiment.id)"
                 unelevated
                 rounded
                 label="进入实验"
@@ -300,20 +281,35 @@ export default {
       }
     },
 
-    sodiumHydroxideConfirm() {
-      this.$q
-        .dialog({
-          title: '进入实验',
-          message: '确定进入实验？',
-          cancel: true,
-          persistent: true,
-        })
-        .onOk(() => {
-          window.open('http://47.98.192.17/coppertask/qingjing.html', '_blank')
-        })
-        .onCancel(() => {
-          console.log('不进入实验')
-        })
+    enterExperimentConfirm(id) {
+      if (id == 5 || id == 10 || id == 11) {
+        this.$q
+          .dialog({
+            title: '进入实验',
+            message: '确定进入实验？',
+            cancel: true,
+            persistent: true,
+          })
+          .onOk(() => {
+            switch (id) {
+              case 5:
+                window.open('http://47.98.192.17/coppertask/qingjing.html', '_blank')
+                break
+              case 10:
+                window.open('http://47.98.192.17/sodiumReactsWithWaterShow/frontTest.html', '_blank')
+                break
+              case 11:
+                this.$router.push('/scene/' + this.$route.params.alias)
+            }
+          })
+          .onCancel(() => {
+            console.log('不进入实验')
+          })
+      } else if (id == 12) {
+        this.$router.push('/scene/' + this.$route.params.alias)
+      } else {
+        this.openOldRealExperiment(id)
+      }
     },
   },
 
