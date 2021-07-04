@@ -40,6 +40,7 @@ export default {
       success: (experiments) => {
         this.experiments = experiments.reverse()
         this.failure = false
+        console.log(experiments);
       },
       failure: (res) => {
         this.failure = true

@@ -238,6 +238,21 @@ export default {
               },
             })
           }
+
+          if (localStorage.getItem('kexperimentId') == null && experiment.id == 12) {
+            this.startExperiment({
+              experimentId: experiment.id,
+              success: (res) => {
+                this.kexperimentId = res.kexperimentId
+                console.log(this.kexperimentId)
+                localStorage.setItem('kexperimentId', res.kexperimentId)
+                console.log(localStorage.getItem('kexperimentId'))
+              },
+              failure: (res) => {
+                console.log(res)
+              },
+            })
+          }
           // console.log(localStorage.getItem('kexperimentId'))
 
           this.getEquipment({
