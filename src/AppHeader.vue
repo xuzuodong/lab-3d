@@ -79,6 +79,19 @@
                 <q-item-section>班级</q-item-section>
               </q-item>
 
+              <q-item
+                v-if="userInfo.type == '学生'"
+                clickable
+                v-close-popup
+                to="/portfolio-recommendation"
+                :active-class="$q.dark.isActive ? 'text-white' : 'text-dark'"
+              >
+                <q-item-section side>
+                  <q-icon name="grade" size="sm" />
+                </q-item-section>
+                <q-item-section>学习档案与推荐</q-item-section>
+              </q-item>
+
               <q-item to="/kexperiments-list">
                 <q-item-section side>
                   <q-icon name="history" size="sm" />

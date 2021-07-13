@@ -12,6 +12,7 @@ const routes = [
   { path: '/experiment/:alias', component: () => import('../views/ExperimentDetails.vue') },
   { path: '/realExperiment/:alias', component: () => import('../views/RealExperimentDetails.vue') },
   { path: '/classrooms-list', component: () => import('../views/ClassroomsList.vue') },
+  { path: '/portfolio-recommendation', component: () => import('../views/PortfolioAndRecommendation.vue') },
   { path: '/kexperiments-list', component: () => import('../views/KexperimentsList.vue') },
   {
     path: '/dashboard',
