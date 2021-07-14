@@ -80,7 +80,7 @@
               </q-item>
 
               <q-item
-                v-if="userInfo.type == '学生'"
+                v-if="userInfo.id == 35 || userInfo.id == 74 || userInfo.id == 95"
                 clickable
                 v-close-popup
                 to="/portfolio-recommendation"
