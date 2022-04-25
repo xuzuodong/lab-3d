@@ -280,7 +280,14 @@ export default {
     },
 
     presentScore: function() {
-      return Math.round(this.percentageScore * 100)
+      if (this.experimentId == 12 || this.experimentId == 13 || this.experimentId == 14) {
+        if (this.finalScore >= this.allScore || this.finalScore > 100) {
+          this.finalScore == 100
+        }
+        return Math.round((this.finalScore / this.allScore) * 100)
+      } else {
+        return Math.round(this.percentageScore * 100)
+      }
     },
   },
 

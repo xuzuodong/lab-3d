@@ -9,13 +9,19 @@
 
       <q-footer v-if="!insideExperiment" class="text-center bg-navBar">
         <q-separator />
-        <div class="q-py-md">© Lab 3D 版权所有</div>
+        <div class="q-py-md row item-center justify-center">
+          <!-- © Lab 3D 版权所有 -->
+          <img :src="police" class="q-mr-xs" />
+          备案号：
+          <a href="https://beian.miit.gov.cn/" style="text-decoration:none" target="_blank"><span class="text-white">浙ICP备19051402号-1</span></a>
+        </div>
       </q-footer>
     </q-layout>
   </div>
 </template>
 
 <script>
+import police from './assets/police.jpg'
 import { mapState } from 'vuex'
 import AppHeaderVue from './AppHeader.vue'
 
@@ -24,6 +30,7 @@ export default {
 
   data() {
     return {
+      police,
       insideExperiment: false,
     }
   },
