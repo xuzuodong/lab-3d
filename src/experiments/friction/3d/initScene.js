@@ -60,9 +60,9 @@ export default (scene) => {
                 light2.intensity = 0.4;
                 const shadowGenerator = new BABYLON.ShadowGenerator(2048, light2);
                 shadowGenerator.useBlurExponentialShadowMap = true;
-                shadowGenerator.getShadowMap().renderList.push(role);
-                shadowGenerator.getShadowMap().renderList.push(box);
-                shadowGenerator.addShadowCaster(scene.meshes[0], true);
+                // shadowGenerator.getShadowMap().renderList.push(role);
+                // shadowGenerator.getShadowMap().renderList.push(box);
+                // shadowGenerator.addShadowCaster(scene.meshes[0], true);
             }
 
             const road = BABYLON.MeshBuilder.CreateGround("road", {

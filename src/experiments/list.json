@@ -12,6 +12,12 @@
   },
 
   {
+    "name": "盐的溶解-重制",
+    "alias": "dissolutionOfSalt",
+    "type": "virtual"
+  },
+
+  {
     "name": "胆矾与氢氧化钠反应",
     "alias": "sodiumHydroxide",
     "type": "real"

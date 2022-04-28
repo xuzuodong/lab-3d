@@ -208,6 +208,7 @@ export default {
       this.selectExperimentByAlias({
         alias: this.$route.params.alias,
         success: (experiment) => {
+          console.log(experiment);
           this.experiment = experiment
           document.title = experiment.name + ' | Lab 3D'
           this.knowledgeImageSlides = this.experiment.knowledgePoints.map(() => 0)
@@ -225,6 +226,7 @@ export default {
           experimentId,
           choiceType: choiceType,
           success: (res) => {
+            console.log(res);
             this.$q
               .dialog({
                 component: TestVue,
