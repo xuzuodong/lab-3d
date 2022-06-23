@@ -1,6 +1,7 @@
 import { Dialog } from 'quasar'
 import { Notify } from 'quasar'
 import storeData from '../2d/storeData'
+import conditionData from '../2d/conditionData'
 import woodjpg from '../2d/assets/wood.jpg'
 import grasspng from '../2d/assets/grass.png'
 import icejpg from '../2d/assets/ice.jpg'
@@ -39,20 +40,23 @@ export default [
     paragraph: '开始实验',
     talk: 0,
     method: ({ next, scene }) => {
-      const assume = Dialog.create({
-        component: designPage,
-        data: [{ message: 'A 将温度调整至15℃' },
-        { message: 'B 将温度调整至25℃' },
-        { message: 'C 向烧杯中加入适量水' },
-        { message: 'D 向烧杯中加入100毫升水' },
-        { message: 'E 向烧杯中加盐，食盐完全溶解烧杯底部没有剩余' },
-        { message: 'F 向烧杯中加盐至烧杯底部有剩余盐不再溶解' },
-        { message: 'G 记录实验结果：盐的溶解度' },
-        { message: 'H 结束实验' },]
-      }).onOk(async () => {
-        next()
+
+      const test = Dialog.create({
+        component: testPage,
+        data: [{ message: '水' }, { message: '酒精' }, { message: '油' },],
+        tthis: scene
       })
-      scene.mutate({ assumePanel: assume })
+      const param = Dialog.create({
+        component: paramPage,
+        // information: [{
+        //   liquidVolume: 40,
+        //   saltAmount: 10,
+        //   dissolvedSaltAmount: 10,
+        //   temperature: 20,
+        // }]
+      })
+      scene.mutate({ paramPanel: param })
+      scene.mutate({ testPanel: test })
     },
   },
   {
@@ -79,7 +83,6 @@ export default [
     method: ({ next, scene }) => {
       const video = Dialog.create({
         component: videoPage,
-        icon: true,
       }).onOk(async () => {
         next()
       })

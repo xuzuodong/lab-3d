@@ -1,64 +1,71 @@
 <template>
-  <div class="QTest" >
+  <div class="QTest">
     <q-dialog
       ref="dialog"
       @hide="onDialogHide"
       seamless
-      transition-show="slide-left"
-      transition-hide="slide-right"
-      class="top-right-dialog"
+      transition-show="slide-right"
+      transition-hide="slide-left"
+      class="bottom-left-dialog"
     >
-      <q-card class="my-card">
-        <q-card-section class="bg-secondary text-white">
-          <div class="text-h6">改变接触面积</div>
-          <div>
-            <q-btn color="secondary" label="使物品与地面接触面积变大" class="q-my-sm" @click="large" />
-          </div>
-          <div>
-            <q-btn color="secondary" label="使物品与地面接触面积变小" class="q-my-sm" @click="small" />
-          </div>
+      <q-card class="my-card bg-indigo-8 dialogStyle">
+        <q-card-section class="q-py-xl q-my-lg">
+          <q-badge class="text-h6 absolute-top q-ml-md" color="indigo-8">将溶剂设置为：</q-badge>
+          <q-btn-dropdown :label="dropdown" flat vertical class="absolute-center" text-color="white">
+            <q-list>
+              <q-item
+                clickable
+                v-close-popup
+                v-for="item in datas"
+                :key="item.message"
+                style="text-align: center"
+                @click="onItemClick(item.message)"
+              >
+                <q-item-section>
+                  <q-item-label>{{ item.message }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
         </q-card-section>
 
         <q-separator />
 
-        <q-card-section class="bg-secondary text-white">
-          <div class="text-h6">改变地面材质</div>
-          <div>
-            <q-btn color="secondary" class="q-mx-sm q-my-sm" @click="grass">
-              草地
-              <br />
-              (非常粗糙)
-            </q-btn>
-            <q-btn color="secondary" class="q-mx-sm q-my-sm" @click="wood">
-              木板
-              <br />
-              (较为光滑)
-            </q-btn>
-            <q-btn color="secondary" class="q-mx-sm q-my-sm" @click="ice">
-              冰面
-              <br />
-              (非常光滑)
-            </q-btn>
-          </div>
-        </q-card-section>
-
-        <q-separator />
-        <q-card-section class="q-pa-md bg-secondary text-white">
-          <q-badge class="text-h6 q-mb-xl" color="secondary">将质量改变为：{{ gravityData }}</q-badge>
-          <q-badge class="text-h7" color="secondary">kg</q-badge>
-          <q-btn color="secondary" label="确定" class="qbutton q-ml-xl" @click="dataPast" />
+        <q-card-section class="bg-indigo-8">
+          <q-badge class="text-h6 q-mb-lg" color="indigo-8">将溶剂温度设置为：{{ temperatureData }}</q-badge>
+          <q-badge class="text-h7" color="indigo-8">℃</q-badge>
           <q-slider
-            v-model="gravityData"
+            v-model="temperatureData"
             color="white"
-            markers
-            :min="25"
-            :max="75"
-            :step="25"
+            :min="0"
+            :max="100"
+            :step="1"
             label
             label-always
-            label-color="secondary"
+            label-color="indigo-8"
             label-text-color="white"
             dense
+            @input="temperaturePast"
+          />
+        </q-card-section>
+
+        <q-separator />
+
+        <q-card-section class="bg-indigo-8">
+          <q-badge class="text-h6 q-mb-lg" color="indigo-8">将溶剂体积设置为：{{ volumeData }}</q-badge>
+          <q-badge class="text-h7" color="indigo-8">mL</q-badge>
+          <q-slider
+            v-model="volumeData"
+            color="white"
+            :min="5"
+            :max="100"
+            :step="1"
+            label
+            label-always
+            label-color="indigo-8"
+            label-text-color="white"
+            dense
+            @input="volumePast"
           />
         </q-card-section>
       </q-card>
@@ -66,14 +73,22 @@
   </div>
 </template>
 <script>
-import storeData from './storeData'
+import condition from './conditionData'
+import eventBus from './eventBus.js'
+import actions from '../3d/actions.js'
+
 export default {
-  name: 'testPage',
+  name: 'test-page',
   data() {
     return {
-      gravityData: 75,
+      temperatureData: condition.temperature,
+      volumeData: condition.liquidVolume,
+      dropdown: '选择你想要的溶剂',
+      datas: this.data,
+      tthiss: this.tthis,
     }
   },
+  props: { data: Array, tthis: Object },
   methods: {
     show() {
       this.$refs.dialog.show()
@@ -88,43 +103,34 @@ export default {
       this.$emit('ok')
       this.hide()
     },
+    onItemClick(solute) {
+      // console.log('Clicked on an Item')
+      this.dropdown = solute
+      actions.liquidType(solute)
+    },
 
-    grass() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('grass')
-      this.$emit('ok', this)
+    temperaturePast() {
+      condition.temperature = this.temperatureData
+      eventBus.$emit('aMsg', '来自A页面的消息')
+      actions.updateData('temperature')
     },
-    wood() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('wood')
-      this.$emit('ok', this)
+    volumePast() {
+      condition.liquidVolume = this.volumeData
+      eventBus.$emit('aMsg', '来自A页面的消息')
+      actions.updateData('volume')
     },
-    ice() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('ice')
-      this.$emit('ok', this)
-    },
-    large() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('large')
-      this.$emit('ok', this)
-    },
-    small() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push('small')
-      this.$emit('ok', this)
-    },
-    dataPast() {
-      this.hide()
-      storeData.splice(0, storeData.length)
-      storeData.push(this.gravityData)
-      this.$emit('ok', this.gravityData)
-    },
+  },
+  mounted() {
+    actions.getThis(this.tthiss)
+    actions.updateData()
   },
 }
 </script>
+<style scoped>
+.my-card {
+  width: 400px;
+}
+.dialogStyle {
+  height: 100%;
+}
+</style>

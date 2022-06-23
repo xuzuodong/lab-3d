@@ -7,38 +7,27 @@
       class="top-right-dialog"
       seamless
     >
-      <q-card style="width: 350px">
-        <q-card-section class="bg-secondary text-white q-px-md">
-          <div class="text-h6 text-center">
-            拉动木箱<span class="text-yellow">{{ information[0].msg }}</span>
-          </div>
-          <div class="text-h7 q-mt-sm text-center">达到受力平衡</div>
+      <q-card style="width: 350px" class="bg-indigo-8">
+        <q-card-section class="bg-indigo-8 text-white q-px-md">
+          <div class="text-h6 text-center">实时数据</div>
         </q-card-section>
-        <q-separator />
-        <q-card-section class="bg-secondary text-white q-px-md">
+        <q-card-section class="bg-indigo-8 text-white q-px-md">
           <div>
-            <q-badge class="text-body1 bg-secondary text-white">机器人的拉力:</q-badge>
-            <q-badge class="text-body1 bg-secondary text-white float-right">
-              {{ information[0].force }}N
+            <q-badge class="text-body1 bg-indigo-8 text-white">当前下落的盐共：{{ saltAmount }} g</q-badge>
+          </div>
+          <div>
+            <q-badge class="text-body1 bg-indigo-8 text-white">
+              其中溶解在溶剂中的盐共：{{ dissolvedSaltAmount }} g
             </q-badge>
           </div>
           <div>
-            <q-badge class="text-body1 bg-secondary text-white">摩擦系数（μ）：</q-badge>
-            <q-badge class="text-body1 bg-secondary text-white float-right">
-              {{ information[0].coefficient }}
-            </q-badge>
+            <q-badge class="text-body1 bg-indigo-8 text-white">温度：{{ temperature }} ℃</q-badge>
           </div>
           <div>
-            <q-badge class="text-body1 bg-secondary text-white">接触面积：</q-badge>
-            <q-badge class="text-body1 bg-secondary text-white float-right">
-              {{ information[0].square }}m²
-            </q-badge>
+            <q-badge class="text-body1 bg-indigo-8 text-white">体积：{{ liquidVolume }} mL</q-badge>
           </div>
           <div>
-            <q-badge class="text-body1 bg-secondary text-white">木块质量：</q-badge>
-            <q-badge class="text-body1 bg-secondary text-white float-right">
-              {{ information[0].mass }}kg
-            </q-badge>
+            <q-badge class="text-body1 bg-indigo-8 text-white">溶液的浓度 C = {{ Concentration }} %</q-badge>
           </div>
         </q-card-section>
       </q-card>
@@ -46,10 +35,17 @@
   </div>
 </template>
 <script>
+import condition from './conditionData'
+import eventBus from './eventBus.js'
 export default {
-  name: 'paramPage',
-  props: {
-    information: Array,
+  name: 'param-page',
+  data() {
+    return {
+      saltAmount: 0,
+      dissolvedSaltAmount: 0,
+      liquidVolume: 0,
+      temperature: 0,
+    }
   },
   methods: {
     show() {
@@ -66,6 +62,34 @@ export default {
     onOKClick() {
       this.$emit('ok')
       this.hide()
+    },
+    updateData() {
+      this.saltAmount = condition.saltAmount
+      this.dissolvedSaltAmount = condition.dissolvedSaltAmount
+      this.temperature = condition.temperature
+      this.liquidVolume = condition.liquidVolume
+    },
+  },
+  mounted() {
+    eventBus.$on('aMsg', (msg) => {
+      // A发送来的消息
+      this.updateData()
+    })
+    this.updateData()
+  },
+  computed: {
+    Concentration() {
+      if (this.liquidVolume != 0) {
+        return ((this.dissolvedSaltAmount / (this.dissolvedSaltAmount + this.liquidVolume)) * 100).toFixed(2)
+      } else return 0
+    },
+  },
+  watch: {
+    saltAmount() {
+      this.saltAmount = condition.saltAmount
+    },
+    dissolvedSaltAmount() {
+      this.dissolvedSaltAmount = condition.dissolvedSaltAmount
     },
   },
 }

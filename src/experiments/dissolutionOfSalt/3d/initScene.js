@@ -1,15 +1,24 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
-import xbot from './meshes/Xbot.glb'
 import beaker from './meshes/beaker4.glb'
 import backgroundGround from '../2d/assets/backgroundGround.png'
-import initGround from '../2d/assets/initGround.png'
-import crate from '../2d/assets/crate.png'
 import flare from '../2d/assets/flare.png'
+import condition from '../2d/conditionData'
+import actions from './actions'
 
 export default (scene) => {
     return new Promise((resolve) => {
         // 场景在这里初始化
+        condition.liquidVolume = 40
+        condition.saltAmount = 0
+        condition.dissolvedSaltAmount = 0
+        condition.temperature = 20
+        condition.maxSolubility = -1
+        condition.liquidType = ''
+        condition.currentMaxSoluteParticle = 0
+        condition.current盐的颗粒系数 = 80
         const backgroundRGB = new BABYLON.Color3(0, 0, 0)
+        const backgroundHue = 1.0232558139534902 * condition.temperature + 205.90697674418604
+        BABYLON.Color3.HSVtoRGBToRef(backgroundHue, 0.45, 0.3, backgroundRGB);
         scene.clearColor = backgroundRGB
         scene.createDefaultCamera(true, true, true)
 
@@ -40,24 +49,6 @@ export default (scene) => {
                 camera.useBouncingBehavior = true
                 camera.targetScreenOffset = new BABYLON.Vector2(0, -10)
                 scene.activeCameras.push(camera);
-
-                // $("#switchUIButton").click(function () {
-                //     if (isUIShowing) {
-                //         isUIShowing = false
-                //         $("#container").animate({
-                //             left: '96.5%'
-                //         });
-                //         camera.targetScreenOffset = new BABYLON.Vector2(0, 0)
-
-                //     } else {
-                //         isUIShowing = true
-                //         $("#container").animate({
-                //             left: '50%'
-                //         });
-                //         camera.targetScreenOffset = new BABYLON.Vector2(-40, 0)
-
-                //     }
-                // })
             }
 
             //灯光系统，其中方向光用来生成阴影，半球光用来照亮整个场景
@@ -104,6 +95,7 @@ export default (scene) => {
                 matLiquid1.diffuseColor = new BABYLON.Color3(40 / 255, 60 / 255, 1);
                 liquid1.material = matLiquid1;
                 liquid1.material.alpha = 0.4
+                liquid1.scaling.y = condition.liquidVolume * 0.21576919670154812
 
                 const matLiquid2 = new BABYLON.StandardMaterial('matLiquid2', scene);
                 matLiquid2.diffuseColor = new BABYLON.Color3(0.96, 0.96, 0.96);
@@ -129,8 +121,7 @@ export default (scene) => {
             saltCreator.position.y = 60
             saltCreator.actionManager = new BABYLON.ActionManager(scene);
 
-            let maxSolubility = -1
-            const solutionBalance = true
+            let solutionBalance = true
             let hint = {}
             let particleSystem = new BABYLON.ParticleSystem("particles", 20000, scene)
             let isParticleSystemStarted = false
@@ -138,12 +129,6 @@ export default (scene) => {
             let isPush = true
             let isPost = false
             let isPress = false; //isPress = false 表示，目前没有点击撒盐 isPress = true 表示，目前是点击撒盐状态
-            let condition = {
-                "liquidVolume": 0, //一元一次函数，液面高度转换为毫升数
-                "temperature": 20,
-                "saltAmount": 0, //杯中所有粒子重量（g）
-                "dissolvedSaltAmount": 0    //杯中已溶解粒子重量（g）
-            }
 
             //撒盐控制，点击开始撒盐
             saltCreator.actionManager.registerAction(
@@ -151,28 +136,31 @@ export default (scene) => {
                     BABYLON.ActionManager.OnPickDownTrigger,
                     function () {
                         if (!isAnimating) {
-                            if (maxSolubility == -1) {
+                            if (condition.maxSolubility != -1) {
                                 // hint.createNewHintCell("请先选择烧杯中的溶剂种类")
-                            }
-                            if (solutionBalance) {
                                 //点击撒盐图标后发生的事情写在这里
-                                particleSystem.start();
-                                isParticleSystemStarted = true
-                                isAnimating = true;
-                                isPush = true;
-                                isPost = true;
-                                console.log("开始撒盐...")
+                                if (solutionBalance) {
+                                    particleSystem.start();
+                                    isParticleSystemStarted = true
+                                    isAnimating = true;
+                                    // isPush = true;
+                                    // isPost = true;
+                                    console.log("开始撒盐...")
+                                }
                             }
+
                             isPress = true;
                         }
                     }
                 )
             );
 
+            //停止撒盐
             saltCreator.actionManager.registerAction(
                 new BABYLON.ExecuteCodeAction(
                     BABYLON.ActionManager.OnPickUpTrigger,
                     function () {
+                        isAnimating = false;
                         particleSystem.stop()
                         isPress = false;
                     }
@@ -182,6 +170,7 @@ export default (scene) => {
                 new BABYLON.ExecuteCodeAction(
                     BABYLON.ActionManager.OnPickOutTrigger,
                     function () {
+                        isAnimating = false;
                         particleSystem.stop()
                         isPress = false;
                     }
@@ -193,7 +182,7 @@ export default (scene) => {
             function createParticleSystem() {
                 particleSystem.particleTexture = new BABYLON.Texture(flare, scene);
                 particleSystem.emitter = saltCreator;
-                saltCreator.rotation.z = Math.PI//想让发射器向下喷，就得让它倒置，即沿x轴或z轴旋转180°
+                // saltCreator.rotation.z = Math.PI//想让发射器向下喷，就得让它倒置，即沿x轴或z轴旋转180°
                 particleSystem.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0);
                 particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0);
                 particleSystem.minSize = 0.55;
@@ -223,7 +212,7 @@ export default (scene) => {
             function onDisposeParticleSystem() {
                 createParticleSystem()
                 condition.dissolvedSaltAmount = 0
-                updateData()
+                actions.updateData()
             }
 
             function getTopY(mesh) {
@@ -231,56 +220,10 @@ export default (scene) => {
                 return vectorsWorld[0].y
             }
 
-            function updateData(whichOne) {
-
-                if (whichOne) {
-                    if (whichOne == "temperature") {
-                        updateTemperature()
-                    } else if (whichOne == "water" || whichOne == "volume") {
-                        updateVolume()
-                    } else if (whichOne == "salt") {
-                        updateSalt()
-                    }
-                } else {
-                    updateTemperature()
-                    updateVolume()
-                    updateSalt()
-                }
-
-                function updateTemperature() {
-                    // $("#temperature").html(condition.temperature.toFixed(0))
-                    //改变场景背景颜色
-                    const backgroundHue = 1.0232558139534902 * condition.temperature + 205.90697674418604
-                    BABYLON.Color3.HSVtoRGBToRef(backgroundHue, 0.45, 0.3, backgroundRGB);
-                }
-
-                function updateVolume() {
-                    condition.liquidVolume = 3.5470144279593043 * getTopY(liquid1) - 4.710858298894572
-                    // $("#volume").html(condition.liquidVolume.toFixed(1))
-                    //console.log("最大溶解粒子数: " + current最大溶解粒子数 + ";已溶解粒子数: " + current杯中已溶解粒子数)
-                }
-
-                // let text1
-                // let text2
-                function updateSalt() {
-                    //console.log(condition)
-                    const 质量分数 = ((condition.dissolvedSaltAmount / (condition.dissolvedSaltAmount + condition.liquidVolume)) * 100).toFixed(2)
-                    // $(".formula .value").html(质量分数)
-                    // $(".formula .mass").html((condition.dissolvedSaltAmount).toFixed(2))
-                    // $(".submit .mass").html((condition.dissolvedSaltAmount).toFixed(2))
-                    // text1.text = "当前下落的盐共：" + String((condition.saltAmount).toFixed(2)) + " g"
-                    // $(".formula .total-mass").html((condition.saltAmount).toFixed(2))
-                    // $(".submit .total-mass").html((condition.saltAmount).toFixed(2))
-                    // text2.text = "溶解在溶剂中的盐：" + String((condition.dissolvedSaltAmount).toFixed(2)) + " g"
-                }
-            }
-
             let waterLevel = getTopY(liquid1)
             let currentSolutedParticle = 0
-            let currentMaxSoluteParticle
             let currentSoluteSpeed = 1
             let waterBottom = 2
-            let current盐的颗粒系数 = 80//自定义几粒盐为1克
 
             particleSystem.updateFunction = updateParticles
             function updateParticles(particles) {
@@ -301,7 +244,7 @@ export default (scene) => {
                     //存在了2.5秒以上的粒子才判断是否进行溶解
                     if (particle.age > 2.5) {
                         //当前单位粒子未溶解，且溶液未饱和，必溶解
-                        if (currentSolutedParticle < currentMaxSoluteParticle && particle.scale.x != 0) {
+                        if (currentSolutedParticle < condition.currentMaxSoluteParticle && particle.scale.x != 0) {
                             if (Math.random() < currentSoluteSpeed) {//随机数控制溶解速度
                                 particle.scale = { x: 0, y: 0 }
                                 currentSolutedParticle++
@@ -309,14 +252,12 @@ export default (scene) => {
                             continue;
                         }
                         //判断溶液是否过饱和，且当前单位粒子已溶解
-                        else if (currentSolutedParticle > currentMaxSoluteParticle + 1 && particle.scale.x == 0) {
+                        else if (currentSolutedParticle > condition.currentMaxSoluteParticle + 1 && particle.scale.x == 0) {
                             //析出一部分粒子，使溶液正常饱和
                             particle.scale = { x: 1, y: 1 }
                             currentSolutedParticle--
                         }
                     }
-
-                    // console.log(particle.id + " " + particle.age)
 
                     //粒子移动
                     if (particle.position.y < waterBottom) {
@@ -329,16 +270,16 @@ export default (scene) => {
                     this.gravity.scaleToRef(this._scaledUpdateSpeed, this._scaledGravity);
                     particle.direction.addInPlace(this._scaledGravity);
                 }
-                condition.dissolvedSaltAmount = currentSolutedParticle / current盐的颗粒系数 //自定义几粒盐为1克
+                condition.dissolvedSaltAmount = currentSolutedParticle / condition.current盐的颗粒系数 //自定义几粒盐为1克
+                condition.saltAmount = particles.length / condition.current盐的颗粒系数
+                // if (condition.saltAmount) {
+                //     actions.updateData("salt")
+                // }
+                console.log(condition);
 
-                condition.saltAmount = particles.length / current盐的颗粒系数
-                if (condition.saltAmount) {
-                    updateData("salt")
-                }
             }
-
             //数据更新
-            updateData()
+            // actions.updateData()
 
             resolve()
         })

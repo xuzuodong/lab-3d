@@ -1,6 +1,135 @@
 import * as BABYLON from '@babylonjs/core/Legacy/legacy'
+import condition from '../2d/conditionData'
+import This from '../2d/this'
 
 export default {
+  //先拿到this，存在this.js里，用的时候取This[0]
+  getThis(whichThis) {
+    This.push(whichThis)
+    console.log(This);
+  },
+
+  //更新数据
+  updateData(whichOne) {
+    const backgroundRGB = new BABYLON.Color3(0, 0, 0)
+    if (whichOne) {
+      if (whichOne == "temperature") {
+        updateTemperature()
+      } else if (whichOne == "water" || whichOne == "volume") {
+        updateVolume()
+      } else if (whichOne == "salt") {
+        updateSalt()
+      }
+    } else {
+      updateTemperature()
+      updateVolume()
+      updateSalt()
+      updateMaxSolubility()
+    }
+
+    //改变场景背景颜色，HSVtoRGBToRef()中，前三个是参数，最后一个是输出。
+    function updateTemperature() {
+      const backgroundHue = 1.0232558139534902 * condition.temperature + 205.90697674418604
+      BABYLON.Color3.HSVtoRGBToRef(backgroundHue, 0.45, 0.3, backgroundRGB);
+      This[0].clearColor = backgroundRGB
+    }
+
+    function updateVolume() {
+      This[0].getMeshByName('liquid1').scaling.y = condition.liquidVolume * 0.21576919670154812
+    }
+
+    function updateSalt() {
+      //console.log(condition)
+      const 质量分数 = ((condition.dissolvedSaltAmount / (condition.dissolvedSaltAmount + condition.liquidVolume)) * 100).toFixed(2)
+    }
+
+    function updateMaxSolubility() {
+      switch (condition.liquidType) {
+        case '水':
+          condition.maxSolubility = 35.7118881118881 + 0.00848018648018435 * condition.temperature + 0.000317016317016339 * condition.temperature * condition.temperature
+          break;
+        case '酒精':
+          condition.maxSolubility = 1 + 0.0056842935 * condition.temperature + 0.0004251478 * condition.temperature * condition.temperature
+          break;
+        case '油':
+          condition.maxSolubility = 0.000000001;
+          break;
+      }
+      condition.currentMaxSoluteParticle = (condition.liquidVolume * condition.maxSolubility * 0.01) * condition.current盐的颗粒系数
+      console.log(condition.currentMaxSoluteParticle);
+    }
+  },
+
+  //更改液体的颜色
+  liquidType(liquid) {
+    let matLiquid1 = This[0].getMaterialByName('matLiquid1')
+    condition.liquidType = '水'
+    switch (liquid) {
+      //初始为case = 0，因current溶液已平衡 = false，（原因请看loop.js）所以其他按钮都没有效果。
+      case '选择你想要的溶剂':
+        // reset();
+        matLiquid1.diffuseColor = new BABYLON.Color3(40 / 255, 60 / 255, 1);
+        console.log("未选择");
+        break;
+      case '水':
+        // reset();
+        matLiquid1.diffuseColor = new BABYLON.Color3(40 / 255, 60 / 255, 1);
+        console.log("水");
+        condition.liquidType = '水'
+        break;
+      case '酒精':
+        // reset();
+        matLiquid1.diffuseColor = new BABYLON.Color3(1, 1, 1);
+        console.log("酒精");
+        condition.liquidType = '酒精'
+        break;
+      case '油':
+        // reset();
+        matLiquid1.diffuseColor = new BABYLON.Color3(1, 1, 0);
+        console.log("油");
+        condition.liquidType = '油'
+        break;
+    }
+    this.updateData()
+  },
+
+  // reset() {
+  //   current杯中已溶解粒子数 = 0
+  //   最大溶解度 = -1
+  //   isPush = false;
+  //   isAnimating = false;
+  //   isPost = false;
+  //   isSaturated = false;
+  //   isParticleSystemStarted = false;
+  //   scene.particleSystems[0].dispose()
+  //   drawer.clear()
+  //   liquid1.scaling.y = originLiquidScaleY //液体还原
+  //   condition.temperature = 20 //温度还原
+  //   condition.saltAmount = 0
+  //   currentUser.manipulateHistory.splice(0, currentUser.manipulateHistory.length);
+  //   console.log(currentUser.manipulateHistory);
+
+  //   voiceWarning.pause();
+  //   voiceWarning.currentTime = 0;
+  //   $("#temperature-warning").css({ display: "none" })
+  //   $("#volume-warning").css({ display: "none" })
+
+
+  //   if (submit2_style.display == "block") {
+  //     $("#submit2").css({ display: "none" });
+  //   }
+  //   document.getElementById("form2").reset();
+
+  //   if (hintID_style.visibility == "hidden") {
+  //     $("#hintID").css({ visibility: "visible" });
+  //   }
+  //   if (finalHint_style.visibility == "visible") {
+  //     $("#finalHint").css({ visibility: "hidden" });
+  //   }
+  //   hint.createNewHintCell("向烧杯中撒盐</br>杯中会有什么变化呢？")
+  //   setTimeout(updateData, 50)
+  // },
+
   changeGround(ground) {
     let groundMaterial = this.getMaterialByName('groundMaterial')
     let road = this.getMeshByName('road')
