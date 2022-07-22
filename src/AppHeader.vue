@@ -59,7 +59,12 @@
             transition-hide="jump-up"
           >
             <q-list style="min-width: 150px" :class="{ 'bg-grey-9': $q.dark.isActive }">
-              <q-item clickable v-close-popup @click="openUserCenter">
+              <q-item
+                clickable
+                v-close-popup
+                :to="'/user-center'"
+                :active-class="$q.dark.isActive ? 'text-white' : 'text-dark'"
+              >
                 <q-item-section side>
                   <q-icon name="account_circle" size="sm" />
                 </q-item-section>
@@ -141,7 +146,6 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import DialogJoinVue from './components/DialogJoin.vue'
-import UserCenter from './views/UserCenter'
 import headerLogo from './assets/headerLogo.png'
 
 export default {
@@ -179,17 +183,6 @@ export default {
       this.$q
         .dialog({
           component: DialogJoinVue,
-          parent: this,
-        })
-        .onOk(() => {})
-        .onCancel(() => {})
-        .onDismiss(() => {})
-    },
-
-    openUserCenter() {
-      this.$q
-        .dialog({
-          component: UserCenter,
           parent: this,
         })
         .onOk(() => {})

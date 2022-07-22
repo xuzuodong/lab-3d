@@ -299,7 +299,7 @@ const actions = {
     })
   },
 
-  updateUserInfo({ commit }, { passWord, phoneNumber, realName, sex, grade, school, success, failure }) {
+  updateUserInfo({ commit }, { passWord, phoneNumber, realName, sex, grade, school, success, slogan, failure }) {
     userApi.updateUserInfo({
       passWord,
       phoneNumber,
@@ -307,6 +307,7 @@ const actions = {
       sex,
       grade,
       school,
+      slogan,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
           success(res)

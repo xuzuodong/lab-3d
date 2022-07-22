@@ -1,197 +1,108 @@
 <template>
-  <q-dialog ref="dialog" persistent @hide="onDialogHide">
-    <q-card class="row q-dialog q-pa-md">
-      <q-card-section class="col-6">
-        <div class="text-h6 q-my-md">账号信息</div>
-        <div class="text-subtitle2 q-my-md">账号：{{ username }}</div>
-        <div class="text-subtitle2 q-my-md">手机：{{ phone }}</div>
-        <div class="text-subtitle2 q-my-md">真实姓名：{{ realname }}</div>
+  <div>
+    <div class="row bg-grey-4" style="padding: 25px 0 25px 15%">
+      <q-avatar size="75px" class="q-mr-md">
+        <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+      </q-avatar>
+      <div class="column justify-center">
+        <div class="text-h5 col-md-5">{{ userName }}</div>
+        <div class="col-md-auto q-mt-sm">{{ userAnoun }}</div>
+      </div>
+      <q-btn
+        style="height: fit-content"
+        flat
+        dense
+        class="q-mt-sm"
+        color="grey-14"
+        @click="openInformationCenter"
+      >
+        编辑
+      </q-btn>
+    </div>
+    <div style="height: max-content">
+      <q-splitter v-model="splitterModel" style="height: 600px" disable>
+        <template v-slot:before>
+          <div class="q-pa-md column items-center justify-center" style="height: 60%">
+            <div class="col column justify-center" v-for="item in items" :key="item.name">
+              <q-btn
+                color="white"
+                class="q-px-md q-py-sm"
+                text-color="black"
+                rounded
+                :label="item.label"
+                @click="tabChange(item.num)"
+                :flat="tab != item.num"
+              />
+            </div>
+          </div>
+        </template>
 
-        <q-separator />
-
-        <div class="text-h6 q-my-md">更改密码</div>
-        <q-form ref="myForm">
-          <q-input
-            class="q-my-sm"
-            filled
-            type="password"
-            v-model="oldPassword"
-            label="当前密码"
-            lazy-rules="ondemand"
-            :rules="[checkOldPwd]"
-          />
-
-          <q-input
-            class="q-my-sm"
-            filled
-            type="password"
-            v-model="password"
-            label="新密码"
-            lazy-rules="ondemand"
-            :rules="[(val) => val !== null || '请输入密码']"
-          />
-
-          <q-input
-            filled
-            type="password"
-            v-model="confirmPassword"
-            label="确认新密码"
-            lazy-rules="ondemand"
-            :rules="[
-              (val) => val !== null || '请确认密码',
-              (val) => val == password || '两次输入的密码不一致',
-            ]"
-          />
-        </q-form>
-      </q-card-section>
-
-      <q-card-section class="col-6 row">
-        <div class="text-h6">个人资料</div>
-
-        <q-input class="col-12" filled v-model="realname" label="真实姓名" />
-
-        <div class="row justify-between col-12">
-          <q-input class="col-5" filled v-model="school" label="学校" />
-          <q-select class="col-5" clearable filled v-model="grade" :options="gradeList" label="年级" />
-        </div>
-
-        <q-input filled class="col-12" v-model="phone" label="手机号码" />
-
-        <div class="text-h6 col-12">性别</div>
-        <div>
-          <q-radio v-model="sex" val="0" label="女" />
-          <q-radio v-model="sex" val="1" label="男" />
-        </div>
-      </q-card-section>
-
-      <q-card-actions align="center" class="col-12">
-        <q-btn color="primary" label="保存" @click="onOKClick" />
-      </q-card-actions>
-    </q-card>
-  </q-dialog>
+        <template v-slot:after>
+          <div class="q-pa-md">
+            <div v-if="tab == 1">
+              <user-center-plan-design-vue></user-center-plan-design-vue>
+            </div>
+            <div v-else-if="tab == 2">
+              <user-center-achieve-record-vue></user-center-achieve-record-vue>
+            </div>
+            <div v-else-if="tab == 3">
+              <user-center-reflect-vue></user-center-reflect-vue>
+            </div>
+          </div>
+        </template>
+      </q-splitter>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import InformationCenterVue from './InformationCenter.vue'
+import UserCenterPlanDesignVue from './UserCenterPlanDesign.vue'
+import UserCenterAchieveRecordVue from './UserCenterAchieveRecord.vue'
+import UserCenterReflectVue from './UserCenterReflect.vue'
 export default {
-  props: {},
-
+  components: { UserCenterAchieveRecordVue, UserCenterPlanDesignVue, UserCenterReflectVue },
   data() {
     return {
-      username: '',
-      phone: null,
-      realname: null,
-      oldPassword: '',
-      password: '',
-      confirmPassword: '',
-      school: null,
-      grade: null,
-      sex: '',
-
-      oldPwdCorrect: false,
-      gradeList: ['四年级', '五年级', '六年级', '初一', '初二', '初三'],
+      userName: 'Jasper',
+      userAnoun: '我就是未来的科学家！',
+      splitterModel: 20,
+      items: [
+        {
+          num: 1,
+          name: 'UserCenterPlanDesign',
+          label: '计划制定',
+        },
+        {
+          num: 2,
+          name: 'UserCenterAchieveRecord',
+          label: '成就记录',
+        },
+        {
+          num: 3,
+          name: 'UserCenterReflect',
+          label: '反思探讨',
+        },
+      ],
+      tab: 1,
+      isFlat: true,
     }
   },
-
-  created() {
-    this.getUserInfo({
-      success: (res) => {
-        this.username = res.name
-        this.phone = res.phone
-        this.realname = res.realname
-        this.school = res.school
-        this.grade = res.grade
-        this.sex = String(res.sex)
-      },
-      failure: (err) => {
-        console.log(err)
-      },
-    })
-  },
-
   methods: {
-    ...mapActions('user', ['getUserInfo', 'updateUserInfo', 'login']),
-
-    checkOldPwd(val) {
-      if (val) {
-        return new Promise((resovle, reject) => {
-          this.login({
-            username: this.username,
-            password: val,
-            success: () => {
-              this.oldPwdCorrect = true
-              resovle()
-            },
-            failure: () => {
-              this.oldPwdCorrect = false
-              resovle('密码错误')
-            },
-          })
+    openInformationCenter() {
+      this.$q
+        .dialog({
+          component: InformationCenterVue,
+          parent: this,
         })
-      } else if (this.password == this.confirmPassword && this.password != '') {
-        return '请输入原密码'
-      }
+        .onOk(() => {})
+        .onCancel(() => {})
+        .onDismiss(() => {})
     },
-
-    show() {
-      this.$refs.dialog.show()
-    },
-
-    hide() {
-      this.$refs.dialog.hide()
-    },
-
-    onDialogHide() {
-      this.$emit('hide')
-    },
-
-    onOKClick() {
-      this.$emit('ok')
-      this.$refs.myForm.validate().then((success) => {
-        if (success) {
-          if (
-            (this.oldPwdCorrect && this.password == this.confirmPassword) ||
-            (!this.oldPwdCorrect && this.password == '' && this.confirmPassword == '')
-          ) {
-            this.updateUserInfo({
-              passWord: this.password || '',
-              phoneNumber: this.phone || '',
-              realName: this.realname || '',
-              sex: this.sex || '',
-              grade: this.grade || '',
-              school: this.school || '',
-              success: (res) => {
-                console.log(res)
-              },
-              failure: (err) => {
-                console.log(err)
-              },
-            })
-            this.hide()
-          }
-        } else {
-          setTimeout(() => {
-            this.$refs.myForm.resetValidation()
-          }, 2000)
-        }
-      })
-    },
-
-    onCancelClick() {
-      this.hide()
+    tabChange(num) {
+      console.log(num)
+      this.tab = num
     },
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.q-dialog {
-  .q-dialog__inner--minimized {
-    padding: 16px;
-  }
-  .q-dialog__inner--minimized > div {
-    max-width: 1000px;
-    min-width: 450px;
-  }
-}
-</style>

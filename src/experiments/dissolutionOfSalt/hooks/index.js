@@ -29,13 +29,13 @@ let kexperimentId
 let warnMsg = '请按照左上角的假设进行实验！'
 
 export default [
-  // {
-  //   paragraph: '开始实验',
-  //   talk: 0,
-  //   method: ({ goto }) => {
-  //     goto({ paragraph: '常温下盐的溶解度q1' })
-  //   },
-  // },
+  {
+    paragraph: '开始实验',
+    talk: 0,
+    method: ({ goto }) => {
+      goto({ paragraph: '方案设计1' })
+    },
+  },
   {
     paragraph: '开始实验',
     talk: 0,

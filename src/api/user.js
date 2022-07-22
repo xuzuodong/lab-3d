@@ -196,12 +196,12 @@ export default {
       .catch((res) => failure(res))
   },
 
-  updateUserInfo({ passWord, phoneNumber, realName, sex, grade, school, success, failure }) {
+  updateUserInfo({ passWord, phoneNumber, realName, sex, grade, school, success, slogan, failure }) {
     axios({
       method: 'post',
       url: baseUrl + 'user/updateUserInfo',
       headers: { Authorization: store.state.user.userInfo.token },
-      data: { passWord, phoneNumber, realName, sex, grade, school },
+      data: { passWord, phoneNumber, realName, sex, grade, school, slogan },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))
