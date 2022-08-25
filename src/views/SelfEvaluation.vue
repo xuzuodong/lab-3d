@@ -5,6 +5,7 @@
       seamless
       transition-show="scale"
       transition-hide="scale"
+      persistent
       class="q-pa-md row items-start q-gutter-md"
     >
       <q-card class="container">
@@ -87,7 +88,13 @@
               label="我的实验感言"
               class="q-ml-md col-10"
             />
-            <q-btn class="q-ml-sm col self-end" style="height: 40px" label="提交" color="primary" @click="hide()"/>
+            <q-btn
+              class="q-ml-sm col self-end"
+              style="height: 40px"
+              label="提交"
+              color="primary"
+              @click="onOKClick()"
+            />
           </div>
         </q-card-section>
       </q-card>
@@ -95,6 +102,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'SelfEvaluation',
   data() {
@@ -143,10 +151,16 @@ export default {
         },
       ],
       text: '',
+      stopTime: '',
     }
   },
 
+  created() {
+    this.stopTime = new Date().getTime()
+  },
+
   methods: {
+    ...mapActions('user', ['submitStepInfo']),
     show() {
       this.$refs.dialog.show()
     },
@@ -157,8 +171,20 @@ export default {
       this.$emit('hide')
     },
     onOKClick() {
-      this.$emit('ok')
-      this.hide()
+      this.submitStepInfo({
+        kexperiment_id: this.$route.params.id,
+        stepName: 'reflected',
+        stepTime: new Date().getTime() - this.stopTime,
+        stepInfo: [this.ratingModel, this.chooseResult[0].color, this.text],
+        success: (res) => {
+          console.log(res)
+          this.$emit('ok')
+          this.hide()
+        },
+        failure: (error) => {
+          console.log(error)
+        },
+      })
     },
     getEmotion(count) {
       this.chooseResult[0].color = this.experDiff.find((e) => e.color == count).color

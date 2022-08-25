@@ -6,7 +6,7 @@
       </q-avatar>
       <div class="column justify-center">
         <div class="text-h5 col-md-5">{{ userName }}</div>
-        <div class="col-md-auto q-mt-sm">{{ userAnoun }}</div>
+        <div class="col-md-auto q-mt-sm">{{ slogan }}</div>
       </div>
       <q-btn
         style="height: fit-content"
@@ -20,9 +20,9 @@
       </q-btn>
     </div>
     <div style="height: max-content">
-      <q-splitter v-model="splitterModel" style="height: 600px" disable>
+      <q-splitter v-model="splitterModel" disable>
         <template v-slot:before>
-          <div class="q-pa-md column items-center justify-center" style="height: 60%">
+          <div class="q-pa-md column items-center justify-center" style="height: 300px">
             <div class="col column justify-center" v-for="item in items" :key="item.name">
               <q-btn
                 color="white"
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import InformationCenterVue from './InformationCenter.vue'
 import UserCenterPlanDesignVue from './UserCenterPlanDesign.vue'
 import UserCenterAchieveRecordVue from './UserCenterAchieveRecord.vue'
@@ -64,8 +65,8 @@ export default {
   components: { UserCenterAchieveRecordVue, UserCenterPlanDesignVue, UserCenterReflectVue },
   data() {
     return {
-      userName: 'Jasper',
-      userAnoun: '我就是未来的科学家！',
+      userName: '',
+      slogan: '',
       splitterModel: 20,
       items: [
         {
@@ -84,24 +85,41 @@ export default {
           label: '反思探讨',
         },
       ],
-      tab: 1,
+      tab: 2,
       isFlat: true,
     }
   },
+  created() {
+    this.updateUserInfo()
+  },
+
   methods: {
+    ...mapActions('user', ['getUserInfo']),
     openInformationCenter() {
       this.$q
         .dialog({
           component: InformationCenterVue,
           parent: this,
         })
-        .onOk(() => {})
+        .onOk(() => {
+          this.updateUserInfo()
+        })
         .onCancel(() => {})
         .onDismiss(() => {})
     },
     tabChange(num) {
-      console.log(num)
       this.tab = num
+    },
+    updateUserInfo() {
+      this.getUserInfo({
+        success: (res) => {
+          this.userName = res.realname
+          this.slogan = res.slogan
+        },
+        failure: (err) => {
+          console.log(err)
+        },
+      })
     },
   },
 }

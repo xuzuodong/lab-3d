@@ -249,4 +249,109 @@ export default {
       .then((res) => success(res))
       .catch((res) => failure(res))
   },
+
+  startNewMemo({ memo_content, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/startNewMemo',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { memo_content },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  deleteMemoById({ memo_id, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/deleteMemoById',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { memo_id },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getUserMemoById({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'behavior/getUserMemoById',
+      headers: { Authorization: store.state.user.userInfo.token },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getKexperimentNumOfExperimentName({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'behavior/getKexperimentNumOfExperimentName',
+      headers: { Authorization: store.state.user.userInfo.token },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getAvgScore({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'behavior/getAvgScore',
+      headers: { Authorization: store.state.user.userInfo.token },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getAvgTotalTime({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'behavior/getAvgTotalTime',
+      headers: { Authorization: store.state.user.userInfo.token },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getPostNumOfUser({ success, failure }) {
+    axios({
+      method: 'get',
+      url: baseUrl + 'behavior/getPostNumOfUser',
+      headers: { Authorization: store.state.user.userInfo.token },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getSubScoreByTitle({ title, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getSubScoreByTitle',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { title },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getStepInfo({ stepName, kexperiment_id, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getStepInfo',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { stepName, kexperiment_id },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  submitStepInfo({ kexperiment_id, stepName, stepTime, stepInfo, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/submitStepInfo',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { kexperiment_id, stepName, stepTime, stepInfo },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
 }

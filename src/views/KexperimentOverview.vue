@@ -170,6 +170,12 @@ export default {
           categories: ['提出问题', '猜想假设', '计划设计', '探索假设', '结论形成', '交流评估'],
           tickmarkPlacement: 'on',
           lineWidth: 0,
+          labels: {
+            style: {
+              color: '#000000',
+              fontSize: '20px',
+            },
+          },
         },
         yAxis: {
           gridLineInterpolation: 'polygon',

@@ -375,6 +375,145 @@ const actions = {
       },
     })
   },
+
+  startNewMemo({ commit }, { memo_content, success, failure }) {
+    userApi.startNewMemo({
+      memo_content,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  deleteMemoById({ commit }, { memo_id, success, failure }) {
+    userApi.deleteMemoById({
+      memo_id,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getUserMemoById({ commit }, { success, failure }) {
+    userApi.getUserMemoById({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getKexperimentNumOfExperimentName({ commit }, { success, failure }) {
+    userApi.getKexperimentNumOfExperimentName({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getAvgScore({ commit }, { success, failure }) {
+    userApi.getAvgScore({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getAvgTotalTime({ commit }, { success, failure }) {
+    userApi.getAvgTotalTime({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getPostNumOfUser({ commit }, { success, failure }) {
+    userApi.getPostNumOfUser({
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getSubScoreByTitle({ commit }, { title, success, failure }) {
+    userApi.getSubScoreByTitle({
+      title,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getStepInfo({ commit }, { stepName, kexperiment_id, success, failure }) {
+    userApi.getStepInfo({
+      stepName,
+      kexperiment_id,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  submitStepInfo({ commit }, { kexperiment_id, stepName, stepTime, stepInfo, success, failure }) {
+    userApi.submitStepInfo({
+      kexperiment_id,
+      stepName,
+      stepTime,
+      stepInfo,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
 }
 
 export default { namespaced: true, state, getters, actions, mutations }
