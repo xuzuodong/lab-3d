@@ -100,7 +100,6 @@
 <script>
 import XChart from './KexperimentOverviewChart.vue'
 import { mapActions } from 'vuex'
-import { reduce } from 'highcharts'
 export default {
   components: { XChart },
   data() {

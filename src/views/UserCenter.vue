@@ -85,7 +85,7 @@ export default {
           label: '反思探讨',
         },
       ],
-      tab: 2,
+      tab: 1,
       isFlat: true,
     }
   },

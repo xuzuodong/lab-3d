@@ -1,0 +1,7877 @@
+﻿[
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 407,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "1",
+          "act_id": "6",
+          "name": "一定溶质质量分数的氯化钠溶液的配制"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 410,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "1",
+          "name": "稀硫酸的化学性质探究",
+          "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        }
+      ],
+      "length": 3.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 580,
+        "labels": ["skill"],
+        "properties": {
+          "name": "胶头滴管的使用",
+          "skill_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 667,
+            "start": 410,
+            "end": 580,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 580,
+            "labels": ["skill"],
+            "properties": {
+              "name": "胶头滴管的使用",
+              "skill_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 424,
+        "labels": ["skill"],
+        "properties": {
+          "name": "酸碱指示剂的变色原理及规律",
+          "skill_id": "5"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 676,
+            "start": 410,
+            "end": 424,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 424,
+            "labels": ["skill"],
+            "properties": {
+              "name": "酸碱指示剂的变色原理及规律",
+              "skill_id": "5"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 426,
+        "labels": ["skill"],
+        "properties": {
+          "name": "扇闻的方法",
+          "skill_id": "7"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 680,
+            "start": 410,
+            "end": 426,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 426,
+            "labels": ["skill"],
+            "properties": {
+              "name": "扇闻的方法",
+              "skill_id": "7"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 421,
+        "labels": ["skill"],
+        "properties": {
+          "name": "固体药品的取用",
+          "skill_id": "2"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 670,
+            "start": 410,
+            "end": 421,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 421,
+            "labels": ["skill"],
+            "properties": {
+              "name": "固体药品的取用",
+              "skill_id": "2"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 425,
+        "labels": ["skill"],
+        "properties": {
+          "name": "pH试纸的使用",
+          "skill_id": "6"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 678,
+            "start": 410,
+            "end": 425,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 425,
+            "labels": ["skill"],
+            "properties": {
+              "name": "pH试纸的使用",
+              "skill_id": "6"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 423,
+        "labels": ["skill"],
+        "properties": {
+          "name": "气体收集的方法",
+          "skill_id": "4"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 675,
+            "start": 410,
+            "end": 423,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 423,
+            "labels": ["skill"],
+            "properties": {
+              "name": "气体收集的方法",
+              "skill_id": "4"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 537,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "11",
+          "name": "碳酸钠溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 621,
+            "start": 410,
+            "end": 537,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 537,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "11",
+              "name": "碳酸钠溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 527,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "1",
+          "name": "石蕊溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 608,
+            "start": 410,
+            "end": 527,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 527,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "1",
+              "name": "石蕊溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 528,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "2",
+          "name": "酚酞试剂"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 610,
+            "start": 410,
+            "end": 528,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 528,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "2",
+              "name": "酚酞试剂"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 529,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "3",
+          "name": "稀硫酸溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 613,
+            "start": 410,
+            "end": 529,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 529,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "3",
+              "name": "稀硫酸溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 419,
+        "labels": ["appa"],
+        "properties": {
+          "name": "胶头滴管",
+          "appa_id": "2"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 596,
+            "start": 410,
+            "end": 419,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 419,
+            "labels": ["appa"],
+            "properties": {
+              "name": "胶头滴管",
+              "appa_id": "2"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 418,
+        "labels": ["appa"],
+        "properties": {
+          "name": "试管",
+          "appa_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 583,
+            "start": 407,
+            "end": 410,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 410,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "1",
+              "name": "稀硫酸的化学性质探究",
+              "exp_url": "http://beta.lab3d.site/realExperiment/chemicalPropertiesOfDiluteSulfuricAcid"
+            }
+          },
+          "relationship": {
+            "identity": 590,
+            "start": 410,
+            "end": 418,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 418,
+            "labels": ["appa"],
+            "properties": {
+              "name": "试管",
+              "appa_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 415,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "6",
+          "name": "铁丝与稀盐酸反应",
+          "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 587,
+            "start": 407,
+            "end": 415,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          }
+        }
+      ],
+      "length": 3.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 426,
+        "labels": ["skill"],
+        "properties": {
+          "name": "扇闻的方法",
+          "skill_id": "7"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 587,
+            "start": 407,
+            "end": 415,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          },
+          "relationship": {
+            "identity": 681,
+            "start": 415,
+            "end": 426,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 426,
+            "labels": ["skill"],
+            "properties": {
+              "name": "扇闻的方法",
+              "skill_id": "7"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 541,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "15",
+          "name": "铁丝"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 587,
+            "start": 407,
+            "end": 415,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          },
+          "relationship": {
+            "identity": 625,
+            "start": 415,
+            "end": 541,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 541,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "15",
+              "name": "铁丝"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 532,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "6",
+          "name": "稀盐酸"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 587,
+            "start": 407,
+            "end": 415,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          },
+          "relationship": {
+            "identity": 616,
+            "start": 415,
+            "end": 532,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 532,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "6",
+              "name": "稀盐酸"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 418,
+        "labels": ["appa"],
+        "properties": {
+          "name": "试管",
+          "appa_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 587,
+            "start": 407,
+            "end": 415,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 415,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "6",
+              "name": "铁丝与稀盐酸反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/ironHyrochloricacid"
+            }
+          },
+          "relationship": {
+            "identity": 594,
+            "start": 415,
+            "end": 418,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 418,
+            "labels": ["appa"],
+            "properties": {
+              "name": "试管",
+              "appa_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 414,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "5",
+          "name": "胆矾与氢氧化钠反应",
+          "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 586,
+            "start": 407,
+            "end": 414,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          }
+        }
+      ],
+      "length": 3.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 422,
+        "labels": ["skill"],
+        "properties": {
+          "name": "液体药品的取用",
+          "skill_id": "3"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 586,
+            "start": 407,
+            "end": 414,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          },
+          "relationship": {
+            "identity": 674,
+            "start": 414,
+            "end": 422,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 422,
+            "labels": ["skill"],
+            "properties": {
+              "name": "液体药品的取用",
+              "skill_id": "3"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 535,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "9",
+          "name": "氢氧化钠溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 586,
+            "start": 407,
+            "end": 414,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          },
+          "relationship": {
+            "identity": 619,
+            "start": 414,
+            "end": 535,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 535,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "9",
+              "name": "氢氧化钠溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 538,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "12",
+          "name": "胆矾"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 586,
+            "start": 407,
+            "end": 414,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          },
+          "relationship": {
+            "identity": 622,
+            "start": 414,
+            "end": 538,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 538,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "12",
+              "name": "胆矾"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 418,
+        "labels": ["appa"],
+        "properties": {
+          "name": "试管",
+          "appa_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 586,
+            "start": 407,
+            "end": 414,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 414,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "5",
+              "name": "胆矾与氢氧化钠反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumHydroxide"
+            }
+          },
+          "relationship": {
+            "identity": 593,
+            "start": 414,
+            "end": 418,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 418,
+            "labels": ["appa"],
+            "properties": {
+              "name": "试管",
+              "appa_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 416,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "7",
+          "name": "溶液的pH值",
+          "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 588,
+            "start": 407,
+            "end": 416,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        }
+      ],
+      "length": 3.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 426,
+        "labels": ["skill"],
+        "properties": {
+          "name": "扇闻的方法",
+          "skill_id": "7"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 588,
+            "start": 407,
+            "end": 416,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 682,
+            "start": 416,
+            "end": 426,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 426,
+            "labels": ["skill"],
+            "properties": {
+              "name": "扇闻的方法",
+              "skill_id": "7"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 528,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "2",
+          "name": "酚酞试剂"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 588,
+            "start": 407,
+            "end": 416,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 612,
+            "start": 416,
+            "end": 528,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 528,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "2",
+              "name": "酚酞试剂"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 527,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "1",
+          "name": "石蕊溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 588,
+            "start": 407,
+            "end": 416,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 609,
+            "start": 416,
+            "end": 527,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 527,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "1",
+              "name": "石蕊溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 418,
+        "labels": ["appa"],
+        "properties": {
+          "name": "试管",
+          "appa_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 588,
+            "start": 407,
+            "end": 416,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 595,
+            "start": 416,
+            "end": 418,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 418,
+            "labels": ["appa"],
+            "properties": {
+              "name": "试管",
+              "appa_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 419,
+        "labels": ["appa"],
+        "properties": {
+          "name": "胶头滴管",
+          "appa_id": "2"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 588,
+            "start": 407,
+            "end": 416,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 416,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "7",
+              "name": "溶液的pH值",
+              "exp_url": "http://47.98.192.17/phpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 599,
+            "start": 416,
+            "end": 419,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 419,
+            "labels": ["appa"],
+            "properties": {
+              "name": "胶头滴管",
+              "appa_id": "2"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 412,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "3",
+          "name": "酸碱中和",
+          "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        }
+      ],
+      "length": 3.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 580,
+        "labels": ["skill"],
+        "properties": {
+          "name": "胶头滴管的使用",
+          "skill_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 669,
+            "start": 412,
+            "end": 580,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 580,
+            "labels": ["skill"],
+            "properties": {
+              "name": "胶头滴管的使用",
+              "skill_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 421,
+        "labels": ["skill"],
+        "properties": {
+          "name": "固体药品的取用",
+          "skill_id": "2"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 672,
+            "start": 412,
+            "end": 421,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 421,
+            "labels": ["skill"],
+            "properties": {
+              "name": "固体药品的取用",
+              "skill_id": "2"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 533,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "7",
+          "name": "氢氧化钙溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 617,
+            "start": 412,
+            "end": 533,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 533,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "7",
+              "name": "氢氧化钙溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 531,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "5",
+          "name": "稀硝酸溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 615,
+            "start": 412,
+            "end": 531,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 531,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "5",
+              "name": "稀硝酸溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 534,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "8",
+          "name": "氢氧化钡溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 618,
+            "start": 412,
+            "end": 534,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 534,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "8",
+              "name": "氢氧化钡溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 530,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "4",
+          "name": "稀盐酸溶液"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 614,
+            "start": 412,
+            "end": 530,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 530,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "4",
+              "name": "稀盐酸溶液"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 418,
+        "labels": ["appa"],
+        "properties": {
+          "name": "试管",
+          "appa_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 592,
+            "start": 412,
+            "end": 418,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 418,
+            "labels": ["appa"],
+            "properties": {
+              "name": "试管",
+              "appa_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 419,
+        "labels": ["appa"],
+        "properties": {
+          "name": "胶头滴管",
+          "appa_id": "2"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 580,
+            "start": 398,
+            "end": 407,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 407,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "6",
+              "name": "一定溶质质量分数的氯化钠溶液的配制"
+            }
+          },
+          "relationship": {
+            "identity": 585,
+            "start": 407,
+            "end": 412,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 412,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "3",
+              "name": "酸碱中和",
+              "exp_url": "http://beta.lab3d.site/experiment/neutralization"
+            }
+          },
+          "relationship": {
+            "identity": 597,
+            "start": 412,
+            "end": 419,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 419,
+            "labels": ["appa"],
+            "properties": {
+              "name": "胶头滴管",
+              "appa_id": "2"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 404,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "1",
+          "act_id": "3",
+          "name": "二氧化碳的实验室制取与性质"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 577,
+            "start": 398,
+            "end": 404,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 404,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "3",
+              "name": "二氧化碳的实验室制取与性质"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 405,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "1",
+          "act_id": "4",
+          "name": "常见金属的物理性质和化学性质"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 578,
+            "start": 398,
+            "end": 405,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 405,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "4",
+              "name": "常见金属的物理性质和化学性质"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 403,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "1",
+          "act_id": "2",
+          "name": "氧气的实验室制取与性质"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 576,
+            "start": 398,
+            "end": 403,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 403,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "2",
+              "name": "氧气的实验室制取与性质"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 406,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "1",
+          "act_id": "5",
+          "name": "常见酸、碱的化学性质"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 411,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "2",
+          "name": "钠和水的反应",
+          "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        }
+      ],
+      "length": 3.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 580,
+        "labels": ["skill"],
+        "properties": {
+          "name": "胶头滴管的使用",
+          "skill_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 668,
+            "start": 411,
+            "end": 580,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 580,
+            "labels": ["skill"],
+            "properties": {
+              "name": "胶头滴管的使用",
+              "skill_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 425,
+        "labels": ["skill"],
+        "properties": {
+          "name": "pH试纸的使用",
+          "skill_id": "6"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 679,
+            "start": 411,
+            "end": 425,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 425,
+            "labels": ["skill"],
+            "properties": {
+              "name": "pH试纸的使用",
+              "skill_id": "6"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 421,
+        "labels": ["skill"],
+        "properties": {
+          "name": "固体药品的取用",
+          "skill_id": "2"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 671,
+            "start": 411,
+            "end": 421,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 421,
+            "labels": ["skill"],
+            "properties": {
+              "name": "固体药品的取用",
+              "skill_id": "2"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 424,
+        "labels": ["skill"],
+        "properties": {
+          "name": "酸碱指示剂的变色原理及规律",
+          "skill_id": "5"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 677,
+            "start": 411,
+            "end": 424,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 424,
+            "labels": ["skill"],
+            "properties": {
+              "name": "酸碱指示剂的变色原理及规律",
+              "skill_id": "5"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 540,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "14",
+          "name": "钠块"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 624,
+            "start": 411,
+            "end": 540,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 540,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "14",
+              "name": "钠块"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 528,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "2",
+          "name": "酚酞试剂"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 611,
+            "start": 411,
+            "end": 528,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 528,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "2",
+              "name": "酚酞试剂"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 418,
+        "labels": ["appa"],
+        "properties": {
+          "name": "试管",
+          "appa_id": "1"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 591,
+            "start": 411,
+            "end": 418,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 418,
+            "labels": ["appa"],
+            "properties": {
+              "name": "试管",
+              "appa_id": "1"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 523,
+        "labels": ["appa"],
+        "properties": {
+          "name": "镊子",
+          "appa_id": "5"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 604,
+            "start": 411,
+            "end": 523,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 523,
+            "labels": ["appa"],
+            "properties": {
+              "name": "镊子",
+              "appa_id": "5"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 420,
+        "labels": ["appa"],
+        "properties": {
+          "name": "烧杯",
+          "appa_id": "3"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 600,
+            "start": 411,
+            "end": 420,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 420,
+            "labels": ["appa"],
+            "properties": {
+              "name": "烧杯",
+              "appa_id": "3"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 526,
+        "labels": ["appa"],
+        "properties": {
+          "name": "酒精灯",
+          "appa_id": "8"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 607,
+            "start": 411,
+            "end": 526,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 526,
+            "labels": ["appa"],
+            "properties": {
+              "name": "酒精灯",
+              "appa_id": "8"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 525,
+        "labels": ["appa"],
+        "properties": {
+          "name": "铝箔",
+          "appa_id": "7"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 579,
+            "start": 398,
+            "end": 406,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 406,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "5",
+              "name": "常见酸、碱的化学性质"
+            }
+          },
+          "relationship": {
+            "identity": 584,
+            "start": 406,
+            "end": 411,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 411,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "2",
+              "name": "钠和水的反应",
+              "exp_url": "http://beta.lab3d.site/realExperiment/sodiumReactsWithWater"
+            }
+          },
+          "relationship": {
+            "identity": 606,
+            "start": 411,
+            "end": 525,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 525,
+            "labels": ["appa"],
+            "properties": {
+              "name": "铝箔",
+              "appa_id": "7"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 402,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "1",
+          "act_id": "1",
+          "name": "粗盐中难溶性杂质的去除"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 694,
+            "start": 438,
+            "end": 398,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 398,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "1",
+              "name": "物质的多样性"
+            }
+          },
+          "relationship": {
+            "identity": 575,
+            "start": 398,
+            "end": 402,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 402,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "1",
+              "act_id": "1",
+              "name": "粗盐中难溶性杂质的去除"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 408,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "2",
+          "act_id": "7",
+          "name": "水的组成及变化的探究"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 695,
+            "start": 438,
+            "end": 399,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          },
+          "relationship": {
+            "identity": 581,
+            "start": 399,
+            "end": 408,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 417,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 695,
+            "start": 438,
+            "end": 399,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          },
+          "relationship": {
+            "identity": 581,
+            "start": 399,
+            "end": 408,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          },
+          "relationship": {
+            "identity": 589,
+            "start": 408,
+            "end": 417,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        }
+      ],
+      "length": 3.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 427,
+        "labels": ["skill"],
+        "properties": {
+          "name": "搅拌操作",
+          "skill_id": "8"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 695,
+            "start": 438,
+            "end": 399,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          },
+          "relationship": {
+            "identity": 581,
+            "start": 399,
+            "end": 408,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          },
+          "relationship": {
+            "identity": 589,
+            "start": 408,
+            "end": 417,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 683,
+            "start": 417,
+            "end": 427,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 427,
+            "labels": ["skill"],
+            "properties": {
+              "name": "搅拌操作",
+              "skill_id": "8"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 428,
+        "labels": ["skill"],
+        "properties": {
+          "name": "量筒的使用",
+          "skill_id": "9"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 695,
+            "start": 438,
+            "end": 399,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          },
+          "relationship": {
+            "identity": 581,
+            "start": 399,
+            "end": 408,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          },
+          "relationship": {
+            "identity": 589,
+            "start": 408,
+            "end": 417,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 684,
+            "start": 417,
+            "end": 428,
+            "type": "所需实验技能",
+            "properties": {
+              "name": "所需实验技能"
+            }
+          },
+          "end": {
+            "identity": 428,
+            "labels": ["skill"],
+            "properties": {
+              "name": "量筒的使用",
+              "skill_id": "9"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 539,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "13",
+          "name": "氯化钠固体"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 695,
+            "start": 438,
+            "end": 399,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          },
+          "relationship": {
+            "identity": 581,
+            "start": 399,
+            "end": 408,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          },
+          "relationship": {
+            "identity": 589,
+            "start": 408,
+            "end": 417,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 623,
+            "start": 417,
+            "end": 539,
+            "type": "所需实验药品",
+            "properties": {
+              "name": "所需实验药品"
+            }
+          },
+          "end": {
+            "identity": 539,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "13",
+              "name": "氯化钠固体"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 522,
+        "labels": ["appa"],
+        "properties": {
+          "name": "玻璃棒",
+          "appa_id": "4"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 695,
+            "start": 438,
+            "end": 399,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          },
+          "relationship": {
+            "identity": 581,
+            "start": 399,
+            "end": 408,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          },
+          "relationship": {
+            "identity": 589,
+            "start": 408,
+            "end": 417,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 603,
+            "start": 417,
+            "end": 522,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 522,
+            "labels": ["appa"],
+            "properties": {
+              "name": "玻璃棒",
+              "appa_id": "4"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 420,
+        "labels": ["appa"],
+        "properties": {
+          "name": "烧杯",
+          "appa_id": "3"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 695,
+            "start": 438,
+            "end": 399,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 399,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          },
+          "relationship": {
+            "identity": 581,
+            "start": 399,
+            "end": 408,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 408,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          },
+          "relationship": {
+            "identity": 589,
+            "start": 408,
+            "end": 417,
+            "type": "实现于",
+            "properties": {
+              "name": "实现于"
+            }
+          },
+          "end": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 417,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 602,
+            "start": 417,
+            "end": 420,
+            "type": "所需实验仪器",
+            "properties": {
+              "name": "所需实验仪器"
+            }
+          },
+          "end": {
+            "identity": 420,
+            "labels": ["appa"],
+            "properties": {
+              "name": "烧杯",
+              "appa_id": "3"
+            }
+          }
+        }
+      ],
+      "length": 4.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 438,
+        "labels": ["start"],
+        "properties": {
+          "name": "学科大概念"
+        }
+      },
+      "end": {
+        "identity": 409,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "3",
+          "act_id": "8",
+          "name": "燃烧条件的探究"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 438,
+            "labels": ["start"],
+            "properties": {
+              "name": "学科大概念"
+            }
+          },
+          "relationship": {
+            "identity": 696,
+            "start": 438,
+            "end": 400,
+            "type": "包含",
+            "properties": {
+              "name": "包含"
+            }
+          },
+          "end": {
+            "identity": 400,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "3",
+              "name": "物质的变化与转化"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 400,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "3",
+              "name": "物质的变化与转化"
+            }
+          },
+          "relationship": {
+            "identity": 582,
+            "start": 400,
+            "end": 409,
+            "type": "依托于",
+            "properties": {
+              "name": "依托于"
+            }
+          },
+          "end": {
+            "identity": 409,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "3",
+              "act_id": "8",
+              "name": "燃烧条件的探究"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  }
+]

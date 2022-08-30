@@ -1,0 +1,64 @@
+﻿[
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 289,
+        "labels": ["skill"],
+        "properties": {
+          "exp_id": "8",
+          "name": "搅拌操作",
+          "skill_id": "8",
+          "rela_id": "17"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 440,
+            "start": 220,
+            "end": 289,
+            "type": "所需实验技能",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需实验技能",
+              "skill_id": "8",
+              "rela_id": "17",
+              "r_name": "搅拌操作"
+            }
+          },
+          "end": {
+            "identity": 289,
+            "labels": ["skill"],
+            "properties": {
+              "exp_id": "8",
+              "name": "搅拌操作",
+              "skill_id": "8",
+              "rela_id": "17"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  }
+]

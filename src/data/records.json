@@ -1,0 +1,1338 @@
+[
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 289,
+        "labels": ["skill"],
+        "properties": {
+          "exp_id": "8",
+          "name": "搅拌操作",
+          "skill_id": "8",
+          "rela_id": "17"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 440,
+            "start": 220,
+            "end": 289,
+            "type": "所需实验技能",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需实验技能",
+              "skill_id": "8",
+              "rela_id": "17",
+              "r_name": "搅拌操作"
+            }
+          },
+          "end": {
+            "identity": 289,
+            "labels": ["skill"],
+            "properties": {
+              "exp_id": "8",
+              "name": "搅拌操作",
+              "skill_id": "8",
+              "rela_id": "17"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 298,
+        "labels": ["video"],
+        "properties": {
+          "v_id": "8",
+          "video_url": "47.98.192.17/Video/jiaoban.mp4",
+          "name": "搅拌操作演示",
+          "skill_id": "8"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 440,
+            "start": 220,
+            "end": 289,
+            "type": "所需实验技能",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需实验技能",
+              "skill_id": "8",
+              "rela_id": "17",
+              "r_name": "搅拌操作"
+            }
+          },
+          "end": {
+            "identity": 289,
+            "labels": ["skill"],
+            "properties": {
+              "exp_id": "8",
+              "name": "搅拌操作",
+              "skill_id": "8",
+              "rela_id": "17"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 289,
+            "labels": ["skill"],
+            "properties": {
+              "exp_id": "8",
+              "name": "搅拌操作",
+              "skill_id": "8",
+              "rela_id": "17"
+            }
+          },
+          "relationship": {
+            "identity": 449,
+            "start": 289,
+            "end": 298,
+            "type": "实验技能演示",
+            "properties": {
+              "v_id": "8",
+              "video_url": "47.98.192.17/Video/jiaoban.mp4",
+              "name": "实验技能演示",
+              "skill_id": "8",
+              "v_name": "搅拌操作演示"
+            }
+          },
+          "end": {
+            "identity": 298,
+            "labels": ["video"],
+            "properties": {
+              "v_id": "8",
+              "video_url": "47.98.192.17/Video/jiaoban.mp4",
+              "name": "搅拌操作演示",
+              "skill_id": "8"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 290,
+        "labels": ["skill"],
+        "properties": {
+          "exp_id": "8",
+          "name": "量筒的使用",
+          "skill_id": "9",
+          "rela_id": "18"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 441,
+            "start": 220,
+            "end": 290,
+            "type": "所需实验技能",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需实验技能",
+              "skill_id": "9",
+              "rela_id": "18",
+              "r_name": "量筒的使用"
+            }
+          },
+          "end": {
+            "identity": 290,
+            "labels": ["skill"],
+            "properties": {
+              "exp_id": "8",
+              "name": "量筒的使用",
+              "skill_id": "9",
+              "rela_id": "18"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 299,
+        "labels": ["video"],
+        "properties": {
+          "v_id": "9",
+          "video_url": "https://lab-3d-static.oss-cn-beijing.aliyuncs.com/md/ltdsy.mp4",
+          "name": "量筒的使用演示",
+          "skill_id": "9"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 441,
+            "start": 220,
+            "end": 290,
+            "type": "所需实验技能",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需实验技能",
+              "skill_id": "9",
+              "rela_id": "18",
+              "r_name": "量筒的使用"
+            }
+          },
+          "end": {
+            "identity": 290,
+            "labels": ["skill"],
+            "properties": {
+              "exp_id": "8",
+              "name": "量筒的使用",
+              "skill_id": "9",
+              "rela_id": "18"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 290,
+            "labels": ["skill"],
+            "properties": {
+              "exp_id": "8",
+              "name": "量筒的使用",
+              "skill_id": "9",
+              "rela_id": "18"
+            }
+          },
+          "relationship": {
+            "identity": 450,
+            "start": 290,
+            "end": 299,
+            "type": "实验技能演示",
+            "properties": {
+              "v_id": "9",
+              "video_url": "https://lab-3d-static.oss-cn-beijing.aliyuncs.com/md/ltdsy.mp4",
+              "name": "实验技能演示",
+              "skill_id": "9",
+              "v_name": "量筒的使用演示"
+            }
+          },
+          "end": {
+            "identity": 299,
+            "labels": ["video"],
+            "properties": {
+              "v_id": "9",
+              "video_url": "https://lab-3d-static.oss-cn-beijing.aliyuncs.com/md/ltdsy.mp4",
+              "name": "量筒的使用演示",
+              "skill_id": "9"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 279,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "质量分数",
+          "k_id": "36",
+          "rela_id": "40"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 421,
+            "start": 220,
+            "end": 279,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "rela_id": "40",
+              "k_id": "36",
+              "r_name": "质量分数"
+            }
+          },
+          "end": {
+            "identity": 279,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "质量分数",
+              "k_id": "36",
+              "rela_id": "40"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 270,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "乳浊液",
+          "k_id": "27",
+          "rela_id": "35"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 328,
+            "start": 220,
+            "end": 270,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "27",
+              "rela_id": "35",
+              "r_name": "乳浊液"
+            }
+          },
+          "end": {
+            "identity": 270,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "乳浊液",
+              "k_id": "27",
+              "rela_id": "35"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 266,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "溶解性",
+          "k_id": "23",
+          "rela_id": "36"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 324,
+            "start": 220,
+            "end": 266,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "23",
+              "rela_id": "36",
+              "r_name": "溶解性"
+            }
+          },
+          "end": {
+            "identity": 266,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "溶解性",
+              "k_id": "23",
+              "rela_id": "36"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 267,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "溶液",
+          "k_id": "24",
+          "rela_id": "33"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 325,
+            "start": 220,
+            "end": 267,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "24",
+              "rela_id": "33",
+              "r_name": "溶液"
+            }
+          },
+          "end": {
+            "identity": 267,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "溶液",
+              "k_id": "24",
+              "rela_id": "33"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 277,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "悬浊液",
+          "k_id": "34",
+          "rela_id": "34"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 419,
+            "start": 220,
+            "end": 277,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "34",
+              "rela_id": "34",
+              "r_name": "悬浊液"
+            }
+          },
+          "end": {
+            "identity": 277,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "悬浊液",
+              "k_id": "34",
+              "rela_id": "34"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 265,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "溶解度",
+          "k_id": "22",
+          "rela_id": "39"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 323,
+            "start": 220,
+            "end": 265,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "22",
+              "rela_id": "39",
+              "r_name": "溶解度"
+            }
+          },
+          "end": {
+            "identity": 265,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "溶解度",
+              "k_id": "22",
+              "rela_id": "39"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 262,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "浓度",
+          "k_id": "19",
+          "rela_id": "41"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 320,
+            "start": 220,
+            "end": 262,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "19",
+              "rela_id": "41",
+              "r_name": "浓度"
+            }
+          },
+          "end": {
+            "identity": 262,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "浓度",
+              "k_id": "19",
+              "rela_id": "41"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 246,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "不饱和溶液",
+          "k_id": "3",
+          "rela_id": "38"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 303,
+            "start": 220,
+            "end": 246,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "rela_id": "38",
+              "k_id": "3",
+              "r_name": "不饱和溶液"
+            }
+          },
+          "end": {
+            "identity": 246,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "不饱和溶液",
+              "k_id": "3",
+              "rela_id": "38"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 245,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "饱和溶液",
+          "k_id": "2",
+          "rela_id": "37"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 302,
+            "start": 220,
+            "end": 245,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "rela_id": "37",
+              "k_id": "2",
+              "r_name": "饱和溶液"
+            }
+          },
+          "end": {
+            "identity": 245,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "饱和溶液",
+              "k_id": "2",
+              "rela_id": "37"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 264,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "溶剂",
+          "k_id": "21",
+          "rela_id": "32"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 322,
+            "start": 220,
+            "end": 264,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "21",
+              "rela_id": "32",
+              "r_name": "溶剂"
+            }
+          },
+          "end": {
+            "identity": 264,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "溶剂",
+              "k_id": "21",
+              "rela_id": "32"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 269,
+        "labels": ["knowledge"],
+        "properties": {
+          "exp_id": "8",
+          "name": "溶质",
+          "k_id": "26",
+          "rela_id": "31"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 327,
+            "start": 220,
+            "end": 269,
+            "type": "所需前置知识",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需前置知识",
+              "k_id": "26",
+              "rela_id": "31",
+              "r_name": "溶质"
+            }
+          },
+          "end": {
+            "identity": 269,
+            "labels": ["knowledge"],
+            "properties": {
+              "exp_id": "8",
+              "name": "溶质",
+              "k_id": "26",
+              "rela_id": "31"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 241,
+        "labels": ["drug"],
+        "properties": {
+          "drug_id": "13",
+          "exp_id": "8",
+          "name": "氯化钠固体",
+          "rela_id": "16"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 298,
+            "start": 220,
+            "end": 241,
+            "type": "所需实验药品",
+            "properties": {
+              "drug_id": "13",
+              "d_name": "氯化钠固体",
+              "exp_id": "8",
+              "name": "所需实验药品",
+              "rela_id": "16"
+            }
+          },
+          "end": {
+            "identity": 241,
+            "labels": ["drug"],
+            "properties": {
+              "drug_id": "13",
+              "exp_id": "8",
+              "name": "氯化钠固体",
+              "rela_id": "16"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 223,
+        "labels": ["appa"],
+        "properties": {
+          "exp_id": "8",
+          "name": "烧杯",
+          "appa_id": "3",
+          "rela_id": "13"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 277,
+            "start": 220,
+            "end": 223,
+            "type": "所需实验仪器",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需实验仪器",
+              "appa_id": "3",
+              "rela_id": "13",
+              "a_name": "烧杯"
+            }
+          },
+          "end": {
+            "identity": 223,
+            "labels": ["appa"],
+            "properties": {
+              "exp_id": "8",
+              "name": "烧杯",
+              "appa_id": "3",
+              "rela_id": "13"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 224,
+        "labels": ["appa"],
+        "properties": {
+          "exp_id": "8",
+          "name": "玻璃棒",
+          "appa_id": "4",
+          "rela_id": "14"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 278,
+            "start": 220,
+            "end": 224,
+            "type": "所需实验仪器",
+            "properties": {
+              "exp_id": "8",
+              "name": "所需实验仪器",
+              "appa_id": "4",
+              "rela_id": "14",
+              "a_name": "玻璃棒"
+            }
+          },
+          "end": {
+            "identity": 224,
+            "labels": ["appa"],
+            "properties": {
+              "exp_id": "8",
+              "name": "玻璃棒",
+              "appa_id": "4",
+              "rela_id": "14"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 211,
+        "labels": ["act"],
+        "properties": {
+          "BI_id": "2",
+          "act_id": "7",
+          "name": "水的组成及变化的探究"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 264,
+            "start": 211,
+            "end": 220,
+            "type": "实现于",
+            "properties": {
+              "e_name": "盐的溶解",
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "实现于",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 211,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        }
+      ],
+      "length": 1.0
+    }
+  },
+  {
+    "p": {
+      "start": {
+        "identity": 220,
+        "labels": ["exp"],
+        "properties": {
+          "exp_id": "8",
+          "act_id": "7",
+          "name": "盐的溶解",
+          "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+        }
+      },
+      "end": {
+        "identity": 202,
+        "labels": ["BI"],
+        "properties": {
+          "Bi_id": "2",
+          "name": "物质的组成"
+        }
+      },
+      "segments": [
+        {
+          "start": {
+            "identity": 220,
+            "labels": ["exp"],
+            "properties": {
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "盐的溶解",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "relationship": {
+            "identity": 264,
+            "start": 211,
+            "end": 220,
+            "type": "实现于",
+            "properties": {
+              "e_name": "盐的溶解",
+              "exp_id": "8",
+              "act_id": "7",
+              "name": "实现于",
+              "exp_url": "http://47.98.192.17/saltpage.html?eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiMSIsImV4cCI6MzQ2MDY0ODM0OCwiaWF0IjoxNjYwNjQ4MzQ4fQ.BKjdmww7OjAqBJ_zP-r3gqiRXDD3nRt15glP7MrYhn3dF6dK1aKIUx8mExqVHM-n4_5FB8aUTfaWkvJVQdoes83q_siE1tyFGKV1wMu7aYpe1oNn5VA5UBGr7meT2fOD4hoq9ZVvUNYLOweNRfO2Vw3ak8PE21saHaQ_wiwuhGc"
+            }
+          },
+          "end": {
+            "identity": 211,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          }
+        },
+        {
+          "start": {
+            "identity": 211,
+            "labels": ["act"],
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "水的组成及变化的探究"
+            }
+          },
+          "relationship": {
+            "identity": 256,
+            "start": 202,
+            "end": 211,
+            "type": "依托于",
+            "properties": {
+              "BI_id": "2",
+              "act_id": "7",
+              "name": "依托于",
+              "a_name": "水的组成及变化的探究"
+            }
+          },
+          "end": {
+            "identity": 202,
+            "labels": ["BI"],
+            "properties": {
+              "Bi_id": "2",
+              "name": "物质的组成"
+            }
+          }
+        }
+      ],
+      "length": 2.0
+    }
+  }
+]
