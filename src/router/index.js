@@ -35,6 +35,7 @@ const routes = [
     ],
   },
   { path: '/kexperiment-details/:id', component: () => import('../views/KexperimentDetails.vue') },
+  { path: '/kexperiment-overview/:id', component: () => import('../views/KexperimentOverview.vue') },
   {
     path: '/real-kexperiment-details/:id',
     component: () => import('../views/RealKexperimentDetails.vue'),

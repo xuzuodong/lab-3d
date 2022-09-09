@@ -19,10 +19,10 @@
 
             <div class="text-h5 q-mt-sm">{{ item.times }}</div>
             <div class="row justify-between">
-              <div class="vertical-middle col-auto">
+              <div class="column justify-center">
                 {{ item.describe }}
               </div>
-              <div class="col-auto column justify-center">
+              <div class="column justify-center q-my-none">
                 <svg
                   class="icon"
                   viewBox="0 0 1024 1024"
@@ -195,7 +195,7 @@ export default {
         tooltip: {
           snap: 0,
           shared: true,
-          pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>',
+          pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.2f}</b><br/>',
         },
         //右边的那些点的象征和名字的样式
         legend: {
@@ -225,7 +225,7 @@ export default {
       'getSubScoreByTitle',
       'getAvgTotalTime',
       'getPostNumOfUser',
-      'getSubScoreByTitle',
+      'getAvgSubScoreByTitle',
     ]),
     ...mapActions('experiment', ['selectAllExperiments']),
 
@@ -276,32 +276,102 @@ export default {
       })
     },
 
+    pushAvgData(res) {
+      this.option.series[0].data.push(res)
+      this.items.find((e) => e.num == 2).times += res || 1
+    },
+
     getAvgScore() {
-      for (let i = 0; i < this.getScoreList.length; i++) {
-        this.getSubScoreByTitle({
-          title: this.getScoreList[i],
-          success: (res) => {
-            // this.option.series[0].data[i] = res[0].num
-            // this.items.find((e) => e.num == 2).times += res[0].num || 1
-            console.log(res.length)
-            this.option.series[0].data.push(
-              res.reduce(function (a, b) {
-                return parseInt(a) + parseInt(b)
-              }, 0) / res.length
-            )
-            this.items.find((e) => e.num == 2).times =
-              this.option.series[0].data.reduce(function (a, b) {
-                return parseInt(a) + parseInt(b)
-              }, 0) || 0
-            if (this.option.series[0].data.length == 6) {
-              this.optiondata = true
-            }
-          },
-          failure: (err) => {
-            console.log(err)
-          },
-        })
-      }
+      this.getAvgSubScoreByTitle({
+        title: 'leadIn',
+        success: (res) => {
+          // console.log(res[0].avg(leadIn_score))
+          console.log(res[0])
+          this.pushAvgData(res[0].avgScore)
+
+          this.getAvgSubScoreByTitle({
+            title: 'assumed',
+            success: (res) => {
+              this.pushAvgData(res[0].avgScore)
+              this.getAvgSubScoreByTitle({
+                title: 'chosen',
+                success: (res) => {
+                  this.pushAvgData(res[0].avgScore)
+                  this.getAvgSubScoreByTitle({
+                    title: 'inquiry',
+                    success: (res) => {
+                      this.pushAvgData(res[0].avgScore)
+                      this.getAvgSubScoreByTitle({
+                        title: 'concluded',
+                        success: (res) => {
+                          this.pushAvgData(res[0].avgScore)
+                          this.getAvgSubScoreByTitle({
+                            title: 'reflected',
+                            success: (res) => {
+                              this.pushAvgData(res[0].avgScore)
+                              this.items.find((e) => e.num == 2).times.toFixed(2)
+                              this.optiondata = true
+                              console.log(res)
+                            },
+                            failure: (error) => {
+                              console.log(error)
+                            },
+                          })
+                          console.log(res)
+                        },
+                        failure: (error) => {
+                          console.log(error)
+                        },
+                      })
+                      console.log(res)
+                    },
+                    failure: (error) => {
+                      console.log(error)
+                    },
+                  })
+                  console.log(res)
+                },
+                failure: (error) => {
+                  console.log(error)
+                },
+              })
+              console.log(res)
+            },
+            failure: (error) => {
+              console.log(error)
+            },
+          })
+          console.log(res)
+        },
+        failure: (error) => {
+          console.log(error)
+        },
+      })
+      // for (let i = 0; i < this.getScoreList.length; i++) {
+      //   this.getSubScoreByTitle({
+      //     title: this.getScoreList[i],
+      //     success: (res) => {
+      //       // this.option.series[0].data[i] = res[0].num
+      //       // this.items.find((e) => e.num == 2).times += res[0].num || 1
+      //       console.log(res.length)
+      //       this.option.series[0].data.push(
+      //         res.reduce(function (a, b) {
+      //           return parseInt(a) + parseInt(b)
+      //         }, 0) / res.length
+      //       )
+      //       this.items.find((e) => e.num == 2).times =
+      //         this.option.series[0].data.reduce(function (a, b) {
+      //           return parseInt(a) + parseInt(b)
+      //         }, 0) || 0
+      //       if (this.option.series[0].data.length == 6) {
+      //         this.optiondata = true
+      //       }
+      //     },
+      //     failure: (err) => {
+      //       console.log(err)
+      //     },
+      //   })
+      // }
     },
   },
 

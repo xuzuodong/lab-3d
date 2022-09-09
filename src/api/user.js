@@ -322,10 +322,21 @@ export default {
       .catch((res) => failure(res))
   },
 
-  getSubScoreByTitle({ title, success, failure }) {
+  getSubScoreByTitle({ title, kexperiment_id, success, failure }) {
     axios({
       method: 'post',
       url: baseUrl + 'behavior/getSubScoreByTitle',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { title, kexperiment_id },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  getAvgSubScoreByTitle({ title, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/getAvgSubScoreByTitle',
       headers: { Authorization: store.state.user.userInfo.token },
       data: { title },
     })
@@ -350,6 +361,17 @@ export default {
       url: baseUrl + 'behavior/submitStepInfo',
       headers: { Authorization: store.state.user.userInfo.token },
       data: { kexperiment_id, stepName, stepTime, stepInfo },
+    })
+      .then((res) => success(res))
+      .catch((res) => failure(res))
+  },
+
+  submitSubScoreByTitle({ title, kexperiment_id, score, success, failure }) {
+    axios({
+      method: 'post',
+      url: baseUrl + 'behavior/submitSubScoreByTitle',
+      headers: { Authorization: store.state.user.userInfo.token },
+      data: { title, kexperiment_id, score },
     })
       .then((res) => success(res))
       .catch((res) => failure(res))

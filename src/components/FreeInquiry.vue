@@ -52,7 +52,7 @@ export default {
     },
 
     onOKClick() {
-      router.push('/kexperiment-details/' + this.kexperimentId)
+      router.push('/kexperiment-overview/' + this.kexperimentId)
       this.$emit('ok')
       this.hide()
     },

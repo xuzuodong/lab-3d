@@ -469,8 +469,23 @@ const actions = {
     })
   },
 
-  getSubScoreByTitle({ commit }, { title, success, failure }) {
+  getSubScoreByTitle({ commit }, { title, kexperiment_id, success, failure }) {
     userApi.getSubScoreByTitle({
+      title,
+      kexperiment_id,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  getAvgSubScoreByTitle({ commit }, { title, success, failure }) {
+    userApi.getAvgSubScoreByTitle({
       title,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
@@ -504,6 +519,22 @@ const actions = {
       stepName,
       stepTime,
       stepInfo,
+      success(res) {
+        if (res.status == 200 && res.data.code == 200) {
+          success(res.data.body)
+        } else failure(res)
+      },
+      failure(res) {
+        failure(res)
+      },
+    })
+  },
+
+  submitSubScoreByTitle({ commit }, { title, kexperiment_id, score, stepInfo, success, failure }) {
+    userApi.submitSubScoreByTitle({
+      title,
+      kexperiment_id,
+      score,
       success(res) {
         if (res.status == 200 && res.data.code == 200) {
           success(res.data.body)

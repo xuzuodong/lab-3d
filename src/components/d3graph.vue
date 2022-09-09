@@ -36,7 +36,7 @@
         <strong>稀疏度：{{ gSparsity }}</strong>
       </p> -->
     </div>
-    <svg id="svg" width="800" height="500"></svg>
+    <svg id="svg" width="800" height="500" style="cursor: grab"></svg>
     <!-- 绘制图例 -->
     <div id="indicator">
       <!-- 利用item 遍历一个数组 利用index 遍历另外一个数组 -->
@@ -1149,10 +1149,7 @@ export default {
 @import '@/plugins/d3-context-menu';
 $opacity: 0.15; /* 显示的不透明度 */
 $activeColor: #1e90ff; /* 激活的颜色 */
-svg {
-  margin: 20px 0px;
-  // border: 1px #000 solid;
-}
+
 /*设置节点及边的样式*/
 .links line {
   stroke: #e0cac1b2; // #bbb

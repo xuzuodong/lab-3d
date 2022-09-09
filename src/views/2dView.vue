@@ -131,6 +131,7 @@ export default {
 
 <style lang="scss" scoped>
 .gContainer {
+  margin: 20px 0;
   position: relative;
   border: 2px #000 solid;
   background-color: #9dadc1;

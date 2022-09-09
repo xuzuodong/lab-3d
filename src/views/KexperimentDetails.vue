@@ -3,8 +3,18 @@
     <div class="row">
       <div class="col-12 text-h5 text-center q-my-md">“{{ experimentName }}”实验回顾</div>
     </div>
-    <div class="row q-my-xm">
-      <div class="col-10"></div>
+    <div class="row q-my-md">
+      <div class="col-1"></div>
+      <div>
+        <q-btn
+          fab-mini
+          icon="arrow_back"
+          :color="$q.dark.isActive ? 'dark' : 'white'"
+          :text-color="$q.dark.isActive ? 'white' : 'dark'"
+          @click="toSimple"
+        />
+      </div>
+      <div class="col-9"></div>
       <q-btn label="导出报告" color="primary" class="text-h7" @click="exportReport" />
     </div>
     <div class="row justify-center">
@@ -62,7 +72,6 @@
     <q-separator class="q-my-lg" color="grey-6" inset />
 
     <!-- <KexperimentOverview :experimentTime="2" :grade="this.grade"></KexperimentOverview> -->
-    <!-- <SelfEvaluationVue v-if="reflectedTips"></SelfEvaluationVue> -->
 
     <q-list class="container">
       <q-item class="q-px-none">
@@ -1096,6 +1105,10 @@ export default {
       else if (res[0].leadIn_time < 78750) this.point1 = 4
       else this.point1 = 5
       this.leadInProgress = res[0].leadIn_time / 105000
+    },
+
+    toSimple() {
+      this.$router.push({ path: '/kexperiment-overview/' + this.$route.params.id })
     },
   },
 }

@@ -178,7 +178,7 @@ export default {
         stepInfo: [this.ratingModel, this.chooseResult[0].color, this.text],
         success: (res) => {
           console.log(res)
-          this.$emit('ok')
+          this.$emit('ok', this.text)
           this.hide()
         },
         failure: (error) => {
